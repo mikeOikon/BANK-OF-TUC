@@ -1,48 +1,6 @@
 package backend.accounts;
 
-public class SavingsAccount extends Account {
+public class SavingsAccount extends PersonalAccount {
 	
-	//auto generated
-	private String accountNumber;
-	private double balance;
-	private double interestRate;
-	
-	public SavingsAccount(String accountNumber, double initialDeposit, double interestRate) {
-		this.accountNumber = accountNumber;
-		this.balance = initialDeposit;
-		this.interestRate = interestRate;
-	}
-	
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-	
-	public double getBalance() {
-		return balance;
-	}
-	
-	public double getInterestRate() {
-		return interestRate;
-	}
-	
-	public void deposit(double amount) {
-		if (amount > 0) {
-			balance += amount;
-		} else {
-			throw new IllegalArgumentException("Deposit amount must be positive.");
-		}
-	}
-	
-	public void withdraw(double amount) {
-		if (amount > 0 && amount <= balance) {
-			balance -= amount;
-		} else {
-			throw new IllegalArgumentException("Invalid withdrawal amount.");
-		}
-	}
-	
-	public void applyInterest() {
-		balance += balance * interestRate / 100;
-	}
 
 }
