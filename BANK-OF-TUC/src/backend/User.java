@@ -1,14 +1,30 @@
 package backend;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class User {
 
 	private String userID;
 	private String password;
+	private String email;
+	private String name;
+	private String surname;
+	private String phoneNumber;
+	private static Map<String,ArrayList<String>> users=new HashMap<String,ArrayList<String>>(); // Map to store users with userID as key and informations as value
+
+	private ArrayList<String> informations;// List to store all users	
 	
-	public User(String userID, String password) {
-		this.userID = userID;
-		this.password = password;
-		//this.email = email;
+	public User(String userID, String password, String email, String name, String surname, String phoneNumber) {
+		this.informations = new ArrayList<String>();
+		this.informations.add(password);
+		this.informations.add(email);
+		this.informations.add(name);
+	    this.informations.add(surname);
+	    this.informations.add(phoneNumber);
+	    this.users.put(userID, informations);
+		
 	}
 	
 	//na doume poies methodoi prepei na einai protected
@@ -40,5 +56,7 @@ public abstract class User {
 	protected void deleteAccount() {
 		// Implement delete account functionality
 	}
+
+	
 	
 }
