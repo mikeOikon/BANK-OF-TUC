@@ -1,4 +1,4 @@
-package backend;
+package backend.users;
 
 public class Customer extends User {
 

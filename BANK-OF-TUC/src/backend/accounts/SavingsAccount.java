@@ -1,4 +1,4 @@
-package backend;
+package backend.accounts;
 
 public class SavingsAccount extends Account {
 	

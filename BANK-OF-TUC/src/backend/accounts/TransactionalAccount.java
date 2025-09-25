@@ -1,4 +1,4 @@
-package backend;
+package backend.accounts;
 
 public class TransactionalAccount extends Account {
 	
@@ -86,5 +86,4 @@ public class TransactionalAccount extends Account {
 			return false;
 		}
 	}
-
 }

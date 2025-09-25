@@ -1,4 +1,4 @@
-package backend;
+package backend.users;
 
 import java.util.ArrayList;
 import java.util.HashMap;
