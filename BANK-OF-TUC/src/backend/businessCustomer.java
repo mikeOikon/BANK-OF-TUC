@@ -1,13 +1,12 @@
 package backend;
 
-public class Customer extends User {
+public class businessCustomer extends Customer {
 
-	
-	public Customer(String userID, String password, String email, String name, String surname, String phoneNumber) {
+	public businessCustomer(String userID, String password, String email, String name, String surname, String phoneNumber) {
 		super(userID, password, password, password, password, password);
 	}
-	
 	//na doume ti prepei na einai protected
+	
 	
 	
 	protected void createAccount() {
@@ -44,4 +43,5 @@ public class Customer extends User {
 	protected void updatePersonalInformation() {
 		
 	}
+
 }

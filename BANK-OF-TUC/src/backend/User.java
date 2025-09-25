@@ -36,6 +36,64 @@ public abstract class User {
 		return password;
 	}
 	
+	
+	
+	protected String getEmail() {
+		return email;
+	}
+
+	protected void setEmail(String email) {
+		this.email = email;
+	}
+
+	protected String getName() {
+		return name;
+	}
+
+	protected void setName(String name) {
+		this.name = name;
+	}
+
+	protected String getSurname() {
+		return surname;
+	}
+
+	protected void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	protected String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	protected void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	protected static Map<String, ArrayList<String>> getUsers() {
+		return users;
+	}
+
+	protected static void setUsers(Map<String, ArrayList<String>> users) {
+		User.users = users;
+	}
+
+	protected ArrayList<String> getInformations() {
+		return informations;
+	}
+
+	protected void setInformations(ArrayList<String> informations) {
+		this.informations = informations;
+	}
+
+	protected void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	protected void setPassword(String password) {
+		this.password = password;
+	}
+
 	protected boolean login(String userID, String password) {
 		return this.userID.equals(userID) && this.password.equals(password);
 	}

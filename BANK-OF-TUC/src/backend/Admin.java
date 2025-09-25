@@ -2,8 +2,8 @@ package backend;
 
 public class Admin extends User {
 
-	public Admin(String userID, String password) {
-		super(userID, password);
+	public Admin(String userID, String password, String email, String name, String surname, String phoneNumber) {
+		super(userID, password, password, password, password, password);
 	}
 	
 	//na doume ti prepei na einai protected

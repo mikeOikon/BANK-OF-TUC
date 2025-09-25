@@ -2,8 +2,8 @@ package backend;
 
 public class BankEmployer extends User {
 
-	public BankEmployer(String userID, String password) {
-		super(userID, password);
+	public BankEmployer(String userID, String password, String email, String name, String surname, String phoneNumber) {
+		super(userID, password, password, password, password, password);
 	}
 
 	//na doume ti prepei na einai protected
