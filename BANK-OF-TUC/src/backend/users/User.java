@@ -13,7 +13,8 @@ public abstract class User {
 	private String surname;
 	private String phoneNumber;
 	private static Map<String,ArrayList<String>> users=new HashMap<String,ArrayList<String>>(); // Map to store users with userID as key and informations as value
-
+	//private ArrayList<>	//link user to accounts 
+	
 	private ArrayList<String> informations;// List to store all users	
 	
 	public User(String userID, String password, String email, String name, String surname, String phoneNumber) {
@@ -32,6 +33,7 @@ public abstract class User {
 	public String getUserID() {
 		return userID;
 	}
+	
 	private String getPassword() {
 		return password;
 	}
@@ -95,6 +97,7 @@ public abstract class User {
 	}
 
 	protected boolean login(String userID, String password) {
+		//maybe use a quick pin?
 		return this.userID.equals(userID) && this.password.equals(password);
 	}
 	
