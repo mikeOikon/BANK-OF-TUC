@@ -20,6 +20,11 @@ public class BankSystem {
 	private Map<String,User> bankEmployers; // Map to bankEmployers users with userID as key and informations as value
 	private Map<String,User> auditors; // Map to store auditors with userID as key and informations as value
 	
+	private static int adminCount = 0;
+	private static int customerCount = 0;
+	private static int employeeCount = 0;
+	private static int auditorCount = 0;
+	
 	public BankSystem() {
 		this.admins=new HashMap<>();
 		this.customers=new HashMap<>();
@@ -30,37 +35,43 @@ public class BankSystem {
 	}
 	
 	public void createUserCLI() {
-		String userID=null;
-		String password=null;
-		String email=null;
-		String name=null;
-		String surname=null;
-		String phoneNumber=null;
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("What user do you want to create?\n1. Admin\n2. Customer\n3. Employer\n4. Auditor");
-		int choice = scanner.nextInt();
-		switch(choice) {
-		case 1:
-			User newAdmin = new Admin(userID, password, email, name, surname, phoneNumber);//create admin
-			this.admins.put(userID, newAdmin);
-			break;
-		case 2:
-			User newCustomer = new Customer(userID, password, email, name, surname, phoneNumber);//create customer
-			customers.put(userID, newCustomer);
-			break;
-		case 3:
-			User newEmployer = new BankEmployer(userID, password, email, name, surname, phoneNumber);//create employer
-			bankEmployers.put(userID, newEmployer);
-			break;
-		case 4:
-			User newAuditor = new Auditor(userID, password, email, name, surname, phoneNumber);//create auditor
-			auditors.put(userID, newAuditor);
-			break;
-		}
-		
-		
-	}
+		System.out.println("Type password: ");	//maybe should be hidden and have some rules
+		String password = scanner.nextLine();
+		System.out.println("Type email: ");
+		String email = scanner.nextLine();
+		System.out.println("Type name: ");
+		String name = scanner.nextLine();
+		System.out.println("Type surname: ");
+		String surname = scanner.nextLine();
+		System.out.println("Type phone number: ");
+		String phoneNumber = scanner.nextLine();
+		String userID = generateId(2); //2 for customer
+		User newCustomer = new Customer(userID, password, email, name, surname, phoneNumber);//create customer
+		customers.put(userID, newCustomer);
+		}	
 	
+	
+	public String generateId(int choice) {  //Genrates unique ID for each user ids are in order
+	    String prefix;
+	    if (choice == 1) {
+	        prefix = "ADM";
+	        return String.format("%s%03d", prefix, ++adminCount);
+	    } else if (choice == 2) {
+	        prefix = "CUS";
+	        return String.format("%s%03d", prefix, ++customerCount);
+	    } else if (choice == 3) {
+	        prefix = "EMP";
+	        return String.format("%s%03d", prefix, ++employeeCount);
+	    } else if (choice == 4) {
+	        prefix = "AUD";
+	        return String.format("%s%03d", prefix, ++auditorCount);
+	    } else {
+	        throw new IllegalArgumentException("Unknown user type");
+	    }
+
+	   
+	}	
 	
 	
 }
