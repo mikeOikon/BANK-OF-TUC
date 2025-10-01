@@ -3,6 +3,7 @@ package backend.users;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public abstract class User {
 
@@ -118,6 +119,36 @@ public abstract class User {
 		// Implement delete account functionality
 	}
 
-	
+	protected void login() {
+		//angel 
+		int tries = 0;
+		Scanner scanner = new Scanner(System.in);
+		while(true) {
+			System.out.println("Type userID");
+			String userID = scanner.nextLine();		//takes String from scanner?
+			System.out.println("Type Passward");
+			String password = scanner.nextLine();		//takes String from scanner?
+			tries++;
+			if(login(userID, password)) {
+				System.out.println("*******Wellcome*******");
+				scanner.close();		//maybe not close scanner here
+				return;
+			}
+			else {
+				System.out.println("Wrong username or password. Try again!");
+				if(tries % 3 == 0) {
+					int waitMinutes = tries / 3; // Calculate wait time in minutes
+					System.out.print("Try again in ");
+					System.out.print(waitMinutes);
+					System.out.println(" minutes");	//makes trying available after +1 minute every 3 attempts
+					try {
+	                    Thread.sleep(waitMinutes * 60 * 1000); // μετατρέπει λεπτά σε ms and waits for that time
+	                } catch (InterruptedException e) {
+	                    e.printStackTrace();
+	                }
+				}
+			}		
+		}
+	}
 	
 }
