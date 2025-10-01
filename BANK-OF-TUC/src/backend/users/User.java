@@ -6,32 +6,36 @@ import java.util.Map;
 
 public abstract class User {
 
-	private String userID;
+	protected String userID;
 	private String password;
 	private String email;
 	private String name;
 	private String surname;
 	private String phoneNumber;
-	private static Map<String,ArrayList<String>> users=new HashMap<String,ArrayList<String>>(); // Map to store users with userID as key and informations as value
-	//private ArrayList<>	//link user to accounts 
 	
-	private ArrayList<String> informations;// List to store all users	
+	private ArrayList<String> accounts;	//link user to accounts 
+	
+	
 	
 	public User(String userID, String password, String email, String name, String surname, String phoneNumber) {
-		this.informations = new ArrayList<String>();
-		this.informations.add(password);
-		this.informations.add(email);
-		this.informations.add(name);
-	    this.informations.add(surname);
-	    this.informations.add(phoneNumber);
-	    this.users.put(userID, informations);
+		this.userID = userID;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.phoneNumber = phoneNumber;
+		this.accounts = new ArrayList<>();
 		
 	}
-	
+		
 	//na doume poies methodoi prepei na einai protected
 	
 	public String getUserID() {
 		return userID;
+	}
+	
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	
 	private String getPassword() {
@@ -72,25 +76,7 @@ public abstract class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	protected static Map<String, ArrayList<String>> getUsers() {
-		return users;
-	}
 
-	protected static void setUsers(Map<String, ArrayList<String>> users) {
-		User.users = users;
-	}
-
-	protected ArrayList<String> getInformations() {
-		return informations;
-	}
-
-	protected void setInformations(ArrayList<String> informations) {
-		this.informations = informations;
-	}
-
-	protected void setUserID(String userID) {
-		this.userID = userID;
-	}
 
 	protected void setPassword(String password) {
 		this.password = password;
