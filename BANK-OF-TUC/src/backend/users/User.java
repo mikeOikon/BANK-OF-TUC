@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class User {
-
+	
 	protected String userID;
-	private String password;
-	private String email;
-	private String name;
-	private String surname;
-	private String phoneNumber;
+	protected String password;
+	protected String email;
+	protected String name;
+	protected String surname;
+	protected String phoneNumber;
 	
 	private ArrayList<String> accounts;	//link user to accounts 
 	
@@ -111,9 +111,9 @@ public abstract class User {
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
 			System.out.println("Type userID");
-			String userID = scanner.nextLine();		//takes String from scanner?
+			String userID = scanner.nextLine();		
 			System.out.println("Type Passward");
-			String password = scanner.nextLine();		//takes String from scanner?
+			String password = scanner.nextLine();		
 			tries++;
 			if(login(userID, password)) {
 				System.out.println("*******Wellcome*******");

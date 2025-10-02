@@ -25,7 +25,7 @@ public class Admin extends User {
 	}
 
 	//na doume ti prepei na einai protected
-	//ο αδμιν μπορει να κανει admin ή employer αλλον user (ο bank employer μονο bank employer αλλο user μαλλον)
+	//ο αδμιν μπορει να κανει admin ή employer αλλον user (εφοσον αυτος δεν ειναι business customer)
 	
 	protected void manageUserAccounts() {
 		
