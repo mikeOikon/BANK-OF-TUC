@@ -2,6 +2,9 @@ package backend.users;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
@@ -21,6 +24,7 @@ public class Customer extends User {
 	
 	public Customer(String userID, String password, String email, String name, String surname, String phoneNumber) {
 		super(userID, password, email, name, surname, phoneNumber);
+		this.accounts = new ArrayList<Account>();
 	}
 	
 	//na doume ti prepei na einai protected
@@ -98,13 +102,29 @@ public class Customer extends User {
 	protected void viewTransactionHistory() {	//θα πρεπει να βγαζει τις συνναλαγες από ολους τους λογαριασμους;
 		//για καθε λογαριασμο θα πρεπει να καλειται η getTransactionHistory και να εμφανιζει τις συναλαγες με χρονική σειρά από τις πιο πρόσφατες στις πιο παλιές
 		//format: ωρα, λογαριασμος, ποσό, λογαριασαμός προορισμού (αν υπάρχει), τύπος συναλλαγής
+		List<Transaction> allTransactions = new ArrayList<>();
+
 		for (Account acc : accounts) {
 			Stack<Transaction> transactions = acc.getTransactions();
-			System.out.println("Transaction history for account " + acc.getIBAN() + ":");
-			for (Transaction transaction : transactions) {
-				System.out.println(transaction.toString()); // Assuming Transaction class has a meaningful toString() method
-			}
+		    allTransactions.addAll(transactions); // πρόσθεσε όλες τις συναλλαγές του λογαριασμού
 		}
+		// Ταξινόμηση κατά χρόνο, πιο πρόσφατες πρώτες
+	    Collections.sort(allTransactions, new Comparator<Transaction>() {
+	        @Override
+	        public int compare(Transaction t1, Transaction t2) {
+	            return t2.getTimestamp().compareTo(t1.getTimestamp()); // φθίνουσα σειρά
+	        }
+	    });
+		if (allTransactions.isEmpty()) {
+	        System.out.println("No transactions found for customer " + this.userID);
+	        return;
+	    }
+		
+		System.out.println("Transaction history :");
+		for (Transaction t : allTransactions) {
+		    System.out.println(t);
+		}
+		
 		//αν θελουμε να ειναι με βαση τον χρονο μονο (δηλαδη ολοι οι λογαριασμοι να εμφανιζονται και να λεει ποιος λογαριασμος εγινε η συναλαγη) θα πρεπει να φτιαξουμε μια stack με ολες τις συναλαγες σε ολους τους λογαριασμους στον user και να μην καλουμε ξεχωριστες stack για καθε λογαριασμο 
 	}
 	
