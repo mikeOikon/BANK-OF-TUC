@@ -16,7 +16,7 @@ import backend.users.Auditor;
 import backend.users.BankEmployer;
 import backend.users.Customer;
 import backend.users.User;
-import backend.users.businessCustomer;
+import backend.users.ΒusinessCustomer;
 
 public class BankSystem {
 	
@@ -70,9 +70,9 @@ public class BankSystem {
 				String surname = scanner.nextLine();
 				System.out.println("Type phone number: ");
 				String phoneNumber = scanner.nextLine();
-				
+				//customers are created with the main branch, if we want to create customers with different branches we need to change this
 				String userID = generateId(2); //2 for customer
-				User newCustomer = new Customer(userID, password, email, name, surname, phoneNumber);//create customer
+				User newCustomer = new Customer(userID, password, email, name, surname, phoneNumber, branches.get(branchCode) );//create customer
 				customers.put(userID, newCustomer);
 				break;
 		    case 2:
@@ -88,7 +88,7 @@ public class BankSystem {
 				String businessPhoneNumber = scanner.nextLine();
 				
 				String businessUserID = generateId(5); //5 for businessCustomer (different from simple customer)
-				User newBusinessCustomer = new businessCustomer(businessUserID, businessPassword, businessEmail, businessName, representativeName, businessPhoneNumber);//create business customer
+				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessPassword, businessEmail, businessName, representativeName, businessPhoneNumber, branches.get(branchCode));//create business customer
 				customers.put(businessUserID, newBusinessCustomer);
 		        break;
 		    default:
@@ -145,10 +145,10 @@ public class BankSystem {
 		Account toAccount = getAccountbyNumber(toAccountNumber);
 		if (amount <= 0) {
 			System.out.println("Amount must be positive.");
-			scanner.close();
+			scanner.close(); 
 			return;
 		}
-		if (fromAccount.getIBAN()==null || toAccount.getIBAN()==null) {	
+		if (fromAccount == null || toAccount == null) {	
 			System.out.println("One or both of the account numbers are invalid.");
 			scanner.close();
 			return;
@@ -173,7 +173,7 @@ public class BankSystem {
 			scanner.close();
 			return;
 		}
-		if (fromAccount.getBranch().getBankCode() != toAccount.getBranch().getBankCode()) { // σε transfer σε αλλη τραπεζα προμηθεια 1 euro σε παραληπτη
+		if (!fromAccount.getBranch().getBankCode().equals(toAccount.getBranch().getBankCode())) { // σε transfer σε αλλη τραπεζα προμηθεια 1 euro σε παραληπτη
 			if(fromAccount.getBalance() < amount + 1) {
 				System.out.println("Insufficient funds in the source account to cover the transfer fee.");
 				scanner.close();

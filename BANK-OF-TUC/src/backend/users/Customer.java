@@ -22,8 +22,8 @@ public class Customer extends User {
 	private Branch branch;
 	private ArrayList<Account> accounts; 
 	
-	public Customer(String userID, String password, String email, String name, String surname, String phoneNumber) {
-		super(userID, password, email, name, surname, phoneNumber);
+	public Customer(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+		super(userID, password, email, name, surname, phoneNumber, branch);
 		this.accounts = new ArrayList<Account>();
 	}
 	
@@ -39,16 +39,19 @@ public class Customer extends User {
 		    	//create transactional account
 		    	Account newTransactionalAccount = new TransactionalAccount(this.userID, 0.0, new Stack<Transaction>(), branch);
 		    	accounts.add(newTransactionalAccount);
+		    	viewAccountDetails(newTransactionalAccount);
 		    	break;
 		    case 2:
 		    	//create savings account
 		    	Account newSavingsAccount = new SavingsAccount(this.userID, 0.0, new Stack<Transaction>(), branch);
 		    	accounts.add(newSavingsAccount);
+		    	viewAccountDetails(newSavingsAccount);
 		    	break;
 		    case 3:
 		    	//create fixed-term account
 		    	Account newFixedTermAccount = new FixedTermAccount(this.userID, 0.0, new Stack<Transaction>(), branch);
 		    	accounts.add(newFixedTermAccount);
+		    	viewAccountDetails(newFixedTermAccount);
 		    	break;
 		    default:
 		        System.out.println("Invalid choice. Please select a valid account type.");
@@ -79,7 +82,15 @@ public class Customer extends User {
 		scanner.close();	//ισως δεν πρεπει να κλεισει εδω		
 	}
 	
-	protected void viewAccountDetails() {
+	protected void viewAccountDetails(Account acc) {
+		if (acc != null) {
+			System.out.println("Account type" + acc.getClass() + "Account iBAN: " + acc.getIBAN() + ", Balance: " + acc.getBalance());
+		} else {
+		    System.out.println("Account not found.");
+		}
+	}
+	
+	protected void viewAccountsDetails() {
 		//na grafei apo pote einai melos o customer
 		
 		System.out.println("Customer ID: " + this.userID);
@@ -88,9 +99,8 @@ public class Customer extends User {
 		System.out.println("Phone Number: " + this.phoneNumber);
 		System.out.println("Accounts:");
 		for (Account acc : accounts) {
-			System.out.println("Account iBAN: " + acc.getIBAN() + ", Balance: " + acc.getBalance());
-		}
-		
+			viewAccountDetails(acc);
+		}	
 	}
 		
 	

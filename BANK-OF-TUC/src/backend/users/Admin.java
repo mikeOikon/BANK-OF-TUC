@@ -2,14 +2,17 @@ package backend.users;
 
 import java.util.Scanner;
 
+import backend.accounts.Branch;
+
 public class Admin extends User {
 	private static int customerCount = 0;
     private static int adminCount = 0;
     private static int employeeCount = 0;
     private static int auditorCount = 0;
     
-	public Admin(String userID, String password, String email, String name, String surname, String phoneNumber) {
-		super(userID, password, email, name, surname, phoneNumber);
+    //ισως ο admin δεν πρεπει να εχει branch
+	public Admin(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+		super(userID, password, email, name, surname, phoneNumber, branch);
 	}
 	
 	protected void promoteUser(String userId, String newRole) {

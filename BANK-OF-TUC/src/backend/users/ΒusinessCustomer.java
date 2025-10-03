@@ -1,0 +1,161 @@
+package backend.users;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Stack;
+
+import backend.accounts.Account;
+import backend.accounts.Branch;
+import backend.accounts.BusinessAccount;
+import backend.accounts.Transaction;
+
+public class ΒusinessCustomer extends User{
+	private Branch branch;
+	private ArrayList<Account> accounts;
+	
+	public ΒusinessCustomer(String userID, String password, String email, String businessName, String representativeName, String phoneNumber, Branch branch) {
+		super(userID, password, email, businessName, representativeName, phoneNumber, branch);
+		this.accounts = new ArrayList<>();
+	}
+	//na doume ti prepei na einai protected
+	
+	
+	
+	protected void createAccount() {
+    	Account newBusinessAccount = new BusinessAccount(this.userID, 0.0, new Stack<Transaction>(), branch);    	
+    	accounts.add(newBusinessAccount);
+    	viewAccountDetails(newBusinessAccount);
+	}
+	
+	protected void askToCloseAccount() {
+		//
+	}
+	
+
+	protected void viewAccountBalance() {	//ιδια ακριβως με customer
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Type the acount iBAN you want to check the balance");
+		String accountNumber = scanner.nextLine();	
+		Account account = findAccountByNumber(accountNumber);
+		if (account != null) {
+		    accountBalance(account);
+		} else {
+		    System.out.println("Account with iBAN " + accountNumber + " not found.");
+		}
+		scanner.close();	//ισως δεν πρεπει να κλεισει εδω		
+	}
+	
+	protected void viewAccountDetails(Account acc) { //mporoyme na toy valoume na emfanizei kai se poio branch anhkei
+		if (acc != null) {
+			System.out.println("Account iBAN: " + acc.getIBAN() + ", Balance: " + acc.getBalance());
+		} else {
+		    System.out.println("Account not found.");
+		}
+	}
+	
+	protected void viewAccountsDetails() {
+		//na grafei apo pote einai melos o customer
+		
+		System.out.println("Customer ID: " + this.userID);
+		System.out.println("Business Name: " + this.name + ", Representative Name " + this.surname);
+		System.out.println("Email: " + this.email);
+		System.out.println("Phone Number: " + this.phoneNumber);
+		System.out.println("Accounts:");
+		for (Account acc : accounts) {
+			viewAccountDetails(acc);
+		}	
+
+	}
+	
+	protected void transferMoney() {
+		
+	}
+	
+	
+	protected void payBills() {
+		
+	}
+	
+	
+	protected void viewTransactionHistory() {	//θα πρεπει να βγαζει τις συνναλαγες από ολους τους λογαριασμους;
+		//για καθε λογαριασμο θα πρεπει να καλειται η getTransactionHistory και να εμφανιζει τις συναλαγες με χρονική σειρά από τις πιο πρόσφατες στις πιο παλιές
+		//format: ωρα, λογαριασμος, ποσό, λογαριασαμός προορισμού (αν υπάρχει), τύπος συναλλαγής
+		List<Transaction> allTransactions = new ArrayList<>();
+
+		for (Account acc : accounts) {
+			Stack<Transaction> transactions = acc.getTransactions();
+		    allTransactions.addAll(transactions); // πρόσθεσε όλες τις συναλλαγές του λογαριασμού
+		}
+		// Ταξινόμηση κατά χρόνο, πιο πρόσφατες πρώτες
+	    Collections.sort(allTransactions, new Comparator<Transaction>() {
+	        @Override
+	        public int compare(Transaction t1, Transaction t2) {
+	            return t2.getTimestamp().compareTo(t1.getTimestamp()); // φθίνουσα σειρά
+	        }
+	    });
+		if (allTransactions.isEmpty()) {
+	        System.out.println("No transactions found for customer " + this.userID);
+	        return;
+	    }
+		
+		System.out.println("Transaction history :");
+		for (Transaction t : allTransactions) {
+		    System.out.println(t);
+		}
+		
+		//αν θελουμε να ειναι με βαση τον χρονο μονο (δηλαδη ολοι οι λογαριασμοι να εμφανιζονται και να λεει ποιος λογαριασμος εγινε η συναλαγη) θα πρεπει να φτιαξουμε μια stack με ολες τις συναλαγες σε ολους τους λογαριασμους στον user και να μην καλουμε ξεχωριστες stack για καθε λογαριασμο 
+	}
+	
+	protected void updatePersonalInformation() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("To update your business information, please enter your current password:");
+		String currentPassword = scanner.nextLine();
+		if (currentPassword.equals(this.password)) {
+			System.out.println("Current email: " + getEmail());
+			System.out.println("Type new email (or press Enter to keep current): ");
+			String newEmail = scanner.nextLine();
+			if (!newEmail.isEmpty()) {
+				setEmail(newEmail);
+			}
+		
+			System.out.println("Type new business name (or press Enter to keep current): ");
+			String newBusinessName = scanner.nextLine();
+			if (!newBusinessName.isEmpty()) {
+				setName(newBusinessName);
+			}
+		
+			System.out.println("Type new representative name (or press Enter to keep current): ");
+			String newRepName = scanner.nextLine();
+			if (!newRepName.isEmpty()) {
+				setSurname(newRepName);
+			}
+		
+			System.out.println("Type new phone number (or press Enter to keep current): ");
+			String newPhoneNumber = scanner.nextLine();
+			if (!newPhoneNumber.isEmpty()) {
+				setPhoneNumber(newPhoneNumber);
+			}
+		} else {
+			System.out.println("Incorrect password. Personal information not updated.");
+			return;
+		}
+		System.out.println("Personal information updated.");
+		scanner.close(); //ίσως δεν πρεπει να κλεισει εδω
+	}
+
+	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN (ιδιο με customer)
+	    for (Account acc : accounts) {
+	        if (acc.getIBAN().equals(accountNumber)) {
+	            return acc;
+	        }
+	    }
+	    return null; // αν δεν βρεθεί
+	}
+	
+	protected void accountBalance(Account account) { //ιδιο ακριβως με customer
+		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());
+	}
+}

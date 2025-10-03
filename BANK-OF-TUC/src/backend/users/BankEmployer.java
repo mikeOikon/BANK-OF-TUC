@@ -1,9 +1,11 @@
 package backend.users;
 
+import backend.accounts.Branch;
+
 public class BankEmployer extends User {
 
-	public BankEmployer(String userID, String password, String email, String name, String surname, String phoneNumber) {
-		super(userID, password, password, password, password, password);
+	public BankEmployer(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+		super(userID, password, password, password, password, password, branch);
 	}
 
 	//na doume ti prepei na einai protected

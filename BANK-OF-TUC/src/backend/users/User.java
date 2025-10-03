@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import backend.accounts.Branch;
+
 public abstract class User {
 	
 	protected String userID;
@@ -13,18 +15,19 @@ public abstract class User {
 	protected String name;
 	protected String surname;
 	protected String phoneNumber;
-	
+	protected Branch branch;	//link user to branch
 	private ArrayList<String> accounts;	//link user to accounts 
 	
 	
 	
-	public User(String userID, String password, String email, String name, String surname, String phoneNumber) {
+	public User(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		this.userID = userID;
 		this.password = password;
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.phoneNumber = phoneNumber;
+		this.branch = branch;
 		this.accounts = new ArrayList<>();
 		
 	}
