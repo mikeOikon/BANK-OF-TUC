@@ -141,7 +141,5 @@ public abstract class Account {
 	        return remainder;
 	    }
 	    
-	    
-
 	}
 

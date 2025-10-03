@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import backend.accounts.Account;
+import backend.accounts.BankAccount;
 import backend.accounts.Branch;
 import backend.accounts.FixedTermAccount;
 import backend.accounts.Transaction;
@@ -25,6 +26,7 @@ public class BankSystem {
 	private Map<String,User> customers; // Map to store customers with userID as key and informations as value
 	private Map<String,User> bankEmployers; // Map to bankEmployers users with userID as key and informations as value
 	private Map<String,User> auditors; // Map to store auditors with userID as key and informations as value
+	private BankAccount bankAccount; // η τράπεζα έχει και έναν λογαριασμό για τις προμήθειες κλπ
 	
 	private static int adminCount = 0;
 	private static int customerCount = 0;
@@ -40,7 +42,7 @@ public class BankSystem {
 		this.bankEmployers=new HashMap<>();
 		this.auditors=new HashMap<>();		
 		//this.accounts = new ArrayList<Account>();
-	
+		this.bankAccount = new BankAccount("BANK001", new Branch(bankCode, branchCode)); //BAMK001 is the bank account number
 		this.branches = new HashMap<>();
         Branch mainBranch = new Branch(bankCode, branchCode);
         branches.put(branchCode, mainBranch); // χρησιμοποιούμε branchCode ως key
@@ -93,7 +95,7 @@ public class BankSystem {
 		        System.out.println("Invalid choice. Please select 1 or 2.");
 		        break;
 		}
-		}		
+	}		
 	
 	
 	public String generateId(int choice) {  //Genrates unique ID for each user ids are in order
@@ -146,7 +148,7 @@ public class BankSystem {
 			scanner.close();
 			return;
 		}
-		if (fromAccount.getIBAN()==null || toAccount.getIBAN()==null) {	//το toAccountNumber ειναι λαθος
+		if (fromAccount.getIBAN()==null || toAccount.getIBAN()==null) {	
 			System.out.println("One or both of the account numbers are invalid.");
 			scanner.close();
 			return;
@@ -171,9 +173,20 @@ public class BankSystem {
 			scanner.close();
 			return;
 		}
-		fromAccount.setBalance(fromAccount.getBalance() - amount);
-		toAccount.setBalance(toAccount.getBalance() + amount);
-		
+		if (fromAccount.getBranch().getBankCode() != toAccount.getBranch().getBankCode()) { // σε transfer σε αλλη τραπεζα προμηθεια 1 euro σε παραληπτη
+			if(fromAccount.getBalance() < amount + 1) {
+				System.out.println("Insufficient funds in the source account to cover the transfer fee.");
+				scanner.close();
+				return;
+			}
+			fromAccount.setBalance(fromAccount.getBalance() - (amount + 1));
+			toAccount.setBalance(toAccount.getBalance() + amount);
+			bankAccount.receivePayment(1.0); // η τράπεζα παίρνει 1 euro προμήθεια
+		}
+		else {
+			fromAccount.setBalance(fromAccount.getBalance() - amount);
+			toAccount.setBalance(toAccount.getBalance() + amount);
+		}
 		//update transaction history for both accounts
 		Transaction transfer = new Transaction("transfer", amount, fromAccount.getIBAN(), toAccount.getIBAN());
 		fromAccount.getTransactions().add(transfer);

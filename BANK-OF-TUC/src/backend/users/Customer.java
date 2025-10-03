@@ -59,7 +59,7 @@ public class Customer extends User {
 	}
 	
 	protected void askToCloseAccount() {
-		//
+		//methodos pou kleinei ton logaraismo(prepei o loariasmos na exei 0 balance kai na min einai fixed term)
 	}
 	
 	protected void accountBalance(Account account) {
@@ -129,7 +129,47 @@ public class Customer extends User {
 	}
 	
 	protected void updatePersonalInformation() {
-		
+		//if password is correct then let user update email, name, surname, phone number, and maybe password
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("To update your personal information, please enter your current password:");
+		String currentPassword = scanner.nextLine();
+		if (currentPassword.equals(this.password)) {
+		    System.out.println("Enter new email (or press Enter to keep current):");
+		    String newEmail = scanner.nextLine();
+		    if (!newEmail.isEmpty()) {
+		        this.email = newEmail;
+		    }
+
+		    System.out.println("Enter new name (or press Enter to keep current):");
+		    String newName = scanner.nextLine();
+		    if (!newName.isEmpty()) {
+		        this.name = newName;
+		    }
+
+		    System.out.println("Enter new surname (or press Enter to keep current):");
+		    String newSurname = scanner.nextLine();
+		    if (!newSurname.isEmpty()) {
+		        this.surname = newSurname;
+		    }
+
+		    System.out.println("Enter new phone number (or press Enter to keep current):");
+		    String newPhoneNumber = scanner.nextLine();
+		    if (!newPhoneNumber.isEmpty()) {
+		        this.phoneNumber = newPhoneNumber;
+		    }
+
+		    System.out.println("Do you want to change your password? (yes/no)");
+		    String changePassword = scanner.nextLine();
+		    if (changePassword.equalsIgnoreCase("yes")) {
+		        System.out.println("Enter new password:");
+		        String newPassword = scanner.nextLine();
+		        this.password = newPassword;
+		    }
+
+		    System.out.println("Personal information updated successfully.");
+		} else {
+		    System.out.println("Incorrect password. Personal information not updated.");
+		}
 	}
 	
 	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN
