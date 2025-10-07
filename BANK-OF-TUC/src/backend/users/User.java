@@ -1,11 +1,5 @@
 package backend.users;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
-
 import backend.accounts.Branch;
 
 public abstract class User {
@@ -17,7 +11,6 @@ public abstract class User {
 	protected String surname;
 	protected String phoneNumber;
 	protected Branch branch;	//link user to branch
-	private ArrayList<String> accounts;	//link user to accounts 
 	
 	
 	
@@ -29,7 +22,6 @@ public abstract class User {
 		this.surname = surname;
 		this.phoneNumber = phoneNumber;
 		this.branch = branch;
-		this.accounts = new ArrayList<>();
 		
 	}
 		
@@ -39,9 +31,11 @@ public abstract class User {
 		return userID;
 	}
 	
+	/*
 	public ArrayList<String> getAccounts() {
 		return accounts;
 	}
+	*/
 	
 	public void setUserID(String userID) {
 		this.userID = userID;
