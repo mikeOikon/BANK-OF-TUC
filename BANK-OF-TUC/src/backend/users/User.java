@@ -3,28 +3,32 @@ package backend.users;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
-public abstract class User {
+import backend.accounts.Branch;
 
-	protected String userID;
-	private String password;
-	private String email;
-	private String name;
-	private String surname;
-	private String phoneNumber;
+public abstract class User {
 	
+	protected String userID;
+	protected String password;
+	protected String email;
+	protected String name;
+	protected String surname;
+	protected String phoneNumber;
+	protected Branch branch;	//link user to branch
 	private ArrayList<String> accounts;	//link user to accounts 
 	
 	
 	
-	public User(String userID, String password, String email, String name, String surname, String phoneNumber) {
+	public User(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		this.userID = userID;
 		this.password = password;
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.phoneNumber = phoneNumber;
+		this.branch = branch;
 		this.accounts = new ArrayList<>();
 		
 	}
@@ -33,6 +37,10 @@ public abstract class User {
 	
 	public String getUserID() {
 		return userID;
+	}
+	
+	public ArrayList<String> getAccounts() {
+		return accounts;
 	}
 	
 	public void setUserID(String userID) {
@@ -53,7 +61,7 @@ public abstract class User {
 		this.email = email;
 	}
 
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -61,7 +69,7 @@ public abstract class User {
 		this.name = name;
 	}
 
-	protected String getSurname() {
+	public String getSurname() {
 		return surname;
 	}
 
@@ -104,20 +112,18 @@ public abstract class User {
 	protected void deleteAccount() {
 		// Implement delete account functionality
 	}
-
+    
 	protected void login() {
 		//angel 
 		int tries = 0;
-		Scanner scanner = new Scanner(System.in);
 		while(true) {
 			System.out.println("Type userID");
-			String userID = scanner.nextLine();		//takes String from scanner?
+			String userID = frontend.Main.scanner.nextLine();		
 			System.out.println("Type Passward");
-			String password = scanner.nextLine();		//takes String from scanner?
+			String password = frontend.Main.scanner.nextLine();		
 			tries++;
 			if(login(userID, password)) {
 				System.out.println("*******Wellcome*******");
-				scanner.close();		//maybe not close scanner here
 				return;
 			}
 			else {

@@ -1,72 +1,62 @@
 package backend.accounts;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.Stack;
 
 public abstract class Account {
 
 	String IBAN;	//εχει συγκεκριμενο αλγοριθμο 
-	String User; //name...
+	String userID;
 	double balance;
-	ArrayList<String> transactions; //na doume an theloume na einai ArrayList
-	long account_id; //used to link account to user(s)
-	private static final Set<String> usedAccounts = new HashSet<>(); //***SOS εδω εχουμε μόνο το Bban +να δοUμε αν θελουμε να ειναι set
-	//   ΜΑΙΝ  private static final String bankCode = "021"; // κωδικός τράπεζας Bank of TUC
-	//private static final String branchCode = "0021"; // κωδικός καταστήματος (υποκαταστήματος) Main Branch
+	Stack<Transaction> transactions; //ωστε να εμφανιζει πρωτη αυτη που έγινε τελευταία
+	private static long nextAccountId = 1;
+	private long account_id;
+	private static Set<String> usedAccounts = new HashSet<>(); // για να κρατάμε τους ήδη χρησιμοποιημένους αριθμούς λογαριασμών 
 	
-	public Account(String iBAN, String user, double balance, ArrayList<String> transactions) {
+	private Branch branch;	//για να συνδεσουμε με υποκαταστημα
+	
+	public Account(String userID, double balance, Stack<Transaction> transactions, Branch branch) {
 		super();
-		this.IBAN = iBAN;
-		this.User = user;
+		this.IBAN = generateIBAN(branch); // Δημιουργία IBAN με branch
+		this.userID = userID;
 		this.balance = balance;
 		this.transactions = transactions;
-		this.account_id = account_id;
+		this.account_id = nextAccountId++;
+		this.branch = branch;	
 	}
 
-
-	protected String getIBAN() {
+	public Branch getBranch() {
+        return branch;
+    }
+	
+	public String getIBAN() {
 		return IBAN;
 	}
 
-
 	protected void setIBAN(String iBAN) {
-		//to IBAN exei GR + 2 check digits + 3 ψηφία κωδικό τράπεζας + 4 ψηφία κωδικός καταστήματος + 16 ψηφία αριθμός λογαριασμού
 		IBAN = iBAN;
 	}
 
 
-	protected String getUser() {
-		return User;
+	protected String getUserID() {
+		return userID;
 	}
 
-
-	protected void setUser(String user) {
-		User = user;
-	}
-
-
-	protected double getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-
-	protected void setBalance(double balance) {
+	//ισως δεν πρεπει να ειναι public
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 
 
-	protected ArrayList<String> getTransactions() {
+	public Stack<Transaction> getTransactions() {
 		return transactions;
 	}
-
-
-	protected void setTransactions(ArrayList<String> transactions) {
-		this.transactions = transactions;
-	}
-
 
 	protected long getAccount_id() {
 		return account_id;
@@ -76,8 +66,6 @@ public abstract class Account {
 	protected void setAccount_id(long account_id) {
 		this.account_id = account_id;
 	}
-	
-	//protected void createAccount()
 	
 // Μετατροπή χαρακτήρων σε ψηφία σύμφωνα με τον κανόνα IBAN (A=10 ... Z=35) ΓΙΑ ΝΑ ΜΠΟΡΕΙ ΝΑ ΑΛΛΑΖΕΙ ΑΝΑΛΟΓΩΣ ΤΗΝ ΤΡΑΠΕΖΑ
 	 private static String lettersToDigits(String input) {
@@ -93,7 +81,7 @@ public abstract class Account {
 	        return sb.toString();
 	    }
 	    
-	  public static String createUniqueBban(String bankCode, String branchCode) {
+	  public static String createUniqueBban(Branch branch) {
 	        String accountNumber;
 	        String bban;
 	        
@@ -104,21 +92,21 @@ public abstract class Account {
 	            long accNum = Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L;  // 16 ψηφία maska
 	            accountNumber = String.format("%016d", accNum);  // συμπλήρωση με μηδενικά αριστερά
 
-	            bban = bankCode + branchCode + accountNumber;
+	            bban = branch.getBankCode() + branch.getBranchCode() + accountNumber;
 	        } while (usedAccounts.contains(bban)); // έλεγχος μοναδικότητας
 
 	        //sos den jerv an prepei na kratame to bban h mono to iban
 	        usedAccounts.add(bban); // κρατάμε το BBAN για να μην ξαναχρησιμοποιηθεί
 
-	        System.out.println("Δημιουργήθηκε νέο BBAN: " + bban);
+	        //System.out.println("Δημιουργήθηκε νέο BBAN: " + bban);
 	        
 	        return bban;
 	    }
 	    
 
 	  // Υπολογισμός IBAN Ελλάδας από BBAN
-	  public static String generateIBAN(String bankCode, String branchCode) {
-		    String bban = createUniqueBban(bankCode, branchCode);
+	  public static String generateIBAN(Branch branch) {
+		    String bban = createUniqueBban(branch);
 	        final String country = "GR";
 
 	        if (!bban.matches("\\d+")) {
@@ -140,6 +128,8 @@ public abstract class Account {
 	        int checkDigits = 98 - mod;
 	        String checkStr = String.format("%02d", checkDigits);
 
+	        System.out.println("Δημιουργήθηκε νέο IBAN: " + country + checkStr + bban);
+	        
 	        return country + checkStr + bban;
 	    }
 
@@ -152,6 +142,17 @@ public abstract class Account {
 	        }
 	        return remainder;
 	    }
-
+	    
+	    @Override
+	    public String toString() {
+	        return String.format(
+	            "%s | IBAN: %s | Balance: %.2f | Branch: %s",
+	            this.getClass().getSimpleName(),  // επιστρέφει π.χ. "TransactionalAccount"
+	            this.getIBAN(),
+	            this.getBalance(),
+	            (branch != null ? branch.getBranchCode() : "N/A")
+	        );
+	    }
+	    
 	}
 

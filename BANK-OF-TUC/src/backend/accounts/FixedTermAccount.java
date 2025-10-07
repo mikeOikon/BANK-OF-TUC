@@ -1,14 +1,12 @@
 package backend.accounts;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class FixedTermAccount extends PersonalAccount {
 
-	public FixedTermAccount(String iBAN, String user, double balance, ArrayList<String> transactions) {
-		super(iBAN, user, balance, transactions);
+	public FixedTermAccount(String user, double balance, Stack<Transaction> transactions, Branch branch) {
+		super(user, balance, transactions, branch);
 		// TODO Auto-generated constructor stub
 	}
-
-	
 	
 }
