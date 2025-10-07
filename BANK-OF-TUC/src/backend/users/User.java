@@ -21,7 +21,7 @@ public abstract class User {
 	
 	
 	
-	public User(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+	public User(String userID, String user, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		this.userID = userID;
 		this.password = password;
 		this.email = email;

@@ -17,6 +17,7 @@ import backend.users.BankEmployer;
 import backend.users.Customer;
 import backend.users.User;
 import backend.users.ΒusinessCustomer;
+//import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 
 public class BankSystem {
 	
@@ -63,6 +64,8 @@ public class BankSystem {
 		frontend.Main.scanner.nextLine(); // Consume newline
 		switch (choice) {
 		    case 1:
+		    	System.out.println("Type Username: ");
+		    	String username = frontend.Main.scanner.nextLine();
 		    	System.out.println("Type password: ");	//maybe should be hidden and have some rules
 				String password = frontend.Main.scanner.nextLine();
 				System.out.println("Type email: ");
@@ -76,10 +79,12 @@ public class BankSystem {
 				//customers are created with the main branch, if we want to create customers with different branches we need to change this
 				String userID = generateId(2); //2 for customer
 				System.out.println("Your user ID is: " + userID); //inform user of his userID
-				User newCustomer = new Customer(userID, password, email, name, surname, phoneNumber, Branch.getDefaultBranch());//create customer
+				User newCustomer = new Customer(userID, username, password, email, name, surname, phoneNumber, Branch.getDefaultBranch());//create customer
 				customers.put(userID, newCustomer);
 				return newCustomer;
 		    case 2:
+		    	System.out.println("Type Username: ");
+		    	String businessUsername = frontend.Main.scanner.nextLine();
 		    	System.out.println("Type password: ");	//maybe should be hidden and have some rules
 				String businessPassword = frontend.Main.scanner.nextLine();
 				System.out.println("Type business email: ");
@@ -92,7 +97,7 @@ public class BankSystem {
 				String businessPhoneNumber = frontend.Main.scanner.nextLine();
 				
 				String businessUserID = generateId(5); //5 for businessCustomer (different from simple customer)
-				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessPassword, businessEmail, businessName, representativeName, businessPhoneNumber, Branch.getDefaultBranch());//create business customer
+				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessUsername, businessPassword, businessEmail, businessName, representativeName, businessPhoneNumber, Branch.getDefaultBranch());//create business customer
 				customers.put(businessUserID, newBusinessCustomer);
 		        return newBusinessCustomer;
 		    default:

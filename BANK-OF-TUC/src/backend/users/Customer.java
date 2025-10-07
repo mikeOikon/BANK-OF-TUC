@@ -22,8 +22,8 @@ public class Customer extends User {
 	private Branch branch;
 	private ArrayList<Account> accounts; //ισως δεν χρειαζεται και εδω λιστα αφου υπαρχει στους users
 	
-	public Customer(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
-		super(userID, password, email, name, surname, phoneNumber, branch);
+	public Customer(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+		super(userID, username, password, email, name, surname, phoneNumber, branch);
 		this.accounts = new ArrayList<Account>();
 	}
 	

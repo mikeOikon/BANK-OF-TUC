@@ -16,8 +16,8 @@ public class ΒusinessCustomer extends User{
 	private Branch branch;
 	private ArrayList<Account> accounts;
 	
-	public ΒusinessCustomer(String userID, String password, String email, String businessName, String representativeName, String phoneNumber, Branch branch) {
-		super(userID, password, email, businessName, representativeName, phoneNumber, branch);
+	public ΒusinessCustomer(String userID,String username, String password, String email, String businessName, String representativeName, String phoneNumber, Branch branch) {
+		super(userID, username, password, email, businessName, representativeName, phoneNumber, branch);
 		this.accounts = new ArrayList<>();
 	}
 	//na doume ti prepei na einai protected

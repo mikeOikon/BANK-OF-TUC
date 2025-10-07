@@ -11,8 +11,8 @@ public class Admin extends User {
     private static int auditorCount = 0;
     
     //ισως ο admin δεν πρεπει να εχει branch
-	public Admin(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
-		super(userID, password, email, name, surname, phoneNumber, branch);
+	public Admin(String userID, String username,String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+		super(userID, username, password, email, name, surname, phoneNumber, branch);
 	}
 	
 	protected void promoteUser(String userId, String newRole) {
