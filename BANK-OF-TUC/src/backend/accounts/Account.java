@@ -101,8 +101,8 @@ public abstract class Account {
 
 	        do {
 	            // Τυχαίος αριθμός λογαριασμού 16 ψηφίων
-	            long accNum = Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L;
-	            accountNumber = String.format("%016d", accNum);
+	            long accNum = Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L;  // 16 ψηφία maska
+	            accountNumber = String.format("%016d", accNum);  // συμπλήρωση με μηδενικά αριστερά
 
 	            bban = bankCode + branchCode + accountNumber;
 	        } while (usedAccounts.contains(bban)); // έλεγχος μοναδικότητας
