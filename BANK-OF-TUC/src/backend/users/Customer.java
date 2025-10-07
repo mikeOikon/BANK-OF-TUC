@@ -102,7 +102,7 @@ public class Customer extends User {
 	public void viewAccountsDetails() {
 		//isos na grafei apo pote einai melos o customer
 		
-		System.out.println("Customer ID: " + this.userID);
+		System.out.println("Username: " + this.username);
 		System.out.println("Name: " + this.name + " " + this.surname);
 		System.out.println("Email: " + this.email);
 		System.out.println("Phone Number: " + this.phoneNumber);
@@ -135,7 +135,7 @@ public class Customer extends User {
 	        }
 	    });
 		if (allTransactions.isEmpty()) {
-	        System.out.println("No transactions found for customer " + this.userID);
+	        System.out.println("No transactions found for customer " + this.username);
 	        return;
 	    }
 		
@@ -152,6 +152,11 @@ public class Customer extends User {
 		System.out.println("To update your personal information, please enter your current password:");
 		String currentPassword = frontend.Main.scanner.nextLine();
 		if (currentPassword.equals(this.password)) {
+			System.out.println("Enter new username (or press Enter to keep current):");
+			String newUsername = frontend.Main.scanner.nextLine();
+		    if (!newUsername.isEmpty()) {
+		        this.username = newUsername;
+		    }
 		    System.out.println("Enter new email (or press Enter to keep current):");
 		    String newEmail = frontend.Main.scanner.nextLine();
 		    if (!newEmail.isEmpty()) {

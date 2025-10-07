@@ -4,6 +4,7 @@ import backend.accounts.Branch;
 
 public abstract class User {
 	
+	protected String username;
 	protected String userID;
 	protected String password;
 	protected String email;
@@ -14,8 +15,9 @@ public abstract class User {
 	
 	
 	
-	public User(String userID, String user, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+	public User(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		this.userID = userID;
+		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.name = name;
@@ -26,6 +28,13 @@ public abstract class User {
 	}
 		
 	//na doume poies methodoi prepei na einai protected
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	
 	public String getUserID() {
 		return userID;
@@ -87,7 +96,7 @@ public abstract class User {
 
 	protected boolean login(String userID, String password) {
 		//maybe use a quick pin?
-		return this.userID.equals(userID) && this.password.equals(password);
+		return this.username.equals(username) && this.password.equals(password);
 	}
 	
 	protected void logout() {
@@ -111,12 +120,12 @@ public abstract class User {
 		//angel 
 		int tries = 0;
 		while(true) {
-			System.out.println("Type userID");
-			String userID = frontend.Main.scanner.nextLine();		
+			System.out.println("Type username");
+			String username = frontend.Main.scanner.nextLine();		
 			System.out.println("Type Passward");
 			String password = frontend.Main.scanner.nextLine();		
 			tries++;
-			if(login(userID, password)) {
+			if(login(username, password)) {
 				System.out.println("*******Wellcome*******");
 				return;
 			}
