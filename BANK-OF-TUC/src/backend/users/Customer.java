@@ -29,6 +29,16 @@ public class Customer extends User {
 	
 	//na doume ti prepei na einai protected
 	
+	public ArrayList<Account> getAccounts() {
+		if (accounts.isEmpty()) {
+			System.out.println("No accounts found for customer " + this.userID);
+			return null;
+		} else {
+			return accounts;
+		}
+	}
+
+	
 	public void createAccountMenu() {
 		System.out.println("What type of account do you want to create? Type 1 for Transactional, Type 2 for Savings, Type 3 for Fixed-Term");
 		int choice = frontend.Main.scanner.nextInt();
@@ -40,19 +50,19 @@ public class Customer extends User {
 		switch (choice) {
 		    case 1:
 		    	//create transactional account
-		    	Account newTransactionalAccount = new TransactionalAccount(this.userID, 0.0, new Stack<Transaction>(), branch.getDefaultBranch());
+		    	Account newTransactionalAccount = new TransactionalAccount(this.userID, 0.0, new Stack<Transaction>(), Branch.getDefaultBranch());
 		    	accounts.add(newTransactionalAccount);
 		    	viewAccountDetails(newTransactionalAccount);
 		    	break;
 		    case 2:
 		    	//create savings account
-		    	Account newSavingsAccount = new SavingsAccount(this.userID, 0.0, new Stack<Transaction>(), branch.getDefaultBranch());
+		    	Account newSavingsAccount = new SavingsAccount(this.userID, 0.0, new Stack<Transaction>(), Branch.getDefaultBranch());
 		    	accounts.add(newSavingsAccount);
 		    	viewAccountDetails(newSavingsAccount);
 		    	break;
 		    case 3:
 		    	//create fixed-term account
-		    	Account newFixedTermAccount = new FixedTermAccount(this.userID, 0.0, new Stack<Transaction>(), branch.getDefaultBranch());
+		    	Account newFixedTermAccount = new FixedTermAccount(this.userID, 0.0, new Stack<Transaction>(), Branch.getDefaultBranch());
 		    	accounts.add(newFixedTermAccount);
 		    	viewAccountDetails(newFixedTermAccount);
 		    	break;

@@ -53,32 +53,31 @@ public class Main {
     // Αν οι υποκλάσεις σου δεν έχουν τέτοιους constructors, πρόσθεσέ τους με την κλήση προς super(...) όπως παραπάνω.
 
     try {
+    	//create users
     	User user1 = centralBank.createUserCLI();
     	User user2 = centralBank.createUserCLI();
     	
-      //  Account t1 = new TransactionalAccount(alice.getUserID(), 0.0, new Stack<Transaction>(), central);
-     //   Account s1 = new SavingsAccount(alice.getUserID(), 100.0, new Stack<Transaction>(), athens);
-     //   Account f1 = new FixedTermAccount(bob.getUserID(), 500.0, new Stack<Transaction>(), central);
-
-       // Account t2 = new TransactionalAccount(bob.getUserID(), 0.0, new Stack<Transaction>(), central);
-        
-        System.out.println("Accounts created:");
-      //  System.out.println(" Alice " + t1.getClass() + "IBAN: " + t1.getIBAN() + "  Branch: " + t1.getBranch().getBranchCode());
-      //  System.out.println(" Alice " + s1.getClass() + "IBAN: " + s1.getIBAN() + "  Branch: " + s1.getBranch().getBranchCode());
-      //  System.out.println("Bob " + f1.getClass() + "IBAN: " + f1.getIBAN() + "  Branch: " + f1.getBranch().getBranchCode());
-      //  System.out.println("Bob " + t2.getClass() + "IBAN: " + t2.getIBAN() + "  Branch: " + t2.getBranch().getBranchCode());
-   
-        if(user1 instanceof Customer) 
+    	//if users are customers create accounts for them
+    	if(user1 instanceof Customer) 
 			((Customer) user1).createAccountMenu();
         
+    	if(user1 instanceof Customer) 
+			((Customer) user1).createAccountMenu();
+    	
         if(user2 instanceof Customer)
         	((Customer) user2).createAccountMenu();
         
-        //alice.viewAccountsDetails();
+
         
        System.out.println("++++++++++");
        
-        centralBank.getAllCustomers();
+        centralBank.getAllCustomers();      	
+        	
+        if(user1 instanceof Customer) {
+        	Account t1 = ((Customer) user1).getAccounts().get(0);
+        	((TransactionalAccount) t1).addMoney(150.0);
+			centralBank.transferMoney((Customer)user1);
+        }
         
     //    if (t1 instanceof TransactionalAccount) 
 	//		((TransactionalAccount) t1).addMoney(150.0);
