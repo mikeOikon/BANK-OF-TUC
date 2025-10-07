@@ -152,6 +152,7 @@ public class Customer extends User {
 		System.out.println("To update your personal information, please enter your current password:");
 		String currentPassword = frontend.Main.scanner.nextLine();
 		if (currentPassword.equals(this.password)) {
+			viewPersonalInformation(); // Display current information
 			System.out.println("Enter new username (or press Enter to keep current):");
 			String newUsername = frontend.Main.scanner.nextLine();
 		    if (!newUsername.isEmpty()) {
@@ -190,9 +191,17 @@ public class Customer extends User {
 		    }
 
 		    System.out.println("Personal information updated successfully.");
+		    viewPersonalInformation(); // Display updated information
 		} else {
 		    System.out.println("Incorrect password. Personal information not updated.");
 		}
+	}
+	
+	private void viewPersonalInformation() {
+		System.out.println("Username: " + this.username);
+		System.out.println("Name: " + this.name + " " + this.surname);
+		System.out.println("Email: " + this.email);
+		System.out.println("Phone Number: " + this.phoneNumber);
 	}
 	
 	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN

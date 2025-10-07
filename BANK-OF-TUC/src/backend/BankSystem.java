@@ -78,7 +78,6 @@ public class BankSystem {
 				String phoneNumber = frontend.Main.scanner.nextLine();
 				//customers are created with the main branch, if we want to create customers with different branches we need to change this
 				String userID = generateId(2); //2 for customer
-				System.out.println("Your user ID is: " + userID); //inform user of his userID
 				User newCustomer = new Customer(userID, username, password, email, name, surname, phoneNumber, Branch.getDefaultBranch());//create customer
 				customers.put(userID, newCustomer);
 				return newCustomer;

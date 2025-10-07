@@ -59,7 +59,7 @@ public class ΒusinessCustomer extends User{
 	protected void viewAccountsDetails() {
 		//na grafei apo pote einai melos o customer
 		
-		System.out.println("Customer ID: " + this.userID);
+		System.out.println("Username: " + this.username);
 		System.out.println("Business Name: " + this.name + ", Representative Name " + this.surname);
 		System.out.println("Email: " + this.email);
 		System.out.println("Phone Number: " + this.phoneNumber);
@@ -99,7 +99,7 @@ public class ΒusinessCustomer extends User{
 	        }
 	    });
 		if (allTransactions.isEmpty()) {
-	        System.out.println("No transactions found for customer " + this.userID);
+	        System.out.println("No transactions found for customer " + this.username);
 	        return;
 	    }
 		
@@ -115,13 +115,17 @@ public class ΒusinessCustomer extends User{
 		System.out.println("To update your business information, please enter your current password:");
 		String currentPassword = frontend.Main.scanner.nextLine();
 		if (currentPassword.equals(this.password)) {
-			System.out.println("Current email: " + getEmail());
+			viewBusinessInformation(); // Display current information
+			System.out.println("Type new username (or press Enter to keep current): ");
+			String newUsername = frontend.Main.scanner.nextLine();
+			if (!newUsername.isEmpty()) {
+				setUsername(newUsername);
+			}
 			System.out.println("Type new email (or press Enter to keep current): ");
 			String newEmail = frontend.Main.scanner.nextLine();
 			if (!newEmail.isEmpty()) {
 				setEmail(newEmail);
 			}
-		
 			System.out.println("Type new business name (or press Enter to keep current): ");
 			String newBusinessName = frontend.Main.scanner.nextLine();
 			if (!newBusinessName.isEmpty()) {
@@ -144,6 +148,7 @@ public class ΒusinessCustomer extends User{
 			return;
 		}
 		System.out.println("Personal information updated.");
+		viewBusinessInformation();	//show updated information
 	}
 
 	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN (ιδιο με customer)
@@ -157,5 +162,12 @@ public class ΒusinessCustomer extends User{
 	
 	protected void accountBalance(Account account) { //ιδιο ακριβως με customer
 		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());
+	}
+	
+	private void viewBusinessInformation() {
+		System.out.println("Business Name: " + this.name);
+		System.out.println("Representative Name: " + this.surname);
+		System.out.println("Email: " + this.email);
+		System.out.println("Phone Number: " + this.phoneNumber);
 	}
 }

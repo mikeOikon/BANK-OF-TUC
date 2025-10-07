@@ -24,34 +24,11 @@ public class Main {
 	
 	public static void main(String[] args) {
 	// --- Δημιουργία υποκαταστημάτων ---
-		
-	backend.accounts.Branch central = new backend.accounts.Branch("001", "0001");
-	backend.accounts.Branch athens  = new backend.accounts.Branch("001", "0002");
-	
+
 	BankSystem centralBank = new BankSystem();
 	
 	System.out.println("=== Bank system quick test ===");
-
-
-    System.out.println("Branch CENTRAL: bank=" + central.getBankCode() + " branch=" + central.getBranchCode());
-    System.out.println("Branch ATHENS : bank=" + athens.getBankCode() + " branch=" + athens.getBranchCode());
-    System.out.println();
-
-    // --- Δημιουργία πελατών ---
-   // Customer alice = new Customer("alice01", "pass", "alice@mail", "Alice", "Pap", "6970000001", central);
-   // Customer bob   = new Customer("bob02",   "pass", "bob@mail",   "Bob",   "Kok", "6970000002", athens);
-
-   // System.out.println("Created customers: " + alice.getUserID() + ", " + bob.getUserID());
-   // System.out.println();
-    
-
-    // --- Δημιουργία λογαριασμών για τους πελάτες ---
-    // ΣΗΜΕΙΩΣΗ: Οι παρακάτω constructors υποθέτουν ότι οι υποκλάσεις έχουν:
-    // public TransactionalAccount(String userID, double balance, ArrayList<String> transactions, Branch branch) { super(...); }
-    // Το ίδιο για SavingsAccount και FixedTermAccount.
-    //
-    // Αν οι υποκλάσεις σου δεν έχουν τέτοιους constructors, πρόσθεσέ τους με την κλήση προς super(...) όπως παραπάνω.
-
+	
     try {
     	//create users
     	User user1 = centralBank.createUserCLI();
@@ -79,15 +56,14 @@ public class Main {
 			centralBank.transferMoney((Customer)user1);
         }
         
-    //    if (t1 instanceof TransactionalAccount) 
-	//		((TransactionalAccount) t1).addMoney(150.0);
-    //    System.out.println(" Alice " + t1.getClass() + " New Balance: " + t1.getBalance());
+        System.out.println(((Customer)user1).getAccounts());
+        System.out.println(((Customer)user2).getAccounts());
         
-      //  if(user1.getAccounts().get(0) instanceof TransactionalAccount) {
-	//		((TransactionalAccount) user1.getAccounts().get(0)).addMoney(300.0);
-     //   }
-     //   centralBank.transferMoney(alice);
-       
+        if(user2 instanceof Customer) {
+			centralBank.transferMoney((Customer)user2);
+        }
+        
+        //η login θελει φτιαξιμο
        
         
         scanner.close();	

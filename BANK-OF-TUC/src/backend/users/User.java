@@ -116,7 +116,7 @@ public abstract class User {
 		// Implement delete account functionality
 	}
     
-	protected void login() {
+	public void login() {
 		//angel 
 		int tries = 0;
 		while(true) {
