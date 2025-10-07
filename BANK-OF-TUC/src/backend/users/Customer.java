@@ -20,7 +20,7 @@ import backend.accounts.TransactionalAccount;
 
 public class Customer extends User {
 	private Branch branch;
-	private ArrayList<Account> accounts; 
+	private ArrayList<Account> accounts; //ισως δεν χρειαζεται και εδω λιστα αφου υπαρχει στους users
 	
 	public Customer(String userID, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		super(userID, password, email, name, surname, phoneNumber, branch);
@@ -29,36 +29,37 @@ public class Customer extends User {
 	
 	//na doume ti prepei na einai protected
 	
-	
-	protected void createAccount() {
-		Scanner scanner = new Scanner(System.in);
+	public void createAccountMenu() {
 		System.out.println("What type of account do you want to create? Type 1 for Transactional, Type 2 for Savings, Type 3 for Fixed-Term");
-		int choice = scanner.nextInt();
+		int choice = frontend.Main.scanner.nextInt();
+		frontend.Main.scanner.nextLine(); // Consume newline
+		createAccount(choice);
+	}
+	
+	protected void createAccount(int choice) {
 		switch (choice) {
 		    case 1:
 		    	//create transactional account
-		    	Account newTransactionalAccount = new TransactionalAccount(this.userID, 0.0, new Stack<Transaction>(), branch);
+		    	Account newTransactionalAccount = new TransactionalAccount(this.userID, 0.0, new Stack<Transaction>(), branch.getDefaultBranch());
 		    	accounts.add(newTransactionalAccount);
 		    	viewAccountDetails(newTransactionalAccount);
 		    	break;
 		    case 2:
 		    	//create savings account
-		    	Account newSavingsAccount = new SavingsAccount(this.userID, 0.0, new Stack<Transaction>(), branch);
+		    	Account newSavingsAccount = new SavingsAccount(this.userID, 0.0, new Stack<Transaction>(), branch.getDefaultBranch());
 		    	accounts.add(newSavingsAccount);
 		    	viewAccountDetails(newSavingsAccount);
 		    	break;
 		    case 3:
 		    	//create fixed-term account
-		    	Account newFixedTermAccount = new FixedTermAccount(this.userID, 0.0, new Stack<Transaction>(), branch);
+		    	Account newFixedTermAccount = new FixedTermAccount(this.userID, 0.0, new Stack<Transaction>(), branch.getDefaultBranch());
 		    	accounts.add(newFixedTermAccount);
 		    	viewAccountDetails(newFixedTermAccount);
 		    	break;
 		    default:
 		        System.out.println("Invalid choice. Please select a valid account type.");
-		        scanner.close();
-		        return;
+		        break;
 		}
-		scanner.close();	//ισως δεν πρεπει να κλεισει εδωζ
 	}
 	
 	protected void askToCloseAccount() {
@@ -70,28 +71,26 @@ public class Customer extends User {
 	}
 
 	protected void viewAccountBalance() {
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("Type the acount iBAN you want to check the balance");
-		String accountNumber = scanner.nextLine();	
+		String accountNumber = frontend.Main.scanner.nextLine();	
 		Account account = findAccountByNumber(accountNumber);
 		if (account != null) {
 		    accountBalance(account);
 		} else {
 		    System.out.println("Account with iBAN " + accountNumber + " not found.");
-		}
-		scanner.close();	//ισως δεν πρεπει να κλεισει εδω		
+		}	
 	}
 	
 	protected void viewAccountDetails(Account acc) {
 		if (acc != null) {
-			System.out.println("Account type" + acc.getClass() + "Account iBAN: " + acc.getIBAN() + ", Balance: " + acc.getBalance());
+			System.out.println(acc.toString());
 		} else {
 		    System.out.println("Account not found.");
 		}
 	}
 	
-	protected void viewAccountsDetails() {
-		//na grafei apo pote einai melos o customer
+	public void viewAccountsDetails() {
+		//isos na grafei apo pote einai melos o customer
 		
 		System.out.println("Customer ID: " + this.userID);
 		System.out.println("Name: " + this.name + " " + this.surname);
@@ -140,39 +139,38 @@ public class Customer extends User {
 	
 	protected void updatePersonalInformation() {
 		//if password is correct then let user update email, name, surname, phone number, and maybe password
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("To update your personal information, please enter your current password:");
-		String currentPassword = scanner.nextLine();
+		String currentPassword = frontend.Main.scanner.nextLine();
 		if (currentPassword.equals(this.password)) {
 		    System.out.println("Enter new email (or press Enter to keep current):");
-		    String newEmail = scanner.nextLine();
+		    String newEmail = frontend.Main.scanner.nextLine();
 		    if (!newEmail.isEmpty()) {
 		        this.email = newEmail;
 		    }
 
 		    System.out.println("Enter new name (or press Enter to keep current):");
-		    String newName = scanner.nextLine();
+		    String newName = frontend.Main.scanner.nextLine();
 		    if (!newName.isEmpty()) {
 		        this.name = newName;
 		    }
 
 		    System.out.println("Enter new surname (or press Enter to keep current):");
-		    String newSurname = scanner.nextLine();
+		    String newSurname = frontend.Main.scanner.nextLine();
 		    if (!newSurname.isEmpty()) {
 		        this.surname = newSurname;
 		    }
 
 		    System.out.println("Enter new phone number (or press Enter to keep current):");
-		    String newPhoneNumber = scanner.nextLine();
+		    String newPhoneNumber = frontend.Main.scanner.nextLine();
 		    if (!newPhoneNumber.isEmpty()) {
 		        this.phoneNumber = newPhoneNumber;
 		    }
 
 		    System.out.println("Do you want to change your password? (yes/no)");
-		    String changePassword = scanner.nextLine();
+		    String changePassword = frontend.Main.scanner.nextLine();
 		    if (changePassword.equalsIgnoreCase("yes")) {
 		        System.out.println("Enter new password:");
-		        String newPassword = scanner.nextLine();
+		        String newPassword = frontend.Main.scanner.nextLine();
 		        this.password = newPassword;
 		    }
 

@@ -48,7 +48,7 @@ public abstract class Account {
 		return balance;
 	}
 
-
+	//ισως δεν πρεπει να ειναι public
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
@@ -98,7 +98,7 @@ public abstract class Account {
 	        //sos den jerv an prepei na kratame to bban h mono to iban
 	        usedAccounts.add(bban); // κρατάμε το BBAN για να μην ξαναχρησιμοποιηθεί
 
-	        System.out.println("Δημιουργήθηκε νέο BBAN: " + bban);
+	        //System.out.println("Δημιουργήθηκε νέο BBAN: " + bban);
 	        
 	        return bban;
 	    }
@@ -128,6 +128,8 @@ public abstract class Account {
 	        int checkDigits = 98 - mod;
 	        String checkStr = String.format("%02d", checkDigits);
 
+	        System.out.println("Δημιουργήθηκε νέο IBAN: " + country + checkStr + bban);
+	        
 	        return country + checkStr + bban;
 	    }
 
@@ -139,6 +141,17 @@ public abstract class Account {
 	            remainder = (remainder * 10 + digit) % 97;
 	        }
 	        return remainder;
+	    }
+	    
+	    @Override
+	    public String toString() {
+	        return String.format(
+	            "%s | IBAN: %s | Balance: %.2f | Branch: %s",
+	            this.getClass().getSimpleName(),  // επιστρέφει π.χ. "TransactionalAccount"
+	            this.getIBAN(),
+	            this.getBalance(),
+	            (branch != null ? branch.getBranchCode() : "N/A")
+	        );
 	    }
 	    
 	}

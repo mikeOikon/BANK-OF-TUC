@@ -8,7 +8,5 @@ public class FixedTermAccount extends PersonalAccount {
 		super(user, balance, transactions, branch);
 		// TODO Auto-generated constructor stub
 	}
-
-	
 	
 }

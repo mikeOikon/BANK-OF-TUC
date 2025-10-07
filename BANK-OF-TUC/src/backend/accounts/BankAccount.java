@@ -47,5 +47,4 @@ public class BankAccount {
 		balance += 4500000.0;
 	}
 
-	
 }

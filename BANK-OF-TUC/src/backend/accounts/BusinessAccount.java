@@ -9,4 +9,5 @@ public class BusinessAccount extends Account {
 		// TODO Auto-generated constructor stub
 	}
 	//πιο υψηλά τέλη διαχείρισης, περισσοτερες δυνατοτητες
+	
 }

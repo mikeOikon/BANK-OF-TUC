@@ -3,6 +3,7 @@ package backend.users;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 import backend.accounts.Branch;
@@ -38,6 +39,10 @@ public abstract class User {
 		return userID;
 	}
 	
+	public ArrayList<String> getAccounts() {
+		return accounts;
+	}
+	
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
@@ -56,7 +61,7 @@ public abstract class User {
 		this.email = email;
 	}
 
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -64,7 +69,7 @@ public abstract class User {
 		this.name = name;
 	}
 
-	protected String getSurname() {
+	public String getSurname() {
 		return surname;
 	}
 
@@ -107,20 +112,18 @@ public abstract class User {
 	protected void deleteAccount() {
 		// Implement delete account functionality
 	}
-
+    
 	protected void login() {
 		//angel 
 		int tries = 0;
-		Scanner scanner = new Scanner(System.in);
 		while(true) {
 			System.out.println("Type userID");
-			String userID = scanner.nextLine();		
+			String userID = frontend.Main.scanner.nextLine();		
 			System.out.println("Type Passward");
-			String password = scanner.nextLine();		
+			String password = frontend.Main.scanner.nextLine();		
 			tries++;
 			if(login(userID, password)) {
 				System.out.println("*******Wellcome*******");
-				scanner.close();		//maybe not close scanner here
 				return;
 			}
 			else {

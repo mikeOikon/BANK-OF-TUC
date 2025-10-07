@@ -10,5 +10,4 @@ public class SavingsAccount extends PersonalAccount {
 		// TODO Auto-generated constructor stub
 	}
 	
-
 }

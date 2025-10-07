@@ -71,6 +71,8 @@ public class ΒusinessCustomer extends User{
 	}
 	
 	protected void transferMoney() {
+		//να πηγαινει μηνυμα στην τράπεζα για να γίνει η μεταφορά 
+		//καπως να γινεται ελεγχοσ ποσα λεφτα μεταφερονται γενικα
 		
 	}
 	
@@ -110,31 +112,30 @@ public class ΒusinessCustomer extends User{
 	}
 	
 	protected void updatePersonalInformation() {
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("To update your business information, please enter your current password:");
-		String currentPassword = scanner.nextLine();
+		String currentPassword = frontend.Main.scanner.nextLine();
 		if (currentPassword.equals(this.password)) {
 			System.out.println("Current email: " + getEmail());
 			System.out.println("Type new email (or press Enter to keep current): ");
-			String newEmail = scanner.nextLine();
+			String newEmail = frontend.Main.scanner.nextLine();
 			if (!newEmail.isEmpty()) {
 				setEmail(newEmail);
 			}
 		
 			System.out.println("Type new business name (or press Enter to keep current): ");
-			String newBusinessName = scanner.nextLine();
+			String newBusinessName = frontend.Main.scanner.nextLine();
 			if (!newBusinessName.isEmpty()) {
 				setName(newBusinessName);
 			}
 		
 			System.out.println("Type new representative name (or press Enter to keep current): ");
-			String newRepName = scanner.nextLine();
+			String newRepName = frontend.Main.scanner.nextLine();
 			if (!newRepName.isEmpty()) {
 				setSurname(newRepName);
 			}
 		
 			System.out.println("Type new phone number (or press Enter to keep current): ");
-			String newPhoneNumber = scanner.nextLine();
+			String newPhoneNumber = frontend.Main.scanner.nextLine();
 			if (!newPhoneNumber.isEmpty()) {
 				setPhoneNumber(newPhoneNumber);
 			}
@@ -143,7 +144,6 @@ public class ΒusinessCustomer extends User{
 			return;
 		}
 		System.out.println("Personal information updated.");
-		scanner.close(); //ίσως δεν πρεπει να κλεισει εδω
 	}
 
 	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN (ιδιο με customer)

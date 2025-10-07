@@ -10,5 +10,12 @@ public class TransactionalAccount extends PersonalAccount {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getAccountType() {
+		return "Transactional Account";
+	}
+	
+	public void addMoney(double amount) {
+		this.balance += amount;
+	}
 	
 }
