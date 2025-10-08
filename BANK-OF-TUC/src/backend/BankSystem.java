@@ -1,9 +1,17 @@
 package backend;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import backend.accounts.Account;
 import backend.accounts.BankAccount;
@@ -23,22 +31,32 @@ public class BankSystem {
 	
 	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
 	private Map<String, Branch> branches;
-	private Map<String,User> admins; // Map to store admins with userID as key and informations as value
-	private Map<String,User> customers; // Map to store customers with userID as key and informations as value
-	private Map<String,User> bankEmployers; // Map to bankEmployers users with userID as key and informations as value
-	private Map<String,User> auditors; // Map to store auditors with userID as key and informations as value
+	private Map<String,ΒusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
+	private Map<String,Admin> admins; // Map to store admins with userID as key and informations as value
+	private Map<String,Customer> customers; // Map to store customers with userID as key and informations as value
+	private Map<String,BankEmployer> bankEmployers; // Map to bankEmployers users with userID as key and informations as value
+	private Map<String,Auditor> auditors; // Map to store auditors with userID as key and informations as value
 	private BankAccount bankAccount; // η τράπεζα έχει και έναν λογαριασμό για τις προμήθειες κλπ
 	
-	private static int adminCount = 0;
-	private static int customerCount = 0;
-	private static int employeeCount = 0;
-	private static int auditorCount = 0;
+	private  int adminCount = 0;
+	private  int customerCount = 0;
+	private  int employeeCount = 0;
+	private  int auditorCount = 0;
+	
+	
+    private static final String DATA_FILE = "data/bankSystem.json";
+    
+    private transient Gson gson;
 	
 	public BankSystem() {
+		
+		gson = new GsonBuilder().setPrettyPrinting().create();
+
 		this.admins=new HashMap<>();
 		this.customers=new HashMap<>();
 		this.bankEmployers=new HashMap<>();
 		this.auditors=new HashMap<>();		
+		this.businessCustomers=new HashMap<>();
 		//this.accounts = new ArrayList<Account>();
 		this.bankAccount = new BankAccount("BANK001", Branch.getDefaultBranch()); //default bank account(TUC)
 		//this.branches = new HashMap<>();
@@ -48,12 +66,65 @@ public class BankSystem {
 	}
 		
 	public void getAllCustomers() {
-		for(User user : customers.values()) {
+		for(User user : this.customers.values()) {
 			Customer customer = (Customer) user;
 			System.out.println("Customer ID: " + customer.getUserID() + ", Name: " + customer.getName() + " " + customer.getSurname());
 		}
 	}
 	
+	
+	
+	public void saveAllData() {
+		if (this.gson == null) {
+		    gson = new GsonBuilder().setPrettyPrinting().create();
+		}
+		
+        try {
+        
+            File dir = new File("data");
+            if (!dir.exists()) dir.mkdir();
+
+            try (FileWriter writer = new FileWriter(DATA_FILE)) {
+                this.gson.toJson(this, writer); // serialize entire BankSystem
+                writer.flush();
+            }
+            System.out.println("[BankSystem] ✅ Data saved successfully.");
+            System.out.println("[BankSystem] Saving JSON at: " + new File(DATA_FILE).getAbsolutePath());
+
+        } catch (IOException e) {
+            System.err.println("[BankSystem] ❌ Failed to save data: " + e.getMessage());
+        }
+    }
+
+
+	public static BankSystem loadFromFile() {
+	    File file = new File(DATA_FILE);
+	    BankSystem system;
+	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+	    if (!file.exists() || file.length() == 0) {
+	        system = new BankSystem();
+	        System.out.println("[BankSystem] No saved data found. Creating new system.");
+	    } else {
+	        try (FileReader reader = new FileReader(file)) {
+	            system = gson.fromJson(reader, BankSystem.class);
+	            System.out.println("[BankSystem] ✅ Data loaded successfully.");
+	            system.getAllCustomers(); // Display loaded customers for verification
+	             
+	        } catch (Exception e) {
+	            System.err.println("[BankSystem] ⚠️ Failed to load data: " + e.getMessage());
+	            system = new BankSystem();
+	        }
+	    }
+
+	    system.gson = gson;
+	    return system;
+	}
+	//να γινεται save οταν γινεται καποια αλλαγη και οταν κλεινει το προγραμμα
+	 public void shutdown() {
+	        this.saveAllData();
+	        System.out.println("[BankSystem] System shutting down, data persisted.");
+	    }
 	public Branch getBranch(String branchCode) {
         return branches.get(branchCode);
     }
@@ -80,7 +151,7 @@ public class BankSystem {
 				String userID = generateId(2); //2 for customer
 				System.out.println("Your user ID is: " + userID); //inform user of his userID
 				User newCustomer = new Customer(userID, username, password, email, name, surname, phoneNumber, Branch.getDefaultBranch());//create customer
-				customers.put(userID, newCustomer);
+				this.customers.put(userID, (Customer) newCustomer);
 				return newCustomer;
 		    case 2:
 		    	System.out.println("Type Username: ");
@@ -98,13 +169,50 @@ public class BankSystem {
 				
 				String businessUserID = generateId(5); //5 for businessCustomer (different from simple customer)
 				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessUsername, businessPassword, businessEmail, businessName, representativeName, businessPhoneNumber, Branch.getDefaultBranch());//create business customer
-				customers.put(businessUserID, newBusinessCustomer);
+				this.businessCustomers.put(businessUserID, (ΒusinessCustomer) newBusinessCustomer);
 		        return newBusinessCustomer;
 		    default:
 		        System.out.println("Invalid choice. Please select 1 or 2.");
 		        return null;
 		}
 	}		
+	
+	
+	/*protected void login() {
+		//angel 
+		int tries = 0;
+		while(true) {
+			System.out.println("Type username");
+			String username = frontend.Main.scanner.nextLine();		
+			System.out.println("Type Passward");
+			String password = frontend.Main.scanner.nextLine();		
+			tries++;
+			if(login(username, password)) {
+				System.out.println("*******Wellcome*******");
+				return;
+			}
+			else {
+				System.out.println("Wrong username or password. Try again!");
+				if(tries % 3 == 0) {
+					int waitMinutes = tries / 3; // Calculate wait time in minutes
+					System.out.print("Try again in ");
+					System.out.print(waitMinutes);
+					System.out.println(" minutes");	//makes trying available after +1 minute every 3 attempts
+					try {
+	                    Thread.sleep(waitMinutes * 60 * 1000); // μετατρέπει λεπτά σε ms and waits for that time
+	                } catch (InterruptedException e) {
+	                    e.printStackTrace();
+	                }
+				}
+			}		
+		}
+	}
+	
+	protected boolean login(String username, String password) {
+		//maybe use a quick pin?
+		for
+		return this.username.equals(username) && this.password.equals(password);
+	}*/
 	
 	
 	public String generateId(int choice) {  //Genrates unique ID for each user ids are in order

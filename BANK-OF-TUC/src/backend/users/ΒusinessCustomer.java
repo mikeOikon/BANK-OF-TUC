@@ -13,7 +13,7 @@ import backend.accounts.BusinessAccount;
 import backend.accounts.Transaction;
 
 public class ΒusinessCustomer extends User{
-	private Branch branch;
+	
 	private ArrayList<Account> accounts;
 	
 	public ΒusinessCustomer(String userID,String username, String password, String email, String businessName, String representativeName, String phoneNumber, Branch branch) {

@@ -19,7 +19,7 @@ import backend.accounts.Transaction;
 import backend.accounts.TransactionalAccount;
 
 public class Customer extends User {
-	private Branch branch;
+	
 	private ArrayList<Account> accounts; //ισως δεν χρειαζεται και εδω λιστα αφου υπαρχει στους users
 	
 	public Customer(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {

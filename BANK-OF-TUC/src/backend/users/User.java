@@ -94,10 +94,6 @@ public abstract class User {
 		this.password = password;
 	}
 
-	protected boolean login(String userID, String password) {
-		//maybe use a quick pin?
-		return this.username.equals(username) && this.password.equals(password);
-	}
 	
 	protected void logout() {
 		// Implement logout functionality
@@ -116,34 +112,6 @@ public abstract class User {
 		// Implement delete account functionality
 	}
     
-	protected void login() {
-		//angel 
-		int tries = 0;
-		while(true) {
-			System.out.println("Type username");
-			String username = frontend.Main.scanner.nextLine();		
-			System.out.println("Type Passward");
-			String password = frontend.Main.scanner.nextLine();		
-			tries++;
-			if(login(username, password)) {
-				System.out.println("*******Wellcome*******");
-				return;
-			}
-			else {
-				System.out.println("Wrong username or password. Try again!");
-				if(tries % 3 == 0) {
-					int waitMinutes = tries / 3; // Calculate wait time in minutes
-					System.out.print("Try again in ");
-					System.out.print(waitMinutes);
-					System.out.println(" minutes");	//makes trying available after +1 minute every 3 attempts
-					try {
-	                    Thread.sleep(waitMinutes * 60 * 1000); // μετατρέπει λεπτά σε ms and waits for that time
-	                } catch (InterruptedException e) {
-	                    e.printStackTrace();
-	                }
-				}
-			}		
-		}
-	}
+	
 	
 }
