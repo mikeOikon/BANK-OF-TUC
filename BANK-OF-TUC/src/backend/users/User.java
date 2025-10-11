@@ -40,11 +40,9 @@ public abstract class User {
 		return userID;
 	}
 	
-	/*
-	public ArrayList<String> getAccounts() {
-		return accounts;
+	public Branch getBranch() {
+		return branch;
 	}
-	*/
 	
 	public void setUserID(String userID) {
 		this.userID = userID;
@@ -102,16 +100,5 @@ public abstract class User {
 	protected void changePassword(String newPassword) {
 		this.password = newPassword;
 	}
-	
-	//protected void resetPassword() {
-		// Implement reset password functionality
-	
-	//}
-	
-	protected void deleteAccount() {
-		// Implement delete account functionality
-	}
-    
-	
 	
 }

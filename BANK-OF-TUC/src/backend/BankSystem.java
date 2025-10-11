@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -304,6 +305,48 @@ public class BankSystem {
 		toAccount.getTransactions().add(transfer);
 		
 		System.out.println("Transfer successful. New balance of source account: " + fromAccount.getBalance());	
+	}
+
+	//mathod to get all accounts in the bank system (used by auditor) 
+	public List<Account> getAllAccounts() {
+		List<Account> allAccounts = new ArrayList<>();
+		for(User user : customers.values()) {
+			Customer customer = (Customer) user;
+			allAccounts.addAll(customer.getAccounts());
+		}
+		return List.copyOf(allAccounts);
+	}
+
+	//method to get transaction history of Customer(used by auditor)
+	//sosssssssssssssss gia business customer na gyrnaei ta transaction tou business account
+	public void viewTransactionsByCustomer(String customerID) {
+		User user = customers.get(customerID); //check if personal customer
+		if (user == null) { 
+			user = businessCustomers.get(customerID);	//check if business customer
+		}
+		if (user == null || !(user instanceof Customer)) { // if not found or not a customer
+			System.out.println("No customer found with ID: " + customerID);
+			return;
+		}
+		if(user instanceof ΒusinessCustomer) {
+			System.out.println("Viewing transactions for Business Customers is not yet implemented.");	//
+			return;
+		}
+		Customer customer = (Customer) user;
+		List<Transaction> allTransactions = new ArrayList<>();
+		for (Account acc : customer.getAccounts()) {
+		    allTransactions.addAll(acc.getTransactions());
+		}
+		if (allTransactions.isEmpty()) {
+	        System.out.println("No transactions found for customer " + customerID);
+	        return;
+	    }
+		
+		System.out.println("Transaction history for customer " + customerID + ":");
+		for (Transaction t : allTransactions) {
+		    System.out.println(t);
+		}
+		
 	}
 	
 	//na ftiaxtei methodos gia plhromes klp

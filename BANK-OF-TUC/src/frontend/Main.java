@@ -79,6 +79,7 @@ public class Main {
 			centralBank.transferMoney((Customer)user1);
         }
         
+        
     //    if (t1 instanceof TransactionalAccount) 
 	//		((TransactionalAccount) t1).addMoney(150.0);
     //    System.out.println(" Alice " + t1.getClass() + " New Balance: " + t1.getBalance());

@@ -76,7 +76,7 @@ public class ΒusinessCustomer extends User{
 		
 	}
 	
-	
+	//να doume ti prepei na ginetai edw
 	protected void payBills() {
 		
 	}

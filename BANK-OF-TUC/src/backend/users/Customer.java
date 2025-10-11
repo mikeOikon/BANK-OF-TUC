@@ -112,15 +112,13 @@ public class Customer extends User {
 		}	
 	}
 		
-	
+	//na doume ti prepei na ginetai edw
 	protected void payBills() {
 		
 	}
 	
 	
 	protected void viewTransactionHistory() {	//θα πρεπει να βγαζει τις συνναλαγες από ολους τους λογαριασμους;
-		//για καθε λογαριασμο θα πρεπει να καλειται η getTransactionHistory και να εμφανιζει τις συναλαγες με χρονική σειρά από τις πιο πρόσφατες στις πιο παλιές
-		//format: ωρα, λογαριασμος, ποσό, λογαριασαμός προορισμού (αν υπάρχει), τύπος συναλλαγής
 		List<Transaction> allTransactions = new ArrayList<>();
 
 		for (Account acc : accounts) {
@@ -144,7 +142,6 @@ public class Customer extends User {
 		    System.out.println(t);
 		}
 		
-		//αν θελουμε να ειναι με βαση τον χρονο μονο (δηλαδη ολοι οι λογαριασμοι να εμφανιζονται και να λεει ποιος λογαριασμος εγινε η συναλαγη) θα πρεπει να φτιαξουμε μια stack με ολες τις συναλαγες σε ολους τους λογαριασμους στον user και να μην καλουμε ξεχωριστες stack για καθε λογαριασμο 
 	}
 	
 	protected void updatePersonalInformation() {

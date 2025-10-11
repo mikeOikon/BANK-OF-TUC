@@ -34,7 +34,6 @@ public class Admin extends User {
 		
 	}
 	
-	
 	protected void acceptAccount() {
 		
 	}
