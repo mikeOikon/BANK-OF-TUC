@@ -177,7 +177,7 @@ public class BankSystem {
 		}
 	}		
 	
-	
+	//na ginetai elegxos an to username uparxei hdh
 	/*protected void login() {
 		//angel 
 		int tries = 0;
