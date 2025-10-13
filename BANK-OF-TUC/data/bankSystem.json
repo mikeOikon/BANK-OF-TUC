@@ -1,0 +1,105 @@
+{
+  "businessCustomers": {
+    "BUS001": {
+      "accounts": [],
+      "username": "sihfdihdg",
+      "userID": "BUS001",
+      "password": "fjfgjfbjbg",
+      "email": "dngviudghifg",
+      "name": "dghgjghjdgn",
+      "surname": "dhdgngijgdn",
+      "phoneNumber": "ngjrgnjjg",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    },
+    "BUS002": {
+      "accounts": [],
+      "username": "shbfdhffhfh",
+      "userID": "BUS002",
+      "password": "dfdfnjfdmnfdndf",
+      "email": "dnfjfjnjfdnjdjnfd",
+      "name": "ddfkffdkndnkfnfd",
+      "surname": "dnkkndnknkd",
+      "phoneNumber": "djknkndkjkjdf",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    }
+  },
+  "admins": {},
+  "customers": {
+    "CUS001": {
+      "accounts": [],
+      "username": "assss",
+      "userID": "CUS001",
+      "password": "asssssssss",
+      "email": "sfsff",
+      "name": "aaaaa",
+      "surname": "aaaa",
+      "phoneNumber": "aaaaaaaaaa",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    },
+    "CUS002": {
+      "accounts": [],
+      "username": "aaaaaaaaaaaaa",
+      "userID": "CUS002",
+      "password": "aaaaa",
+      "email": "aaaaaaaa",
+      "name": "aaaaaa",
+      "surname": "aaaaaaaa",
+      "phoneNumber": "aaaaaaaa",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    },
+    "CUS003": {
+      "accounts": [],
+      "username": "dgegfg",
+      "userID": "CUS003",
+      "password": "dgfggg",
+      "email": "dggdggdg",
+      "name": "dggdg",
+      "surname": "dgdgggd",
+      "phoneNumber": "dggdgddss",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    },
+    "CUS004": {
+      "accounts": [],
+      "username": "rfihghfeghige",
+      "userID": "CUS004",
+      "password": "ekjegkjojkkjfd4",
+      "email": "",
+      "name": "fgfgjgjgjkfg",
+      "surname": "sfjgfjigjigjgk",
+      "phoneNumber": "dfgijdgjgj",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    }
+  },
+  "bankEmployers": {},
+  "auditors": {},
+  "bankAccount": {
+    "accountNumber": "BANK001",
+    "balance": 1.0E8,
+    "branch": {
+      "bankCode": "021",
+      "branchCode": "0021"
+    }
+  },
+  "adminCount": 0,
+  "customerCount": 4,
+  "employeeCount": 0,
+  "auditorCount": 0
+}
