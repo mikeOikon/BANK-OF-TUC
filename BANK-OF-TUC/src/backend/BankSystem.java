@@ -135,47 +135,270 @@ public class BankSystem {
 		int choice = frontend.Main.scanner.nextInt();
 		frontend.Main.scanner.nextLine(); // Consume newline
 		switch (choice) {
-		    case 1:
-		    	System.out.println("Type Username: ");
-		    	String username = frontend.Main.scanner.nextLine();
-		    	System.out.println("Type password: ");	//maybe should be hidden and have some rules
-				String password = frontend.Main.scanner.nextLine();
+			case 1:
+				String username;
+				String password;
+				String email;
+				String name;
+				String surname;
+				String phoneNumber;
+				boolean valid;
+				do {
+					valid = true;
+					System.out.println("Type Username: ");
+					username = frontend.Main.scanner.nextLine();
+					if (username.isEmpty()) {
+						System.out.println("Username cannot be empty.");
+						valid = false;
+						continue;
+					}
+					if (!username.matches("[a-zA-Z0-9_]+")) {
+						System.out.println("Okay, username can contain only characteres allowed (letters, numbers and underscores)."); // I want to rewrite a Username
+						valid = false;
+						continue;
+					}
+					for (User user : customers.values()) {
+						if (user.getUsername().equals(username)) {
+							System.out.println("Username is already taken. Please choose another one.");
+							valid = false;
+							break;
+						}
+					}
+				} while (!valid); //loop until valid username is provided
+
+				System.out.println("Type password: ");//maybe should be hidden and have some rules
+				//I want an if statement to check if password has at least 8 characters, one uppercase letter, one lowercase letter and one number
+				do {
+					valid = true;
+					password = frontend.Main.scanner.nextLine();
+					if (password.isEmpty()) {
+						System.out.println("Password cannot be empty.");
+						valid = false;
+						continue;
+					}
+					if (password.length() < 8) {
+						System.out.println("Password must be at least 8 characters long.");
+						valid = false;
+						continue;
+					}
+					if (!password.matches(".*[A-Z].*")) {
+						System.out.println("Password must contain at least one uppercase letter.");
+						valid = false;
+						continue;
+					}
+					if (!password.matches(".*[a-z].*")) {
+						System.out.println("Password must contain at least one lowercase letter.");
+						valid = false;
+						continue;
+					}
+					if (!password.matches(".*\\d.*")) {
+						System.out.println("Password must contain at least one number.");
+						valid = false;
+						continue;
+					}
+					if (password.contains(" ")) {
+						System.out.println("Password cannot contain spaces.");
+						valid = false;
+					}
+				} while (!valid); //loop until valid password is provided
+
 				System.out.println("Type email: ");
-				String email = frontend.Main.scanner.nextLine();
+				//email validation
+				do {
+					valid = true;
+					email = frontend.Main.scanner.nextLine();
+					if (email.isEmpty()) {
+						System.out.println("Email cannot be empty.");
+						valid = false;
+						continue;
+					}
+					if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+						System.out.println("Invalid email format. Please try again.");
+						valid = false;
+					}
+				} while (!valid); //loop until valid email is provided
+
 				System.out.println("Type name: ");
-				String name = frontend.Main.scanner.nextLine();
+				do {
+					valid = true;
+					name = frontend.Main.scanner.nextLine();
+					if (name.isEmpty()) {
+						System.out.println("Name cannot be empty.");
+						valid = false;
+						continue;
+					}
+					if (!name.matches("[a-zA-Z]+")) {
+						System.out.println("Name can contain only letters. Please try again.");
+						valid = false;
+					}
+				} while (!valid); //loop until valid name is provided
+
 				System.out.println("Type surname: ");
-				String surname = frontend.Main.scanner.nextLine();
+				do {
+					valid = true;
+					surname = frontend.Main.scanner.nextLine();
+					if (surname.isEmpty()) {
+						System.out.println("Surname cannot be empty.");
+						valid = false;
+						continue;
+					}
+					if (!surname.matches("[a-zA-Z' -]+")) {
+						System.out.println("Surname can contain only letters the -,' special characters and space. Please try again.");
+						valid = false;
+					}
+				} while (!valid); //loop until valid surname is provided
+
+
 				System.out.println("Type phone number: ");
-				String phoneNumber = frontend.Main.scanner.nextLine();
+				do {
+					valid = true;
+					phoneNumber = frontend.Main.scanner.nextLine();
+					if (phoneNumber.isEmpty()) {
+						System.out.println("Phone number cannot be empty.");
+						valid = false;
+						continue;
+					}
+					if (!phoneNumber.matches("^[0-9]{10}$")) {
+						System.out.println("Invalid phone number format. Please try again.");
+						valid = false;
+					}
+				} while (!valid); //loop until valid phone number is provided
 				//customers are created with the main branch, if we want to create customers with different branches we need to change this
 				String userID = generateId(2); //2 for customer
 				User newCustomer = new Customer(userID, username, password, email, name, surname, phoneNumber, Branch.getDefaultBranch());//create customer
 				this.customers.put(userID, (Customer) newCustomer);
 				return newCustomer;
-		    case 2:
-		    	System.out.println("Type Username: ");
-		    	String businessUsername = frontend.Main.scanner.nextLine();
-		    	System.out.println("Type password: ");	//maybe should be hidden and have some rules
-				String businessPassword = frontend.Main.scanner.nextLine();
+			case 2:
+				String businessUsername;
+				String businessPassword;
+				String businessEmail;
+				String businessName;
+				String repname;
+				String businessPhoneNumber;
+
+				System.out.println("Type Username: ");
+				boolean businessValid;
+				do {
+					businessValid = true;
+					businessUsername = frontend.Main.scanner.nextLine();
+					if (businessUsername.isEmpty()) {
+						System.out.println("Username cannot be empty.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessUsername.matches("[a-zA-Z0-9_]+")) {
+						System.out.println("Okay, username can contain only characteres allowed (letters, numbers and underscores)."); // I want to rewrite a Username
+						businessValid = false;
+						continue;
+					}
+					for (User user : businessCustomers.values()) {
+						if (user.getUsername().equals(businessUsername)) {
+							System.out.println("Username is already taken. Please choose another one.");
+							businessValid = false;
+							break;
+						}
+					}
+				} while (!businessValid); //loop until valid username is provided
+				System.out.println("Type password: ");    //maybe should be hidden and have some rules
+				do {
+					businessValid = true;
+					businessPassword = frontend.Main.scanner.nextLine();
+					if (businessPassword.isEmpty()) {
+						System.out.println("Password cannot be empty.");
+						businessValid = false;
+						continue;
+					}
+					if (businessPassword.length() < 8) {
+						System.out.println("Password must be at least 8 characters long.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessPassword.matches(".*[A-Z].*")) {
+						System.out.println("Password must contain at least one uppercase letter.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessPassword.matches(".*[a-z].*")) {
+						System.out.println("Password must contain at least one lowercase letter.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessPassword.matches(".*\\d.*")) {
+						System.out.println("Password must contain at least one number.");
+						businessValid = false;
+						continue;
+					}
+					if (businessPassword.contains(" ")) {
+						System.out.println("Password cannot contain spaces.");
+						businessValid = false;
+					}
+				} while (!businessValid); //loop until valid password is provided
 				System.out.println("Type business email: ");
-				String businessEmail = frontend.Main.scanner.nextLine();
+				do {
+					businessValid = true;
+					businessEmail = frontend.Main.scanner.nextLine();
+					if (businessEmail.isEmpty()) {
+						System.out.println("Email cannot be empty.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessEmail.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+						System.out.println("Invalid email format. Please try again.");
+						businessValid = false;
+					}
+				} while (!businessValid); //loop until valid email is provided
 				System.out.println("Type business name: ");
-				String businessName = frontend.Main.scanner.nextLine();
+				do {
+					businessValid = true;
+					businessName = frontend.Main.scanner.nextLine();
+					if (businessName.isEmpty()) {
+						System.out.println("Business name cannot be empty.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessName.matches("[a-zA-Z0-9 '&-]+")) {
+						System.out.println("Business name can contain only letters, numbers and the special characters -,&,' and space. Please try again.");
+						businessValid = false;
+					}
+				} while (!businessValid); //loop until valid business name is provided
 				System.out.println("Type representative name: ");
-				String representativeName =frontend.Main. scanner.nextLine();
+				do {
+					businessValid = true;
+					repname = frontend.Main.scanner.nextLine();
+					if (repname.isEmpty()) {
+						System.out.println("Representative name cannot be empty.");
+						businessValid = false;
+						continue;
+					}
+					if (!repname.matches("[a-zA-Z]+")) {
+						System.out.println("Representative name can contain only letters. Please try again.");
+						businessValid = false;
+					}
+				} while (!businessValid); //loop until valid representative name is provided
 				System.out.println("Type business phone number: ");
-				String businessPhoneNumber = frontend.Main.scanner.nextLine();
-				
+				do {
+					businessValid = true;
+					businessPhoneNumber = frontend.Main.scanner.nextLine();
+					if (businessPhoneNumber.isEmpty()) {
+						System.out.println("Phone number cannot be empty.");
+						businessValid = false;
+						continue;
+					}
+					if (!businessPhoneNumber.matches("^[0-9]{10}$")) {
+						System.out.println("Invalid phone number format. Please try again.");
+						businessValid = false;
+					}
+				} while (!businessValid); //loop until valid phone number is provided
+				//business customers are created with the main branch, if we want to create business customers with different branches we need to change this
 				String businessUserID = generateId(5); //5 for businessCustomer (different from simple customer)
-				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessUsername, businessPassword, businessEmail, businessName, representativeName, businessPhoneNumber, Branch.getDefaultBranch());//create business customer
+				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessUsername, businessPassword, businessEmail, businessName, repname, businessPhoneNumber, Branch.getDefaultBranch());//create business customer
 				this.businessCustomers.put(businessUserID, (ΒusinessCustomer) newBusinessCustomer);
-		        return newBusinessCustomer;
-		    default:
-		        System.out.println("Invalid choice. Please select 1 or 2.");
-		        return null;
+				return newBusinessCustomer;
+			default:
+				System.out.println("Invalid choice. Please select 1 or 2.");
+				return null;
 		}
-	}		
+	}
 	
 	//na ginetai elegxos an to username uparxei hdh
 	/*protected void login() {
@@ -352,3 +575,4 @@ public class BankSystem {
 	
 	
 }
+
