@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 public class StartFrame extends JFrame {
-
+//nikk
     private JTextField userIdField;
     private JPasswordField passwordField;
 
