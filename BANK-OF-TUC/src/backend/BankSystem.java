@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+
 
 import backend.accounts.Account;
 import backend.accounts.BankAccount;
@@ -29,7 +29,7 @@ import backend.users.ΒusinessCustomer;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 
 public class BankSystem {
-	
+	//mono aek 
 	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
 	private Map<String, Branch> branches;
 	private Map<String,ΒusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
