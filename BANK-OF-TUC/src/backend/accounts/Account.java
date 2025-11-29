@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
+import backend.Branch;
+import backend.transactions.Transaction;
+
 public abstract class Account {
 
 	String IBAN;	//εχει συγκεκριμενο αλγοριθμο 

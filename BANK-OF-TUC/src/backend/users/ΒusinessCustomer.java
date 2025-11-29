@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
+import backend.Branch;
 import backend.accounts.Account;
-import backend.accounts.Branch;
 import backend.accounts.BusinessAccount;
-import backend.accounts.Transaction;
+import backend.transactions.Transaction;
 
 public class ΒusinessCustomer extends User{
 	

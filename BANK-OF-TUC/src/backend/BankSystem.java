@@ -15,11 +15,11 @@ import com.google.gson.GsonBuilder;
 
 
 import backend.accounts.Account;
-import backend.accounts.BankAccount;
-import backend.accounts.Branch;
 import backend.accounts.FixedTermAccount;
-import backend.accounts.Transaction;
 import backend.accounts.TransactionalAccount;
+import backend.transactions.Transaction;
+import backend.transactions.TransactionFactory;
+import backend.accounts.AccountFactory;
 import backend.users.Admin;
 import backend.users.Auditor;
 import backend.users.BankEmployer;
@@ -63,7 +63,7 @@ public class BankSystem {
 		//this.branches = new HashMap<>();
         //Branch mainBranch = new Branch(bankCode, branchCode);
         //branches.put(branchCode, mainBranch); // χρησιμοποιούμε branchCode ως key
-        
+		AccountFactory accountFactory = new AccountFactory();
 	}
 		
 	public void getAllCustomers() {
@@ -472,62 +472,76 @@ public class BankSystem {
 		return null; // Account not found
 	}
 	
-	public void transferMoney(Customer customer) {	//method is here because bankSystem can see all Accounts
-		//select account to transfer from and account to transfer to
-		//ισως να πηγαινει μηνυμα στην τραπεζα στις μεταφορες
-		System.out.println("Type the account number you want to transfer from: ");
-		String fromAccountNumber = frontend.Main.scanner.nextLine();
-		System.out.println("Type the account number you want to transfer to: ");
-		String toAccountNumber = frontend.Main.scanner.nextLine();
-		System.out.println("Type the amount you want to transfer: ");
-		double amount = frontend.Main.scanner.nextDouble();
-		frontend.Main.scanner.nextLine(); // Consume newline(consumes the newline character)
-		Account fromAccount = customer.findAccountByNumber(fromAccountNumber);
-		Account toAccount = getAccountbyNumber(toAccountNumber);
-		if (amount <= 0) {
-			System.out.println("Amount must be positive."); 
-			return;
-		}
-		if (fromAccount == null || toAccount == null) {	
-			System.out.println("One or both of the account numbers are invalid.");
-			return;
-		}	
-		if (fromAccount.equals(toAccount)) {
-			System.out.println("You cannot transfer money to the same account.");
-			return;
-		}
-		if(!(fromAccount instanceof TransactionalAccount)) {	//γινεται ελεγχος αν ο λογαριασμος υποστηριζει συναλαγες
-			System.out.println("The source account does not support transactions.");
-			return;
-		}
-		if (fromAccount.getBalance() < amount) {
-			System.out.println("Insufficient funds in the source account.");
-			return;
-		}
-		if(toAccount instanceof FixedTermAccount) {	//γινεται ελεγχος αν ο λογαριασμος μπορει να δεχεται χρηματα
-			System.out.println("The destination account does not support transactions.");
-			return;
-		}
-		if (!fromAccount.getBranch().getBankCode().equals(toAccount.getBranch().getBankCode())) { // σε transfer σε αλλη τραπεζα προμηθεια 1 euro σε παραληπτη
-			if(fromAccount.getBalance() < amount + 1) {
-				System.out.println("Insufficient funds in the source account to cover the transfer fee.");
-				return;
-			}
-			fromAccount.setBalance(fromAccount.getBalance() - (amount + 1));
-			toAccount.setBalance(toAccount.getBalance() + amount);
-			bankAccount.receivePayment(1.0); // η τράπεζα παίρνει 1 euro προμήθεια
-		}
-		else {
-			fromAccount.setBalance(fromAccount.getBalance() - amount);
-			toAccount.setBalance(toAccount.getBalance() + amount);
-		}
-		//update transaction history for both accounts
-		Transaction transfer = new Transaction("transfer", amount, fromAccount.getIBAN(), toAccount.getIBAN());
-		fromAccount.getTransactions().add(transfer);
-		toAccount.getTransactions().add(transfer);
-		
-		System.out.println("Transfer successful. New balance of source account: " + fromAccount.getBalance());	
+	public void transferMoney(Customer customer) {
+
+	    System.out.println("Type the account number you want to transfer from: ");
+	    String fromAccountNumber = frontend.Main.scanner.nextLine();
+
+	    System.out.println("Type the account number you want to transfer to: ");
+	    String toAccountNumber = frontend.Main.scanner.nextLine();
+
+	    System.out.println("Type the amount you want to transfer: ");
+	    double amount = frontend.Main.scanner.nextDouble();
+	    frontend.Main.scanner.nextLine(); // consume newline
+
+	    Account fromAccount = customer.findAccountByNumber(fromAccountNumber);
+	    Account toAccount = getAccountbyNumber(toAccountNumber);
+
+	    if (amount <= 0) {
+	        System.out.println("Amount must be positive.");
+	        return;
+	    }
+
+	    if (fromAccount == null || toAccount == null) {
+	        System.out.println("One or both of the account numbers are invalid.");
+	        return;
+	    }
+
+	    if (fromAccount.equals(toAccount)) {
+	        System.out.println("You cannot transfer money to the same account.");
+	        return;
+	    }
+
+	    if (!(fromAccount instanceof TransactionalAccount)) {
+	        System.out.println("The source account does not support transactions.");
+	        return;
+	    }
+
+	    if (fromAccount.getBalance() < amount) {
+	        System.out.println("Insufficient funds.");
+	        return;
+	    }
+
+	    if (toAccount instanceof FixedTermAccount) {
+	        System.out.println("The destination account does not support transactions.");
+	        return;
+	    }
+
+	    // 💰 Εφαρμογή χρέωσης σε διαφορετική τράπεζα (προμήθεια 1€)
+	    if (!fromAccount.getBranch().getBankCode().equals(toAccount.getBranch().getBankCode())) {
+
+	        if (fromAccount.getBalance() < amount + 1) {
+	            System.out.println("Insufficient funds to cover transfer fee.");
+	            return;
+	        }
+
+	        fromAccount.setBalance(fromAccount.getBalance() - (amount + 1));
+	        toAccount.setBalance(toAccount.getBalance() + amount);
+	        bankAccount.receivePayment(1.0);
+	    } else {
+	        fromAccount.setBalance(fromAccount.getBalance() - amount);
+	        toAccount.setBalance(toAccount.getBalance() + amount);
+	    }
+
+	    // ✅ Χρησιμοποιούμε πλέον FACTORY
+	    Transaction transferTx = TransactionFactory.createTransaction(fromAccount, toAccount, amount);
+
+	    fromAccount.getTransactions().add(transferTx);
+	    toAccount.getTransactions().add(transferTx);
+
+	    System.out.println("Transfer successful. New balance of source account: " + fromAccount.getBalance());
 	}
+
 
 	//mathod to get all accounts in the bank system (used by auditor) 
 	public List<Account> getAllAccounts() {

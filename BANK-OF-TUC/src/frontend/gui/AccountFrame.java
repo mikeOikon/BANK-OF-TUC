@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AccountFrame extends JFrame {
-//huguosadgf
+
     public AccountFrame() {
         setTitle("Bank of TUC - Λογαριασμοί");
         setSize(1000, 650);

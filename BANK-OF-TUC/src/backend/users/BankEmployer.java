@@ -1,6 +1,6 @@
 package backend.users;
 
-import backend.accounts.Branch;
+import backend.Branch;
 
 public class BankEmployer extends User {
 

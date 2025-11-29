@@ -2,7 +2,7 @@ package backend.users;
 
 import java.util.Scanner;
 
-import backend.accounts.Branch;
+import backend.Branch;
 
 public class Admin extends User {
 	private static int customerCount = 0;

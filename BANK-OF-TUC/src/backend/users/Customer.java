@@ -10,13 +10,15 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import backend.BankSystem;
+import backend.Branch;
 import backend.accounts.Account;
-import backend.accounts.Branch;
+import backend.accounts.AccountFactory;
+import backend.accounts.AccountType;
 import backend.accounts.FixedTermAccount;
 import backend.accounts.PersonalAccount;
 import backend.accounts.SavingsAccount;
-import backend.accounts.Transaction;
 import backend.accounts.TransactionalAccount;
+import backend.transactions.Transaction;
 
 public class Customer extends User {
 	
@@ -47,30 +49,29 @@ public class Customer extends User {
 	}
 	
 	protected void createAccount(int choice) {
-		switch (choice) {
-		    case 1:
-		    	//create transactional account
-		    	Account newTransactionalAccount = new TransactionalAccount(this.userID, 0.0, new Stack<Transaction>(), Branch.getDefaultBranch());
-		    	accounts.add(newTransactionalAccount);
-		    	viewAccountDetails(newTransactionalAccount);
-		    	break;
-		    case 2:
-		    	//create savings account
-		    	Account newSavingsAccount = new SavingsAccount(this.userID, 0.0, new Stack<Transaction>(), Branch.getDefaultBranch());
-		    	accounts.add(newSavingsAccount);
-		    	viewAccountDetails(newSavingsAccount);
-		    	break;
-		    case 3:
-		    	//create fixed-term account
-		    	Account newFixedTermAccount = new FixedTermAccount(this.userID, 0.0, new Stack<Transaction>(), Branch.getDefaultBranch());
-		    	accounts.add(newFixedTermAccount);
-		    	viewAccountDetails(newFixedTermAccount);
-		    	break;
-		    default:
-		        System.out.println("Invalid choice. Please select a valid account type.");
-		        break;
-		}
+	    AccountType type;
+
+	    switch (choice) {
+	        case 1:
+	            type = AccountType.TRANSACTIONAL;
+	            break;
+	        case 2:
+	            type = AccountType.SAVINGS;
+	            break;
+	        case 3:
+	            type = AccountType.FIXED;
+	            break;
+	        default:
+	            System.out.println("Invalid choice. Please select a valid account type.");
+	            return;
+	    }
+
+	    // Χρήση AccountFactory για δημιουργία λογαριασμού
+	    Account newAccount = AccountFactory.createAccount(type, this.userID, 0.0, Branch.getDefaultBranch());
+	    accounts.add(newAccount);
+	    viewAccountDetails(newAccount);
 	}
+
 	
 	protected void askToCloseAccount() {
 		//methodos pou kleinei ton logaraismo(prepei o loariasmos na exei 0 balance kai na min einai fixed term)
@@ -118,7 +119,7 @@ public class Customer extends User {
 	}
 	
 	
-	protected void viewTransactionHistory() {	//θα πρεπει να βγαζει τις συνναλαγες από ολους τους λογαριασμους;
+	public void viewTransactionHistory() {	//θα πρεπει να βγαζει τις συνναλαγες από ολους τους λογαριασμους;
 		List<Transaction> allTransactions = new ArrayList<>();
 
 		for (Account acc : accounts) {

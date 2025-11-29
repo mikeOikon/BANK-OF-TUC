@@ -1,4 +1,4 @@
-package backend.accounts;
+package backend;
 
 public class Branch {
 	

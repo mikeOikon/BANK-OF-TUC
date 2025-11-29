@@ -3,8 +3,8 @@ package backend.users;
 import java.util.List;
 
 import backend.BankSystem;
+import backend.Branch;
 import backend.accounts.Account;
-import backend.accounts.Branch;
 
 public class Auditor extends User {
 

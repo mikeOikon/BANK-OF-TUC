@@ -1,7 +1,9 @@
 package backend.accounts;
 
-import java.util.ArrayList;
 import java.util.Stack;
+
+import backend.Branch;
+import backend.transactions.Transaction;
 
 public class TransactionalAccount extends PersonalAccount {
 
@@ -14,8 +16,6 @@ public class TransactionalAccount extends PersonalAccount {
 		return "Transactional Account";
 	}
 	
-	public void addMoney(double amount) {
-		this.balance += amount;
-	}
+
 	
 }
