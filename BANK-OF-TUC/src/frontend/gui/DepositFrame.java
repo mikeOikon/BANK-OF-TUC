@@ -16,10 +16,9 @@ public class DepositFrame extends JFrame {
         Color white = Color.WHITE;
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(mainBlue);
-        add(mainPanel);
+        mainPanel.setBackground(white);
+        setContentPane(mainPanel);
 
-        // Top panel
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(mainBlue);
         topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
@@ -35,7 +34,6 @@ public class DepositFrame extends JFrame {
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        // Center panel για ποσό
         JPanel centerPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         centerPanel.setBackground(white);
         centerPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
@@ -50,7 +48,8 @@ public class DepositFrame extends JFrame {
         depositButton.setForeground(Color.WHITE);
         depositButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         depositButton.setFocusPainted(false);
-        depositButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Κατάθεση " + amountField.getText() + " € ολοκληρώθηκε!"));
+        depositButton.addActionListener(e ->
+                JOptionPane.showMessageDialog(this, "Κατάθεση " + amountField.getText() + " € ολοκληρώθηκε!"));
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(white);
@@ -67,17 +66,8 @@ public class DepositFrame extends JFrame {
         backButton.setFocusPainted(false);
         backButton.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backButton.setBackground(new Color(255, 255, 255, 70));
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                backButton.setBackground(new Color(255, 255, 255, 40));
-            }
-        });
     }
 
-    // main για δοκιμή
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new DepositFrame().setVisible(true));
     }

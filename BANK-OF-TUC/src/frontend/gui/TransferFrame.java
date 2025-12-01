@@ -16,8 +16,8 @@ public class TransferFrame extends JFrame {
         Color white = Color.WHITE;
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(mainBlue);
-        add(mainPanel);
+        mainPanel.setBackground(white);
+        setContentPane(mainPanel);
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(mainBlue);
@@ -56,8 +56,8 @@ public class TransferFrame extends JFrame {
         transferButton.setForeground(Color.WHITE);
         transferButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         transferButton.setFocusPainted(false);
-        transferButton.addActionListener(e -> JOptionPane.showMessageDialog(this,
-                "Μεταφορά " + amountField.getText() + " € προς " + ibanField.getText() + " ολοκληρώθηκε!"));
+        transferButton.addActionListener(e ->
+                JOptionPane.showMessageDialog(this, "Μεταφορά " + amountField.getText() + " € προς " + ibanField.getText() + " ολοκληρώθηκε!"));
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(white);
@@ -74,17 +74,8 @@ public class TransferFrame extends JFrame {
         backButton.setFocusPainted(false);
         backButton.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backButton.setBackground(new Color(255, 255, 255, 70));
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                backButton.setBackground(new Color(255, 255, 255, 40));
-            }
-        });
     }
 
-    // main για δοκιμή
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new TransferFrame().setVisible(true));
     }

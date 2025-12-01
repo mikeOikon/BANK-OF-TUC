@@ -12,16 +12,13 @@ public class AccountFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Χρώματα
         Color mainBlue = new Color(0, 51, 102);
         Color white = Color.WHITE;
 
-        // Κύριο panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(mainBlue);
         add(mainPanel);
 
-        // Επικεφαλίδα με τίτλο και κουμπί "Πίσω"
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(mainBlue);
         topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
@@ -30,21 +27,19 @@ public class AccountFrame extends JFrame {
         styleBackButton(backButton);
         topPanel.add(backButton, BorderLayout.WEST);
 
-        JLabel titleLabel = new JLabel(" Ο Λογαριασμος μου ", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Ο Λογαριασμός μου", SwingConstants.CENTER);
         titleLabel.setForeground(white);
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 28));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        // Κεντρικό panel
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(white);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBorder(BorderFactory.createEmptyBorder(60, 100, 60, 100));
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        // --- Εμφάνιση βασικών πληροφοριών λογαριασμού ---
         JPanel infoPanel = new JPanel(new GridLayout(4, 2, 15, 15));
         infoPanel.setBackground(white);
         infoPanel.setMaximumSize(new Dimension(600, 200));
@@ -59,14 +54,12 @@ public class AccountFrame extends JFrame {
         infoPanel.add(createValueLabel("Ενεργός"));
 
         centerPanel.add(infoPanel);
-        centerPanel.add(Box.createVerticalStrut(60)); // απόσταση πριν τα κουμπιά
+        centerPanel.add(Box.createVerticalStrut(60));
 
-        // --- Κουμπιά ενεργειών ---
         JPanel actionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
         actionsPanel.setBackground(white);
 
         JButton depositButton = createStyledButton("Κατάθεση");
-        // Αφαιρέθηκε το κουμπί "Ανάληψη"
         JButton transferButton = createStyledButton("Μεταφορά");
         JButton historyButton = createStyledButton("Ιστορικό Κινήσεων");
 
@@ -76,15 +69,11 @@ public class AccountFrame extends JFrame {
 
         centerPanel.add(actionsPanel);
 
-        // --- Λειτουργίες κουμπιών ---
-        depositButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Κατάθεση χρημάτων..."));
-        transferButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Μεταφορά σε άλλον λογαριασμό..."));
-        historyButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Προβολή ιστορικού συναλλαγών..."));
+        depositButton.addActionListener(e -> new DepositFrame().setVisible(true));
+        transferButton.addActionListener(e -> new TransferFrame().setVisible(true));
+        historyButton.addActionListener(e -> new RecentTransactionsFrame().setVisible(true));
 
-        backButton.addActionListener(e -> {
-            dispose();
-            // new DashboardFrame().setVisible(true);
-        });
+        backButton.addActionListener(e -> dispose());
     }
 
     private JLabel createInfoLabel(String text) {
@@ -109,19 +98,6 @@ public class AccountFrame extends JFrame {
         button.setForeground(Color.WHITE);
         button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(0, 51, 102), 2),
-                BorderFactory.createEmptyBorder(8, 8, 8, 8)
-        ));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(0, 76, 153));
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(0, 102, 204));
-            }
-        });
         return button;
     }
 
@@ -132,18 +108,8 @@ public class AccountFrame extends JFrame {
         backButton.setFocusPainted(false);
         backButton.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backButton.setBackground(new Color(255, 255, 255, 70));
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                backButton.setBackground(new Color(255, 255, 255, 40));
-            }
-        });
     }
 
-    // Test run
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AccountFrame().setVisible(true));
     }
