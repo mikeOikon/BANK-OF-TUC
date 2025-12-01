@@ -9,7 +9,7 @@ import backend.transactions.Transaction;
 import backend.transactions.TransactionFactory;
 import backend.transactions.TransactionType;
 
-//MONO AEK
+//MONO AEK 21
 public class Main {
 	
     public static final Scanner scanner = new Scanner(System.in);

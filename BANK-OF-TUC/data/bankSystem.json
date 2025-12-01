@@ -1,28 +1,14 @@
 {
   "businessCustomers": {
-    "BUS001": {
-      "accounts": [],
-      "username": "sihfdihdg",
-      "userID": "BUS001",
-      "password": "fjfgjfbjbg",
-      "email": "dngviudghifg",
-      "name": "dghgjghjdgn",
-      "surname": "dhdgngijgdn",
-      "phoneNumber": "ngjrgnjjg",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    },
     "BUS002": {
       "accounts": [],
-      "username": "shbfdhffhfh",
+      "username": "AEKara",
       "userID": "BUS002",
-      "password": "dfdfnjfdmnfdndf",
-      "email": "dnfjfjnjfdnjdjnfd",
-      "name": "ddfkffdkndnkfnfd",
-      "surname": "dnkkndnknkd",
-      "phoneNumber": "djknkndkjkjdf",
+      "password": "AEKara21",
+      "email": "aek@aek.com",
+      "name": "AEKARA",
+      "surname": "AEKARA",
+      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -32,108 +18,27 @@
   "admins": {},
   "customers": {
     "CUS001": {
-      "accounts": [],
-      "username": "assss",
-      "userID": "CUS001",
-      "password": "asssssssss",
-      "email": "sfsff",
-      "name": "aaaaa",
-      "surname": "aaaa",
-      "phoneNumber": "aaaaaaaaaa",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    },
-    "CUS002": {
-      "accounts": [],
-      "username": "aaaaaaaaaaaaa",
-      "userID": "CUS002",
-      "password": "aaaaa",
-      "email": "aaaaaaaa",
-      "name": "aaaaaa",
-      "surname": "aaaaaaaa",
-      "phoneNumber": "aaaaaaaa",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    },
-    "CUS003": {
-      "accounts": [],
-      "username": "dgegfg",
-      "userID": "CUS003",
-      "password": "dgfggg",
-      "email": "dggdggdg",
-      "name": "dggdg",
-      "surname": "dgdgggd",
-      "phoneNumber": "dggdgddss",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    },
-    "CUS004": {
-      "accounts": [],
-      "username": "rfihghfeghige",
-      "userID": "CUS004",
-      "password": "ekjegkjojkkjfd4",
-      "email": "",
-      "name": "fgfgjgjgjkfg",
-      "surname": "sfjgfjigjigjgk",
-      "phoneNumber": "dfgijdgjgj",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    },
-    "CUS005": {
       "accounts": [
         {
-          "IBAN": "GR2502100219377095650288365",
-          "userID": "CUS005",
+          "IBAN": "GR5402100210039659721396963",
+          "userID": "CUS001",
           "balance": 0.0,
           "transactions": [],
           "account_id": 1,
           "branch": {
             "bankCode": "021",
             "branchCode": "0021"
-          }
+          },
+          "accountType": "transactional"
         }
       ],
-      "username": "Aek",
-      "userID": "CUS005",
-      "password": "Aekara21",
-      "email": "aek@gmail.com",
+      "username": "AEK",
+      "userID": "CUS001",
+      "password": "AEKara21",
+      "email": "aek@original.com",
       "name": "AEK",
       "surname": "Original",
       "phoneNumber": "2121212121",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    },
-    "CUS006": {
-      "accounts": [
-        {
-          "IBAN": "GR5702100211767455091225136",
-          "userID": "CUS006",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 2,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          }
-        }
-      ],
-      "username": "PAO",
-      "userID": "CUS006",
-      "password": "eimasteAmees0",
-      "email": "amea@amea.amea",
-      "name": "AMEA",
-      "surname": "AMEA",
-      "phoneNumber": "6666666666",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -151,7 +56,7 @@
     }
   },
   "adminCount": 0,
-  "customerCount": 6,
+  "customerCount": 2,
   "employeeCount": 0,
   "auditorCount": 0
 }

@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 
 import backend.accounts.Account;
 import backend.accounts.FixedTermAccount;
+import backend.accounts.SavingsAccount;
 import backend.accounts.TransactionalAccount;
 import backend.transactions.Transaction;
 import backend.transactions.TransactionFactory;
@@ -50,19 +51,15 @@ public class BankSystem {
     private transient Gson gson;
 	
 	public BankSystem() {
-		
-		gson = new GsonBuilder().setPrettyPrinting().create();
 
+		this.gson = GsonConfig.build();   
 		this.admins=new HashMap<>();
 		this.customers=new HashMap<>();
 		this.bankEmployers=new HashMap<>();
 		this.auditors=new HashMap<>();		
 		this.businessCustomers=new HashMap<>();
-		//this.accounts = new ArrayList<Account>();
 		this.bankAccount = new BankAccount("BANK001", Branch.getDefaultBranch()); //default bank account(TUC)
-		//this.branches = new HashMap<>();
-        //Branch mainBranch = new Branch(bankCode, branchCode);
-        //branches.put(branchCode, mainBranch); // χρησιμοποιούμε branchCode ως key
+		
 		AccountFactory accountFactory = new AccountFactory();
 	}
 		
@@ -73,11 +70,9 @@ public class BankSystem {
 		}
 	}
 	
-	
-	
 	public void saveAllData() {
 		if (this.gson == null) {
-		    gson = new GsonBuilder().setPrettyPrinting().create();
+			this.gson = GsonConfig.build();
 		}
 		
         try {
@@ -96,36 +91,49 @@ public class BankSystem {
             System.err.println("[BankSystem] ❌ Failed to save data: " + e.getMessage());
         }
     }
-
-
+	
 	public static BankSystem loadFromFile() {
+
 	    File file = new File(DATA_FILE);
-	    BankSystem system;
-	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	    if (!file.exists() || file.length() == 0) {
-	        system = new BankSystem();
 	        System.out.println("[BankSystem] No saved data found. Creating new system.");
-	    } else {
-	        try (FileReader reader = new FileReader(file)) {
-	            system = gson.fromJson(reader, BankSystem.class);
-	            System.out.println("[BankSystem] ✅ Data loaded successfully.");
-	            system.getAllCustomers(); // Display loaded customers for verification
-	             
-	        } catch (Exception e) {
-	            System.err.println("[BankSystem] ⚠️ Failed to load data: " + e.getMessage());
-	            system = new BankSystem();
-	        }
+	        return new BankSystem();
 	    }
 
+	    Gson gson = GsonConfig.build();
+	    BankSystem loaded;
+
+	    try (FileReader reader = new FileReader(file)) {
+	        loaded = gson.fromJson(reader, BankSystem.class);
+	        System.out.println("[BankSystem] ✅ Data loaded successfully.");
+	    }
+	    catch (Exception e) {
+	        System.err.println("[BankSystem] ⚠️ Failed to load data: " + e.getMessage());
+	        return new BankSystem();
+	    }
+
+	    // ΦΤΙΑΧΝΟΥΜΕ ΝΕΟ ΣΥΣΤΗΜΑ ΜΕ ΣΩΣΤΟ GSON
+	    BankSystem system = new BankSystem();
 	    system.gson = gson;
+
+	    // ΚΑΙ ΑΝΤΙΓΡΑΦΟΥΜΕ ΟΛΑ ΤΑ LOADED FIELDS
+	    system.admins = loaded.admins;
+	    system.customers = loaded.customers;
+	    system.bankEmployers = loaded.bankEmployers;
+	    system.auditors = loaded.auditors;
+	    system.businessCustomers = loaded.businessCustomers;
+	    system.bankAccount = loaded.bankAccount;
+
 	    return system;
 	}
+
+
 	//να γινεται save οταν γινεται καποια αλλαγη και οταν κλεινει το προγραμμα
 	 public void shutdown() {
-	        this.saveAllData();
-	        System.out.println("[BankSystem] System shutting down, data persisted.");
-	    }
+	    this.saveAllData();
+	    System.out.println("[BankSystem] System shutting down, data persisted.");
+	 }
 	public Branch getBranch(String branchCode) {
         return branches.get(branchCode);
     }
