@@ -13,12 +13,12 @@ import backend.BankSystem;
 import backend.Branch;
 import backend.accounts.Account;
 import backend.accounts.AccountFactory;
-import backend.accounts.AccountType;
 import backend.accounts.FixedTermAccount;
 import backend.accounts.PersonalAccount;
 import backend.accounts.SavingsAccount;
 import backend.accounts.TransactionalAccount;
 import backend.transactions.Transaction;
+import types.AccountType;
 
 public class Customer extends User {
 	

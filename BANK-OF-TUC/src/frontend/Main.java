@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
 
         // --- Load BankSystem from file or create new ---
-        BankSystem centralBank = BankSystem.loadFromFile();
+        BankSystem centralBank = BankSystem.getInstance();
         System.out.println("=== Bank of TUC System ===");
 
        // TransactionInvoker invoker = new TransactionInvoker();

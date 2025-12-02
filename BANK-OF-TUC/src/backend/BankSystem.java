@@ -26,12 +26,16 @@ import backend.users.Auditor;
 import backend.users.BankEmployer;
 import backend.users.Customer;
 import backend.users.User;
+import backend.users.UserBuilder;
+import backend.users.UserFactory;
 import backend.users.ΒusinessCustomer;
+import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 
 public class BankSystem {
-	//mono aek 
+	
 	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
+	private static volatile BankSystem instance;
 	private Map<String, Branch> branches;
 	private Map<String,ΒusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
 	private Map<String,Admin> admins; // Map to store admins with userID as key and informations as value
@@ -50,7 +54,7 @@ public class BankSystem {
     
     private transient Gson gson;
 	
-	public BankSystem() {
+	private BankSystem() {
 
 		this.gson = GsonConfig.build();   
 		this.admins=new HashMap<>();
@@ -92,7 +96,18 @@ public class BankSystem {
         }
     }
 	
-	public static BankSystem loadFromFile() {
+	public static BankSystem getInstance() {
+	    if (instance == null) {
+	        synchronized (BankSystem.class) {
+	            if (instance == null) {
+	                instance = loadFromFileInternal();
+	            }
+	        }
+	    }
+	    return instance;
+	}
+	
+	public static BankSystem loadFromFileInternal() {
 
 	    File file = new File(DATA_FILE);
 
@@ -272,8 +287,16 @@ public class BankSystem {
 					}
 				} while (!valid); //loop until valid phone number is provided
 				//customers are created with the main branch, if we want to create customers with different branches we need to change this
-				String userID = generateId(2); //2 for customer
-				User newCustomer = new Customer(userID, username, password, email, name, surname, phoneNumber, Branch.getDefaultBranch());//create customer
+				String userID = generateId(UserType.CUSTOMER); //2 for customer
+				UserBuilder userBuilder = new UserBuilder();
+				userBuilder.withUsername(username)
+						   .withPassword(password)
+						   .withEmail(email)
+						   .withName(name)
+						   .withSurname(surname)
+						   .withPhoneNumber(phoneNumber)
+						   .withBranch(Branch.getDefaultBranch());
+				User newCustomer = UserFactory.createUser(UserType.CUSTOMER,userID,userBuilder);//create customer
 				this.customers.put(userID, (Customer) newCustomer);
 				return newCustomer;
 			case 2:
@@ -398,8 +421,16 @@ public class BankSystem {
 					}
 				} while (!businessValid); //loop until valid phone number is provided
 				//business customers are created with the main branch, if we want to create business customers with different branches we need to change this
-				String businessUserID = generateId(5); //5 for businessCustomer (different from simple customer)
-				User newBusinessCustomer = new ΒusinessCustomer(businessUserID, businessUsername, businessPassword, businessEmail, businessName, repname, businessPhoneNumber, Branch.getDefaultBranch());//create business customer
+				String businessUserID = generateId(UserType.BUSINESSCUSTOMER); //businessCustomer for businessCustomer (different from simple customer)
+				UserBuilder businessUserBuilder = new UserBuilder();
+				businessUserBuilder.withUsername(businessUsername)
+								   .withPassword(businessPassword)
+								   .withEmail(businessEmail)
+								   .withName(businessName)
+								   .withSurname(repname)
+								   .withPhoneNumber(businessPhoneNumber)
+								   .withBranch(Branch.getDefaultBranch());
+				User newBusinessCustomer = UserFactory.createUser(UserType.BUSINESSCUSTOMER,businessUserID,businessUserBuilder);//create business customer
 				this.businessCustomers.put(businessUserID, (ΒusinessCustomer) newBusinessCustomer);
 				return newBusinessCustomer;
 			default:
@@ -446,21 +477,21 @@ public class BankSystem {
 	}*/
 	
 	
-	public String generateId(int choice) {  //Genrates unique ID for each user ids are in order
+	public String generateId(UserType type) {  //Genrates unique ID for each user ids are in order
 	    String prefix;
-	    if (choice == 1) {
+	    if (type == UserType.ADMIN) {
 	        prefix = "ADM";
 	        return String.format("%s%03d", prefix, ++adminCount);
-	    } else if (choice == 2) {
+	    } else if (type == UserType.CUSTOMER) {
 	        prefix = "CUS";
 	        return String.format("%s%03d", prefix, ++customerCount);
-	    } else if (choice == 3) {
+	    } else if (type == UserType.EMPLOYEE) {
 	        prefix = "EMP";
 	        return String.format("%s%03d", prefix, ++employeeCount);
-	    } else if (choice == 4) {
+	    } else if (type == UserType.AUDITOR) {
 	        prefix = "AUD";
 	        return String.format("%s%03d", prefix, ++auditorCount);
-	    } else if (choice == 5) {
+	    } else if (type == UserType.BUSINESSCUSTOMER) {
 	        prefix = "BUS";
 	        return String.format("%s%03d", prefix, ++customerCount); //business customer count is same as customer count
 	    } else {

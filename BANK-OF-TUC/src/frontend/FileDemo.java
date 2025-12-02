@@ -11,7 +11,7 @@ public class FileDemo {
 
     public static void main(String[] args) {
 
-        BankSystem centralBank = BankSystem.loadFromFile();
+        BankSystem centralBank = BankSystem.getInstance();
         System.out.println("=== Bank of TUC System ===");
 
         try {

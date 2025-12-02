@@ -1,4 +1,4 @@
-package backend.accounts;
+package types;
 
 public enum AccountType {
     TRANSACTIONAL,

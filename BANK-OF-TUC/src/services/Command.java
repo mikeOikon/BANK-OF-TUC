@@ -1,4 +1,4 @@
-package backend;
+package services;
 
 public interface Command {
 	void execute();

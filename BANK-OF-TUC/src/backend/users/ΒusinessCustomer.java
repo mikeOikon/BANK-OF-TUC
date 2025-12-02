@@ -16,7 +16,7 @@ public class ΒusinessCustomer extends User{
 	
 	private ArrayList<Account> accounts;
 	
-	public ΒusinessCustomer(String userID,String username, String password, String email, String businessName, String representativeName, String phoneNumber, Branch branch) {
+	public ΒusinessCustomer(String userID,String username, String password, String email, String phoneNumber, Branch branch, String businessName, String representativeName) {
 		super(userID, username, password, email, businessName, representativeName, phoneNumber, branch);
 		this.accounts = new ArrayList<>();
 	}

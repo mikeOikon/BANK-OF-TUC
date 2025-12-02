@@ -1,0 +1,103 @@
+package backend.users;
+
+import backend.Branch;
+//Builder pattern for creating User objects with optional parameters
+public class UserBuilder {
+   private String username;
+   private String password;
+   private String email;
+   private String name;
+   private String surname;
+   private String phoneNumber;
+   private Branch branch= Branch.getDefaultBranch();
+   
+   
+   //specific to business user
+   private String buisnessName;
+   private String representativeName;
+   
+   
+   
+   public UserBuilder withUsername(String username) {
+	   this.username = username;
+	   return this;}
+   
+   public UserBuilder withPassword(String password) {
+	   this.password = password;
+	   return this;}
+   
+   public UserBuilder withEmail(String email) {
+	   this.email = email;
+	   return this;}
+   
+   
+   public UserBuilder withName(String name) {
+	   this.name = name;
+	   return this;}
+   
+   
+   public UserBuilder withSurname(String surname) {
+	   this.surname = surname;
+	   return this;
+   }
+   
+   
+   public UserBuilder withPhoneNumber(String phoneNumber) {
+	   this.phoneNumber = phoneNumber;
+	   return this;
+   }
+   
+   
+   public UserBuilder withBranch(Branch branch) {
+	   this.branch = branch;
+	   return this;
+   }
+   
+   
+   public UserBuilder withBusinessName(String businessName) {
+	   this.buisnessName = businessName;
+	   return this;
+   }
+
+public String getUsername() {
+	return username;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public String getEmail() {
+	return email;
+}
+
+public String getName() {
+	return name;
+}
+
+public String getSurname() {
+	return surname;
+}
+
+public String getPhoneNumber() {
+	return phoneNumber;
+}
+
+public Branch getBranch() {
+	return branch;
+}
+
+public String getBuisnessName() {
+	return buisnessName;
+}
+
+public String getRepresentativeName() {
+	return representativeName;
+}
+   
+   
+   
+	   
+	   
+  
+}
