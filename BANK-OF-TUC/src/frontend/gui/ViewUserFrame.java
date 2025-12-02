@@ -4,28 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ViewUserFrame extends JFrame {
-
     public ViewUserFrame() {
         setTitle("Προβολή Στοιχείων Χρήστη");
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(640,420);
         setLocationRelativeTo(null);
         setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
-        panel.add(new JLabel("Όνομα:"));
-        panel.add(new JLabel(UserSession.getInstance().getUsername()));
-        panel.add(new JLabel("Email:"));
-        panel.add(new JLabel(UserSession.getInstance().getEmail()));
-        panel.add(new JLabel("Τηλέφωνο:"));
-        panel.add(new JLabel("6901234567"));
-        panel.add(new JLabel("Διεύθυνση:"));
-        panel.add(new JLabel("Χανιά, Κρήτη"));
-
-        add(panel);
+        JPanel p = new JPanel(new GridLayout(4,2,12,12));
+        p.setBorder(BorderFactory.createEmptyBorder(18,18,18,18));
+        p.add(new JLabel("Όνομα:")); p.add(new JLabel(safe(UserSession.getInstance().getUsername())));
+        p.add(new JLabel("Email:")); p.add(new JLabel(safe(UserSession.getInstance().getEmail())));
+        p.add(new JLabel("Τηλέφωνο:")); p.add(new JLabel("6901234567"));
+        p.add(new JLabel("Διεύθυνση:")); p.add(new JLabel("Χανιά, Κρήτη"));
+        add(p);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new ViewUserFrame().setVisible(true));
-    }
+    private String safe(String s){ return s==null? "-" : s; }
+    public static void main(String[] args){ SwingUtilities.invokeLater(() -> new ViewUserFrame().setVisible(true)); }
 }

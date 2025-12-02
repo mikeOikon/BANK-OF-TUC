@@ -4,79 +4,45 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TransferFrame extends JFrame {
-
     public TransferFrame() {
         setTitle("Μεταφορά Χρημάτων");
-        setSize(500, 400);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(580,420);
         setLocationRelativeTo(null);
         setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        Color mainBlue = new Color(0, 51, 102);
-        Color white = Color.WHITE;
+        JPanel root = new JPanel(new BorderLayout(10,10));
+        root.setBorder(BorderFactory.createEmptyBorder(14,14,14,14));
+        add(root);
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(white);
-        setContentPane(mainPanel);
+        JLabel head = new JLabel("Νέα Μεταφορά", SwingConstants.CENTER);
+        head.setFont(new Font("SansSerif", Font.BOLD,16));
+        root.add(head, BorderLayout.NORTH);
 
-        JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(mainBlue);
-        topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        JPanel form = new JPanel(new GridLayout(4,2,12,12));
+        form.add(new JLabel("Από λογαριασμό:"));
+        form.add(new JComboBox<>(new String[]{"GR12... - Ταμιευτήριο", "GR98... - Τρεχ. "}));
+        form.add(new JLabel("IBAN παραλήπτη:"));
+        JTextField iban = new JTextField(); form.add(iban);
+        form.add(new JLabel("Ποσό (€):")); JTextField amount = new JTextField(); form.add(amount);
+        form.add(new JLabel("Σκοπός:")); JTextField purpose = new JTextField(); form.add(purpose);
 
-        JButton backButton = new JButton("⟵ Πίσω");
-        styleBackButton(backButton);
-        topPanel.add(backButton, BorderLayout.WEST);
+        root.add(form, BorderLayout.CENTER);
 
-        JLabel titleLabel = new JLabel("Μεταφορά Χρημάτων", SwingConstants.CENTER);
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
-        topPanel.add(titleLabel, BorderLayout.CENTER);
-
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-
-        JPanel centerPanel = new JPanel(new GridLayout(3, 2, 10, 10));
-        centerPanel.setBackground(white);
-        centerPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
-
-        centerPanel.add(new JLabel("IBAN Παραλήπτη:"));
-        JTextField ibanField = new JTextField();
-        centerPanel.add(ibanField);
-
-        centerPanel.add(new JLabel("Ποσό (€):"));
-        JTextField amountField = new JTextField();
-        centerPanel.add(amountField);
-
-        centerPanel.add(new JLabel("Σκοπός:"));
-        JTextField purposeField = new JTextField();
-        centerPanel.add(purposeField);
-
-        JButton transferButton = new JButton("Μεταφορά");
-        transferButton.setBackground(new Color(0, 102, 204));
-        transferButton.setForeground(Color.WHITE);
-        transferButton.setFont(new Font("SansSerif", Font.BOLD, 16));
-        transferButton.setFocusPainted(false);
-        transferButton.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Μεταφορά " + amountField.getText() + " € προς " + ibanField.getText() + " ολοκληρώθηκε!"));
-
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setBackground(white);
-        bottomPanel.add(transferButton);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        backButton.addActionListener(e -> dispose());
+        JButton send = new JButton("Επιβεβαίωση & Αποστολή");
+        send.setBackground(new Color(0,102,204)); send.setForeground(Color.WHITE);
+        send.addActionListener(e -> {
+            // basic checks
+            if (iban.getText().trim().isEmpty() || amount.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this,"Συμπληρώστε IBAN και ποσό","Σφάλμα", JOptionPane.WARNING_MESSAGE); return;
+            }
+            // TODO: Confirm OTP / call backend
+            JOptionPane.showMessageDialog(this, "Η μεταφορά " + amount.getText() + " € προς " + iban.getText() + " εκτελέστηκε.");
+            dispose();
+        });
+        JPanel foot = new JPanel(); foot.add(send);
+        root.add(foot, BorderLayout.SOUTH);
     }
 
-    private void styleBackButton(JButton backButton) {
-        backButton.setBackground(new Color(255, 255, 255, 40));
-        backButton.setForeground(Color.WHITE);
-        backButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-        backButton.setFocusPainted(false);
-        backButton.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
-        backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TransferFrame().setVisible(true));
-    }
+    public static void main(String[] args){ SwingUtilities.invokeLater(() -> new TransferFrame().setVisible(true)); }
 }
