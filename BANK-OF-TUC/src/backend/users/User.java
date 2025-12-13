@@ -1,6 +1,7 @@
 package backend.users;
 
 import backend.Branch;
+import types.UserType;
 
 public abstract class User {
 	
@@ -26,6 +27,10 @@ public abstract class User {
 		this.branch = branch;
 		
 	}
+	
+	public UserType getUserType() {
+		return null; //to be overridden
+	}
 		
 	//na doume poies methodoi prepei na einai protected
 	public String getUsername() {
@@ -50,7 +55,7 @@ public abstract class User {
 		this.userID = userID;
 	}
 	
-	private String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	

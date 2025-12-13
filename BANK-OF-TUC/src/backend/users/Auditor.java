@@ -5,11 +5,16 @@ import java.util.List;
 import backend.BankSystem;
 import backend.Branch;
 import backend.accounts.Account;
+import types.UserType;
 
 public class Auditor extends User {
 
 	public Auditor(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		super(userID,username, password, email, name, surname, phoneNumber, branch);
+	}
+	
+	public UserType getUserType() {
+		return UserType.AUDITOR;
 	}
 
 	//Προβολή όλων των πελατών

@@ -11,6 +11,7 @@ import backend.Branch;
 import backend.accounts.Account;
 import backend.accounts.BusinessAccount;
 import backend.transactions.Transaction;
+import types.UserType;
 
 public class ΒusinessCustomer extends User{
 	
@@ -23,7 +24,9 @@ public class ΒusinessCustomer extends User{
 	//na doume ti prepei na einai protected
 	
 	
-	
+	public UserType getUserType() {
+		return UserType.BUSINESSCUSTOMER;
+	}
 	protected void createAccount() {
     	Account newBusinessAccount = new BusinessAccount(this.userID, 0.0, new Stack<Transaction>(), branch);    	
     	accounts.add(newBusinessAccount);

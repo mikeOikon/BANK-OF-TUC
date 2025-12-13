@@ -19,6 +19,7 @@ import backend.accounts.SavingsAccount;
 import backend.accounts.TransactionalAccount;
 import backend.transactions.Transaction;
 import types.AccountType;
+import types.UserType;
 
 public class Customer extends User {
 	
@@ -38,6 +39,10 @@ public class Customer extends User {
 		} else {
 			return accounts;
 		}
+	}
+	
+	public UserType getUserType() {
+		return UserType.CUSTOMER;
 	}
 
 	

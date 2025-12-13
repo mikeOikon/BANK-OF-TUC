@@ -1,11 +1,16 @@
 package backend.users;
 
 import backend.Branch;
+import types.UserType;
 
 public class BankEmployer extends User {
 
 	public BankEmployer(String userID,String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		super(userID, username, password, password, password, password, password, branch);
+	}
+	
+	public UserType getUserType() {
+		return UserType.EMPLOYEE;
 	}
 
 	//na doume ti prepei na einai protected

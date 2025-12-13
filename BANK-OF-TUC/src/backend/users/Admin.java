@@ -2,7 +2,9 @@ package backend.users;
 
 import java.util.Scanner;
 
+import backend.BankSystem;
 import backend.Branch;
+import types.UserType;
 
 public class Admin extends User {
 	private static int customerCount = 0;
@@ -29,6 +31,10 @@ public class Admin extends User {
 
 	//na doume ti prepei na einai protected
 	//ο αδμιν μπορει να κανει admin ή employer αλλον user (εφοσον αυτος δεν ειναι business customer)
+	
+	public UserType getUserType() {
+		return UserType.ADMIN;
+	}
 	
 	protected void manageUserAccounts() {
 		

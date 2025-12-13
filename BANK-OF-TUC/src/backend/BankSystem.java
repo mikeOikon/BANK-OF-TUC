@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
+	
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -29,6 +29,9 @@ import backend.users.User;
 import backend.users.UserBuilder;
 import backend.users.UserFactory;
 import backend.users.ΒusinessCustomer;
+import services.UserManager;
+import services.Command;
+import services.CreateUserCommand;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 
@@ -43,6 +46,9 @@ public class BankSystem {
 	private Map<String,BankEmployer> bankEmployers; // Map to bankEmployers users with userID as key and informations as value
 	private Map<String,Auditor> auditors; // Map to store auditors with userID as key and informations as value
 	private BankAccount bankAccount; // η τράπεζα έχει και έναν λογαριασμό για τις προμήθειες κλπ
+	private transient UserManager userManager;
+	private Map<String, Map<String, ? extends User>> userMaps;
+	private Map<String,User> usersByUsername; // Map to find users by username during login
 	
 	private  int adminCount = 0;
 	private  int customerCount = 0;
@@ -63,6 +69,14 @@ public class BankSystem {
 		this.auditors=new HashMap<>();		
 		this.businessCustomers=new HashMap<>();
 		this.bankAccount = new BankAccount("BANK001", Branch.getDefaultBranch()); //default bank account(TUC)
+		this.userManager=new UserManager();
+		this.userMaps = new HashMap<>();
+		  userMaps.put("ADM", admins);
+		  userMaps.put("CUS", customers);
+		  userMaps.put("EMP", bankEmployers);
+		  userMaps.put("AUD", auditors);
+		  userMaps.put("BUS", businessCustomers);
+		this.usersByUsername = new HashMap<>();
 		
 		AccountFactory accountFactory = new AccountFactory();
 	}
@@ -152,7 +166,51 @@ public class BankSystem {
 	public Branch getBranch(String branchCode) {
         return branches.get(branchCode);
     }
+	
+	public void addUser(User user) {
+		switch(user.getUserType()) {
+			case ADMIN:
+				this.admins.put(user.getUserID(), (Admin) user);
+				break;
+			case CUSTOMER:
+				this.customers.put(user.getUserID(), (Customer) user);
+				break;
+			case EMPLOYEE:
+				this.bankEmployers.put(user.getUserID(), (BankEmployer) user);
+				break;
+			case AUDITOR:
+				this.auditors.put(user.getUserID(), (Auditor) user);
+				break;
+			case BUSINESSCUSTOMER:
+				this.businessCustomers.put(user.getUserID(), (ΒusinessCustomer) user);
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid user type: " + user.getUserType());
+		}
 		
+		usersByUsername.put(user.getUsername(), user);
+	}
+	
+	
+	public void removeUser(String userId) {
+	String prefix = userId.substring(0, 3);
+	Map<String, ? extends User> userMap = userMaps.get(prefix);
+
+	if (userMap != null) {	
+		User removed= userMap.remove(userId);
+		if (removed != null) {
+			usersByUsername.remove(removed.getUsername());	
+			System.out.println("User " + userId + " removed successfully.");
+		} else {
+			System.out.println("User " + userId + " not found.");
+		}
+	} else {
+		System.out.println("Invalid user ID prefix: " + prefix);
+	}
+		}
+
+
+	
 	public User createUserCLI() {
 		System.out.println("Select user type to create: Type 1 for Personal Customer, Type 2 for Business Customer");
 		int choice = frontend.Main.scanner.nextInt();
@@ -289,15 +347,21 @@ public class BankSystem {
 				//customers are created with the main branch, if we want to create customers with different branches we need to change this
 				String userID = generateId(UserType.CUSTOMER); //2 for customer
 				UserBuilder userBuilder = new UserBuilder();
+			try {
 				userBuilder.withUsername(username)
-						   .withPassword(password)
+						   .withPassword(PasswordHasher.hash(password))
 						   .withEmail(email)
 						   .withName(name)
 						   .withSurname(surname)
 						   .withPhoneNumber(phoneNumber)
 						   .withBranch(Branch.getDefaultBranch());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();		
+			}
 				User newCustomer = UserFactory.createUser(UserType.CUSTOMER,userID,userBuilder);//create customer
-				this.customers.put(userID, (Customer) newCustomer);
+				Command create= new CreateUserCommand(newCustomer);				
+				userManager.execute(create);
 				return newCustomer;
 			case 2:
 				String businessUsername;
@@ -423,15 +487,21 @@ public class BankSystem {
 				//business customers are created with the main branch, if we want to create business customers with different branches we need to change this
 				String businessUserID = generateId(UserType.BUSINESSCUSTOMER); //businessCustomer for businessCustomer (different from simple customer)
 				UserBuilder businessUserBuilder = new UserBuilder();
+			try {
 				businessUserBuilder.withUsername(businessUsername)
-								   .withPassword(businessPassword)
+								   .withPassword(PasswordHasher.hash(businessPassword))
 								   .withEmail(businessEmail)
 								   .withName(businessName)
 								   .withSurname(repname)
 								   .withPhoneNumber(businessPhoneNumber)
 								   .withBranch(Branch.getDefaultBranch());
-				User newBusinessCustomer = UserFactory.createUser(UserType.BUSINESSCUSTOMER,businessUserID,businessUserBuilder);//create business customer
-				this.businessCustomers.put(businessUserID, (ΒusinessCustomer) newBusinessCustomer);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				User newBusinessCustomer = UserFactory.createUser(UserType.BUSINESSCUSTOMER,businessUserID,businessUserBuilder);//create customer
+				Command businessCreate= new CreateUserCommand(newBusinessCustomer);				
+				userManager.execute(businessCreate);
 				return newBusinessCustomer;
 			default:
 				System.out.println("Invalid choice. Please select 1 or 2.");
@@ -439,44 +509,59 @@ public class BankSystem {
 		}
 	}
 	
-	//na ginetai elegxos an to username uparxei hdh
-	/*protected void login() {
-		//angel 
-		int tries = 0;
-		while(true) {
-			System.out.println("Type username");
-			String username = frontend.Main.scanner.nextLine();		
-			System.out.println("Type Passward");
-			String password = frontend.Main.scanner.nextLine();		
-			tries++;
-			if(login(username, password)) {
-				System.out.println("*******Wellcome*******");
-				return;
-			}
-			else {
-				System.out.println("Wrong username or password. Try again!");
-				if(tries % 3 == 0) {
-					int waitMinutes = tries / 3; // Calculate wait time in minutes
-					System.out.print("Try again in ");
-					System.out.print(waitMinutes);
-					System.out.println(" minutes");	//makes trying available after +1 minute every 3 attempts
-					try {
-	                    Thread.sleep(waitMinutes * 60 * 1000); // μετατρέπει λεπτά σε ms and waits for that time
-	                } catch (InterruptedException e) {
-	                    e.printStackTrace();
+	public User loginCLI() {
+	    Scanner scanner = frontend.Main.scanner;
+	    int attempts = 0;
+
+	    while (true) {
+	        System.out.print("Username: ");
+	        String username = scanner.nextLine();
+
+	        System.out.print("Password: ");
+	        String password = scanner.nextLine();
+
+	        User user = findUserByUsername(username);
+
+	        attempts++;
+	        if (user != null) {
+	            try {
+	                if (PasswordHasher.verify(password, user.getPassword())) {
+	                    System.out.println("******* Welcome " + user.getName() + " *******");
+	                    return user; // successful login
+	                } else {
+	                    System.out.println("Incorrect password.");
 	                }
-				}
-			}		
-		}
+	            } catch (Exception e) {
+	                System.err.println("Error verifying password: " + e.getMessage());
+	            }
+	        } else {
+	            System.out.println("Username not found.");
+	        }
+
+	        // Handle failed attempts with incremental wait time
+	        if (attempts % 3 == 0) {
+	            int waitMinutes = attempts / 3;
+	            System.out.println("Too many failed attempts. Wait " + waitMinutes + " minute(s) before retrying.");
+	            try {
+	                Thread.sleep(waitMinutes * 60 * 1000L); // convert minutes to milliseconds
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
 	}
-	
-	protected boolean login(String username, String password) {
-		//maybe use a quick pin?
-		for
-		return this.username.equals(username) && this.password.equals(password);
-	}*/
-	
-	
+
+	// Helper method: finds user across all maps
+	private User findUserByUsername(String username) {
+	    for (Map<String, ? extends User> map : userMaps.values()) {
+	        for (User u : map.values()) {
+	            if (u.getUsername().equals(username)) {
+	                return u;
+	            }
+	        }
+	    }
+	    return null;
+	}
 	public String generateId(UserType type) {  //Genrates unique ID for each user ids are in order
 	    String prefix;
 	    if (type == UserType.ADMIN) {
