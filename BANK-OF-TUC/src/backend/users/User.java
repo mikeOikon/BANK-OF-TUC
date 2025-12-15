@@ -1,6 +1,7 @@
 package backend.users;
 
 import backend.Branch;
+import behaviors.UserBehavior;
 import types.UserType;
 
 public abstract class User {
@@ -13,6 +14,7 @@ public abstract class User {
 	protected String surname;
 	protected String phoneNumber;
 	protected Branch branch;	//link user to branch
+	protected transient UserBehavior userBehavior; // Bridge  pattern for user-specific behaviors
 	
 	
 	
@@ -27,6 +29,64 @@ public abstract class User {
 		this.branch = branch;
 		
 	}
+	
+	
+	public void setBehavior(UserBehavior behavior) {
+	    this.userBehavior = behavior;
+	}
+	
+	public boolean canViewAccounts() {
+		// TODO Auto-generated method stub
+		return userBehavior.canViewAccounts();
+	}
+
+	
+	public boolean canTransferMoney() {
+		// TODO Auto-generated method stub
+		return userBehavior.canTransferMoney();
+	}
+
+	public boolean canViewTransactionsHistory() {
+		// TODO Auto-generated method stub
+		return userBehavior.canViewTransactionsHistory();
+	}
+
+	public boolean canRemoveUsers() {
+	    return userBehavior.canRemoveUsers();
+	}
+
+	public boolean canViewAllAccounts() {
+	    return userBehavior.canViewAllAccounts();
+	}
+	
+
+	public boolean canViewAllTransactionsHistory() {
+		// TODO Auto-generated method stub
+		return userBehavior.canViewAllTransactionsHistory();
+	}
+
+	public boolean canCreateAuditor() {
+		// TODO Auto-generated method stub
+		return userBehavior.canCreateAuditor();
+	}
+
+	public boolean canPromoteUser() {
+		// TODO Auto-generated method stub
+		return userBehavior.canPromoteUser();
+	}
+
+
+	public boolean canDemoteUser() {
+		// TODO Auto-generated method stub
+		return userBehavior.canDemoteUser();
+	}
+
+
+	public boolean canAssistUsers() {
+		// TODO Auto-generated method stub
+		return userBehavior.canAssistUsers();
+	}
+
 	
 	public UserType getUserType() {
 		return null; //to be overridden

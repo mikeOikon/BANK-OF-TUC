@@ -29,6 +29,11 @@ import backend.users.User;
 import backend.users.UserBuilder;
 import backend.users.UserFactory;
 import backend.users.ΒusinessCustomer;
+import behaviors.AdminBehavior;
+import behaviors.AuditorBehavior;
+import behaviors.BusinessBehavior;
+import behaviors.CustomerBehavior;
+import behaviors.EmployeeBehavior;
 import services.UserManager;
 import services.Command;
 import services.CreateUserCommand;
@@ -47,8 +52,8 @@ public class BankSystem {
 	private Map<String,Auditor> auditors; // Map to store auditors with userID as key and informations as value
 	private BankAccount bankAccount; // η τράπεζα έχει και έναν λογαριασμό για τις προμήθειες κλπ
 	private transient UserManager userManager;
-	private Map<String, Map<String, ? extends User>> userMaps;
-	private Map<String,User> usersByUsername; // Map to find users by username during login
+	private transient Map<String, Map<String, ? extends User>> userMaps;
+	private transient Map<String,User> usersByUsername; // Map to find users by username during login
 	
 	private  int adminCount = 0;
 	private  int customerCount = 0;
@@ -59,7 +64,6 @@ public class BankSystem {
     private static final String DATA_FILE = "data/bankSystem.json";
     
     private transient Gson gson;
-	
 	private BankSystem() {
 
 		this.gson = GsonConfig.build();   
@@ -77,6 +81,30 @@ public class BankSystem {
 		  userMaps.put("AUD", auditors);
 		  userMaps.put("BUS", businessCustomers);
 		this.usersByUsername = new HashMap<>();
+		
+		if (admins.isEmpty()) {
+		    UserBuilder builder = new UserBuilder();
+		    try {
+				builder.withUsername("admin")
+				       .withPassword(PasswordHasher.hash("Admin123"))
+				       .withEmail("admin@bank.com")
+				       .withName("System")
+				       .withSurname("Admin")
+				       .withPhoneNumber("0000000000")
+				       .withBranch(Branch.getDefaultBranch());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		    User admin = UserFactory.createUser(
+		        UserType.ADMIN,
+		        generateId(UserType.ADMIN),
+		        builder
+		    );
+
+		    addUser(admin);
+		}
 		
 		AccountFactory accountFactory = new AccountFactory();
 	}
@@ -125,36 +153,82 @@ public class BankSystem {
 
 	    File file = new File(DATA_FILE);
 
-	    if (!file.exists() || file.length() == 0) {
+	    if (!file.exists()) {
 	        System.out.println("[BankSystem] No saved data found. Creating new system.");
 	        return new BankSystem();
 	    }
 
-	    Gson gson = GsonConfig.build();
-	    BankSystem loaded;
-
 	    try (FileReader reader = new FileReader(file)) {
-	        loaded = gson.fromJson(reader, BankSystem.class);
-	        System.out.println("[BankSystem] ✅ Data loaded successfully.");
-	    }
-	    catch (Exception e) {
-	        System.err.println("[BankSystem] ⚠️ Failed to load data: " + e.getMessage());
+
+	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	        BankSystem system = gson.fromJson(reader, BankSystem.class);
+
+	        if (system == null) {
+	            System.out.println("[BankSystem] Loaded file was empty. Creating new system.");
+	            return new BankSystem();
+	        }
+
+	        // rebuild runtime-only user maps
+	        system.userMaps = new HashMap<>();
+	        system.userMaps.put("ADM", system.admins);
+	        system.userMaps.put("CUS", system.customers);
+	        system.userMaps.put("EMP", system.bankEmployers);
+	        system.userMaps.put("AUD", system.auditors);
+	        system.userMaps.put("BUS", system.businessCustomers);
+
+	        system.usersByUsername = new HashMap<>();
+
+	        for (User user : system.admins.values()) {
+	            system.usersByUsername.put(user.getUsername(), user);
+	        }
+
+	        for (User user : system.customers.values()) {
+	            system.usersByUsername.put(user.getUsername(), user);
+	        }
+
+	        for (User user : system.bankEmployers.values()) {
+	            system.usersByUsername.put(user.getUsername(), user);
+	        }
+
+	        for (User user : system.auditors.values()) {
+	            system.usersByUsername.put(user.getUsername(), user);
+	        }
+
+	        for (User user : system.businessCustomers.values()) {
+	            system.usersByUsername.put(user.getUsername(), user);
+	        }
+	        
+	        
+	        for (Admin admin : system.admins.values()) {
+	            admin.setBehavior(new AdminBehavior());
+	        }
+
+	        for (Customer customer : system.customers.values()) {
+	            customer.setBehavior(new CustomerBehavior());
+	        }
+
+	        for (Auditor auditor : system.auditors.values()) {
+	            auditor.setBehavior(new AuditorBehavior());
+	        }
+
+	        for (BankEmployer emp : system.bankEmployers.values()) {
+	            emp.setBehavior(new EmployeeBehavior());
+	        }
+
+	        for (ΒusinessCustomer bc : system.businessCustomers.values()) {
+	            bc.setBehavior(new BusinessBehavior());
+	        }
+
+	        System.out.println("[BankSystem] Data loaded successfully.");
+	        return system;
+
+	    } catch (Exception e) {
+	        System.out.println("[BankSystem] ⚠️ Failed to load data: " + e.getMessage());
 	        return new BankSystem();
 	    }
-
-	    // ΦΤΙΑΧΝΟΥΜΕ ΝΕΟ ΣΥΣΤΗΜΑ ΜΕ ΣΩΣΤΟ GSON
-	    BankSystem system = new BankSystem();
-	    system.gson = gson;
-
-	    // ΚΑΙ ΑΝΤΙΓΡΑΦΟΥΜΕ ΟΛΑ ΤΑ LOADED FIELDS
-	    system.admins = loaded.admins;
-	    system.customers = loaded.customers;
-	    system.bankEmployers = loaded.bankEmployers;
-	    system.auditors = loaded.auditors;
-	    system.businessCustomers = loaded.businessCustomers;
-	    system.bankAccount = loaded.bankAccount;
-
-	    return system;
+	    
+	    
+	    
 	}
 
 

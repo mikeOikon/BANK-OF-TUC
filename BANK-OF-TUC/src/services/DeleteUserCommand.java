@@ -1,8 +1,8 @@
-package types;
+package services;
 
 import backend.BankSystem;
 import backend.users.User;
-import services.Command;
+import types.UserType;
 
 public class DeleteUserCommand implements Command {
 	
@@ -18,7 +18,7 @@ public class DeleteUserCommand implements Command {
 
 	@Override
 	public void execute() {
-		  if (executor.getUserType() != UserType.ADMIN) {
+		  if (!executor.canRemoveUsers()) {
 	            throw new SecurityException("Only admins can remove users.");
 	        }
 

@@ -18,6 +18,7 @@ import backend.accounts.PersonalAccount;
 import backend.accounts.SavingsAccount;
 import backend.accounts.TransactionalAccount;
 import backend.transactions.Transaction;
+import behaviors.CustomerBehavior;
 import types.AccountType;
 import types.UserType;
 
@@ -28,6 +29,7 @@ public class Customer extends User {
 	public Customer(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		super(userID, username, password, email, name, surname, phoneNumber, branch);
 		this.accounts = new ArrayList<Account>();
+		this.userBehavior= new CustomerBehavior();
 	}
 	
 	//na doume ti prepei na einai protected

@@ -11,6 +11,7 @@ import backend.Branch;
 import backend.accounts.Account;
 import backend.accounts.BusinessAccount;
 import backend.transactions.Transaction;
+import behaviors.BusinessBehavior;
 import types.UserType;
 
 public class ΒusinessCustomer extends User{
@@ -20,6 +21,7 @@ public class ΒusinessCustomer extends User{
 	public ΒusinessCustomer(String userID,String username, String password, String email, String phoneNumber, Branch branch, String businessName, String representativeName) {
 		super(userID, username, password, email, businessName, representativeName, phoneNumber, branch);
 		this.accounts = new ArrayList<>();
+		this.userBehavior= new BusinessBehavior();
 	}
 	//na doume ti prepei na einai protected
 	

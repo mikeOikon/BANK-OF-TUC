@@ -19,7 +19,7 @@ public class FileDemo {
             User user1 = centralBank.createUserCLI();
             User user2 = centralBank.createUserCLI();
 
-           /* // Add customers to system if needed
+           /* Add customers to system if needed
             if (user1 instanceof Customer c1)
                 centralBank.addCustomer(c1);
             if (user2 instanceof Customer c2)

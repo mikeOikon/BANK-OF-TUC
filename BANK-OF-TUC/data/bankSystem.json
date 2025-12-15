@@ -2,12 +2,10 @@
   "businessCustomers": {
     "BUS002": {
       "accounts": [],
-      "username": "AEKara",
+      "username": "mikeBusiness",
       "userID": "BUS002",
-      "password": "AEKara21",
-      "email": "aek@aek.com",
-      "name": "AEKARA",
-      "surname": "AEKARA",
+      "password": "fac0a29156bc68dd093906fdba25e6ed4b428d8ac5613f50a40155218e3a68b3",
+      "email": "business@gmail.com",
       "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
@@ -15,30 +13,31 @@
       }
     }
   },
-  "admins": {},
+  "admins": {
+    "ADM001": {
+      "username": "admin",
+      "userID": "ADM001",
+      "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
+      "email": "admin@bank.com",
+      "name": "System",
+      "surname": "Admin",
+      "phoneNumber": "0000000000",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      }
+    }
+  },
   "customers": {
     "CUS001": {
-      "accounts": [
-        {
-          "IBAN": "GR5402100210039659721396963",
-          "userID": "CUS001",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 1,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "transactional"
-        }
-      ],
-      "username": "AEK",
+      "accounts": [],
+      "username": "mike",
       "userID": "CUS001",
-      "password": "AEKara21",
-      "email": "aek@original.com",
-      "name": "AEK",
-      "surname": "Original",
-      "phoneNumber": "2121212121",
+      "password": "57120f18838fa994fcdd944bb6f5173ec3cf5383d292405e57d8f44087345934",
+      "email": "mikeaek21@gmail.com",
+      "name": "mike",
+      "surname": "oikon",
+      "phoneNumber": "6949908000",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -55,7 +54,7 @@
       "branchCode": "0021"
     }
   },
-  "adminCount": 0,
+  "adminCount": 1,
   "customerCount": 2,
   "employeeCount": 0,
   "auditorCount": 0

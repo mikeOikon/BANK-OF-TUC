@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import backend.BankSystem;
 import backend.Branch;
+import behaviors.AdminBehavior;
+import behaviors.UserBehavior;
 import types.UserType;
 
 public class Admin extends User {
@@ -11,10 +13,12 @@ public class Admin extends User {
     private static int adminCount = 0;
     private static int employeeCount = 0;
     private static int auditorCount = 0;
+   
     
     //ισως ο admin δεν πρεπει να εχει branch
 	public Admin(String userID, String username,String password, String email, String name, String surname, String phoneNumber, Branch branch) {
 		super(userID, username, password, email, name, surname, phoneNumber, branch);
+		this.userBehavior = new AdminBehavior();
 	}
 	
 	protected void promoteUser(String userId, String newRole) {
