@@ -8,9 +8,8 @@ import backend.transactions.Transaction;
 
 public abstract class PersonalAccount extends Account {
 
-	public PersonalAccount(String userID, double balance, Stack<Transaction> transactions, Branch branch) {
-		super(userID, balance, transactions, branch);
-		// TODO Auto-generated constructor stub
+	public PersonalAccount(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest, Branch branch) {
+		super(IBAN, userID, balance, transactions, interest, branch);
 	}
 	
 	

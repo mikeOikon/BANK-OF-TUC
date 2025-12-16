@@ -12,12 +12,14 @@ public class BusinessAccount extends Account {
     private double managementFee;    //τέλη διαχείρισης
 
     public BusinessAccount(
+    		String IBAN,
             String userID,
             double balance,
             Stack<Transaction> transactions,
+            double interest,
             Branch branch
     ) {
-        super(userID, balance, transactions, branch);
+    	super(IBAN, userID, balance, transactions, interest, branch);
         this.managementFee = 10.0;
     }
 

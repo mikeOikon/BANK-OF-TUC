@@ -79,6 +79,7 @@ public class Customer extends User {
 	            .withUserID(this.userID)
 	            .withBalance(0.0)
 	            .withTransactions(new Stack<Transaction>())
+	            .withInterest(0.00)
 	            .withBranch(this.branch);
 	    Account newAccount = AccountFactory.createAccount(type, AccountBuilder);
 	    accounts.add(newAccount);

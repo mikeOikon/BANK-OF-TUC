@@ -12,8 +12,8 @@ public class SavingsAccount extends PersonalAccount {
 	//na dw
 	private static final double managementFee = 2.0; // σταθερό τέλος διαχείρισης ανά ανάληψη
     
-	public SavingsAccount(String userID, double balance, Stack<Transaction> transactions, Branch branch) {
-        super(userID, balance, transactions, branch);
+	public SavingsAccount(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest, Branch branch) {
+        super(IBAN, userID, balance, transactions, interest, branch);
     }
 
     @Override

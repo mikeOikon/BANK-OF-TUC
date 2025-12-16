@@ -9,8 +9,8 @@ import types.AccountType;
 
 public class TransactionalAccount extends PersonalAccount {
 
-    public TransactionalAccount(String userID, double balance, Stack<Transaction> transactions, Branch branch) {
-        super(userID, balance, transactions, branch);
+    public TransactionalAccount(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest, Branch branch) {
+        super(IBAN, userID, balance, transactions, interest, branch);
     }
 
     @Override

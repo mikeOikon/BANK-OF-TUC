@@ -10,33 +10,41 @@ public class AccountFactory {
 
             case TRANSACTIONAL:
                 return new TransactionalAccount(
+                		builder.getIBAN(),
                         builder.getUserID(),
                         builder.getBalance(),
                         builder.getTransactions(),
+                        builder.getInterest(),
                         builder.getBranch()
                 );
 
             case SAVINGS:
                 return new SavingsAccount(
+                		builder.getIBAN(),
                         builder.getUserID(),
                         builder.getBalance(),
                         builder.getTransactions(),
+                        builder.getInterest(),
                         builder.getBranch()
                 );
 
             case FIXED:
                 return new FixedTermAccount(
+                		builder.getIBAN(),
                         builder.getUserID(),
                         builder.getBalance(),
                         builder.getTransactions(),
-                        builder.getBranch(), 0, 0
+                        builder.getInterest(),
+                        builder.getBranch(), 0
                 );
 
             case BUSINESS:
                 return new BusinessAccount(
+                		builder.getIBAN(),
                         builder.getUserID(),
                         builder.getBalance(),
                         builder.getTransactions(),
+                        builder.getInterest(),
                         builder.getBranch()
                 );
 

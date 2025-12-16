@@ -21,12 +21,16 @@ public abstract class Account {
 	private static long nextAccountId = 1;
 	private long account_id;
 	private static Set<String> usedAccounts = new HashSet<>(); // για να κρατάμε τους ήδη χρησιμοποιημένους αριθμούς λογαριασμών 
+	private double interest; //για επιτοκιο
 	
 	private Branch branch;	//για να συνδεσουμε με υποκαταστημα
 	
-	public Account(String userID, double balance, Stack<Transaction> transactions, Branch branch) {
-		super();
-		this.IBAN = generateIBAN(branch); // Δημιουργία IBAN με branch
+	public Account(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest ,Branch branch) {
+		if (IBAN != null && !IBAN.isEmpty()) 
+			this.IBAN = IBAN;
+		else
+			this.IBAN = generateIBAN(branch); // Δημιουργία IBAN με branch
+		this.interest = interest;
 		this.userID = userID;
 		this.balance = balance;
 		this.transactions = transactions;
@@ -62,6 +66,14 @@ public abstract class Account {
 
 	public Stack<Transaction> getTransactions() {
 		return transactions;
+	}
+
+	protected double getInterest() {
+		return interest;
+	}
+
+	protected void setInterest(double interest) {
+		this.interest = interest;
 	}
 
 	protected long getAccount_id() {

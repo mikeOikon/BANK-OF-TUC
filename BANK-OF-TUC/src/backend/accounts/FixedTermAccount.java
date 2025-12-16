@@ -11,23 +11,21 @@ import types.AccountType;
 
 public class FixedTermAccount extends PersonalAccount {
 
-    private double interestRate;     // επιτόκιο
     private int termMonths;          // διάρκεια προθεσμίας
     private LocalDate startDate;     // ημερομηνία δημιουργίας
     private LocalDate maturityDate;  // ημερομηνία λήξης
 
     public FixedTermAccount(
+            String IBAN,
             String userID,
             double balance,
             Stack<Transaction> transactions,
+            double interest, 
             Branch branch,
-            double interestRate,
             int termMonths
     ) {
-        super(userID, balance, transactions, branch);
-        this.interestRate = interestRate;
+        super(IBAN, userID, balance, transactions, interest, branch);
         this.termMonths = termMonths;
-
         this.startDate = LocalDate.now();
         this.maturityDate = startDate.plusMonths(termMonths);
     }
@@ -35,11 +33,7 @@ public class FixedTermAccount extends PersonalAccount {
     @Override
     public AccountType getAccountType() {
         return AccountType.FIXED;
-    }
-
-    public double getInterestRate() {
-        return interestRate;
-    }
+    }   
 
     public int getTermMonths() {
         return termMonths;
@@ -65,7 +59,7 @@ public class FixedTermAccount extends PersonalAccount {
                 getAccountType(),
                 this.getIBAN(),
                 this.getBalance(),
-                interestRate * 100,
+                this.getInterest(),
                 maturityDate
         );
     }

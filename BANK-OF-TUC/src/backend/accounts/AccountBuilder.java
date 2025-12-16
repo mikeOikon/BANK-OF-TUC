@@ -11,6 +11,8 @@ public class AccountBuilder {
     private double balance;
     private Branch branch;
     private Stack<Transaction> transactions = new Stack<>();
+    private double interest;
+    private String IBAN;
 
 
     public AccountBuilder withUserID(String userID) {
@@ -33,6 +35,11 @@ public class AccountBuilder {
             this.transactions = transactions;
         return this;
     }
+    
+    public AccountBuilder withInterest(double interest) {
+		this.interest = interest;
+		return this;
+	}
 
     public String getUserID() { 
     	return userID; 
@@ -49,5 +56,17 @@ public class AccountBuilder {
     public Stack<Transaction> getTransactions() {
     	return transactions; 
     }
+
+	protected String getIBAN() {
+		return IBAN;
+	}
+
+	protected void setIBAN(String iBAN) {
+		IBAN = iBAN;
+	}
+
+	public double getInterest() {
+		return interest;
+	}
 
 }
