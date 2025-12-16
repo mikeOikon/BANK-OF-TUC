@@ -15,22 +15,38 @@ public abstract class User {
 	protected String phoneNumber;
 	protected Branch branch;	//link user to branch
 	protected transient UserBehavior userBehavior; // Bridge  pattern for user-specific behaviors
+	protected String AFM;
 	
 	
 	
-	public User(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
+	public User(String userID, String username, String password, String name, String surname, Branch branch,String AFM) {
 		this.userID = userID;
 		this.username = username;
 		this.password = password;
-		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.phoneNumber = phoneNumber;
+		this.AFM=AFM;
 		this.branch = branch;
 		
 	}
 	
 	
+	
+	
+	public String getAFM() {
+		return AFM;
+	}
+
+
+
+
+	public void setAFM(String aFM) {
+		AFM = aFM;
+	}
+
+
+
+
 	public void setBehavior(UserBehavior behavior) {
 	    this.userBehavior = behavior;
 	}
@@ -105,6 +121,10 @@ public abstract class User {
 		return userID;
 	}
 	
+	public Branch getBranch() {
+		return branch;
+	}
+	
 	/*
 	public ArrayList<String> getAccounts() {
 		return accounts;
@@ -125,7 +145,7 @@ public abstract class User {
 		return email;
 	}
 
-	protected void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -144,12 +164,11 @@ public abstract class User {
 	protected void setSurname(String surname) {
 		this.surname = surname;
 	}
-
 	protected String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	protected void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -159,7 +178,7 @@ public abstract class User {
 		this.password = password;
 	}
 
-	protected boolean login(String userID, String password) {
+	public boolean login(String userID, String password) {
 		//maybe use a quick pin?
 		return this.username.equals(username) && this.password.equals(password);
 	}
@@ -187,7 +206,7 @@ public abstract class User {
 		while(true) {
 			System.out.println("Type username");
 			String username = frontend.Main.scanner.nextLine();		
-			System.out.println("Type Passward");
+			System.out.println("Type Password");
 			String password = frontend.Main.scanner.nextLine();		
 			tries++;
 			if(login(username, password)) {

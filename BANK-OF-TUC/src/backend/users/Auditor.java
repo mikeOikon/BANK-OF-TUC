@@ -11,8 +11,8 @@ import types.UserType;
 public class Auditor extends User {
 	
 
-	public Auditor(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
-		super(userID,username, password, email, name, surname, phoneNumber, branch);
+	public Auditor(String userID, String username, String password, String name, String surname, Branch branch,String AFM) {
+		super(userID,username, password, name, surname, branch,AFM);
 		this.userBehavior = new AuditorBehavior();
 		
 	}

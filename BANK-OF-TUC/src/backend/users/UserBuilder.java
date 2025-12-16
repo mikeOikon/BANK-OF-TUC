@@ -10,6 +10,7 @@ public class UserBuilder {
    private String surname;
    private String phoneNumber;
    private Branch branch= Branch.getDefaultBranch();
+   private String AFM;
    
    
    //specific to business user
@@ -17,7 +18,10 @@ public class UserBuilder {
    private String representativeName;
    
    
-   
+   public UserBuilder withAFM(String AFM) {
+	   this.AFM = AFM;
+	   return this;
+   }
    public UserBuilder withUsername(String username) {
 	   this.username = username;
 	   return this;}
@@ -27,9 +31,17 @@ public class UserBuilder {
 	   return this;}
    
    public UserBuilder withEmail(String email) {
-	   this.email = email;
-	   return this;}
+	    if (email == null || !email.matches("^[^@]+@[^@]+\\.[^@]+$")) {
+	        throw new IllegalArgumentException("Invalid email");
+	    }
+	    this.email = email;
+	    return this;
+	}
    
+   public UserBuilder withRepresentativeName(String representativeName) {
+	   this.representativeName = representativeName;
+	   return this;
+   }
    
    public UserBuilder withName(String name) {
 	   this.name = name;
@@ -41,12 +53,13 @@ public class UserBuilder {
 	   return this;
    }
    
-   
    public UserBuilder withPhoneNumber(String phoneNumber) {
-	   this.phoneNumber = phoneNumber;
-	   return this;
-   }
-   
+	    if (phoneNumber == null || !phoneNumber.matches("^[0-9]{10}$")) {
+	        throw new IllegalArgumentException("Invalid phone number");
+	    }
+	    this.phoneNumber = phoneNumber;
+	    return this;
+	}
    
    public UserBuilder withBranch(Branch branch) {
 	   this.branch = branch;
@@ -58,6 +71,13 @@ public class UserBuilder {
 	   this.buisnessName = businessName;
 	   return this;
    }
+   
+   
+
+
+public String getAFM() {
+	return AFM;
+}
 
 public String getUsername() {
 	return username;

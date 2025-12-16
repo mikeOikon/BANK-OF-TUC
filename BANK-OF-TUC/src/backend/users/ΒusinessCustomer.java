@@ -21,12 +21,12 @@ public class ΒusinessCustomer extends User{
 	
 	private ArrayList<Account> accounts;
 	
-	public ΒusinessCustomer(String userID,String username, String password, String email, String phoneNumber, Branch branch, String businessName, String representativeName) {
-		super(userID, username, password, email, businessName, representativeName, phoneNumber, branch);
+	public ΒusinessCustomer(String userID,String username, String password, Branch branch, String businessName, String representativeName, String AFM) {
+		super(userID, username, password, businessName, representativeName, branch,AFM);
 		this.accounts = new ArrayList<>();
 		this.userBehavior= new BusinessBehavior();
 	}
-	//na doume ti prepei na einai protected
+	//na doume ti prepei na einai protected 
 	
 	
 	public UserType getUserType() {

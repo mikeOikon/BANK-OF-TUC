@@ -1,5 +1,9 @@
 package frontend.gui;
 
+import backend.BankSystem;
+import backend.PasswordHasher;
+import backend.users.User;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,30 +19,25 @@ public class StartFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Main container
+        // Load users from JSON
+        BankSystem.getInstance().loadFromFileInternal();
+
         JPanel container = new JPanel(new GridLayout(1, 2));
         add(container);
 
         //---------------------------------------------------------
-        // LEFT PANEL (Logo + Branding)
+        // LEFT PANEL (LOGO)
         //---------------------------------------------------------
         JPanel leftPanel = new JPanel(new BorderLayout());
-        leftPanel.setBackground(new Color(0, 51, 102)); // deep blue
+        leftPanel.setBackground(new Color(0, 51, 102));
         container.add(leftPanel);
 
-        // 🔵 ΕΔΩ ΘΑ ΒΑΛΕΙΣ ΤΟ PATH ΤΗΣ ΦΩΤΟΓΡΑΦΙΑΣ ΣΟΥ
-        // Παράδειγμα: ImageIcon logo = new ImageIcon("frontend/gui/banklogo.jpg");
-        ImageIcon logo = new ImageIcon("src/frontend/gui/552644274_1308216287470008_1862680383229436246_n.jpg");
-
-        // --------------------------------------------------------
-        // ↑ βάλε εδώ το path της εικόνας που ανέβασες
-        // --------------------------------------------------------
-
-        // Scaling to fit nicely
+        ImageIcon logo = new ImageIcon(
+                "src/frontend/gui/552644274_1308216287470008_1862680383229436246_n.jpg"
+        );
         Image scaledImage = logo.getImage().getScaledInstance(350, 350, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(scaledImage));
         logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
         leftPanel.add(logoLabel, BorderLayout.CENTER);
 
         JLabel bankName = new JLabel("BANK OF TUC", SwingConstants.CENTER);
@@ -59,7 +58,6 @@ public class StartFrame extends JFrame {
         loginTitle.setBounds(150, 60, 350, 40);
         rightPanel.add(loginTitle);
 
-        // Username label
         JLabel userLabel = new JLabel("Όνομα Χρήστη:");
         userLabel.setBounds(80, 160, 200, 30);
         userLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -69,7 +67,6 @@ public class StartFrame extends JFrame {
         usernameField.setBounds(290, 160, 200, 30);
         rightPanel.add(usernameField);
 
-        // Password label
         JLabel passLabel = new JLabel("Κωδικός:");
         passLabel.setBounds(80, 230, 200, 30);
         passLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -79,33 +76,64 @@ public class StartFrame extends JFrame {
         passwordField.setBounds(290, 230, 200, 30);
         rightPanel.add(passwordField);
 
-        // Login button
         JButton loginButton = new JButton("ΣΥΝΔΕΣΗ");
         loginButton.setBounds(80, 330, 180, 45);
         styleMainButton(loginButton);
         rightPanel.add(loginButton);
 
-        // Register button
         JButton registerButton = new JButton("ΔΗΜΙΟΥΡΓΙΑ ΛΟΓΑΡΙΑΣΜΟΥ");
         registerButton.setBounds(290, 330, 200, 45);
         styleSecondaryButton(registerButton);
         rightPanel.add(registerButton);
 
         //---------------------------------------------------------
-        // Action Listeners
+        // ACTIONS
         //---------------------------------------------------------
-
-        // Login logic
-        loginButton.addActionListener(e -> {
-            UserSession.getInstance().setUsername(usernameField.getText());
-            new DashboardFrame().setVisible(true);
-            dispose();
-        });
-
+        loginButton.addActionListener(e -> handleLogin());
         registerButton.addActionListener(e -> new RegisterFrame().setVisible(true));
     }
 
-    // Main blue button style
+    //---------------------------------------------------------
+    // LOGIN LOGIC
+    //---------------------------------------------------------
+    private void handleLogin() {
+        String username = usernameField.getText().trim();
+        String password = new String(passwordField.getPassword());
+
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Παρακαλώ συμπληρώστε όλα τα πεδία.",
+                    "Σφάλμα",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        BankSystem bank = BankSystem.getInstance();
+        User user = bank.findUserByUsername(username);
+
+        if (user == null || !user.login(username, password)) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Λάθος όνομα χρήστη ή κωδικός.",
+                    "Αποτυχία σύνδεσης",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // Successful login
+        UserSession.getInstance().setCurrentUser(user);
+
+        // Open dashboard depending on role / behavior
+        new DashboardFrame().setVisible(true);
+        dispose();
+    }
+
+    //---------------------------------------------------------
+    // BUTTON STYLES
+    //---------------------------------------------------------
     private void styleMainButton(JButton btn) {
         btn.setBackground(new Color(0, 102, 204));
         btn.setForeground(Color.WHITE);
@@ -114,7 +142,6 @@ public class StartFrame extends JFrame {
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
-    // Secondary light button
     private void styleSecondaryButton(JButton btn) {
         btn.setBackground(new Color(220, 220, 220));
         btn.setForeground(Color.BLACK);
@@ -123,6 +150,9 @@ public class StartFrame extends JFrame {
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
+    //---------------------------------------------------------
+    // MAIN
+    //---------------------------------------------------------
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new StartFrame().setVisible(true));
     }

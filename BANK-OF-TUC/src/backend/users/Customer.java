@@ -14,10 +14,7 @@ import backend.Branch;
 import backend.accounts.Account;
 import backend.accounts.AccountBuilder;
 import backend.accounts.AccountFactory;
-import backend.accounts.FixedTermAccount;
-import backend.accounts.PersonalAccount;
-import backend.accounts.SavingsAccount;
-import backend.accounts.TransactionalAccount;
+
 import backend.transactions.Transaction;
 import behaviors.CustomerBehavior;
 import types.AccountType;
@@ -27,8 +24,8 @@ public class Customer extends User {
 	
 	private ArrayList<Account> accounts; //ισως δεν χρειαζεται και εδω λιστα αφου υπαρχει στους users
 	
-	public Customer(String userID, String username, String password, String email, String name, String surname, String phoneNumber, Branch branch) {
-		super(userID, username, password, email, name, surname, phoneNumber, branch);
+	public Customer(String userID, String username, String password, String name, String surname, Branch branch,String AFM) {
+		super(userID, username, password, name, surname, branch, AFM);
 		this.accounts = new ArrayList<Account>();
 		this.userBehavior= new CustomerBehavior();
 	}
@@ -79,6 +76,7 @@ public class Customer extends User {
 	            .withUserID(this.userID)
 	            .withBalance(0.0)
 	            .withTransactions(new Stack<Transaction>())
+	            .withInterest(0.0) // default interest rate
 	            .withBranch(this.branch);
 	    Account newAccount = AccountFactory.createAccount(type, AccountBuilder);
 	    accounts.add(newAccount);

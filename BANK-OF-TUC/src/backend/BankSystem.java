@@ -293,10 +293,9 @@ public class BankSystem {
 			case 1:
 				String username;
 				String password;
-				String email;
 				String name;
 				String surname;
-				String phoneNumber;
+				String AFM;
 				boolean valid;
 				do {
 					valid = true;
@@ -356,22 +355,23 @@ public class BankSystem {
 						valid = false;
 					}
 				} while (!valid); //loop until valid password is provided
-
-				System.out.println("Type email: ");
-				//email validation
+				
+				System.out.println("Type business AFM: ");
 				do {
 					valid = true;
-					email = frontend.Main.scanner.nextLine();
-					if (email.isEmpty()) {
-						System.out.println("Email cannot be empty.");
+					AFM= frontend.Main.scanner.nextLine();
+					if (AFM.isEmpty()) {
+						System.out.println("AFM cannot be empty.");
 						valid = false;
 						continue;
 					}
-					if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-						System.out.println("Invalid email format. Please try again.");
+					if(!AFM.matches("^[0-9]{9}$")) {
+						System.out.println("Invalid AFM format. Please try again.");
 						valid = false;
 					}
-				} while (!valid); //loop until valid email is provided
+					
+				}while(!valid);
+
 
 				System.out.println("Type name: ");
 				do {
@@ -403,31 +403,15 @@ public class BankSystem {
 					}
 				} while (!valid); //loop until valid surname is provided
 
-
-				System.out.println("Type phone number: ");
-				do {
-					valid = true;
-					phoneNumber = frontend.Main.scanner.nextLine();
-					if (phoneNumber.isEmpty()) {
-						System.out.println("Phone number cannot be empty.");
-						valid = false;
-						continue;
-					}
-					if (!phoneNumber.matches("^[0-9]{10}$")) {
-						System.out.println("Invalid phone number format. Please try again.");
-						valid = false;
-					}
-				} while (!valid); //loop until valid phone number is provided
 				//customers are created with the main branch, if we want to create customers with different branches we need to change this
 				String userID = generateId(UserType.CUSTOMER); //2 for customer
 				UserBuilder userBuilder = new UserBuilder();
 			try {
 				userBuilder.withUsername(username)
 						   .withPassword(PasswordHasher.hash(password))
-						   .withEmail(email)
 						   .withName(name)
 						   .withSurname(surname)
-						   .withPhoneNumber(phoneNumber)
+						   .withAFM(AFM)
 						   .withBranch(Branch.getDefaultBranch());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -440,10 +424,9 @@ public class BankSystem {
 			case 2:
 				String businessUsername;
 				String businessPassword;
-				String businessEmail;
 				String businessName;
 				String repname;
-				String businessPhoneNumber;
+				String businessAFM;
 
 				System.out.println("Type Username: ");
 				boolean businessValid;
@@ -502,20 +485,22 @@ public class BankSystem {
 						businessValid = false;
 					}
 				} while (!businessValid); //loop until valid password is provided
-				System.out.println("Type business email: ");
+				System.out.println("Type business AFM: ");
 				do {
 					businessValid = true;
-					businessEmail = frontend.Main.scanner.nextLine();
-					if (businessEmail.isEmpty()) {
-						System.out.println("Email cannot be empty.");
+					businessAFM= frontend.Main.scanner.nextLine();
+					if (businessAFM.isEmpty()) {
+						System.out.println("AFM cannot be empty.");
 						businessValid = false;
 						continue;
 					}
-					if (!businessEmail.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-						System.out.println("Invalid email format. Please try again.");
+					if(!businessAFM.matches("^[0-9]{9}$")) {
+						System.out.println("Invalid AFM format. Please try again.");
 						businessValid = false;
 					}
-				} while (!businessValid); //loop until valid email is provided
+					
+				}while(!businessValid);
+				
 				System.out.println("Type business name: ");
 				do {
 					businessValid = true;
@@ -544,30 +529,15 @@ public class BankSystem {
 						businessValid = false;
 					}
 				} while (!businessValid); //loop until valid representative name is provided
-				System.out.println("Type business phone number: ");
-				do {
-					businessValid = true;
-					businessPhoneNumber = frontend.Main.scanner.nextLine();
-					if (businessPhoneNumber.isEmpty()) {
-						System.out.println("Phone number cannot be empty.");
-						businessValid = false;
-						continue;
-					}
-					if (!businessPhoneNumber.matches("^[0-9]{10}$")) {
-						System.out.println("Invalid phone number format. Please try again.");
-						businessValid = false;
-					}
-				} while (!businessValid); //loop until valid phone number is provided
 				//business customers are created with the main branch, if we want to create business customers with different branches we need to change this
 				String businessUserID = generateId(UserType.BUSINESSCUSTOMER); //businessCustomer for businessCustomer (different from simple customer)
 				UserBuilder businessUserBuilder = new UserBuilder();
 			try {
 				businessUserBuilder.withUsername(businessUsername)
 								   .withPassword(PasswordHasher.hash(businessPassword))
-								   .withEmail(businessEmail)
+								   .withAFM(businessAFM)
 								   .withName(businessName)
 								   .withSurname(repname)
-								   .withPhoneNumber(businessPhoneNumber)
 								   .withBranch(Branch.getDefaultBranch());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -625,17 +595,6 @@ public class BankSystem {
 	    }
 	}
 
-	// Helper method: finds user across all maps
-	private User findUserByUsername(String username) {
-	    for (Map<String, ? extends User> map : userMaps.values()) {
-	        for (User u : map.values()) {
-	            if (u.getUsername().equals(username)) {
-	                return u;
-	            }
-	        }
-	    }
-	    return null;
-	}
 	public String generateId(UserType type) {  //Genrates unique ID for each user ids are in order
 	    String prefix;
 	    if (type == UserType.ADMIN) {
@@ -749,7 +708,7 @@ public class BankSystem {
 			allAccounts.addAll(customer.getAccounts());
 		}
 		return List.copyOf(allAccounts);
-	}
+	}  
 
 	//method to get transaction history of Customer(used by auditor)
 	//sosssssssssssssss gia business customer na gyrnaei ta transaction tou business account
@@ -784,6 +743,9 @@ public class BankSystem {
 	}
 	
 	//na ftiaxtei methodos gia plhromes klp
+	
+	public User findUserByUsername(String username) {
+	    return usersByUsername.get(username);}
 	
 	
 }
