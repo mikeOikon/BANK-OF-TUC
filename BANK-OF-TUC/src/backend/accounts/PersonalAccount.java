@@ -13,4 +13,5 @@ public abstract class PersonalAccount extends Account {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 }

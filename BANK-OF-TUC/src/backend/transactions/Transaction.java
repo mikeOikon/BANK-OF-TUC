@@ -2,6 +2,8 @@ package backend.transactions;
 
 import java.time.LocalDateTime;
 
+import types.TransactionType;
+
 public abstract class Transaction {
 
     protected TransactionType type;

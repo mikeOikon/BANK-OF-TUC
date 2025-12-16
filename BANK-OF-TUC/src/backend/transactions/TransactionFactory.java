@@ -1,6 +1,7 @@
 package backend.transactions;
 
 import backend.accounts.Account;
+import types.TransactionType;
 
 // Factory class for creating different types of transactions
 public class TransactionFactory {

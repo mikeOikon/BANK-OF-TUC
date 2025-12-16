@@ -1,4 +1,4 @@
-package backend.transactions;
+package types;
 
 // Enum representing different types of transactions
 public enum TransactionType {

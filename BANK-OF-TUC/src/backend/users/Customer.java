@@ -12,6 +12,7 @@ import java.util.Stack;
 import backend.BankSystem;
 import backend.Branch;
 import backend.accounts.Account;
+import backend.accounts.AccountBuilder;
 import backend.accounts.AccountFactory;
 import backend.accounts.FixedTermAccount;
 import backend.accounts.PersonalAccount;
@@ -74,7 +75,12 @@ public class Customer extends User {
 	    }
 
 	    // Χρήση AccountFactory για δημιουργία λογαριασμού
-	    Account newAccount = AccountFactory.createAccount(type, this.userID, 0.0, Branch.getDefaultBranch());
+	    AccountBuilder AccountBuilder = new AccountBuilder()
+	            .withUserID(this.userID)
+	            .withBalance(0.0)
+	            .withTransactions(new Stack<Transaction>())
+	            .withBranch(this.branch);
+	    Account newAccount = AccountFactory.createAccount(type, AccountBuilder);
 	    accounts.add(newAccount);
 	    viewAccountDetails(newAccount);
 	}

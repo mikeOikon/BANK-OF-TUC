@@ -1,6 +1,7 @@
 package backend.transactions;
 
 import backend.accounts.Account;
+import types.TransactionType;
 
 public class WithdrawTransaction extends Transaction {
 

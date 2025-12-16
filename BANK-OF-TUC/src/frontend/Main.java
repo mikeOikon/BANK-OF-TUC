@@ -4,10 +4,10 @@ import java.util.Scanner;
 import backend.BankSystem;
 import backend.users.Customer;
 import backend.users.User;
+import types.TransactionType;
 import backend.accounts.Account;
 import backend.transactions.Transaction;
 import backend.transactions.TransactionFactory;
-import backend.transactions.TransactionType;
 
 //MONO AEK 21
 public class Main {

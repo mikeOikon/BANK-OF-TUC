@@ -8,6 +8,7 @@ import backend.transactions.validation.BalanceValidationStrategy;
 import backend.transactions.validation.IbanValidationStrategy;
 import backend.transactions.validation.TransactionValidationStrategy;
 import services.Command;
+import types.TransactionType;
 
 /**
  * TransactionService
@@ -139,6 +140,12 @@ public class TransactionService implements TransactionAPI {
             // Save using DAO
             persist(transaction);
         }
+
+		@Override
+		public void undo() {
+			// TODO Auto-generated method stub
+			
+		}
     }
 
     private class WithdrawCommand extends BaseTransactionCommand {
@@ -165,6 +172,12 @@ public class TransactionService implements TransactionAPI {
             source.getTransactions().push(transaction);
             persist(transaction);
         }
+
+		@Override
+		public void undo() {
+			// TODO Auto-generated method stub
+			
+		}
     }
 
     private class TransferCommand extends BaseTransactionCommand {
@@ -192,6 +205,12 @@ public class TransactionService implements TransactionAPI {
 
             persist(transaction);
         }
+
+		@Override
+		public void undo() {
+			// TODO Auto-generated method stub
+			
+		}
     }
 
 }

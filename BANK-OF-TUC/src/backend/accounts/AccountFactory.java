@@ -1,28 +1,47 @@
 package backend.accounts;
 
-import java.util.Stack;
-
-import backend.Branch;
-import backend.transactions.Transaction;
 import types.AccountType;
 
 public class AccountFactory {
 
-	public static Account createAccount(
-	        AccountType type,
-	        String userID,
-	        double balance,
-	        Branch branch
-	) {
-	    Stack<Transaction> tx = new Stack<>();
+    public static Account createAccount(AccountType type, AccountBuilder builder) {
 
-	    return switch (type) {
-	        case TRANSACTIONAL -> new TransactionalAccount(userID, balance, tx, branch);
-	        case SAVINGS -> new SavingsAccount(userID, balance, tx, branch);
-	        case FIXED -> new FixedTermAccount(userID, balance, tx, branch);
-	        case BUSINESS -> new BusinessAccount(userID, balance, tx, branch);
-	    };
-	}
+        switch (type) {
 
-	
+            case TRANSACTIONAL:
+                return new TransactionalAccount(
+                        builder.getUserID(),
+                        builder.getBalance(),
+                        builder.getTransactions(),
+                        builder.getBranch()
+                );
+
+            case SAVINGS:
+                return new SavingsAccount(
+                        builder.getUserID(),
+                        builder.getBalance(),
+                        builder.getTransactions(),
+                        builder.getBranch()
+                );
+
+            case FIXED:
+                return new FixedTermAccount(
+                        builder.getUserID(),
+                        builder.getBalance(),
+                        builder.getTransactions(),
+                        builder.getBranch(), 0, 0
+                );
+
+            case BUSINESS:
+                return new BusinessAccount(
+                        builder.getUserID(),
+                        builder.getBalance(),
+                        builder.getTransactions(),
+                        builder.getBranch()
+                );
+
+            default:
+                throw new IllegalArgumentException("Invalid account type: " + type);
+        }
+    }
 }

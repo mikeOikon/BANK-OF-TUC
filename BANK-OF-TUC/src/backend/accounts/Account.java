@@ -6,7 +6,11 @@ import java.util.Set;
 import java.util.Stack;
 
 import backend.Branch;
+import backend.transactions.DepositTransaction;
 import backend.transactions.Transaction;
+import backend.transactions.TransferTransaction;
+import backend.transactions.WithdrawTransaction;
+import types.AccountType;
 
 public abstract class Account {
 
@@ -51,7 +55,6 @@ public abstract class Account {
 		return balance;
 	}
 
-	//ισως δεν πρεπει να ειναι public
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
@@ -69,6 +72,52 @@ public abstract class Account {
 	protected void setAccount_id(long account_id) {
 		this.account_id = account_id;
 	}
+	
+	public void deposit(double amount) {
+	    if (amount <= 0)
+	        throw new IllegalArgumentException("Deposit amount must be positive.");
+
+	    this.balance += amount;
+
+	    Transaction tx = new DepositTransaction(this, amount);
+	    transactions.push(tx);
+	}
+
+	public void withdraw(double amount) {
+	    if (amount <= 0)
+	        throw new IllegalArgumentException("Withdraw amount must be positive.");
+
+	    if (this.balance < amount)
+	        throw new IllegalArgumentException("Insufficient funds.");
+
+	    this.balance -= amount;
+
+	    Transaction tx = new WithdrawTransaction(this, amount);
+	    transactions.push(tx);
+	}
+
+	public void transferTo(Account target, double amount) {
+	    if (target == null)
+	        throw new IllegalArgumentException("Target account cannot be null.");
+
+	    if (amount <= 0)
+	        throw new IllegalArgumentException("Amount must be positive.");
+
+	    if (this.balance < amount)
+	        throw new IllegalArgumentException("Insufficient funds.");
+
+	    // Update balances
+	    this.balance -= amount;
+	    target.balance += amount;
+
+	    // Create transfer transaction
+	    Transaction tx = new TransferTransaction(this, target, amount);
+
+	    // Add to both accounts' histories
+	    this.transactions.push(tx);
+	    target.transactions.push(tx);
+	}
+
 	
 // Μετατροπή χαρακτήρων σε ψηφία σύμφωνα με τον κανόνα IBAN (A=10 ... Z=35) ΓΙΑ ΝΑ ΜΠΟΡΕΙ ΝΑ ΑΛΛΑΖΕΙ ΑΝΑΛΟΓΩΣ ΤΗΝ ΤΡΑΠΕΖΑ
 	 private static String lettersToDigits(String input) {
@@ -92,17 +141,14 @@ public abstract class Account {
 
 	        do {
 	            // Τυχαίος αριθμός λογαριασμού 16 ψηφίων
-	            long accNum = Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L;  // 16 ψηφία maska
+	            long accNum = Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L;  // 16 ψηφία mask
 	            accountNumber = String.format("%016d", accNum);  // συμπλήρωση με μηδενικά αριστερά
 
 	            bban = branch.getBankCode() + branch.getBranchCode() + accountNumber;
 	        } while (usedAccounts.contains(bban)); // έλεγχος μοναδικότητας
 
-	        //sos den jerv an prepei na kratame to bban h mono to iban
 	        usedAccounts.add(bban); // κρατάμε το BBAN για να μην ξαναχρησιμοποιηθεί
 
-	        //System.out.println("Δημιουργήθηκε νέο BBAN: " + bban);
-	        
 	        return bban;
 	    }
 	    
@@ -156,6 +202,11 @@ public abstract class Account {
 	            (branch != null ? branch.getBranchCode() : "N/A")
 	        );
 	    }
+
+		public AccountType getAccountType() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	    
 	}
 

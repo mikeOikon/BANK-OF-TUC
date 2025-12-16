@@ -1,6 +1,7 @@
 package backend.transactions;
 
 import backend.accounts.Account;
+import types.TransactionType;
 
 public class TransactionBuilder {
 
@@ -9,9 +10,6 @@ public class TransactionBuilder {
     private Account to;
     private double amount;
 
-    // ------------------------------
-    //        Fluent Setters
-    // ------------------------------
 
     public TransactionBuilder setType(TransactionType type) {
         this.type = type;
@@ -32,10 +30,6 @@ public class TransactionBuilder {
         this.amount = amount;
         return this;
     }
-
-    // ------------------------------
-    //         BUILD METHOD
-    // ------------------------------
 
     public Transaction build() {
 

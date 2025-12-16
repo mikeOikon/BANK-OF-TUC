@@ -9,9 +9,12 @@ import java.util.Stack;
 
 import backend.Branch;
 import backend.accounts.Account;
+import backend.accounts.AccountBuilder;
+import backend.accounts.AccountFactory;
 import backend.accounts.BusinessAccount;
 import backend.transactions.Transaction;
 import behaviors.BusinessBehavior;
+import types.AccountType;
 import types.UserType;
 
 public class ΒusinessCustomer extends User{
@@ -29,8 +32,14 @@ public class ΒusinessCustomer extends User{
 	public UserType getUserType() {
 		return UserType.BUSINESSCUSTOMER;
 	}
+	
 	protected void createAccount() {
-    	Account newBusinessAccount = new BusinessAccount(this.userID, 0.0, new Stack<Transaction>(), branch);    	
+		AccountBuilder AccountBuilder = new AccountBuilder()
+	            .withUserID(this.userID)
+	            .withBalance(0.0)
+	            .withTransactions(new Stack<Transaction>())
+	            .withBranch(this.branch);
+    	Account newBusinessAccount = AccountFactory.createAccount(AccountType.BUSINESS, AccountBuilder);    	
     	accounts.add(newBusinessAccount);
     	viewAccountDetails(newBusinessAccount);
 	}

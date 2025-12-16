@@ -1,6 +1,7 @@
 package backend.transactions;
 
 import backend.accounts.Account;
+import types.TransactionType;
 
 public class TransferTransaction extends Transaction {
 
