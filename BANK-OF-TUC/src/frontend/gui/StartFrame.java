@@ -98,16 +98,9 @@ public class StartFrame extends JFrame {
     //---------------------------------------------------------
     private void handleLogin() {
         String username = usernameField.getText().trim();
-        String password = new String(passwordField.getPassword());
-        
-        try {
-			password = PasswordHasher.hash(password);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        if (username.isEmpty() || password.isEmpty()) {
+        String rawPassword = new String(passwordField.getPassword());
+
+        if (username.isEmpty() || rawPassword.isEmpty()) {
             JOptionPane.showMessageDialog(
                     this,
                     "Παρακαλώ συμπληρώστε όλα τα πεδία.",
@@ -120,7 +113,7 @@ public class StartFrame extends JFrame {
         BankSystem bank = BankSystem.getInstance();
         User user = bank.findUserByUsername(username);
 
-        if (user == null || !user.login(username, password)) {
+        if (user == null || !user.login(username, rawPassword)) {
             JOptionPane.showMessageDialog(
                     this,
                     "Λάθος όνομα χρήστη ή κωδικός.",

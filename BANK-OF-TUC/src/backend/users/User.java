@@ -3,6 +3,7 @@ package backend.users;
 import java.util.ArrayList;
 
 import backend.Branch;
+import backend.PasswordHasher;
 import backend.accounts.Account;
 import behaviors.UserBehavior;
 import types.UserType;
@@ -141,7 +142,7 @@ public abstract class User {
 	
 	
 	
-	protected String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -164,7 +165,7 @@ public abstract class User {
 	protected void setSurname(String surname) {
 		this.surname = surname;
 	}
-	protected String getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
@@ -178,9 +179,14 @@ public abstract class User {
 		this.password = password;
 	}
 
-	public boolean login(String userID, String password) {
+	public boolean login(String username, String password) {
 		//maybe use a quick pin?
-		return this.username.equals(username) && this.password.equals(password);
+		try {
+			return this.username.equals(username) && this.password.equals(PasswordHasher.hash(password));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
 	}
 	
 	protected void logout() {

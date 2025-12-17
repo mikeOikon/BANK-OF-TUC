@@ -6,6 +6,7 @@ import frontend.gui.tabs.AllTransactionsTab;
 import frontend.gui.tabs.CustomerOverviewTab;
 import frontend.gui.tabs.MyAccountsTab;
 import frontend.gui.tabs.MyTransactionsTab;
+import frontend.gui.tabs.ProfileTab;
 import frontend.gui.tabs.TransferTab;
 import frontend.gui.tabs.UserManagementTab;
 
@@ -37,12 +38,12 @@ public class DashboardFrame extends JFrame {
 
     private void buildTabs() {
 
+        // PROFILE (ALL USERS)
+        tabs.addTab("Profile", new ProfileTab(user));
+
         // CUSTOMER START PAGE
         if (user.canViewAccounts()) {
             tabs.addTab("Overview", new CustomerOverviewTab());
-        }
-
-        if (user.canViewAccounts()) {
             tabs.addTab("My Accounts", new MyAccountsTab());
         }
 
@@ -66,5 +67,9 @@ public class DashboardFrame extends JFrame {
         if (user.canPromoteUser() || user.canDemoteUser() || user.canRemoveUsers()) {
             tabs.addTab("User Management", new UserManagementTab());
         }
+
+        // SETTINGS (ALL USERS)
+        tabs.addTab("Settings", new SettingsTab());
     }
+
 }
