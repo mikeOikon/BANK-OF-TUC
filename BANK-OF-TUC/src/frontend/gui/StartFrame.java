@@ -99,7 +99,14 @@ public class StartFrame extends JFrame {
     private void handleLogin() {
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword());
-
+        
+        try {
+			password = PasswordHasher.hash(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         if (username.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(
                     this,
