@@ -22,7 +22,7 @@ public class ΒusinessCustomer extends User{
 	private ArrayList<Account> accounts;
 	
 	public ΒusinessCustomer(String userID,String username, String password, Branch branch, String businessName, String representativeName, String AFM) {
-		super(userID, username, password, businessName, representativeName, branch,AFM);
+		super(userID, username, password, businessName, representativeName, branch, AFM);
 		this.accounts = new ArrayList<>();
 		this.userBehavior= new BusinessBehavior();
 	}

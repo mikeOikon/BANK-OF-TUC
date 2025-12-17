@@ -19,34 +19,20 @@ public abstract class User {
 	protected Branch branch;	//link user to branch
 	protected transient UserBehavior userBehavior; // Bridge  pattern for user-specific behaviors
 	protected String AFM;
-	private ArrayList<Account> accounts;
-	
-	
-	
 
-
-
-
-
-	public User(String userID, String username, String password, String name, String surname, Branch branch,String AFM) {
+	public User(String userID, String username, String password, String name, String surname, Branch branch, String AFM) {
 		this.userID = userID;
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.surname = surname;
 		this.AFM=AFM;
-		this.branch = branch;
-		
+		this.branch = branch;	
 	}
-	
-	
-	
 	
 	public String getAFM() {
 		return AFM;
 	}
-
-	
 	
 	public ArrayList<Account> getAccounts() {
 		return null;
