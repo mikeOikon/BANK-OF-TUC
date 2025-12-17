@@ -181,7 +181,7 @@ public class BankSystemCLI {
                 } else if (selected == viewAllTransactionsOption) {
                     System.out.print("Enter customer ID: ");
                     String customerId = scanner.nextLine();
-                    bankSystem.viewTransactionsByCustomer(customerId);
+                   // bankSystem.viewTransactionsByCustomer(customerId);
                     
                 } else if (selected == createAuditorOption) {
                     System.out.println("Feature not implemented yet.");

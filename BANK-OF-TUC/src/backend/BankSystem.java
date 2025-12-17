@@ -108,14 +108,7 @@ public class BankSystem {
 		
 		AccountFactory accountFactory = new AccountFactory();
 	}
-		
-	public void getAllCustomers() {
-		for(User user : this.customers.values()) {
-			Customer customer = (Customer) user;
-			System.out.println("Customer ID: " + customer.getUserID() + ", Name: " + customer.getName() + " " + customer.getSurname());
-		}
-	}
-	
+
 	public void saveAllData() {
 		if (this.gson == null) {
 			this.gson = GsonConfig.build();
@@ -282,9 +275,18 @@ public class BankSystem {
 		System.out.println("Invalid user ID prefix: " + prefix);
 	}
 		}
-
-
 	
+	
+	public User createUser(UserType type, UserBuilder builder) {
+		String userID = generateId(type);
+		User newUser = UserFactory.createUser(type,userID,builder);//create user
+		Command create= new CreateUserCommand(newUser);				
+		userManager.execute(create);
+		return newUser;
+	}
+
+
+	/*
 	public User createUserCLI() {
 		System.out.println("Select user type to create: Type 1 for Personal Customer, Type 2 for Business Customer");
 		int choice = frontend.Main.scanner.nextInt();
@@ -551,9 +553,9 @@ public class BankSystem {
 				System.out.println("Invalid choice. Please select 1 or 2.");
 				return null;
 		}
-	}
+	}*/
 	
-	public User loginCLI() {
+	/*public User loginCLI() {
 	    Scanner scanner = frontend.Main.scanner;
 	    int attempts = 0;
 
@@ -593,7 +595,7 @@ public class BankSystem {
 	            }
 	        }
 	    }
-	}
+	}*/
 
 	public String generateId(UserType type) {  //Genrates unique ID for each user ids are in order
 	    String prefix;
@@ -629,7 +631,7 @@ public class BankSystem {
 		return null; // Account not found
 	}
 	
-	public void transferMoney(Customer customer) {
+	/*public void transferMoney(Customer customer) {
 
 	    System.out.println("Type the account number you want to transfer from: ");
 	    String fromAccountNumber = frontend.Main.scanner.nextLine();
@@ -697,7 +699,7 @@ public class BankSystem {
 	    toAccount.getTransactions().add(transferTx);
 
 	    System.out.println("Transfer successful. New balance of source account: " + fromAccount.getBalance());
-	}
+	}*/
 
 
 	//mathod to get all accounts in the bank system (used by auditor) 
@@ -712,7 +714,7 @@ public class BankSystem {
 
 	//method to get transaction history of Customer(used by auditor)
 	//sosssssssssssssss gia business customer na gyrnaei ta transaction tou business account
-	public void viewTransactionsByCustomer(String customerID) {
+	/*public void viewTransactionsByCustomer(String customerID) {
 		User user = customers.get(customerID); //check if personal customer
 		if (user == null) { 
 			user = businessCustomers.get(customerID);	//check if business customer
@@ -740,7 +742,7 @@ public class BankSystem {
 		    System.out.println(t);
 		}
 		
-	}
+	}*/
 	
 	//na ftiaxtei methodos gia plhromes klp
 	

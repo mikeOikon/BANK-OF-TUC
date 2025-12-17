@@ -17,19 +17,19 @@ public class CustomerBehavior implements UserBehavior {
 	@Override
 	public boolean canViewAccounts() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canTransferMoney() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canViewTransactionsHistory() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

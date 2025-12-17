@@ -17,7 +17,7 @@ public class AdminBehavior implements UserBehavior {
 	@Override
 	public boolean canViewAccounts() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
@@ -29,31 +29,31 @@ public class AdminBehavior implements UserBehavior {
 	@Override
 	public boolean canViewTransactionsHistory() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean canViewAllTransactionsHistory() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canCreateAuditor() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canPromoteUser() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canDemoteUser() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
