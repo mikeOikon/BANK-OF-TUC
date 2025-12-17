@@ -31,13 +31,13 @@ public class Customer extends User {
 	}
 	
 	//na doume ti prepei na einai protected
-	
+	@Override
 	public ArrayList<Account> getAccounts() {
-		if (accounts.isEmpty()) {
-			System.out.println("No accounts found for customer " + this.userID);
+		if (this.accounts.isEmpty()) {
+			//System.out.println("No accounts found for customer " + this.userID);
 			return null;
 		} else {
-			return accounts;
+			return this.accounts;
 		}
 	}
 	
@@ -46,12 +46,12 @@ public class Customer extends User {
 	}
 
 	
-	public void createAccountMenu() {
+	/*public void createAccountMenu() {
 		System.out.println("What type of account do you want to create? Type 1 for Transactional, Type 2 for Savings, Type 3 for Fixed-Term");
 		int choice = frontend.Main.scanner.nextInt();
 		frontend.Main.scanner.nextLine(); // Consume newline
 		createAccount(choice);
-	}
+	}*/
 	
 	protected void createAccount(int choice) {
 	    AccountType type;
@@ -92,7 +92,7 @@ public class Customer extends User {
 		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());
 	}
 
-	protected void viewAccountBalance() {
+	/*protected void viewAccountBalance() {
 		System.out.println("Type the acount iBAN you want to check the balance");
 		String accountNumber = frontend.Main.scanner.nextLine();	
 		Account account = findAccountByNumber(accountNumber);
@@ -101,7 +101,7 @@ public class Customer extends User {
 		} else {
 		    System.out.println("Account with iBAN " + accountNumber + " not found.");
 		}	
-	}
+	}*/
 	
 	protected void viewAccountDetails(Account acc) {
 		if (acc != null) {
@@ -156,7 +156,7 @@ public class Customer extends User {
 		
 	}
 	
-	protected void updatePersonalInformation() {
+	/*protected void updatePersonalInformation() {
 		//if password is correct then let user update email, name, surname, phone number, and maybe password
 		System.out.println("To update your personal information, please enter your current password:");
 		String currentPassword = frontend.Main.scanner.nextLine();
@@ -204,7 +204,7 @@ public class Customer extends User {
 		} else {
 		    System.out.println("Incorrect password. Personal information not updated.");
 		}
-	}
+	}*/
 	
 	private void viewPersonalInformation() {
 		System.out.println("Username: " + this.username);

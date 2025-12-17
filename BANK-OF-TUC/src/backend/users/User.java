@@ -1,6 +1,9 @@
 package backend.users;
 
+import java.util.ArrayList;
+
 import backend.Branch;
+import backend.accounts.Account;
 import behaviors.UserBehavior;
 import types.UserType;
 
@@ -16,9 +19,15 @@ public abstract class User {
 	protected Branch branch;	//link user to branch
 	protected transient UserBehavior userBehavior; // Bridge  pattern for user-specific behaviors
 	protected String AFM;
+	private ArrayList<Account> accounts;
 	
 	
 	
+
+
+
+
+
 	public User(String userID, String username, String password, String name, String surname, Branch branch,String AFM) {
 		this.userID = userID;
 		this.username = username;
@@ -37,6 +46,11 @@ public abstract class User {
 		return AFM;
 	}
 
+	
+	
+	public ArrayList<Account> getAccounts() {
+		return null;
+	}
 
 
 
@@ -200,7 +214,7 @@ public abstract class User {
 		// Implement delete account functionality
 	}
     
-	protected void login() {
+	/*protected void login() {
 		//angel 
 		int tries = 0;
 		while(true) {
@@ -228,6 +242,6 @@ public abstract class User {
 				}
 			}		
 		}
-	}
+	}*/
 	
 }

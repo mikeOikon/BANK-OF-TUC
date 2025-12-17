@@ -138,7 +138,14 @@ public class RegisterFrame extends JFrame {
 			}
             String name = nameField.getText().trim();
             String surname = surnameField.getText().trim();
+           
             String afm = afmField.getText().trim();
+			try {
+				afm = PasswordHasher.hash(afm);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
             if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()
                     || name.isEmpty() || surname.isEmpty() || afm.isEmpty()) {
@@ -151,7 +158,7 @@ public class RegisterFrame extends JFrame {
             }
 
             UserType userType = (userTypeBox.getSelectedIndex() == 0) ? UserType.CUSTOMER : UserType.BUSINESSCUSTOMER;
-
+            
             UserBuilder builder = new UserBuilder()
                     .withUsername(username)
                     .withPassword(password)

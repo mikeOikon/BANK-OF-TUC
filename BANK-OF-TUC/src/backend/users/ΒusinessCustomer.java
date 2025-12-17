@@ -29,11 +29,21 @@ public class ΒusinessCustomer extends User{
 	//na doume ti prepei na einai protected 
 	
 	
+	@Override
+	public ArrayList<Account> getAccounts() {
+		if (this.accounts.isEmpty()) {
+			//System.out.println("No accounts found for customer " + this.userID);
+			return null;
+		} else {
+			return this.accounts;
+		}
+	}
+	
 	public UserType getUserType() {
 		return UserType.BUSINESSCUSTOMER;
 	}
 	
-	protected void createAccount() {
+	/*protected void createAccount() {
 		AccountBuilder AccountBuilder = new AccountBuilder()
 	            .withUserID(this.userID)
 	            .withBalance(0.0)
@@ -42,14 +52,14 @@ public class ΒusinessCustomer extends User{
     	Account newBusinessAccount = AccountFactory.createAccount(AccountType.BUSINESS, AccountBuilder);    	
     	accounts.add(newBusinessAccount);
     	viewAccountDetails(newBusinessAccount);
-	}
+	}*/
 	
 	protected void askToCloseAccount() {
 		//
 	}
 	
 
-	protected void viewAccountBalance() {	//ιδια ακριβως με customer
+	/*protected void viewAccountBalance() {	//ιδια ακριβως με customer
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Type the acount iBAN you want to check the balance");
 		String accountNumber = scanner.nextLine();	
@@ -68,9 +78,9 @@ public class ΒusinessCustomer extends User{
 		} else {
 		    System.out.println("Account not found.");
 		}
-	}
+	}*/
 	
-	protected void viewAccountsDetails() {
+	/*protected void viewAccountsDetails() {
 		//na grafei apo pote einai melos o customer
 		
 		System.out.println("Username: " + this.username);
@@ -82,7 +92,7 @@ public class ΒusinessCustomer extends User{
 			viewAccountDetails(acc);
 		}	
 
-	}
+	}*/
 	
 	protected void transferMoney() {
 		//να πηγαινει μηνυμα στην τράπεζα για να γίνει η μεταφορά 
@@ -125,7 +135,7 @@ public class ΒusinessCustomer extends User{
 		//αν θελουμε να ειναι με βαση τον χρονο μονο (δηλαδη ολοι οι λογαριασμοι να εμφανιζονται και να λεει ποιος λογαριασμος εγινε η συναλαγη) θα πρεπει να φτιαξουμε μια stack με ολες τις συναλαγες σε ολους τους λογαριασμους στον user και να μην καλουμε ξεχωριστες stack για καθε λογαριασμο 
 	}
 	
-	protected void updatePersonalInformation() {
+	/*protected void updatePersonalInformation() {
 		System.out.println("To update your business information, please enter your current password:");
 		String currentPassword = frontend.Main.scanner.nextLine();
 		if (currentPassword.equals(this.password)) {
@@ -164,7 +174,7 @@ public class ΒusinessCustomer extends User{
 		System.out.println("Personal information updated.");
 		viewBusinessInformation();	//show updated information
 	}
-
+*/
 	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN (ιδιο με customer)
 	    for (Account acc : accounts) {
 	        if (acc.getIBAN().equals(accountNumber)) {
@@ -174,14 +184,14 @@ public class ΒusinessCustomer extends User{
 	    return null; // αν δεν βρεθεί
 	}
 	
-	protected void accountBalance(Account account) { //ιδιο ακριβως με customer
+	/*protected void accountBalance(Account account) { //ιδιο ακριβως με customer
 		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());
-	}
+	}*/
 	
-	private void viewBusinessInformation() {
+	/*private void viewBusinessInformation() {
 		System.out.println("Business Name: " + this.name);
 		System.out.println("Representative Name: " + this.surname);
 		System.out.println("Email: " + this.email);
 		System.out.println("Phone Number: " + this.phoneNumber);
-	}
+	}*/
 }

@@ -22,25 +22,25 @@ public class Auditor extends User {
 	}
 
 	//Προβολή όλων των πελατών
-    public void viewAllCustomers(BankSystem bank) {
+    /*public void viewAllCustomers(BankSystem bank) {
         System.out.println("=== All Customers ===");
         bank.getAllCustomers();
-    }
+    }*/
 
     //Προβολή όλων των λογαριασμών στη βάση
-    public void viewAllAccounts(BankSystem bank) {
+    /*public void viewAllAccounts(BankSystem bank) {
         System.out.println("=== All Accounts in the System ===");
         List<Account> allAccounts = bank.getAllAccounts();
         for (Account acc : allAccounts) {
             System.out.println(acc.toString());	//get information of all accounts
         }
-    }
+    }*/
 
     //Προβολή ιστορικού συναλλαγών συγκεκριμένου πελάτη
-    public void viewTransactionsOfCustomer(BankSystem bank, String customerID) {
+    /*public void viewTransactionsOfCustomer(BankSystem bank, String customerID) {
         System.out.println("=== Transaction history for customer " + customerID + " ===");
         bank.viewTransactionsByCustomer(customerID);
-    }
+    }*/
 
     /*
     //Προβολή συνολικού balance όλων των πελατών
