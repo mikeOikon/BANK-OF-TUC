@@ -12,8 +12,8 @@ import types.AccountType;
 public class FixedTermAccount extends PersonalAccount {
 
     private int termMonths;          // διάρκεια προθεσμίας
-    private LocalDate startDate;     // ημερομηνία δημιουργίας
-    private LocalDate maturityDate;  // ημερομηνία λήξης
+    private transient LocalDate startDate;     // ημερομηνία δημιουργίας
+    private transient LocalDate maturityDate;  // ημερομηνία λήξης
 
     public FixedTermAccount(
             String IBAN,

@@ -1,27 +1,12 @@
 {
-  "businessCustomers": {
-    "BUS002": {
-      "accounts": [],
-      "username": "mikeBusiness",
-      "userID": "BUS002",
-      "password": "fac0a29156bc68dd093906fdba25e6ed4b428d8ac5613f50a40155218e3a68b3",
-      "email": "business@gmail.com",
-      "phoneNumber": "2121212121",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      }
-    }
-  },
+  "businessCustomers": {},
   "admins": {
     "ADM001": {
       "username": "admin",
       "userID": "ADM001",
       "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-      "email": "admin@bank.com",
       "name": "System",
-      "surname": "Admin",
-      "phoneNumber": "0000000000",
+      "surname": "0000000000",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -31,17 +16,29 @@
   "customers": {
     "CUS001": {
       "accounts": [],
-      "username": "mike",
+      "username": "angelodiak",
       "userID": "CUS001",
-      "password": "57120f18838fa994fcdd944bb6f5173ec3cf5383d292405e57d8f44087345934",
-      "email": "mikeaek21@gmail.com",
-      "name": "mike",
-      "surname": "oikon",
-      "phoneNumber": "6949908000",
+      "password": "Diakoumis",
+      "name": "Angelos",
+      "surname": "Diakoumis",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
-      }
+      },
+      "AFM": "123456789"
+    },
+    "CUS002": {
+      "accounts": [],
+      "username": "mike21",
+      "userID": "CUS002",
+      "password": "a043913351e3830bf1b0ecf679e0fa370c35aac7cc719e1036230a7c63b45807",
+      "name": "Mike",
+      "surname": "Oikonomou",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "123456798"
     }
   },
   "bankEmployers": {},

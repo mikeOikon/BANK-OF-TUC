@@ -129,7 +129,13 @@ public class RegisterFrame extends JFrame {
         createButton.addActionListener(e -> {
             String username = usernameField.getText().trim();
             String password = new String(passwordField.getPassword());
-            String confirm = new String(confirmField.getPassword());
+        	String confirm = new String(confirmField.getPassword());
+            try {            	
+            	confirm = PasswordHasher.hash(confirm);
+				password = PasswordHasher.hash(password);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
             String name = nameField.getText().trim();
             String surname = surnameField.getText().trim();
             String afm = afmField.getText().trim();
@@ -168,10 +174,8 @@ public class RegisterFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Το όνομα χρήστη υπάρχει ήδη!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
-            String userID = bank.generateId(userType);
-            User user = UserFactory.createUser(userType, userID, builder);
-            bank.addUser(user);
+            
+            User user = bank.createUser(userType, builder);
             bank.saveAllData(); // save to JSON immediately
 
             UserSession.getInstance().setCurrentUser(user);
