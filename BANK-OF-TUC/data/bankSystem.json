@@ -489,6 +489,18 @@
         "branchCode": "0021"
       },
       "AFM": "123456789"
+    },
+    "EMP003": {
+      "username": "mike21",
+      "userID": "EMP003",
+      "password": "a043913351e3830bf1b0ecf679e0fa370c35aac7cc719e1036230a7c63b45807",
+      "name": "Mike",
+      "surname": "Oikonomou",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "123456798"
     }
   },
   "auditors": {
@@ -515,6 +527,6 @@
   },
   "adminCount": 1,
   "customerCount": 4,
-  "employeeCount": 2,
+  "employeeCount": 3,
   "auditorCount": 2
 }
