@@ -1,81 +1,132 @@
 package frontend.gui.tabs;
 
+import backend.BankSystem;
 import backend.accounts.Account;
 import backend.users.Customer;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MyAccountsTab extends JPanel {
 
     private final Customer customer;
-    private final JList<Account> accountList; // Προσβάσιμο σε όλη την κλάση
-    private Account selectedAccount;
-    private JButton viewOverviewButton;
-    private CustomerOverviewTab overviewTab;
+    private final JList<Account> accountList;
+    private Account selectedAccount; // Αναφορά για χρήση μεταξύ μεθόδων
+    private final JButton viewOverviewButton;
+    private final JButton setPrimaryButton;
+    private final CustomerOverviewTab overviewTab;
 
     public MyAccountsTab(Customer customer, CustomerOverviewTab overviewTab) {
         this.customer = customer;
         this.overviewTab = overviewTab;
 
         setLayout(new BorderLayout(10, 10));
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Δημιουργία της λίστας
+        // --- ΛΙΣΤΑ ΛΟΓΑΡΙΑΣΜΩΝ ---
         accountList = new JList<>();
         accountList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        accountList.setFont(new Font("Monospaced", Font.PLAIN, 14));
         
-        // Αρχικό γέμισμα της λίστας
         updateListModel();
         
         add(new JScrollPane(accountList), BorderLayout.CENTER);
 
+        // Listener για την ενημέρωση της επιλογής
         accountList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 selectedAccount = accountList.getSelectedValue();
             }
         });
 
-        viewOverviewButton = new JButton("View Overview & Details");
-        viewOverviewButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-        add(viewOverviewButton, BorderLayout.SOUTH);
+        // --- PANEL ΚΟΥΜΠΙΩΝ ---
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+        
+        viewOverviewButton = new JButton("View Overview");
+        setPrimaryButton = new JButton("Set as Primary");
+        
+        buttonPanel.add(viewOverviewButton);
+        buttonPanel.add(setPrimaryButton);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-        viewOverviewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (selectedAccount == null) {
-                    JOptionPane.showMessageDialog(MyAccountsTab.this,
-                            "Please select an account from the list first.",
-                            "No Selection",
-                            JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
+        // --- ACTION LISTENERS ---
 
-                overviewTab.setSelectedAccount(selectedAccount);
-                
-                Container parent = MyAccountsTab.this.getParent();
-                if (parent instanceof JTabbedPane) {
-                    JTabbedPane parentTabs = (JTabbedPane) parent;
-                    parentTabs.setSelectedComponent(overviewTab);
-                }
+        // Listener για το Set as Primary
+        setPrimaryButton.addActionListener(e -> {
+            // Χρήση τοπικής μεταβλητής για να αποφύγουμε NPE αν η λίστα αλλάξει κατά το refresh
+            Account currentSelection = accountList.getSelectedValue();
+
+            if (currentSelection == null) {
+                JOptionPane.showMessageDialog(this, 
+                    "Please select an account first.", 
+                    "Selection Required", 
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // 1. Ενημέρωση Backend
+            customer.setPrimaryAccount(currentSelection);
+            BankSystem.getInstance().saveAllData(); 
+            
+            // 2. Αποθήκευση στοιχείων πριν το refresh του μοντέλου
+            String iban = currentSelection.getIBAN();
+            
+            // 3. Ανανέωση UI
+            updateListModel(); 
+            
+            // 4. Ενημέρωση του Overview Tab ώστε να δείξει το νέο Status αμέσως
+            overviewTab.setSelectedAccount(currentSelection);
+            
+            JOptionPane.showMessageDialog(this, 
+                "Account " + iban + " is now set as primary.", 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        // Listener για το View Overview
+        viewOverviewButton.addActionListener(e -> {
+            Account currentSelection = accountList.getSelectedValue();
+            
+            if (currentSelection == null) {
+                JOptionPane.showMessageDialog(this, "Select an account first.");
+                return;
+            }
+            
+            overviewTab.setSelectedAccount(currentSelection);
+            
+            Container parent = MyAccountsTab.this.getParent();
+            if (parent instanceof JTabbedPane) {
+                ((JTabbedPane) parent).setSelectedComponent(overviewTab);
             }
         });
     }
 
-    // Η μέθοδος refresh που καλείται από το OverviewTab
     public void refresh() {
         updateListModel();
-        revalidate();
-        repaint();
     }
 
-    // Βοηθητική μέθοδος για να ανανεώνει τα περιεχόμενα της JList
+    /**
+     * Ενημερώνει το μοντέλο της λίστας και διατηρεί την επιλογή αν είναι δυνατόν.
+     */
     private void updateListModel() {
+        // Αποθήκευση της τρέχουσας επιλογής πριν το clear
+        Account previouslySelected = accountList.getSelectedValue();
+        
         DefaultListModel<Account> model = new DefaultListModel<>();
-        for (Account acc : customer.getAccounts()) {
+        ArrayList<Account> sortedAccounts = new ArrayList<>(customer.getAccounts());
+        
+        // Ταξινόμηση: Primary λογαριασμοί στην κορυφή
+        sortedAccounts.sort((a, b) -> Boolean.compare(b.isPrimary(), a.isPrimary()));
+
+        for (Account acc : sortedAccounts) {
             model.addElement(acc);
         }
+        
         accountList.setModel(model);
+
+        // Επαναφορά της επιλογής αν ο λογαριασμός υπάρχει ακόμα στη λίστα
+        if (previouslySelected != null) {
+            accountList.setSelectedValue(previouslySelected, true);
+        }
     }
 }

@@ -196,6 +196,35 @@
             "branchCode": "0021"
           },
           "accountType": "transactional"
+        },
+        {
+          "primary": false,
+          "IBAN": "GR4102100218950986537645158",
+          "userID": "CUS002",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "savings"
+        },
+        {
+          "termMonths": 0,
+          "primary": false,
+          "IBAN": "GR1602100218310305822539128",
+          "userID": "CUS002",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 2,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "fixed"
         }
       ],
       "username": "mike21",
@@ -490,17 +519,17 @@
       },
       "AFM": "123456789"
     },
-    "EMP003": {
-      "username": "mike21",
-      "userID": "EMP003",
-      "password": "a043913351e3830bf1b0ecf679e0fa370c35aac7cc719e1036230a7c63b45807",
-      "name": "Mike",
-      "surname": "Oikonomou",
+    "EMP004": {
+      "username": "aek",
+      "userID": "EMP004",
+      "password": "3842ef4684ab13444b7157719ca97140de39c14f5a83bfb34ac52694b78784d1",
+      "name": "AEK",
+      "surname": "Original",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
       },
-      "AFM": "123456798"
+      "AFM": "6dd8036f1343a3cf322a86ac12e046bef5d678104e9c6e2b5b2910a5fdde941f"
     }
   },
   "auditors": {
@@ -526,7 +555,7 @@
     }
   },
   "adminCount": 1,
-  "customerCount": 4,
-  "employeeCount": 3,
+  "customerCount": 5,
+  "employeeCount": 4,
   "auditorCount": 2
 }

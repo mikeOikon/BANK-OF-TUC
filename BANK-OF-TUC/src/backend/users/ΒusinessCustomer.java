@@ -43,6 +43,27 @@ public class ΒusinessCustomer extends User{
 		return UserType.BUSINESSCUSTOMER;
 	}
 	
+	public Account getPrimaryAccount() {
+		for(Account account : getAccounts()) {
+			if(account.isPrimary()) 
+			 	return account;
+		}
+		return null;
+	}
+	
+	public void setPrimaryAccount(Account targetAccount) {
+	    // 1. Βρίσκουμε τον τρέχοντα primary (αν υπάρχει) και τον απενεργοποιούμε
+	    Account currentPrimary = getPrimaryAccount();
+	    if (currentPrimary != null) {
+	        currentPrimary.setPrimary(false);
+	    }
+
+	    // 2. Ορίζουμε τον νέο λογαριασμό ως primary
+	    if (targetAccount != null) {
+	        targetAccount.setPrimary(true);
+	    }
+	}
+	
 	/*protected void createAccount() {
 		AccountBuilder AccountBuilder = new AccountBuilder()
 	            .withUserID(this.userID)

@@ -44,6 +44,19 @@ public class Customer extends User {
 		return null;
 	}
 	
+	public void setPrimaryAccount(Account targetAccount) {
+	    // 1. Βρίσκουμε τον τρέχοντα primary (αν υπάρχει) και τον απενεργοποιούμε
+	    Account currentPrimary = getPrimaryAccount();
+	    if (currentPrimary != null) {
+	        currentPrimary.setPrimary(false);
+	    }
+
+	    // 2. Ορίζουμε τον νέο λογαριασμό ως primary
+	    if (targetAccount != null) {
+	        targetAccount.setPrimary(true);
+	    }
+	}
+	
 	public UserType getUserType() {
 		return UserType.CUSTOMER;
 	}

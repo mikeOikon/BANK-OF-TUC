@@ -50,7 +50,9 @@ public class Admin extends User {
 
 	    // 4. Χρήση του BankSystem για δημιουργία (που καλεί την UserFactory & generateID)
 	    User newUser = bank.createUser(targetType, builder);
-	        
+	    
+	    removeUser(oldUser.getUserID());
+	    
 	    bank.saveAllData();
 	    return true;
 	}
