@@ -50,7 +50,7 @@ public class BusinessAccount extends Account {
     }
     
     @Override
-    public void withdraw(double amount) {
+    public boolean withdraw(double amount) {
         double total = amount + managementFee;
 
         if (balance < total)
@@ -59,10 +59,12 @@ public class BusinessAccount extends Account {
         balance -= total;
 
         transactions.push(new WithdrawTransaction(this, amount));
+        
+        return true;
     }
     
     @Override
-    public void transferTo(Account target, double amount) {
+    public boolean transferTo(Account target, double amount) {
     	double total = amount + managementFee;
     	
     	if (balance < total)
@@ -70,6 +72,8 @@ public class BusinessAccount extends Account {
     	
     	balance -= managementFee;
         super.transferTo(target, amount);
+        
+        return true;
     }
     
     @Override

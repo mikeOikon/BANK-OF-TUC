@@ -8,7 +8,7 @@ public class UserFactory {
 		switch(userType) {
 			case CUSTOMER:
 				return new Customer(userID, builder.getUsername(), builder.getPassword(), 
-						 builder.getName(),
+						builder.getName(),
 						builder.getSurname(), 
 						builder.getBranch(),builder.getAFM());
 				

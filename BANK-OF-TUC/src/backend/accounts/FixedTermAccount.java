@@ -65,7 +65,7 @@ public class FixedTermAccount extends PersonalAccount {
     }
     
     @Override
-    public void withdraw(double amount) {
+    public boolean withdraw(double amount) {
     	
     	if (!isMatured()) {
 			throw new IllegalStateException("Cannot withdraw from Fixed Term Account before maturity date.");
@@ -76,6 +76,8 @@ public class FixedTermAccount extends PersonalAccount {
         balance -= amount;
 
         transactions.push(new WithdrawTransaction(this, amount));
+        
+        return true;
     }
     
     @Override
@@ -85,9 +87,8 @@ public class FixedTermAccount extends PersonalAccount {
     }
     
     @Override
-    public void transferTo(Account target, double amount) {
+    public boolean transferTo(Account target, double amount) {
 
         throw new IllegalArgumentException("You cannot transfer from a Fixed Term Account.");
-
     }
 }

@@ -114,10 +114,5 @@ public String getBuisnessName() {
 public String getRepresentativeName() {
 	return representativeName;
 }
-   
-   
-   
-	   
-	   
   
 }

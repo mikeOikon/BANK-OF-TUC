@@ -13,7 +13,8 @@ import backend.transactions.WithdrawTransaction;
 import types.AccountType;
 
 public abstract class Account {
-
+	
+	private boolean primary;
 	String IBAN;	//εχει συγκεκριμενο αλγοριθμο 
 	String userID;
 	double balance;
@@ -80,9 +81,16 @@ public abstract class Account {
 		return account_id;
 	}
 
-
 	protected void setAccount_id(long account_id) {
 		this.account_id = account_id;
+	}
+	
+	public boolean isPrimary() {
+        return this.primary;
+    }
+	
+	public void setPrimary(boolean primary) {
+		this.primary = primary;
 	}
 	
 	public void deposit(double amount) {
@@ -95,7 +103,7 @@ public abstract class Account {
 	    transactions.push(tx);
 	}
 
-	public void withdraw(double amount) {
+	public boolean withdraw(double amount) {
 	    if (amount <= 0)
 	        throw new IllegalArgumentException("Withdraw amount must be positive.");
 
@@ -106,9 +114,10 @@ public abstract class Account {
 
 	    Transaction tx = new WithdrawTransaction(this, amount);
 	    transactions.push(tx);
+	    return true;
 	}
 
-	public void transferTo(Account target, double amount) {
+	public boolean transferTo(Account target, double amount) {
 	    if (target == null)
 	        throw new IllegalArgumentException("Target account cannot be null.");
 
@@ -128,6 +137,8 @@ public abstract class Account {
 	    // Add to both accounts' histories
 	    this.transactions.push(tx);
 	    target.transactions.push(tx);
+	    
+	    return true;
 	}
 
 	
@@ -219,6 +230,7 @@ public abstract class Account {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
 	    
 	}
 

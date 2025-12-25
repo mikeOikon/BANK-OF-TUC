@@ -153,8 +153,8 @@ public class BankSystem {
 
 	    try (FileReader reader = new FileReader(file)) {
 
-	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	        BankSystem system = gson.fromJson(reader, BankSystem.class);
+	    	Gson gson = GsonConfig.build();
+	    	BankSystem system = gson.fromJson(reader, BankSystem.class);
 
 	        if (system == null) {
 	            System.out.println("[BankSystem] Loaded file was empty. Creating new system.");

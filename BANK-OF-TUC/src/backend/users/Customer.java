@@ -33,12 +33,15 @@ public class Customer extends User {
 	//na doume ti prepei na einai protected
 	@Override
 	public ArrayList<Account> getAccounts() {
-		if (this.accounts.isEmpty()) {
-			//System.out.println("No accounts found for customer " + this.userID);
-			return null;
-		} else {
-			return this.accounts;
+	    return accounts; // άδεια λίστα αν δεν έχει
+	}
+	
+	public Account getPrimaryAccount() {
+		for(Account account : getAccounts()) {
+			if(account.isPrimary()) 
+			 	return account;
 		}
+		return null;
 	}
 	
 	public UserType getUserType() {
@@ -53,12 +56,12 @@ public class Customer extends User {
 		createAccount(choice);
 	}*/
 	
-	protected void createAccount(int choice) {
+	public Account createAccount(int choice) {
 	    AccountType type;
 
 	    switch (choice) {
 	        case 1:
-	            type = AccountType.TRANSACTIONAL;
+	            type = AccountType.TRANSACTIONAL;           	
 	            break;
 	        case 2:
 	            type = AccountType.SAVINGS;
@@ -68,7 +71,7 @@ public class Customer extends User {
 	            break;
 	        default:
 	            System.out.println("Invalid choice. Please select a valid account type.");
-	            return;
+	            return null;
 	    }
 
 	    // Χρήση AccountFactory για δημιουργία λογαριασμού
@@ -79,8 +82,13 @@ public class Customer extends User {
 	            .withInterest(0.0) // default interest rate
 	            .withBranch(this.branch);
 	    Account newAccount = AccountFactory.createAccount(type, AccountBuilder);
+	    boolean firstAccount = accounts.isEmpty();
 	    accounts.add(newAccount);
-	    viewAccountDetails(newAccount);
+	    if(firstAccount) {
+	    	newAccount.setPrimary(true);
+	    }
+	    return newAccount;
+	    //viewAccountDetails(newAccount);
 	}
 
 	

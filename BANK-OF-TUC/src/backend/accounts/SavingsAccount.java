@@ -34,7 +34,7 @@ public class SavingsAccount extends PersonalAccount {
     }
     
     @Override
-    public void withdraw(double amount) {
+    public boolean withdraw(double amount) {
         double total = amount + managementFee;
 
         if (balance < total)
@@ -43,10 +43,12 @@ public class SavingsAccount extends PersonalAccount {
         balance -= total;
 
         transactions.push(new WithdrawTransaction(this, amount));
+        
+        return true;
     }
     
     @Override
-    public void transferTo(Account target, double amount) {
+    public boolean transferTo(Account target, double amount) {
     	
     	if (balance < amount)
             throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
@@ -59,6 +61,8 @@ public class SavingsAccount extends PersonalAccount {
             );
 
         super.transferTo(target, amount);
+        
+        return true;
     }
     
     @Override

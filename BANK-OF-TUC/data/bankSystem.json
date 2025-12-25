@@ -28,12 +28,178 @@
       "AFM": "123456789"
     },
     "CUS002": {
-      "accounts": [],
+      "accounts": [
+        {
+          "primary": true,
+          "IBAN": "GR9702100211007066640300783",
+          "userID": "CUS002",
+          "balance": 2.0,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 50.0,
+              "timestampString": "2025-12-25T12:27:33.432828700",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 50.0,
+              "timestampString": "2025-12-25T12:28:58.087909800",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 50.0,
+              "timestampString": "2025-12-25T12:29:02.981844200",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 140.0,
+              "timestampString": "2025-12-25T12:29:32.132012200",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 20.0,
+              "timestampString": "2025-12-25T12:29:50.324103600",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 310.0,
+              "timestampString": "2025-12-25T12:30:19.007002",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 50.0,
+              "timestampString": "2025-12-25T12:34:46.940992700",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 15.0,
+              "timestampString": "2025-12-25T12:34:57.632101900",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 30.0,
+              "timestampString": "2025-12-25T12:36:27.313271500",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T12:37:23.945235900",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T12:46:42.050019700",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "transactional"
+        },
+        {
+          "primary": false,
+          "IBAN": "GR6502100212170649787641659",
+          "userID": "CUS002",
+          "balance": 65.0,
+          "transactions": [
+            {
+              "type": "TRANSFER",
+              "amount": 30.0,
+              "timestampString": "2025-12-25T12:36:27.313271500",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 30.0,
+              "timestampString": "2025-12-25T12:36:27.313271500",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "deposit"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T12:37:23.945235900",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T12:37:23.945235900",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "deposit"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T12:46:42.050019700",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            }
+          ],
+          "account_id": 2,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "savings"
+        },
+        {
+          "termMonths": 0,
+          "primary": false,
+          "IBAN": "GR2502100214735078807874346",
+          "userID": "CUS002",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 3,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "fixed"
+        }
+      ],
       "username": "mike21",
       "userID": "CUS002",
       "password": "a043913351e3830bf1b0ecf679e0fa370c35aac7cc719e1036230a7c63b45807",
+      "email": "mike21@gmail.com",
       "name": "Mike",
       "surname": "Oikonomou",
+      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"

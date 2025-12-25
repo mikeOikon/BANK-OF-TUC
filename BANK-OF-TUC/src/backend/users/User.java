@@ -31,22 +31,17 @@ public abstract class User {
 		this.branch = branch;	
 	}
 	
+	public ArrayList<Account> getAccounts(){
+		return null; //to be overridden
+	}
+	
 	public String getAFM() {
 		return AFM;
 	}
-	
-	public ArrayList<Account> getAccounts() {
-		return null;
-	}
-
-
 
 	public void setAFM(String aFM) {
 		AFM = aFM;
 	}
-
-
-
 
 	public void setBehavior(UserBehavior behavior) {
 	    this.userBehavior = behavior;
@@ -125,12 +120,6 @@ public abstract class User {
 	public Branch getBranch() {
 		return branch;
 	}
-	
-	/*
-	public ArrayList<String> getAccounts() {
-		return accounts;
-	}
-	*/
 	
 	public void setUserID(String userID) {
 		this.userID = userID;
