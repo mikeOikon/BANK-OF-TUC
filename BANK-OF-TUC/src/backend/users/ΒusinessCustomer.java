@@ -183,6 +183,11 @@ public class ΒusinessCustomer extends User{
 	    }
 	    return null; // αν δεν βρεθεί
 	}
+
+
+	public Object getFullName() {
+		return this.name + " " + this.surname;
+	}
 	
 	/*protected void accountBalance(Account account) { //ιδιο ακριβως με customer
 		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());

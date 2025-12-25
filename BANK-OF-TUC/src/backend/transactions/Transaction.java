@@ -21,7 +21,6 @@ public abstract class Transaction {
         this.amount = amount;
         this.timestamp = LocalDateTime.now();
         this.timestampString = this.timestamp.toString(); // ISO string
-
         this.fromAccountIban = fromAccountIban;
         this.toAccountIban = toAccountIban;
     }
@@ -42,19 +41,33 @@ public abstract class Transaction {
     }
 
     public String getFromAccountIban() {
-        return fromAccountIban;
+        return this.fromAccountIban;
     }
 
     public String getToAccountIban() {
-        return toAccountIban;
+        return this.toAccountIban;
     }
 
     @Override
     public String toString() {
-        return "[" + getTimestamp() + "] "
+    	if (type == TransactionType.TRANSFER) {
+    		return "[" + getTimestamp() + "] "
                 + type + " "
                 + amount +
-                " from " + fromAccountIban +
-                " to " + toAccountIban;
+                " from " + this.fromAccountIban +
+                " to " + this.toAccountIban;
+    	}
+    	else if(type == TransactionType.DEPOSIT) {
+			return "[" + getTimestamp() + "] "
+	                + type + " "
+	                + amount +
+	                " to " + this.toAccountIban;
+    	}
+    	else
+    		return "[" + getTimestamp() + "] "
+				+ type + " "
+				+ amount +
+				" from " + this.fromAccountIban;
     }
+
 }

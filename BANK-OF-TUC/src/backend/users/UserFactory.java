@@ -27,6 +27,11 @@ public class UserFactory {
 						builder.getBranch(),
 						builder.getBuisnessName(),
 						builder.getRepresentativeName(), builder.getAFM());
+			case AUDITOR:
+				return new Auditor(userID, builder.getUsername(), 
+						builder.getPassword(), builder.getName(),
+						 builder.getSurname(),
+						builder.getBranch(), builder.getAFM());
 			default:
 				throw new IllegalArgumentException("Invalid user type: " + userType);
 		}

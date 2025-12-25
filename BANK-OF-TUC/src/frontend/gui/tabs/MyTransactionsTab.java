@@ -3,11 +3,13 @@ package frontend.gui.tabs;
 import javax.swing.*;
 import java.awt.*;
 
+import backend.accounts.Account;
 import backend.transactions.Transaction;
 import backend.users.Customer;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 public class MyTransactionsTab extends JPanel {
 
@@ -50,16 +52,17 @@ public class MyTransactionsTab extends JPanel {
      * Μαζεύει όλες τις συναλλαγές από όλους τους λογαριασμούς,
      * τις ταξινομεί κατά ημερομηνία και τις εμφανίζει.
      */
+    
     public void refresh() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-15s | %-12s | %-10s | %s\n", "Date", "Amount", "Type", "Account IBAN"));
-        sb.append("----------------------------------------------------------------------\n");
+        sb.append("-------------------------------------------------------------------\n");
 
-        // Συλλογή όλων των συναλλαγών από τη λίστα λογαριασμών του πελάτη
+        // Συλλογή όλων των συναλλαγών
         List<Transaction> allTransactions = customer.getAccounts().stream()
                 .flatMap(acc -> acc.getTransactions().stream())
-                // Προαιρετικά: Ταξινόμηση ώστε οι πιο πρόσφατες να είναι πάνω
-                // .sorted(Comparator.comparing(Transaction::getDate).reversed())
+                // ΤΑΞΙΝΟΜΗΣΗ: Φέρνει τις πιο πρόσφατες ημερομηνίες πρώτες
+                .sorted(Comparator.comparing(Transaction::getTimestamp).reversed()) 
                 .collect(Collectors.toList());
 
         if (allTransactions.isEmpty()) {
@@ -71,7 +74,6 @@ public class MyTransactionsTab extends JPanel {
         }
 
         historyArea.setText(sb.toString());
-        // Επαναφορά του scroll στην αρχή (πάνω)
         historyArea.setCaretPosition(0);
     }
 }

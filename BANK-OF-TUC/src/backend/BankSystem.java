@@ -142,6 +142,8 @@ public class BankSystem {
 	    return instance;
 	}
 	
+	
+	
 	public static BankSystem loadFromFileInternal() {
 
 	    File file = new File(DATA_FILE);
@@ -285,7 +287,27 @@ public class BankSystem {
 		return newUser;
 	}
 
+	public Map<String, Customer> getCustomers() {
+	    return customers;
+	}
 
+	public Map<String, ΒusinessCustomer> getBusinessCustomers() {
+	    return businessCustomers;
+	}
+
+	public Map<String, Admin> getAdmins() {
+	    return admins;
+	}
+	
+	public Map<String, BankEmployer> getBankEmployers() {
+	    return bankEmployers;
+	}
+	
+	public Map<String, Auditor> getAuditors() {
+	    return auditors;
+	}
+	
+	
 	/*
 	public User createUserCLI() {
 		System.out.println("Select user type to create: Type 1 for Personal Customer, Type 2 for Business Customer");
@@ -747,7 +769,8 @@ public class BankSystem {
 	//na ftiaxtei methodos gia plhromes klp
 	
 	public User findUserByUsername(String username) {
-	    return usersByUsername.get(username);}
+	    return usersByUsername.get(username);
+	}
 	
 	
 }

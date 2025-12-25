@@ -56,4 +56,8 @@ public class BankEmployer extends User {
 	protected void updateCustomerAccountDetails() {
 		//πχ να κανει reset password, να κλεινει account (οχι να τα διαγραφει), να κανει update limit συναλλαγων
 	}
+	
+	public String getFullName() {
+	    return this.name + " " + this.surname;
+	}
 }

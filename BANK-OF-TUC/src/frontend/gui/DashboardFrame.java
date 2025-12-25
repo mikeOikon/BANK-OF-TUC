@@ -4,7 +4,6 @@ import backend.BankSystem;
 import backend.users.Customer;
 import backend.users.User;
 import frontend.gui.tabs.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -23,13 +22,10 @@ public class DashboardFrame extends JFrame {
         }
 
         setTitle("Bank of TUC — Dashboard");
-        setSize(900, 600);
+        setSize(1000, 700);
         setLocationRelativeTo(null);
-
-        // Αλλάζουμε το close operation για να χειριστούμε shutdown
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-        // Listener για να σώσουμε δεδομένα πριν κλείσει η εφαρμογή
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -42,50 +38,47 @@ public class DashboardFrame extends JFrame {
         add(tabs);
 
         buildTabs();
-
-        // Ορατό το JFrame στο τέλος
         setVisible(true);
     }
 
-
     private void buildTabs() {
-
-        // PROFILE (ALL USERS)
+        // 1. PROFILE (Πάντα πρώτο)
         tabs.addTab("Profile", new ProfileTab(user));
 
-        // CUSTOMER START PAGE
-        if (user instanceof Customer) {
-        	Customer customer = (Customer) user;
-        	CustomerOverviewTab overview = new CustomerOverviewTab(customer);
-            tabs.addTab("Overview", overview);
-            tabs.addTab("My Accounts", new MyAccountsTab(customer, overview));
-        
-            tabs.addTab("My Transactions", new MyTransactionsTab(customer));
-        
+        // 2. CUSTOMER TABS (Με σύνδεση refresh)
+        if (user instanceof Customer customer) {
+            // Δημιουργία των tabs
+            MyTransactionsTab transactionsTab = new MyTransactionsTab(customer);
+            CustomerOverviewTab overviewTab = new CustomerOverviewTab(customer);
+            TransferTab transferTab = new TransferTab(customer, overviewTab);
+            MyAccountsTab accountsTab = new MyAccountsTab(customer, overviewTab);
 
-        if (user.canTransferMoney()) {
-            tabs.addTab("Transfer", new TransferTab(customer, overview));
+            //Συνδέουμε το Overview με τα υπόλοιπα tabs
+            overviewTab.setOtherTabs(accountsTab, transactionsTab, transferTab);
+
+            if (user.canViewAccounts()) {
+                tabs.addTab("Overview", overviewTab);
+                tabs.addTab("My Accounts", accountsTab);
+            }
+            if (user.canViewTransactionsHistory()) {
+                tabs.addTab("My Transactions", transactionsTab);
+            }
+            if (user.canTransferMoney()) {
+                tabs.addTab("Transfer", transferTab);
+            }
         }
-        }
-        // ADMIN / AUDITOR
+
+        // 3. ADMIN / AUDITOR TABS
         if (user.canViewAllAccounts()) {
-            tabs.addTab("All Accounts", new AllAccountsTab());
+            tabs.addTab("All Accounts", new AllAccountsTab(user));
         }
-
         if (user.canViewAllTransactionsHistory()) {
             tabs.addTab("All Transactions", new AllTransactionsTab());
         }
-
         if (user.canPromoteUser() || user.canDemoteUser() || user.canRemoveUsers()) {
-            tabs.addTab("User Management", new UserManagementTab());
+            tabs.addTab("User Management", new UserManagementTab(user));
         }
 
-        // SETTINGS (ALL USERS)
         tabs.addTab("Settings", new SettingsTab());
-        
-        
     }
-    
-    
-
 }

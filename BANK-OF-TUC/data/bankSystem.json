@@ -14,26 +14,13 @@
     }
   },
   "customers": {
-    "CUS001": {
-      "accounts": [],
-      "username": "angelodiak",
-      "userID": "CUS001",
-      "password": "Diakoumis",
-      "name": "Angelos",
-      "surname": "Diakoumis",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "123456789"
-    },
     "CUS002": {
       "accounts": [
         {
           "primary": true,
           "IBAN": "GR9702100211007066640300783",
           "userID": "CUS002",
-          "balance": 2.0,
+          "balance": 378.0,
           "transactions": [
             {
               "type": "DEPOSIT",
@@ -114,6 +101,92 @@
               "fromAccountIban": "GR9702100211007066640300783",
               "toAccountIban": "GR6502100212170649787641659",
               "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T13:01:18.596579",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6502100212170649787641659",
+              "txType": "transfer"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 200.0,
+              "timestampString": "2025-12-25T14:11:26.869284600",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1000.0,
+              "timestampString": "2025-12-25T14:12:29.885558800",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 100.0,
+              "timestampString": "2025-12-25T14:14:13.901661500",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 200.0,
+              "timestampString": "2025-12-25T14:15:31.475862",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "transfer"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:31:55.358603700",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T14:32:10.920480200",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 3.0,
+              "timestampString": "2025-12-25T14:32:14.189123100",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 5.0,
+              "timestampString": "2025-12-25T14:32:22.839376",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:32:25.443764300",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 200.0,
+              "timestampString": "2025-12-25T14:35:57.668313600",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:49:05.584987",
+              "toAccountIban": "GR9702100211007066640300783",
+              "txType": "deposit"
             }
           ],
           "account_id": 1,
@@ -123,74 +196,6 @@
             "branchCode": "0021"
           },
           "accountType": "transactional"
-        },
-        {
-          "primary": false,
-          "IBAN": "GR6502100212170649787641659",
-          "userID": "CUS002",
-          "balance": 65.0,
-          "transactions": [
-            {
-              "type": "TRANSFER",
-              "amount": 30.0,
-              "timestampString": "2025-12-25T12:36:27.313271500",
-              "fromAccountIban": "GR9702100211007066640300783",
-              "toAccountIban": "GR6502100212170649787641659",
-              "txType": "transfer"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 30.0,
-              "timestampString": "2025-12-25T12:36:27.313271500",
-              "toAccountIban": "GR6502100212170649787641659",
-              "txType": "deposit"
-            },
-            {
-              "type": "TRANSFER",
-              "amount": 2.0,
-              "timestampString": "2025-12-25T12:37:23.945235900",
-              "fromAccountIban": "GR9702100211007066640300783",
-              "toAccountIban": "GR6502100212170649787641659",
-              "txType": "transfer"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 2.0,
-              "timestampString": "2025-12-25T12:37:23.945235900",
-              "toAccountIban": "GR6502100212170649787641659",
-              "txType": "deposit"
-            },
-            {
-              "type": "TRANSFER",
-              "amount": 1.0,
-              "timestampString": "2025-12-25T12:46:42.050019700",
-              "fromAccountIban": "GR9702100211007066640300783",
-              "toAccountIban": "GR6502100212170649787641659",
-              "txType": "transfer"
-            }
-          ],
-          "account_id": 2,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "savings"
-        },
-        {
-          "termMonths": 0,
-          "primary": false,
-          "IBAN": "GR2502100214735078807874346",
-          "userID": "CUS002",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 3,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "fixed"
         }
       ],
       "username": "mike21",
@@ -205,10 +210,301 @@
         "branchCode": "0021"
       },
       "AFM": "123456798"
+    },
+    "CUS003": {
+      "accounts": [
+        {
+          "primary": true,
+          "IBAN": "GR7202100219717850449273362",
+          "userID": "CUS003",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "transactional"
+        },
+        {
+          "primary": false,
+          "IBAN": "GR4602100210906615862541081",
+          "userID": "CUS003",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 2,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "transactional"
+        }
+      ],
+      "username": "diak21",
+      "userID": "CUS003",
+      "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
+      "email": "angdiak21@gmail.com",
+      "name": "angelos",
+      "surname": "diakoumis",
+      "phoneNumber": "",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
+    },
+    "CUS004": {
+      "accounts": [
+        {
+          "primary": true,
+          "IBAN": "GR6802100213751998651833333",
+          "userID": "CUS004",
+          "balance": 197.06199999999995,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 50.0,
+              "timestampString": "2025-12-25T14:05:41.406167",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "deposit"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 200.0,
+              "timestampString": "2025-12-25T14:15:31.475862",
+              "fromAccountIban": "GR9702100211007066640300783",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "transfer"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:16:35.010611400",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 10.0,
+              "timestampString": "2025-12-25T14:16:39.308642700",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:16:47.128420700",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.52,
+              "timestampString": "2025-12-25T14:16:54.310869700",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.542,
+              "timestampString": "2025-12-25T14:17:00.221532500",
+              "toAccountIban": "GR6802100213751998651833333",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:12.537645100",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:15.792022800",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:19.009257900",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:22.251248700",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:29.590153700",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:32.607693300",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:35.830777600",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:38.937036100",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:42.005997300",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:44.630395600",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T14:17:50.711510900",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 3.0,
+              "timestampString": "2025-12-25T14:17:54.154076",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:17:58.131851900",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T14:18:01.052712400",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 3.0,
+              "timestampString": "2025-12-25T14:18:04.728044600",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:18:11.084141300",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 2.0,
+              "timestampString": "2025-12-25T14:18:15.269488900",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 3.0,
+              "timestampString": "2025-12-25T14:18:19.433957200",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.0,
+              "timestampString": "2025-12-25T14:18:26.282423700",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 5.0,
+              "timestampString": "2025-12-25T14:18:41.998549600",
+              "fromAccountIban": "GR6802100213751998651833333",
+              "txType": "withdraw"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "transactional"
+        }
+      ],
+      "username": "angelo",
+      "userID": "CUS004",
+      "password": "1ce51db6cdf1f93d2cb4450ed493bfe974ad91e0ffa7cb90891818d7015a6d76",
+      "email": "ang@gmail.com",
+      "name": "Angelo",
+      "surname": "Diakoumis",
+      "phoneNumber": "2121212121",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "47276f6d8f8ca18f758d2ae311733ff6a46a3eff9944ab9424fba5563c49df3f"
     }
   },
-  "bankEmployers": {},
-  "auditors": {},
+  "bankEmployers": {
+    "E1": {
+      "username": "angelodiak",
+      "userID": "E1",
+      "password": "Diakoumis",
+      "name": "Angelos",
+      "surname": "Diakoumis",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "123456789"
+    }
+  },
+  "auditors": {
+    "AU1": {
+      "username": "angelodiak",
+      "userID": "AU1",
+      "password": "Diakoumis",
+      "name": "Angelos",
+      "surname": "Diakoumis",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "123456789"
+    }
+  },
   "bankAccount": {
     "accountNumber": "BANK001",
     "balance": 1.0E8,
@@ -218,7 +514,7 @@
     }
   },
   "adminCount": 1,
-  "customerCount": 2,
-  "employeeCount": 0,
-  "auditorCount": 0
+  "customerCount": 4,
+  "employeeCount": 2,
+  "auditorCount": 2
 }

@@ -148,4 +148,14 @@ public class TransferTab extends JPanel {
             JOptionPane.showMessageDialog(this, "Please enter a valid numeric amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void refresh() {
+        // Αφαίρεση όλων των παλιών επιλογών
+        accountSelector.removeAllItems();
+        
+        // Προσθήκη των νέων επιλογών από τη λίστα του πελάτη
+        for (Account acc : customer.getAccounts()) {
+            accountSelector.addItem(acc);
+        }
+    }
 }

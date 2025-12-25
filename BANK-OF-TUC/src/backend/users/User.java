@@ -87,7 +87,6 @@ public abstract class User {
 		return userBehavior.canPromoteUser();
 	}
 
-
 	public boolean canDemoteUser() {
 		// TODO Auto-generated method stub
 		return userBehavior.canDemoteUser();
@@ -194,7 +193,9 @@ public abstract class User {
 	protected void deleteAccount() {
 		// Implement delete account functionality
 	}
-    
+
+	public abstract Object getFullName();
+
 	/*protected void login() {
 		//angel 
 		int tries = 0;

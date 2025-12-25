@@ -229,4 +229,8 @@ public class Customer extends User {
 	    }
 	    return null; // αν δεν βρεθεί
 	}
+
+	public Object getFullName() {
+		return this.name + " " + this.surname;
+	}
 }
