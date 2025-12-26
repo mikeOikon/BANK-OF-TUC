@@ -3,9 +3,11 @@ package frontend.gui.tabs;
 import backend.BankSystem;
 import backend.accounts.Account;
 import backend.users.Admin;
+import backend.users.Auditor;
 import backend.users.Customer;
 import backend.users.User;
 import backend.users.ΒusinessCustomer;
+import backend.users.BankEmployer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,31 +23,30 @@ public class AllAccountsTab extends JPanel {
     private DefaultTableModel tableModel;
     private JTextField searchField;
     private TableRowSorter<DefaultTableModel> sorter;
-    private final Admin currentUser;
+    private User currentUser;
+    private JButton closeBtn;
 
-    /**
-     * Constructor που δέχεται τον συνδεδεμένο User (Admin/Auditor)
-     */
     public AllAccountsTab(User user) {
-        this.currentUser = (Admin) user;
+        // ΔΙΟΡΘΩΣΗ: Αποθηκεύουμε τον χρήστη ως User χωρίς επικίνδυνα casts
+        this.currentUser = user;
+        
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // --- ΠΑΝΩ ΜΕΡΟΣ: SEARCH BAR ---
         JPanel searchPanel = new JPanel(new BorderLayout(10, 10));
-        searchPanel.add(new JLabel("Search (IBAN or Owner ID):"), BorderLayout.WEST);
+        searchPanel.add(new JLabel("Αναζήτηση (IBAN ή ID):"), BorderLayout.WEST);
         
         searchField = new JTextField();
-        searchField.setToolTipText("Search across all columns...");
         searchPanel.add(searchField, BorderLayout.CENTER);
         add(searchPanel, BorderLayout.NORTH);
 
-        // --- ΚΕΝΤΡΟ: ΠΙΝΑΚΑΣ ΜΕ SCROLL ---
-        String[] columnNames = {"Owner ID", "Owner Name", "IBAN", "Account Type", "Balance (€)"};
+        // --- ΚΕΝΤΡΟ: ΠΙΝΑΚΑΣ ---
+        String[] columnNames = {"Owner ID", "Full Name", "IBAN", "Type", "Balance"};
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Μόνο ανάγνωση
+                return false; 
             }
         };
 
@@ -53,95 +54,110 @@ public class AllAccountsTab extends JPanel {
         sorter = new TableRowSorter<>(tableModel);
         accountsTable.setRowSorter(sorter);
         
-        // UI βελτιώσεις πίνακα
-        accountsTable.setFillsViewportHeight(true);
-        accountsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        accountsTable.getTableHeader().setReorderingAllowed(false);
+        add(new JScrollPane(accountsTable), BorderLayout.CENTER);
 
-        JScrollPane scrollPane = new JScrollPane(accountsTable);
-        add(scrollPane, BorderLayout.CENTER);
-
-        // --- ΚΑΤΩ ΜΕΡΟΣ: ΚΟΥΜΠΙ ΔΙΑΓΡΑΦΗΣ (CLOSE ACCOUNT) ---
-        JButton closeBtn = new JButton("Close Selected Account");
-        closeBtn.setBackground(new Color(180, 50, 50)); // Κόκκινο για κρίσιμη ενέργεια
+        // --- ΚΑΤΩ ΜΕΡΟΣ: ΚΟΥΜΠΙΑ ---
+        closeBtn = new JButton("Close Selected Account");
+        closeBtn.setBackground(new Color(180, 50, 50));
         closeBtn.setForeground(Color.WHITE);
         closeBtn.setFont(new Font("SansSerif", Font.BOLD, 12));
-        closeBtn.setFocusPainted(false);
         
-        // Εμφάνιση του κουμπιού μόνο αν ο χρήστης έχει δικαίωμα (π.χ. Admin, όχι Auditor)
-        // Αν ο Auditor δεν πρέπει να σβήνει, βάλε έλεγχο εδώ
+        // ΕΛΕΓΧΟΣ ΔΙΚΑΙΩΜΑΤΩΝ: Μόνο Admin και Employer βλέπουν το κουμπί διαγραφής
+        if (currentUser instanceof Auditor) {
+            closeBtn.setVisible(false);
+        }
+
         closeBtn.addActionListener(e -> handleCloseAccount());
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(closeBtn);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // --- LOGIC: SEARCH FILTER ---
+        // SEARCH LOGIC
         searchField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 String text = searchField.getText();
-                if (text.trim().length() == 0) {
-                    sorter.setRowFilter(null);
-                } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
+                sorter.setRowFilter(text.trim().isEmpty() ? null : RowFilter.regexFilter("(?i)" + text));
             }
         });
 
         refresh();
     }
 
-    /**
-     * Διαχειρίζεται το κλείσιμο του λογαριασμού και το refresh του GUI
-     */
     private void handleCloseAccount() {
         int selectedRow = accountsTable.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select an account from the table.");
+            JOptionPane.showMessageDialog(this, "Παρακαλώ επιλέξτε έναν λογαριασμό.");
             return;
         }
 
-        // Μετατροπή index από view σε model (απαραίτητο λόγω sorter)
         int modelRow = accountsTable.convertRowIndexToModel(selectedRow);
         String userID = (String) tableModel.getValueAt(modelRow, 0);
         String iban = (String) tableModel.getValueAt(modelRow, 2);
 
         int confirm = JOptionPane.showConfirmDialog(this, 
-            "Are you sure you want to PERMANENTLY close account: " + iban + "?",
-            "Confirm Account Closure", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            "Οριστική διαγραφή του λογαριασμού: " + iban + ";",
+            "Επιβεβαίωση", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (confirm == JOptionPane.YES_OPTION) {
             BankSystem bank = BankSystem.getInstance();
-            
-            // Εύρεση του αντικειμένου User (Customer ή Business)
             User targetUser = bank.getCustomers().get(userID);
-            if (targetUser == null) {
-                targetUser = bank.getBusinessCustomers().get(userID);
-            }
+            if (targetUser == null) targetUser = bank.getBusinessCustomers().get(userID);
 
-            // Κλήση της μεθόδου διαγραφής στο BankSystem
-            if (currentUser.deleteUserAccount(targetUser, iban)) {
-                bank.saveAllData(); // Οριστική αποθήκευση στο JSON
-                JOptionPane.showMessageDialog(this, "Account closed successfully.");
+            if (targetUser != null) {
+                boolean success = false;
                 
-                // ΚΑΘΟΛΙΚΟ REFRESH: Ενημερώνει όλα τα tabs του Dashboard
-                refreshEntireSystem();
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to close account. Target user or account not found.", 
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                // Ασφαλές Casting ανάλογα με τον τύπο του currentUser
+                if (currentUser instanceof Admin admin) {
+                    success = admin.deleteUserAccount(targetUser, iban);
+                } else if (currentUser instanceof BankEmployer employer) {
+                    success = employer.deleteUserAccount(targetUser, iban);
+                }
+
+                if (success) {
+                    bank.saveAllData();
+                    JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
+                    refreshEntireSystem();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Αδυναμία διαγραφής.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
 
-    /**
-     * Ενημερώνει όλα τα tabs που βρίσκονται στο DashboardFrame
-     */
-    private void refreshEntireSystem() {
-        // 1. Refresh αυτού του tab
-        refresh();
+    public void refresh() {
+        tableModel.setRowCount(0); 
+        BankSystem bank = BankSystem.getInstance();
+        
+        // Φόρτωση όλων των τύπων πελατών
+        if (bank.getCustomers() != null) {
+            bank.getCustomers().values().forEach(this::addAccountsToTable);
+        }
+        if (bank.getBusinessCustomers() != null) {
+            bank.getBusinessCustomers().values().forEach(this::addAccountsToTable);
+        }
+    }
 
-        // 2. Refresh όλων των άλλων tabs που είναι στο JTabbedPane
+    private void addAccountsToTable(User user) {
+        // Χρήση της getAccounts() αν υπάρχει στη βασική κλάση User ή έλεγχος τύπου
+        java.util.List<Account> accounts = new java.util.ArrayList<>();
+        if (user instanceof Customer c) accounts = c.getAccounts();
+        else if (user instanceof ΒusinessCustomer bc) accounts = bc.getAccounts();
+
+        for (Account acc : accounts) {
+            tableModel.addRow(new Object[]{
+                user.getUserID(),
+                user.getFullName(),
+                acc.getIBAN(),
+                acc.getClass().getSimpleName().replace("Account", ""),
+                String.format("%.2f €", acc.getBalance())
+            });
+        }
+    }
+
+    private void refreshEntireSystem() {
+        refresh();
         Container parent = getParent();
         while (parent != null && !(parent instanceof JTabbedPane)) {
             parent = parent.getParent();
@@ -150,64 +166,9 @@ public class AllAccountsTab extends JPanel {
         if (parent instanceof JTabbedPane tabs) {
             for (int i = 0; i < tabs.getTabCount(); i++) {
                 Component tab = tabs.getComponentAt(i);
-                
-                // Εδώ καλούμε τη refreshData για κάθε tab αν την έχει
-                // (Πρέπει τα tabs σου να έχουν αυτή τη μέθοδο public)
-                if (tab instanceof CustomerOverviewTab) ((CustomerOverviewTab) tab).refresh();
-                if (tab instanceof MyAccountsTab) ((MyAccountsTab) tab).refresh();
-                if (tab instanceof MyTransactionsTab) ((MyTransactionsTab) tab).refresh();
-                //if (tab instanceof AllTransactionsTab) ((AllTransactionsTab) tab).refresh();
-            }
-        }
-    }
-
-    /**
-     * Γεμίζει τον πίνακα με τα δεδομένα από το BankSystem
-     */
-    public void refresh() {
-        tableModel.setRowCount(0); 
-        BankSystem bank = BankSystem.getInstance();
-        
-        // Φόρτωση Απλών Πελατών
-        Map<String, Customer> customers = bank.getCustomers();
-        if (customers != null) {
-            for (Customer c : customers.values()) {
-                addAccountsToTable(c);
-            }
-        }
-
-        // Φόρτωση Business Πελατών
-        Map<String, ΒusinessCustomer> businessCustomers = bank.getBusinessCustomers();
-        if (businessCustomers != null) {
-            for (ΒusinessCustomer bc : businessCustomers.values()) {
-                addAccountsToTable(bc);
-            }
-        }
-    }
-
-    /**
-     * Προσθέτει τους λογαριασμούς ενός User (Customer/Business) στον πίνακα
-     */
-    private void addAccountsToTable(User user) {
-        if (user instanceof Customer customer) {
-            for (Account acc : customer.getAccounts()) {
-                tableModel.addRow(new Object[]{
-                    customer.getUserID(),
-                    customer.getFullName(),
-                    acc.getIBAN(),
-                    acc.getClass().getSimpleName().replace("Account", ""),
-                    String.format("%.2f €", acc.getBalance())
-                });
-            }
-        } else if (user instanceof ΒusinessCustomer bCust) {
-            for (Account acc : bCust.getAccounts()) {
-                tableModel.addRow(new Object[]{
-                    bCust.getUserID(),
-                    bCust.getFullName(),
-                    acc.getIBAN(),
-                    acc.getClass().getSimpleName().replace("Account", ""),
-                    String.format("%.2f €", acc.getBalance())
-                });
+                // Δυναμική κλήση refresh αν το tab το υποστηρίζει
+                if (tab instanceof UserManagementTab) ((UserManagementTab) tab).refreshData();
+                // Προσθέστε εδώ και άλλα tabs αν χρειάζεται
             }
         }
     }

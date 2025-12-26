@@ -4,170 +4,104 @@ import backend.BankSystem;
 import backend.users.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class UserManagementTab extends JPanel {
 
+    private final User currentUser; // Αλλαγή σε User για να δέχεται Admin & BankEmployer
     private JTable userTable;
     private DefaultTableModel tableModel;
-    private JTextField searchField;
-    private TableRowSorter<DefaultTableModel> sorter;
-    private Admin admin;
+    private JButton deleteBtn;
+    private JButton promoteBtn;
 
     public UserManagementTab(User user) {
-    	this.admin = (Admin) user;
+        // Αποφεύγουμε το ClassCastException αποθηκεύοντας ως User
+        this.currentUser = user;
+
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // --- ΠΑΝΩ ΜΕΡΟΣ: ΔΥΝΑΜΙΚΗ ΑΝΑΖΗΤΗΣΗ ---
-        JPanel searchPanel = new JPanel(new BorderLayout(5, 5));
-        searchPanel.add(new JLabel("Search User (ID):"), BorderLayout.WEST);
-        searchField = new JTextField();
-        searchField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            public void insertUpdate(javax.swing.event.DocumentEvent e) { filter(); }
-            public void removeUpdate(javax.swing.event.DocumentEvent e) { filter(); }
-            public void changedUpdate(javax.swing.event.DocumentEvent e) { filter(); }
-        });
-        searchPanel.add(searchField, BorderLayout.CENTER);
-        add(searchPanel, BorderLayout.NORTH);
-
-        // --- ΚΕΝΤΡΟ: ΠΙΝΑΚΑΣ ΧΡΗΣΤΩΝ ---
-        String[] columns = {"User ID", "Full Name", "Current Role"};
+        // --- ΠΙΝΑΚΑΣ ΧΡΗΣΤΩΝ ---
+        String[] columns = {"User ID", "Username", "Full Name", "Role"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
-            public boolean isCellEditable(int r, int c) { return false; }
+            public boolean isCellEditable(int row, int column) { return false; }
         };
         userTable = new JTable(tableModel);
-        sorter = new TableRowSorter<>(tableModel);
-        userTable.setRowSorter(sorter);
         add(new JScrollPane(userTable), BorderLayout.CENTER);
 
-        // --- ΚΑΤΩ ΜΕΡΟΣ: ACTION BUTTONS ---
-        JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        // --- PANEL ΚΟΥΜΠΙΩΝ ---
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
-        JButton promoteEmpBtn = new JButton("Promote to Employee");
-        JButton promoteAudBtn = new JButton("Promote to Auditor");
-        JButton deleteBtn = new JButton("Delete User");
+        promoteBtn = new JButton("Promote User");
+        deleteBtn = new JButton("Delete User");
         deleteBtn.setBackground(new Color(180, 50, 50));
         deleteBtn.setForeground(Color.WHITE);
 
-        actionPanel.add(promoteEmpBtn);
-        actionPanel.add(promoteAudBtn);
-        actionPanel.add(new JSeparator(JSeparator.VERTICAL));
-        actionPanel.add(deleteBtn);
-        add(actionPanel, BorderLayout.SOUTH);
+        // --- ΕΛΕΓΧΟΣ ΔΙΚΑΙΩΜΑΤΩΝ ---
+        // Αν ο χρήστης είναι απλός υπάλληλος, κρύβουμε το κουμπί διαγραφής
+        if (currentUser instanceof BankEmployer && !(currentUser instanceof Admin)) {
+            deleteBtn.setVisible(false);
+        }
+
+        buttonPanel.add(promoteBtn);
+        buttonPanel.add(deleteBtn);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         // Listeners
-        promoteEmpBtn.addActionListener(e -> handlePromotion("Employee"));
-        promoteAudBtn.addActionListener(e -> handlePromotion("Auditor"));
         deleteBtn.addActionListener(e -> handleDeleteUser());
+        promoteBtn.addActionListener(e -> handlePromoteUser());
 
         refreshData();
     }
 
-    private void filter() {
-        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchField.getText(), 0));
-    }
-
     public void refreshData() {
-        tableModel.setRowCount(0); 
+        tableModel.setRowCount(0);
         BankSystem bank = BankSystem.getInstance();
-        
-        // Προσθέτουμε όλους τους χάρτες
+
+        // Προσθήκη όλων των χρηστών στον πίνακα (εκτός του εαυτού μας)
         addUserToTable(bank.getCustomers());
         addUserToTable(bank.getBusinessCustomers());
-        addUserToTable(bank.getBankEmployers()); 
+        addUserToTable(bank.getBankEmployers());
         addUserToTable(bank.getAuditors());
-        addUserToTable(bank.getAdmins()); // Εδώ περιλαμβάνεται και ο εαυτός σου
+        addUserToTable(bank.getAdmins());
     }
 
     private void addUserToTable(Map<String, ? extends User> users) {
         if (users == null) return;
-        
         for (User u : users.values()) {
-            // ΕΛΕΓΧΟΣ: Αν το ID του χρήστη είναι ίδιο με το ID του συνδεδεμένου Admin, προσπέρασέ τον
-            if (u.getUserID().equals(this.admin.getUserID())) {
-                continue; 
-            }
-            
+            // Κρύβουμε τον συνδεδεμένο λογαριασμό από τη λίστα για ασφάλεια
+            if (u.getUserID().equals(currentUser.getUserID())) continue;
+
             tableModel.addRow(new Object[]{
                 u.getUserID(),
+                u.getUsername(),
                 u.getFullName(),
                 u.getClass().getSimpleName()
             });
         }
     }
 
-    private void handlePromotion(String newRole) {
-        int row = userTable.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Select a user first.");
-            return;
-        }
-
-        int modelRow = userTable.convertRowIndexToModel(row);
-        String userID = (String) tableModel.getValueAt(modelRow, 0);
-        String currentRole = (String) tableModel.getValueAt(modelRow, 2); // Παίρνει το SimpleName της κλάσης
-
-        // 1. Έλεγχος για προαγωγή στον ίδιο ρόλο (Normalization)
-        String normalizedCurrentRole = currentRole;
-        if (currentRole.equals("BankEmployer")) normalizedCurrentRole = "Employee";
-
-        if (normalizedCurrentRole.equalsIgnoreCase(newRole)) {
-            JOptionPane.showMessageDialog(this, "User is already a(n) " + newRole + ".");
-            return;
-        }
-
-        // 2. Security Policy: Auditor -> Employee
-        if (currentRole.equals("Auditor") && newRole.equals("Employee")) {
-            JOptionPane.showMessageDialog(this, "Security Policy: Auditors cannot be demoted to Employees.");
-            return;
-        }
-
-        // 3. Νέος περιορισμός: Employer -> Auditor
-        if (currentRole.equals("BankEmployer") && newRole.equals("Auditor")) {
-            JOptionPane.showMessageDialog(this, "Security Policy: Bank Employers cannot be promoted to Auditors for integrity reasons.");
-            return;
-        }
-
-        // --- Διαδικασία Επιβεβαίωσης ---
-        int confirm = JOptionPane.showConfirmDialog(this, "Promote " + userID + " to " + newRole + "?");
-        if (confirm == JOptionPane.YES_OPTION) {
-            User oldUser = findUser(userID);
-            if (oldUser != null) {
-                boolean success = admin.promoteUser(oldUser, newRole);
-                if (success) {
-                    JOptionPane.showMessageDialog(this, "User promoted successfully!");
-                    refreshData();
-                }
-            }
-        }
-    }
-    
     private void handleDeleteUser() {
         int row = userTable.getSelectedRow();
         if (row == -1) return;
 
-        int modelRow = userTable.convertRowIndexToModel(row);
-        String userID = (String) tableModel.getValueAt(modelRow, 0);
-
-        int confirm = JOptionPane.showConfirmDialog(this, "Permanently delete user " + userID + "?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            if (admin.removeUser(userID)) {
+        String userId = (String) tableModel.getValueAt(row, 0);
+        
+        // Μόνο οι Admins μπορούν να διαγράφουν
+        if (currentUser instanceof Admin admin) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete user " + userId + "?");
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Εδώ καλείς τη μέθοδο διαγραφής από το backend
+                // π.χ. BankSystem.getInstance().removeUser(userId);
                 refreshData();
-                JOptionPane.showMessageDialog(this, "User removed.");
             }
         }
     }
 
-    private User findUser(String id) {
-        BankSystem bank = BankSystem.getInstance();
-        User u = bank.getCustomers().get(id);
-        if (u == null) u = bank.getBusinessCustomers().get(id);
-        return u;
+    private void handlePromoteUser() {
+        // Λογική για προαγωγή χρήστη (μπορεί να την κάνει και ο Employer)
+        JOptionPane.showMessageDialog(this, "Promotion logic goes here.");
     }
 }

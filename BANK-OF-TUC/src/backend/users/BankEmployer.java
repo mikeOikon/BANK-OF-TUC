@@ -1,6 +1,7 @@
 package backend.users;
 
 import backend.Branch;
+import backend.accounts.Account;
 import behaviors.EmployeeBehavior;
 import types.UserType;
 
@@ -59,5 +60,29 @@ public class BankEmployer extends User {
 	
 	public String getFullName() {
 	    return this.name + " " + this.surname;
+	}
+	
+	public boolean deleteUserAccount(User user, String IBAN) {
+	    if (user == null) {
+	        return false;
+	    }
+
+	    if (user instanceof Customer) {
+	    	Customer customer = (Customer) user;
+	        Account accToClose = customer.findAccountByNumber(IBAN);
+	        if (accToClose != null) {
+	            customer.getAccounts().remove(accToClose);
+	            return true;
+	        }
+	    }
+	    else if(user instanceof ΒusinessCustomer) {
+	    	ΒusinessCustomer bCustomer = (ΒusinessCustomer) user;
+	        Account accToClose = bCustomer.findAccountByNumber(IBAN);
+	        if (accToClose != null) {
+	            bCustomer.getAccounts().remove(accToClose);
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 }

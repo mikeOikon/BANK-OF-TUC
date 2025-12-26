@@ -90,7 +90,7 @@ public class StartFrame extends JFrame {
         // ACTIONS
         //---------------------------------------------------------
         loginButton.addActionListener(e -> handleLogin());
-        registerButton.addActionListener(e -> new RegisterFrame().setVisible(true));
+        registerButton.addActionListener(e -> new RegisterFrame(this).setVisible(true));
     }
 
     //---------------------------------------------------------

@@ -4,7 +4,6 @@ import backend.BankSystem;
 import backend.PasswordHasher;
 import backend.users.User;
 import backend.users.UserBuilder;
-import backend.users.UserFactory;
 import types.UserType;
 
 import javax.swing.*;
@@ -12,9 +11,13 @@ import java.awt.*;
 
 public class RegisterFrame extends JFrame {
 
-    public RegisterFrame() {
+    private JFrame loginFrame; // Αναφορά στο αρχικό παράθυρο login
+
+    public RegisterFrame(JFrame loginFrame) {
+        this.loginFrame = loginFrame; // Αποθήκευση της αναφοράς
+        
         setTitle("Bank of TUC — Εγγραφή");
-        setSize(820, 600);
+        setSize(820, 650); // Ελαφρώς μεγαλύτερο ύψος για άνεση
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -35,7 +38,9 @@ public class RegisterFrame extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10, 10, 10, 10);
 
-        // User type selection
+        // --- Πεδία Φόρμας ---
+        
+        // User type
         c.gridx = 0; c.gridy = 0; c.anchor = GridBagConstraints.EAST;
         form.add(new JLabel("Τύπος Λογαριασμού:"), c);
         c.gridx = 1; c.anchor = GridBagConstraints.WEST;
@@ -85,19 +90,19 @@ public class RegisterFrame extends JFrame {
         JTextField afmField = new JTextField(20);
         form.add(afmField, c);
 
-        // Business fields (hidden for normal customers)
+        // Business fields
         c.gridx = 0; c.gridy++; c.anchor = GridBagConstraints.EAST;
         JLabel businessNameLabel = new JLabel("Όνομα Επιχείρησης:");
+        form.add(businessNameLabel, c);
         c.gridx = 1; c.anchor = GridBagConstraints.WEST;
         JTextField businessNameField = new JTextField(20);
-        form.add(businessNameLabel, c);
         form.add(businessNameField, c);
 
         c.gridx = 0; c.gridy++; c.anchor = GridBagConstraints.EAST;
         JLabel representativeLabel = new JLabel("Όνομα Εκπροσώπου:");
+        form.add(representativeLabel, c);
         c.gridx = 1; c.anchor = GridBagConstraints.WEST;
         JTextField representativeField = new JTextField(20);
-        form.add(representativeLabel, c);
         form.add(representativeField, c);
 
         // Initially hide business fields
@@ -106,7 +111,6 @@ public class RegisterFrame extends JFrame {
         representativeLabel.setVisible(false);
         representativeField.setVisible(false);
 
-        // Show/hide business fields based on selection
         userTypeBox.addActionListener(e -> {
             boolean business = userTypeBox.getSelectedIndex() == 1;
             businessNameLabel.setVisible(business);
@@ -125,71 +129,77 @@ public class RegisterFrame extends JFrame {
         foot.add(createButton);
         root.add(foot, BorderLayout.SOUTH);
 
-        // Create action
+        // --- CREATE ACTION ---
         createButton.addActionListener(e -> {
             String username = usernameField.getText().trim();
-            String password = new String(passwordField.getPassword());
-        	String confirm = new String(confirmField.getPassword());
-            try {            	
-            	confirm = PasswordHasher.hash(confirm);
-				password = PasswordHasher.hash(password);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+            String rawPassword = new String(passwordField.getPassword());
+            String rawConfirm = new String(confirmField.getPassword());
             String name = nameField.getText().trim();
             String surname = surnameField.getText().trim();
-           
-            String afm = afmField.getText().trim();
-			try {
-				afm = PasswordHasher.hash(afm);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+            String rawAfm = afmField.getText().trim();
 
-            if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()
-                    || name.isEmpty() || surname.isEmpty() || afm.isEmpty()) {
+            // 1. Validation
+            if (username.isEmpty() || rawPassword.isEmpty() || rawConfirm.isEmpty()
+                    || name.isEmpty() || surname.isEmpty() || rawAfm.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Συμπληρώστε όλα τα πεδία", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (!password.equals(confirm)) {
+
+            if (!rawPassword.equals(rawConfirm)) {
                 JOptionPane.showMessageDialog(this, "Οι κωδικοί δεν ταιριάζουν", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            UserType userType = (userTypeBox.getSelectedIndex() == 0) ? UserType.CUSTOMER : UserType.BUSINESSCUSTOMER;
-            
-            UserBuilder builder = new UserBuilder()
-                    .withUsername(username)
-                    .withPassword(password)
-                    .withName(name)
-                    .withSurname(surname)
-                    .withAFM(afm);
-
-            if (userType == UserType.BUSINESSCUSTOMER) {
-                String businessName = businessNameField.getText().trim();
-                String repName = representativeField.getText().trim();
-                if (businessName.isEmpty() || repName.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Συμπληρώστε όλα τα πεδία της επιχείρησης", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                builder.withBusinessName(businessName).withRepresentativeName(repName);
+            // 2. Hashing
+            String hashedPassword;
+            String hashedAfm;
+            try {
+                hashedPassword = PasswordHasher.hash(rawPassword);
+                hashedAfm = PasswordHasher.hash(rawAfm);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Σφάλμα κατά την κρυπτογράφηση", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
+            // 3. User Setup
+            UserType userType = (userTypeBox.getSelectedIndex() == 0) ? UserType.CUSTOMER : UserType.BUSINESSCUSTOMER;
+            UserBuilder builder = new UserBuilder()
+                    .withUsername(username)
+                    .withPassword(hashedPassword)
+                    .withName(name)
+                    .withSurname(surname)
+                    .withAFM(hashedAfm);
+
+            if (userType == UserType.BUSINESSCUSTOMER) {
+                String bName = businessNameField.getText().trim();
+                String rName = representativeField.getText().trim();
+                if (bName.isEmpty() || rName.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Συμπληρώστε τα στοιχεία επιχείρησης", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                builder.withBusinessName(bName).withRepresentativeName(rName);
+            }
+
+            // 4. Save & Transition
             BankSystem bank = BankSystem.getInstance();
             if (bank.findUserByUsername(username) != null) {
                 JOptionPane.showMessageDialog(this, "Το όνομα χρήστη υπάρχει ήδη!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             User user = bank.createUser(userType, builder);
-            bank.saveAllData(); // save to JSON immediately
+            bank.saveAllData();
 
             UserSession.getInstance().setCurrentUser(user);
             JOptionPane.showMessageDialog(this, "Ο λογαριασμός δημιουργήθηκε με επιτυχία!", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
 
-            // Open dashboard for new user
+            // ΚΛΕΙΣΙΜΟ ΠΑΡΑΘΥΡΩΝ
+            if (this.loginFrame != null) {
+                this.loginFrame.dispose(); // Κλείνει το LoginFrame
+            }
+            this.dispose(); // Κλείνει το RegisterFrame
+
+            // Άνοιγμα Dashboard
             new DashboardFrame().setVisible(true);
         });
 
@@ -203,4 +213,3 @@ public class RegisterFrame extends JFrame {
         b.setFont(new Font("SansSerif", Font.BOLD, 13));
     }
 }
-

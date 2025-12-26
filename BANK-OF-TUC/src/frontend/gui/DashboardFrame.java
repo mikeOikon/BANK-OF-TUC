@@ -1,84 +1,91 @@
 package frontend.gui;
 
-import backend.BankSystem;
-import backend.users.Customer;
-import backend.users.User;
+import backend.users.*;
 import frontend.gui.tabs.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class DashboardFrame extends JFrame {
 
-    private final User user;
-    private final JTabbedPane tabs;
+    private JTabbedPane tabs;
+    private final User currentUser;
 
     public DashboardFrame() {
-        user = UserSession.getInstance().getCurrentUser();
+        // Παίρνουμε τον χρήστη από το Session
+        this.currentUser = UserSession.getInstance().getCurrentUser();
 
-        if (user == null) {
-            throw new IllegalStateException("No logged-in user");
+        if (currentUser == null) {
+            dispose();
+            new StartFrame().setVisible(true);
+            return;
         }
 
-        setTitle("Bank of TUC — Dashboard");
+        setTitle("Bank of TUC — Dashboard [" + currentUser.getUsername() + "]");
         setSize(1000, 700);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                BankSystem.getInstance().shutdown();
-                System.exit(0);
-            }
-        });
+        // Κύριο Panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        
+        // Header Panel
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBackground(new Color(0, 51, 102));
+        header.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        tabs = new JTabbedPane(JTabbedPane.TOP);
-        add(tabs);
+        JLabel welcomeLabel = new JLabel("Καλωσήρθατε, " + currentUser.getFullName() + " (" + currentUser.getClass().getSimpleName() + ")");
+        welcomeLabel.setForeground(Color.WHITE);
+        welcomeLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        header.add(welcomeLabel, BorderLayout.WEST);
 
+        JButton logoutBtn = new JButton("Αποσύνδεση");
+        logoutBtn.addActionListener(e -> handleLogout());
+        header.add(logoutBtn, BorderLayout.EAST);
+
+        mainPanel.add(header, BorderLayout.NORTH);
+
+        // Δημιουργία των Tabs
+        tabs = new JTabbedPane();
         buildTabs();
-        setVisible(true);
+        mainPanel.add(tabs, BorderLayout.CENTER);
+
+        add(mainPanel);
     }
 
     private void buildTabs() {
-        // 1. PROFILE (Πάντα πρώτο)
-        tabs.addTab("Profile", new ProfileTab(user));
-
-        // 2. CUSTOMER TABS (Με σύνδεση refresh)
-        if (user instanceof Customer customer) {
-            // Δημιουργία των tabs
-            MyTransactionsTab transactionsTab = new MyTransactionsTab(customer);
-            CustomerOverviewTab overviewTab = new CustomerOverviewTab(customer);
-            TransferTab transferTab = new TransferTab(customer, overviewTab);
-            MyAccountsTab accountsTab = new MyAccountsTab(customer, overviewTab);
-
-            //Συνδέουμε το Overview με τα υπόλοιπα tabs
-            overviewTab.setOtherTabs(accountsTab, transactionsTab, transferTab);
-
-            if (user.canViewAccounts()) {
-                tabs.addTab("Overview", overviewTab);
-                tabs.addTab("My Accounts", accountsTab);
-            }
-            if (user.canViewTransactionsHistory()) {
-                tabs.addTab("My Transactions", transactionsTab);
-            }
-            if (user.canTransferMoney()) {
-                tabs.addTab("Transfer", transferTab);
-            }
+        // --- TABS ΓΙΑ ΠΕΛΑΤΕΣ (Customer / BusinessCustomer) ---
+        if (currentUser instanceof Customer) {
+            Customer customer = (Customer) currentUser;
+            CustomerOverviewTab overview = new CustomerOverviewTab(customer);
+            tabs.addTab("Overview", overview);
+            tabs.addTab("My Accounts", new MyAccountsTab(customer, overview));
+            // tabs.addTab("Transactions", new MyTransactionsTab(customer));
         }
 
-        // 3. ADMIN / AUDITOR TABS
-        if (user.canViewAllAccounts()) {
-            tabs.addTab("All Accounts", new AllAccountsTab(user));
-        }
-        if (user.canViewAllTransactionsHistory()) {
-            tabs.addTab("All Transactions", new AllTransactionsTab());
-        }
-        if (user.canPromoteUser() || user.canDemoteUser() || user.canRemoveUsers()) {
-            tabs.addTab("User Management", new UserManagementTab(user));
+        // --- TABS ΓΙΑ ΠΡΟΣΩΠΙΚΟ (Admin, Auditor, BankEmployer) ---
+        
+        // 1. Προβολή όλων των λογαριασμών (Ορατό σε όλους τους υπαλλήλους/admin)
+        if (currentUser instanceof Admin || currentUser instanceof Auditor || currentUser instanceof BankEmployer) {
+            tabs.addTab("Όλοι οι Λογαριασμοί", new AllAccountsTab(currentUser));
         }
 
-        tabs.addTab("Settings", new SettingsTab());
+        // 2. Διαχείριση Χρηστών (Ορατό σε Admin και BankEmployer - Ο Auditor εξαιρείται συνήθως)
+        if (currentUser instanceof Admin || currentUser instanceof BankEmployer) {
+            tabs.addTab("Διαχείριση Χρηστών", new UserManagementTab(currentUser));
+        }
+
+        // 3. Στατιστικά & Έλεγχος (Ορατό σε Admin και Auditor)
+        if (currentUser instanceof Admin || currentUser instanceof Auditor) {
+            // tabs.addTab("Audit Logs", new AuditLogsTab(currentUser));
+        }
+    }
+
+    private void handleLogout() {
+        int confirm = JOptionPane.showConfirmDialog(this, "Θέλετε να αποσυνδεθείτε;", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            UserSession.getInstance().setCurrentUser(null);
+            dispose();
+            new StartFrame().setVisible(true);
+        }
     }
 }

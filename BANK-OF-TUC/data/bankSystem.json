@@ -243,20 +243,6 @@
     "CUS003": {
       "accounts": [
         {
-          "primary": true,
-          "IBAN": "GR7202100219717850449273362",
-          "userID": "CUS003",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 1,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "transactional"
-        },
-        {
           "primary": false,
           "IBAN": "GR4602100210906615862541081",
           "userID": "CUS003",
@@ -530,6 +516,18 @@
         "branchCode": "0021"
       },
       "AFM": "6dd8036f1343a3cf322a86ac12e046bef5d678104e9c6e2b5b2910a5fdde941f"
+    },
+    "EMP005": {
+      "username": "angdiak",
+      "userID": "EMP005",
+      "password": "7edd983bbd45015b8d7c7b83db3558f6a70bba286e82feb92b77f9775eb4eba9",
+      "name": "ang",
+      "surname": "diak",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "eb79a76172d6c546da4bea205c5d30145a5e0d4cd9e7e150ae8d289caa3f1812"
     }
   },
   "auditors": {
@@ -544,6 +542,18 @@
         "branchCode": "0021"
       },
       "AFM": "123456789"
+    },
+    "AUD003": {
+      "username": "auditor",
+      "userID": "AUD003",
+      "password": "023d552dc77da5fca3f63b0be4b3a8984865e2976d2f17b6071e66a575f42e85",
+      "name": "auditor",
+      "surname": "1",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "053d90a73f66c53bb7eb7ac7c6acc30206f81491f85ac5ac618ed80919e0b3ce"
     }
   },
   "bankAccount": {
@@ -555,7 +565,7 @@
     }
   },
   "adminCount": 1,
-  "customerCount": 5,
-  "employeeCount": 4,
-  "auditorCount": 2
+  "customerCount": 8,
+  "employeeCount": 5,
+  "auditorCount": 3
 }
