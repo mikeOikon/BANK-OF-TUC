@@ -1,7 +1,9 @@
 package backend;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
+import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import backend.accounts.*;
 import backend.transactions.*;
@@ -13,7 +15,7 @@ public class GsonConfig {
         // Account polymorphism
         RuntimeTypeAdapterFactory<Account> accountAdapter =
                 RuntimeTypeAdapterFactory
-                        .of(Account.class, "accountType")   // <--- KEY added to JSON
+                        .of(Account.class, "accountType")
                         .registerSubtype(TransactionalAccount.class, "transactional")
                         .registerSubtype(SavingsAccount.class, "savings")
                         .registerSubtype(FixedTermAccount.class, "fixed")
@@ -29,8 +31,28 @@ public class GsonConfig {
 
         return new GsonBuilder()
                 .setPrettyPrinting()
+                // --- Η ΠΡΟΣΘΗΚΗ ΠΟΥ ΛΕΙΠΕΙ ---
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                // ----------------------------
                 .registerTypeAdapterFactory(accountAdapter)
                 .registerTypeAdapterFactory(transactionAdapter)
                 .create();
+    }
+
+    /**
+     * Εσωτερική βοηθητική κλάση για τη διαχείριση του LocalDate
+     */
+    private static class LocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+
+        @Override
+        public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(date.format(formatter));
+        }
+
+        @Override
+        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            return LocalDate.parse(json.getAsString(), formatter);
+        }
     }
 }

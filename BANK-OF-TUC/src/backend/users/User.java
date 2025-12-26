@@ -163,7 +163,7 @@ public abstract class User {
 
 
 
-	protected void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 

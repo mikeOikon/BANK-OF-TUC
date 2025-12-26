@@ -40,9 +40,7 @@ public class SavingsAccount extends PersonalAccount {
         if (balance < total)
             throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
 
-        balance -= total;
-
-        transactions.push(new WithdrawTransaction(this, amount));
+        super.withdraw(amount);
         
         return true;
     }

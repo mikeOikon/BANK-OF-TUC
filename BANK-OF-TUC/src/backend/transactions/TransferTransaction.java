@@ -12,5 +12,14 @@ public class TransferTransaction extends Transaction {
                 from.getIBAN(),
                 to.getIBAN()
         );
+        execute(from, to, amount);
+    }
+    
+    private void execute(Account from, Account to, double amount) {
+        // Αφαίρεση από τον αποστολέα
+        from.setBalance(from.getBalance() - amount);
+        
+        // Πρόσθεση στον παραλήπτη
+        to.setBalance(to.getBalance() + amount);
     }
 }

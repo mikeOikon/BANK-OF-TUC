@@ -8,18 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 	
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 
 import backend.accounts.Account;
-import backend.accounts.FixedTermAccount;
-import backend.accounts.SavingsAccount;
-import backend.accounts.TransactionalAccount;
-import backend.transactions.Transaction;
-import backend.transactions.TransactionFactory;
 import backend.accounts.AccountFactory;
 import backend.users.Admin;
 import backend.users.Auditor;
@@ -65,7 +58,7 @@ public class BankSystem {
     
     private transient Gson gson;
 	private BankSystem() {
-
+		
 		this.gson = GsonConfig.build();   
 		this.admins=new HashMap<>();
 		this.customers=new HashMap<>();

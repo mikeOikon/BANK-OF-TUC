@@ -1,236 +1,130 @@
 package backend.accounts;
 
-import java.util.Random;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Stack;
-
+import java.util.*;
 import backend.Branch;
-import backend.transactions.DepositTransaction;
-import backend.transactions.Transaction;
-import backend.transactions.TransferTransaction;
-import backend.transactions.WithdrawTransaction;
+import backend.transactions.*;
 import types.AccountType;
 
 public abstract class Account {
-	
-	private boolean primary;
-	String IBAN;	//εχει συγκεκριμενο αλγοριθμο 
-	String userID;
-	double balance;
-	Stack<Transaction> transactions; //ωστε να εμφανιζει πρωτη αυτη που έγινε τελευταία
-	private static long nextAccountId = 1;
-	private long account_id;
-	private static Set<String> usedAccounts = new HashSet<>(); // για να κρατάμε τους ήδη χρησιμοποιημένους αριθμούς λογαριασμών 
-	private double interest; //για επιτοκιο
-	
-	private Branch branch;	//για να συνδεσουμε με υποκαταστημα
-	
-	public Account(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest ,Branch branch) {
-		if (IBAN != null && !IBAN.isEmpty()) 
-			this.IBAN = IBAN;
-		else
-			this.IBAN = generateIBAN(branch); // Δημιουργία IBAN με branch
-		this.interest = interest;
-		this.userID = userID;
-		this.balance = balance;
-		this.transactions = transactions;
-		this.account_id = nextAccountId++;
-		this.branch = branch;	
-	}
-
-	public Branch getBranch() {
-        return branch;
+    private boolean primary;
+    private boolean frozen; 
+    protected String IBAN;    
+    protected String userID;
+    protected double balance;
+    protected Stack<Transaction> transactions; 
+    private static long nextAccountId = 1;
+    private long account_id;
+    private static Set<String> usedAccounts = new HashSet<>(); 
+    protected double interest; 
+    private Branch branch;    
+    
+    public Account(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest, Branch branch) {
+        this.IBAN = (IBAN != null && !IBAN.isEmpty()) ? IBAN : generateIBAN(branch); 
+        this.interest = interest;
+        this.userID = userID;
+        this.balance = balance;
+        this.transactions = (transactions != null) ? transactions : new Stack<>();
+        this.account_id = nextAccountId++;
+        this.branch = branch;
+        this.frozen = false;
     }
-	
-	public String getIBAN() {
-		return IBAN;
-	}
 
-	protected void setIBAN(String iBAN) {
-		IBAN = iBAN;
-	}
-
-
-	protected String getUserID() {
-		return userID;
-	}
-
-	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-
-
-	public Stack<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	protected double getInterest() {
-		return interest;
-	}
-
-	protected void setInterest(double interest) {
-		this.interest = interest;
-	}
-
-	protected long getAccount_id() {
-		return account_id;
-	}
-
-	protected void setAccount_id(long account_id) {
-		this.account_id = account_id;
-	}
-	
-	public boolean isPrimary() {
+    // --- Getters & Setters ---
+    public Branch getBranch() { return branch; }
+    public String getIBAN() { return IBAN; }
+    public double getBalance() { return balance; }
+    public void setBalance(double balance) { this.balance = balance; }
+    public Stack<Transaction> getTransactions() { return transactions; }
+    public boolean isFrozen() { return frozen; }
+    public void setFrozen(boolean frozen) { this.frozen = frozen; }
+    public abstract AccountType getAccountType();
+    
+    public boolean isPrimary() {
         return this.primary;
     }
-	
+
 	public void setPrimary(boolean primary) {
 		this.primary = primary;
 	}
 	
-	public void deposit(double amount) {
-	    if (amount <= 0)
-	        throw new IllegalArgumentException("Deposit amount must be positive.");
-
-	    this.balance += amount;
-
-	    Transaction tx = new DepositTransaction(this, amount);
-	    transactions.push(tx);
+	public void setInterest(double interest) {
+		this.interest = interest;
 	}
-
-	public boolean withdraw(double amount) {
-	    if (amount <= 0)
-	        throw new IllegalArgumentException("Withdraw amount must be positive.");
-
-	    if (this.balance < amount)
-	        throw new IllegalArgumentException("Insufficient funds.");
-
-	    this.balance -= amount;
-
-	    Transaction tx = new WithdrawTransaction(this, amount);
-	    transactions.push(tx);
-	    return true;
-	}
-
-	public boolean transferTo(Account target, double amount) {
-	    if (target == null)
-	        throw new IllegalArgumentException("Target account cannot be null.");
-
-	    if (amount <= 0)
-	        throw new IllegalArgumentException("Amount must be positive.");
-
-	    if (this.balance < amount)
-	        throw new IllegalArgumentException("Insufficient funds.");
-
-	    // Update balances
-	    this.balance -= amount;
-	    target.balance += amount;
-
-	    // Create transfer transaction
-	    Transaction tx = new TransferTransaction(this, target, amount);
-
-	    // Add to both accounts' histories
-	    this.transactions.push(tx);
-	    target.transactions.push(tx);
-	    
-	    return true;
-	}
-
 	
-// Μετατροπή χαρακτήρων σε ψηφία σύμφωνα με τον κανόνα IBAN (A=10 ... Z=35) ΓΙΑ ΝΑ ΜΠΟΡΕΙ ΝΑ ΑΛΛΑΖΕΙ ΑΝΑΛΟΓΩΣ ΤΗΝ ΤΡΑΠΕΖΑ
-	 private static String lettersToDigits(String input) {
-	        StringBuilder sb = new StringBuilder();
-	        for (char ch : input.toCharArray()) {
-	            if (Character.isLetter(ch)) {
-	                int val = Character.toUpperCase(ch) - 'A' + 10;
-	                sb.append(val);
-	            } else {
-	                sb.append(ch);
-	            }
-	        }
-	        return sb.toString();
-	    }
-	    
-	  public static String createUniqueBban(Branch branch) {
-	        String accountNumber;
-	        String bban;
-	        
-	        Random random = new Random();
-
-	        do {
-	            // Τυχαίος αριθμός λογαριασμού 16 ψηφίων
-	            long accNum = Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L;  // 16 ψηφία mask
-	            accountNumber = String.format("%016d", accNum);  // συμπλήρωση με μηδενικά αριστερά
-
-	            bban = branch.getBankCode() + branch.getBranchCode() + accountNumber;
-	        } while (usedAccounts.contains(bban)); // έλεγχος μοναδικότητας
-
-	        usedAccounts.add(bban); // κρατάμε το BBAN για να μην ξαναχρησιμοποιηθεί
-
-	        return bban;
-	    }
-	    
-
-	  // Υπολογισμός IBAN Ελλάδας από BBAN
-	  public static String generateIBAN(Branch branch) {
-		    String bban = createUniqueBban(branch);
-	        final String country = "GR";
-
-	        if (!bban.matches("\\d+")) {
-	            throw new IllegalArgumentException("Το BBAN πρέπει να περιέχει μόνο ψηφία.");
-	        }
-	        if (bban.length() != 23) {
-	            throw new IllegalArgumentException("Το BBAN για Ελλάδα πρέπει να έχει ακριβώς 23 ψηφία.");
-	        }
-
-	        // Αναδιάταξη: BBAN + GR + "00"
-	        String rearranged = bban + country + "00";
-
-	        // Μετατροπή γραμμάτων σε αριθμούς
-	        String numericString = lettersToDigits(rearranged);
-
-	        // Υπολογισμός mod 97 (σε μεγάλα νούμερα, με Long.parseLong κομμάτι-κομμάτι)
-	        int mod = mod97(numericString);
-
-	        int checkDigits = 98 - mod;
-	        String checkStr = String.format("%02d", checkDigits);
-
-	        System.out.println("Δημιουργήθηκε νέο IBAN: " + country + checkStr + bban);
-	        
-	        return country + checkStr + bban;
-	    }
-
-	    // Υπολογισμός mod 97 σε μεγάλους αριθμούς με τμηματική διαίρεση
-	    private static int mod97(String numeric) {
-	        int remainder = 0;
-	        for (int i = 0; i < numeric.length(); i++) {
-	            int digit = numeric.charAt(i) - '0';
-	            remainder = (remainder * 10 + digit) % 97;
-	        }
-	        return remainder;
-	    }
-	    
-	    @Override
-	    public String toString() {
-	        return String.format(
-	            "%s | IBAN: %s | Balance: %.2f | Branch: %s",
-	            this.getClass().getSimpleName(),  // επιστρέφει π.χ. "TransactionalAccount"
-	            this.getIBAN(),
-	            this.getBalance(),
-	            (branch != null ? branch.getBranchCode() : "N/A")
-	        );
-	    }
-
-		public AccountType getAccountType() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-	    
+	public double getInterest() {
+		return interest;
 	}
 
+    // --- Core Logic Methods ---
+
+    public void deposit(double amount) {
+        if (frozen) throw new IllegalStateException("Account is frozen.");
+        if (amount <= 0) throw new IllegalArgumentException("Amount must be positive.");
+
+        // Η DepositTransaction θα αυξήσει το balance
+        Transaction tx = new DepositTransaction(this, amount);
+        transactions.push(tx);
+    }
+
+    public boolean withdraw(double amount) {
+        if (frozen) throw new IllegalStateException("Account is frozen.");
+        if (amount <= 0) throw new IllegalArgumentException("Amount must be positive.");
+        if (this.balance < amount) throw new IllegalArgumentException("Insufficient funds.");
+
+        // Η WithdrawTransaction θα μειώσει το balance
+        Transaction tx = new WithdrawTransaction(this, amount);
+        transactions.push(tx);
+        return true;
+    }
+
+    public boolean transferTo(Account target, double amount) {
+        if (frozen) throw new IllegalStateException("Source account is frozen.");
+        if (target == null) throw new IllegalArgumentException("Target account cannot be null.");
+        if (target.isFrozen()) throw new IllegalStateException("Target account is frozen.");
+        if (this.balance < amount) throw new IllegalArgumentException("Insufficient funds.");
+
+        // Η TransferTransaction θα αλλάξει και τα δύο balances
+        Transaction tx = new TransferTransaction(this, target, amount);
+        this.transactions.push(tx);
+        target.getTransactions().push(tx);
+        return true;
+    }
+
+    // --- IBAN Generation (Helper Methods) ---
+    private static String lettersToDigits(String input) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : input.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                sb.append(Character.toUpperCase(ch) - 'A' + 10);
+            } else sb.append(ch);
+        }
+        return sb.toString();
+    }
+    
+    public static String generateIBAN(Branch branch) {
+        Random random = new Random();
+        String bban;
+        do {
+            bban = branch.getBankCode() + branch.getBranchCode() + String.format("%016d", Math.abs(random.nextLong()) % 1_0000_0000_0000_0000L);
+        } while (usedAccounts.contains(bban));
+        usedAccounts.add(bban);
+
+        String numericString = lettersToDigits(bban + "GR00");
+        int checkDigits = 98 - mod97(numericString);
+        return "GR" + String.format("%02d", checkDigits) + bban;
+    }
+
+    private static int mod97(String numeric) {
+        int remainder = 0;
+        for (int i = 0; i < numeric.length(); i++) {
+            remainder = (remainder * 10 + (numeric.charAt(i) - '0')) % 97;
+        }
+        return remainder;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s | IBAN: %s | Balance: %.2f | %s", 
+            getClass().getSimpleName(), IBAN, balance, (frozen ? "[FROZEN]" : "ACTIVE"));
+    }
+}

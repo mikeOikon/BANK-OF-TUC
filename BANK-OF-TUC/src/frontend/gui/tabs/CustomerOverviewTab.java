@@ -14,6 +14,7 @@ public class CustomerOverviewTab extends JPanel {
     private final JLabel balanceLabel;
     private final JLabel typeLabel;
     private final JTextArea transactionsArea;
+    private final JButton freezeBtn; // Νέο κουμπί
     
     private Account account;
     private final Customer customer;
@@ -23,24 +24,28 @@ public class CustomerOverviewTab extends JPanel {
     private TransferTab transferTab;
     
     private ChartPanel chartPanel;
-    
-    double[] monthlyIncome = new double[12]; // Y axis data
-    String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}; // X axis
 
     public CustomerOverviewTab(Customer customer) {
         this.customer = customer;
-        // Προσπάθεια ανάκτησης του πρώτου λογαριασμού (μπορεί να είναι null)
         this.account = customer.getPrimaryAccount();
 
         setLayout(new BorderLayout(20, 20));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Τίτλος
+        // --- ΠΑΝΩ ΜΕΡΟΣ: Τίτλος και Freeze Button ---
+        JPanel headerPanel = new JPanel(new BorderLayout());
         JLabel title = new JLabel("Account Overview");
         title.setFont(new Font("SansSerif", Font.BOLD, 20));
-        add(title, BorderLayout.NORTH);
+        
+        freezeBtn = new JButton("Freeze Account");
+        styleFreezeButton(freezeBtn);
+        freezeBtn.addActionListener(e -> handleFreezeToggle());
 
-        // Στοιχεία Λογαριασμού
+        headerPanel.add(title, BorderLayout.WEST);
+        headerPanel.add(freezeBtn, BorderLayout.EAST);
+        add(headerPanel, BorderLayout.NORTH);
+
+        // --- Στοιχεία Λογαριασμού ---
         typeLabel = new JLabel("Account Type: None");
         typeLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
         typeLabel.setForeground(Color.DARK_GRAY);
@@ -53,67 +58,96 @@ public class CustomerOverviewTab extends JPanel {
         infoPanel.add(typeLabel);
         infoPanel.add(balanceLabel);
 
-        // Περιοχή Συναλλαγών
+        // --- ΚΕΝΤΡΙΚΟ ΜΕΡΟΣ: Transactions & Chart ---
         transactionsArea = new JTextArea();
         transactionsArea.setEditable(false);
         transactionsArea.setFont(new Font("Monospaced", Font.PLAIN, 13));
 
+        chartPanel = new ChartPanel();
+        chartPanel.setPreferredSize(new Dimension(0, 150));
+        chartPanel.setBackground(Color.WHITE);
+        chartPanel.setBorder(BorderFactory.createTitledBorder("Monthly Income Flow"));
+
+        JPanel bottomContent = new JPanel(new BorderLayout());
+        bottomContent.add(new JScrollPane(transactionsArea), BorderLayout.CENTER);
+        bottomContent.add(chartPanel, BorderLayout.SOUTH);
+
         JPanel content = new JPanel(new BorderLayout(10, 10));
         content.add(infoPanel, BorderLayout.NORTH);
-        content.add(new JScrollPane(transactionsArea), BorderLayout.CENTER);
+        content.add(bottomContent, BorderLayout.CENTER);
 
         add(content, BorderLayout.CENTER);
         
-        // Footer
+        // --- FOOTER ---
         JButton createAccountBtn = new JButton("Create New Account");
         createAccountBtn.addActionListener(e -> showCreateAccountDialog());
 
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         footer.add(createAccountBtn);
         add(footer, BorderLayout.SOUTH);
-        
-     // Δημιουργία του Chart
-        chartPanel = new ChartPanel();
-        chartPanel.setPreferredSize(new Dimension(0, 150)); // Ύψος 200px
-        chartPanel.setBackground(Color.WHITE);
-        chartPanel.setBorder(BorderFactory.createTitledBorder("Monthly Income Flow"));
-
-        // Προσθήκη στο UI
-        // Θα χρειαστούμε ένα panel για να κρατάει το transactionsArea και το Chart μαζί
-        JPanel bottomContent = new JPanel(new BorderLayout());
-        bottomContent.add(new JScrollPane(transactionsArea), BorderLayout.CENTER);
-        bottomContent.add(chartPanel, BorderLayout.SOUTH);
-
-        content.add(bottomContent, BorderLayout.CENTER);
 
         refresh();
     }
 
-    //---------------------------------------------------------
-    // UPDATE METHODS (Refresh)
-    //---------------------------------------------------------
+    private void styleFreezeButton(JButton btn) {
+        btn.setFocusPainted(false);
+        btn.setFont(new Font("SansSerif", Font.BOLD, 12));
+    }
+
+    private void handleFreezeToggle() {
+        if (account == null) return;
+
+        // Υποθέτουμε ότι η κλάση Account έχει μέθοδο isFrozen() και setFrozen(boolean)
+        boolean isCurrentlyFrozen = account.isFrozen();
+        String action = isCurrentlyFrozen ? "unfreeze" : "freeze";
+        
+        int confirm = JOptionPane.showConfirmDialog(this, 
+            "Are you sure you want to " + action + " this account?", 
+            "Confirm Action", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            account.setFrozen(!isCurrentlyFrozen);
+            backend.BankSystem.getInstance().saveAllData();
+            refresh();
+            JOptionPane.showMessageDialog(this, "Account " + (isCurrentlyFrozen ? "Activated" : "Frozen") + " successfully.");
+        }
+    }
+
     public void refresh() {
-        // 1. Έλεγχος αν υπάρχει λογαριασμός (για αποφυγή NullPointerException)
         if (account == null) {
             typeLabel.setText("No account selected.");
             balanceLabel.setText("Balance: 0.00 €");
             transactionsArea.setText("Please create or select an account to view details.");
+            freezeBtn.setEnabled(false);
         } else {
+            freezeBtn.setEnabled(true);
             updateType();
             updateBalance();
             updateTransactions();
             chartPanel.setData(account.getTransactions());
+            
+            // Ενημέρωση εμφάνισης κουμπιού Freeze
+            if (account.isFrozen()) {
+                freezeBtn.setText("Unfreeze Account");
+                freezeBtn.setBackground(new Color(255, 204, 0)); // Πορτοκαλί/Κίτρινο
+                balanceLabel.setForeground(Color.RED);
+                balanceLabel.setText(balanceLabel.getText() + " (FROZEN)");
+            } else {
+                freezeBtn.setText("Freeze Account");
+                freezeBtn.setBackground(new Color(200, 200, 200)); // Γκρι
+                balanceLabel.setForeground(new Color(0, 102, 0));
+            }
         }
 
-        // 2. Ενημέρωση των υπόλοιπων Tabs αν έχουν συνδεθεί
         if (accountsTab != null) accountsTab.refresh();
         if (transactionsTab != null) transactionsTab.refresh();
         if (transferTab != null) transferTab.refresh();
     }
 
+    // Οι υπόλοιπες μέθοδοι (updateType, updateBalance, κλπ) παραμένουν ίδιες...
+
     private void updateType() {
         String rawName = account.getClass().getSimpleName();
-        // Προσθήκη κενών ανάμεσα σε κεφαλαία γράμματα
         String formattedName = rawName.replaceAll("(?<=[a-z])(?=[A-Z])", " ");
         typeLabel.setText("Account Type: " + formattedName + " (" + account.getIBAN() + ")");
     }
@@ -130,7 +164,6 @@ public class CustomerOverviewTab extends JPanel {
         if (account.getTransactions().isEmpty()) {
             sb.append("No transactions found for this account.");
         } else {
-            // Ταξινόμηση: Πρόσφατα πάνω, limit 10
             account.getTransactions().stream()
                     .sorted(Comparator.comparing(Transaction::getTimestamp).reversed())
                     .limit(10)
@@ -141,9 +174,6 @@ public class CustomerOverviewTab extends JPanel {
         transactionsArea.setCaretPosition(0);
     }
 
-    //---------------------------------------------------------
-    // PUBLIC API
-    //---------------------------------------------------------
     public void setSelectedAccount(Account account) {
         this.account = account;
         refresh();
@@ -153,7 +183,6 @@ public class CustomerOverviewTab extends JPanel {
         this.accountsTab = a;
         this.transactionsTab = t;
         this.transferTab = tr;
-        // Αν μετά το login βρέθηκε λογαριασμός, τον ορίζουμε
         if (this.account == null) {
             this.account = customer.getPrimaryAccount();
         }
@@ -174,18 +203,12 @@ public class CustomerOverviewTab extends JPanel {
         }
         
         backend.BankSystem.getInstance().saveAllData(); 
-        
         JOptionPane.showMessageDialog(this, "Success! IBAN: " + newAccount.getIBAN());
-
-        // ΑΝΤΙ ΓΙΑ refresh(), ΚΑΛΟΥΜΕ refreshEntireSystem()
         refreshEntireSystem(); 
     }
     
     private void refreshEntireSystem() {
-        // 1. Refresh το ίδιο το tab
         refresh();
-
-        // 2. Refresh όλων των άλλων tabs στο JTabbedPane (συμπεριλαμβανομένου του All Accounts του Admin)
         Container parent = getParent();
         while (parent != null && !(parent instanceof JTabbedPane)) {
             parent = parent.getParent();
@@ -194,17 +217,11 @@ public class CustomerOverviewTab extends JPanel {
         if (parent instanceof JTabbedPane tabs) {
             for (int i = 0; i < tabs.getTabCount(); i++) {
                 Component tab = tabs.getComponentAt(i);
-                
-                // Αν το tab είναι το AllAccountsTab του Admin, το κάνουμε refresh
                 if (tab instanceof AllAccountsTab) ((AllAccountsTab) tab).refresh();
-                
-                // Refresh στα υπόλοιπα Customer Tabs (αν δεν έχουν ήδη γίνει από τη refresh())
                 if (tab instanceof MyAccountsTab) ((MyAccountsTab) tab).refresh();
                 if (tab instanceof MyTransactionsTab) ((MyTransactionsTab) tab).refresh();
                 if (tab instanceof TransferTab) ((TransferTab) tab).refresh();
             }
         }
     }
-    
-    
 }

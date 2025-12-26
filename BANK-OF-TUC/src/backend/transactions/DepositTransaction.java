@@ -12,5 +12,10 @@ public class DepositTransaction extends Transaction {
                 null,                         // deposit has no "from"
                 targetAccount.getIBAN()
         );
+        execute(targetAccount, amount);
+    }
+    
+    private void execute(Account targetAccount, double amount) {
+    	targetAccount.setBalance(targetAccount.getBalance() + amount);
     }
 }

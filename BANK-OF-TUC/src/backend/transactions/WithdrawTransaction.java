@@ -12,5 +12,10 @@ public class WithdrawTransaction extends Transaction {
                 sourceAccount.getIBAN(),      // withdraw has "from"
                 null                          // no "to"
         );
+        execute(sourceAccount, amount);
     }
+    
+    private void execute(Account sourceAccount, double amount) {
+		sourceAccount.setBalance(sourceAccount.getBalance() - amount);
+	}
 }

@@ -36,7 +36,6 @@ public class TransactionalAccount extends PersonalAccount {
         if (balance < amount)
             throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
 
-        balance -= amount;
 
         super.withdraw(amount);
         
