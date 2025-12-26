@@ -1,5 +1,21 @@
 {
-  "businessCustomers": {},
+  "businessCustomers": {
+    "BUS002": {
+      "accounts": [],
+      "username": "tuc",
+      "userID": "BUS002",
+      "password": "10fe8f704d06cc82a4add5abc8c8ce2747fd042fd1c723b0b13df9df39e912cb",
+      "email": "tuc@tuc.gr",
+      "name": "TUC",
+      "surname": "tuc",
+      "phoneNumber": "2121212198",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "903bfc421057dd11bbe25bee5992b46fd5dce30791d3771298020439984f94e7"
+    }
+  },
   "admins": {
     "ADM001": {
       "username": "admin",
@@ -159,7 +175,7 @@
     }
   },
   "adminCount": 1,
-  "customerCount": 1,
+  "customerCount": 2,
   "employeeCount": 0,
   "auditorCount": 0
 }

@@ -39,16 +39,17 @@ public class ΒusinessCustomer extends User{
 		}
 	}
 	
-	public UserType getUserType() {
-		return UserType.BUSINESSCUSTOMER;
-	}
-	
+	@Override
 	public Account getPrimaryAccount() {
 		for(Account account : getAccounts()) {
 			if(account.isPrimary()) 
 			 	return account;
 		}
 		return null;
+	}
+	
+	public UserType getUserType() {
+		return UserType.BUSINESSCUSTOMER;
 	}
 	
 	public void setPrimaryAccount(Account targetAccount) {
@@ -65,16 +66,28 @@ public class ΒusinessCustomer extends User{
 	}
 	
 	
-	/*protected void createAccount() {
-		AccountBuilder AccountBuilder = new AccountBuilder()
+	@Override
+	public Account createAccount(int choice) {
+	    AccountType type;
+
+	    type = AccountType.BUSINESS ;           	
+
+	    // Χρήση AccountFactory για δημιουργία λογαριασμού
+	    AccountBuilder AccountBuilder = new AccountBuilder()
 	            .withUserID(this.userID)
 	            .withBalance(0.0)
 	            .withTransactions(new Stack<Transaction>())
+	            .withInterest(0.0) // default interest rate
 	            .withBranch(this.branch);
-    	Account newBusinessAccount = AccountFactory.createAccount(AccountType.BUSINESS, AccountBuilder);    	
-    	accounts.add(newBusinessAccount);
-    	viewAccountDetails(newBusinessAccount);
-	}*/
+	    Account newAccount = AccountFactory.createAccount(type, AccountBuilder);
+	    boolean firstAccount = accounts.isEmpty();
+	    accounts.add(newAccount);
+	    if(firstAccount) {
+	    	newAccount.setPrimary(true);
+	    }
+	    return newAccount;
+	    //viewAccountDetails(newAccount);
+	}
 	
 	protected void askToCloseAccount() {
 		//

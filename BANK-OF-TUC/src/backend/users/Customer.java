@@ -36,6 +36,7 @@ public class Customer extends User {
 	    return accounts; // άδεια λίστα αν δεν έχει
 	}
 	
+	@Override
 	public Account getPrimaryAccount() {
 		for(Account account : getAccounts()) {
 			if(account.isPrimary()) 
@@ -68,7 +69,7 @@ public class Customer extends User {
 		frontend.Main.scanner.nextLine(); // Consume newline
 		createAccount(choice);
 	}*/
-	
+	@Override
 	public Account createAccount(int choice) {
 	    AccountType type;
 

@@ -47,6 +47,10 @@ public abstract class User {
 	    this.userBehavior = behavior;
 	}
 	
+	public Account createAccount(int choice) {
+		return null;
+	}
+	
 	public boolean canViewAccounts() {
 		// TODO Auto-generated method stub
 		return userBehavior.canViewAccounts();
@@ -195,6 +199,10 @@ public abstract class User {
 	}
 
 	public abstract Object getFullName();
+
+	public Account getPrimaryAccount() {
+		return null;
+	}
 
 	/*protected void login() {
 		//angel 
