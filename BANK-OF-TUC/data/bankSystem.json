@@ -198,20 +198,6 @@
           "accountType": "transactional"
         },
         {
-          "primary": false,
-          "IBAN": "GR4102100218950986537645158",
-          "userID": "CUS002",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 1,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "savings"
-        },
-        {
           "termMonths": 0,
           "primary": false,
           "IBAN": "GR1602100218310305822539128",

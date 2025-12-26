@@ -43,6 +43,7 @@ public class UserManagementTab extends JPanel {
         // Αν ο χρήστης είναι απλός υπάλληλος, κρύβουμε το κουμπί διαγραφής
         if (currentUser instanceof BankEmployer && !(currentUser instanceof Admin)) {
             deleteBtn.setVisible(false);
+            promoteBtn.setVisible(false); 
         }
 
         buttonPanel.add(promoteBtn);

@@ -11,7 +11,7 @@ public class EmployeeBehavior implements UserBehavior {
 	@Override
 	public boolean canViewAllAccounts() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
