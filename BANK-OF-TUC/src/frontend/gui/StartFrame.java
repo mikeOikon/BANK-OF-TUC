@@ -39,7 +39,7 @@ public class StartFrame extends JFrame {
         JLabel logoLabel = new JLabel(new ImageIcon(scaledImage));
         logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         leftPanel.add(logoLabel, BorderLayout.CENTER);
-
+ 
         JLabel bankName = new JLabel("BANK OF TUC", SwingConstants.CENTER);
         bankName.setForeground(Color.WHITE);
         bankName.setFont(new Font("Arial", Font.BOLD, 34));

@@ -29,14 +29,14 @@ public class AllAccountsTab extends JPanel {
     public AllAccountsTab(User user) {
         // ΔΙΟΡΘΩΣΗ: Αποθηκεύουμε τον χρήστη ως User χωρίς επικίνδυνα casts
         this.currentUser = user;
-        
+       
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // --- ΠΑΝΩ ΜΕΡΟΣ: SEARCH BAR ---
         JPanel searchPanel = new JPanel(new BorderLayout(10, 10));
         searchPanel.add(new JLabel("Αναζήτηση (IBAN ή ID):"), BorderLayout.WEST);
-        
+       
         searchField = new JTextField();
         searchPanel.add(searchField, BorderLayout.CENTER);
         add(searchPanel, BorderLayout.NORTH);
@@ -46,14 +46,14 @@ public class AllAccountsTab extends JPanel {
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; 
+                return false;
             }
         };
 
         accountsTable = new JTable(tableModel);
         sorter = new TableRowSorter<>(tableModel);
         accountsTable.setRowSorter(sorter);
-        
+       
         add(new JScrollPane(accountsTable), BorderLayout.CENTER);
 
         // --- ΚΑΤΩ ΜΕΡΟΣ: ΚΟΥΜΠΙΑ ---
@@ -61,7 +61,7 @@ public class AllAccountsTab extends JPanel {
         closeBtn.setBackground(new Color(180, 50, 50));
         closeBtn.setForeground(Color.WHITE);
         closeBtn.setFont(new Font("SansSerif", Font.BOLD, 12));
-        
+       
         // ΕΛΕΓΧΟΣ ΔΙΚΑΙΩΜΑΤΩΝ: Μόνο Admin και Employer βλέπουν το κουμπί διαγραφής
         if (currentUser instanceof Auditor) {
             closeBtn.setVisible(false);
@@ -96,7 +96,7 @@ public class AllAccountsTab extends JPanel {
         String userID = (String) tableModel.getValueAt(modelRow, 0);
         String iban = (String) tableModel.getValueAt(modelRow, 2);
 
-        int confirm = JOptionPane.showConfirmDialog(this, 
+        int confirm = JOptionPane.showConfirmDialog(this,
             "Οριστική διαγραφή του λογαριασμού: " + iban + ";",
             "Επιβεβαίωση", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
@@ -107,7 +107,7 @@ public class AllAccountsTab extends JPanel {
 
             if (targetUser != null) {
                 boolean success = false;
-                
+               
                 // Ασφαλές Casting ανάλογα με τον τύπο του currentUser
                 if (currentUser instanceof Admin admin) {
                     success = admin.deleteUserAccount(targetUser, iban);
@@ -116,7 +116,7 @@ public class AllAccountsTab extends JPanel {
                 }
 
                 if (success) {
-                	bank.dao.save(bank);
+                    bank.saveAllData();
                     JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
                     refreshEntireSystem();
                 } else {
@@ -127,9 +127,9 @@ public class AllAccountsTab extends JPanel {
     }
 
     public void refresh() {
-        tableModel.setRowCount(0); 
+        tableModel.setRowCount(0);
         BankSystem bank = BankSystem.getInstance();
-        
+       
         // Φόρτωση όλων των τύπων πελατών
         if (bank.getCustomers() != null) {
             bank.getCustomers().values().forEach(this::addAccountsToTable);
@@ -140,10 +140,18 @@ public class AllAccountsTab extends JPanel {
     }
 
     private void addAccountsToTable(User user) {
-        // Χρήση της getAccounts() αν υπάρχει στη βασική κλάση User ή έλεγχος τύπου
-        java.util.List<Account> accounts = new java.util.ArrayList<>();
-        if (user instanceof Customer c) accounts = c.getAccounts();
-        else if (user instanceof BusinessCustomer bc) accounts = bc.getAccounts();
+
+        java.util.List<Account> accounts = null;
+
+        if (user instanceof Customer c) {
+            accounts = c.getAccounts();
+        } else if (user instanceof BusinessCustomer bc) {
+            accounts = bc.getAccounts();
+        }
+
+        if (accounts == null || accounts.isEmpty()) {
+            return;
+        }
 
         for (Account acc : accounts) {
             tableModel.addRow(new Object[]{
@@ -155,6 +163,7 @@ public class AllAccountsTab extends JPanel {
             });
         }
     }
+
 
     private void refreshEntireSystem() {
         refresh();
