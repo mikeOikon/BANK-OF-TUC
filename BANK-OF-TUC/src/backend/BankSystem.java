@@ -705,6 +705,9 @@ public class BankSystem {
 	    return usersByUsername.get(username);
 	}
 	
+	public void saveAllData() {
+	    dao.save(this);
+	}
 	
 }
 
