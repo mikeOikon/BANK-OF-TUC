@@ -19,8 +19,10 @@
       "username": "admin",
       "userID": "ADM001",
       "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
+      "email": "admin@admin.com",
       "name": "System",
       "surname": "0000000000",
+      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -36,20 +38,25 @@
         "branchCode": "0021"
       },
       "AFM": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
-    },
-    "ADM003": {
-      "username": "diak21",
-      "userID": "ADM003",
-      "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
-      "name": "angelos",
+    }
+  },
+  "customers": {
+    "CUS007": {
+      "accounts": [],
+      "username": "dia21",
+      "userID": "CUS007",
+      "password": "4057d8c859782141bee3cc653208ac0464c92531e03357b78beda7903ac4c6df",
+      "email": "dia@gmail.com",
+      "name": "A",
+      "surname": "D",
+      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
       },
-      "AFM": "1c6ead2be033a9b102dfe99f9acfe0c77f3e66dac946a6de9c71f5fe0cac0d46"
+      "AFM": "097afe17f15825ae1953c5aa4ea00c6db60ea9532405db1cca118054b6c38580"
     }
   },
-  "customers": {},
   "bankEmployers": {},
   "auditors": {
     "AUD001": {
@@ -74,7 +81,7 @@
     }
   },
   "adminCount": 3,
-  "customerCount": 6,
+  "customerCount": 7,
   "employeeCount": 2,
   "auditorCount": 1
 }

@@ -2,6 +2,8 @@ package frontend.gui.tabs;
 
 import backend.BankSystem;
 import backend.users.User;
+import services.UpdateEmailCommand;
+import services.UpdatePhoneNumberCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -105,11 +107,13 @@ public class ProfileTab extends JPanel {
     private void saveAndRefresh() {
 
         if (emailField != null) {
-            user.setEmail(emailField.getText());
+        	UpdateEmailCommand command = new UpdateEmailCommand(user, emailField.getText());
+        	command.execute();
         }
 
         if (phoneField != null) {
-            user.setPhoneNumber(phoneField.getText());
+        	UpdatePhoneNumberCommand command = new UpdatePhoneNumberCommand(user, phoneField.getText());
+        	command.execute();
         }
         
         BankSystem bank = BankSystem.getInstance();

@@ -85,6 +85,6 @@ public class DashboardFrame extends JFrame {
             tabs.addTab("User Management", new UserManagementTab(user));
         }
 
-        tabs.addTab("Settings", new SettingsTab());
+        tabs.addTab("Settings", new SettingsTab(user));
     }
 }
