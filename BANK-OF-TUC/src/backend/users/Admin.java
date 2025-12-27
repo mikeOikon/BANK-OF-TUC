@@ -22,7 +22,7 @@ public class Admin extends User {
 		this.userBehavior = new AdminBehavior();
 	}
 	
-	public boolean promoteUser(User oldUser, String newRole) {
+	/*public boolean promoteUser(User oldUser, String newRole) {
 	    BankSystem bank = BankSystem.getInstance();
 	    
 	    // 1. Μετατροπή του String σε UserType enum
@@ -61,7 +61,7 @@ public class Admin extends User {
 		BankSystem bank = BankSystem.getInstance();
 		bank.removeUser(userId);
 		return true;
-	}
+	}*/
 
 	//na doume ti prepei na einai protected
 	//ο αδμιν μπορει να κανει admin ή employer αλλον user (εφοσον αυτος δεν ειναι business customer)

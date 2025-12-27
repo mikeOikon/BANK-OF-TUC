@@ -188,7 +188,7 @@ public class RegisterFrame extends JFrame {
             }
 
             User user = bank.createUser(userType, builder);
-            bank.saveAllData();
+            bank.dao.save(bank);
 
             UserSession.getInstance().setCurrentUser(user);
             JOptionPane.showMessageDialog(this, "Ο λογαριασμός δημιουργήθηκε με επιτυχία!", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);

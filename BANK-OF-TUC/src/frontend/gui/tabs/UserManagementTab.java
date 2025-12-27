@@ -35,6 +35,7 @@ public class UserManagementTab extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
         promoteBtn = new JButton("Promote User");
+        
         deleteBtn = new JButton("Delete User");
         deleteBtn.setBackground(new Color(180, 50, 50));
         deleteBtn.setForeground(Color.WHITE);
@@ -79,7 +80,7 @@ public class UserManagementTab extends JPanel {
                 u.getUserID(),
                 u.getUsername(),
                 u.getFullName(),
-                u.getClass().getSimpleName()
+                u.getClass().getSimpleName() 
             });
         }
     }

@@ -13,8 +13,8 @@ public class ViewUserFrame extends JFrame {
 
         JPanel p = new JPanel(new GridLayout(4,2,12,12));
         p.setBorder(BorderFactory.createEmptyBorder(18,18,18,18));
-        p.add(new JLabel("Όνομα:")); p.add(new JLabel(safe(UserSession.getInstance().getUsername())));
-        p.add(new JLabel("Email:")); p.add(new JLabel(safe(UserSession.getInstance().getEmail())));
+        p.add(new JLabel("Όνομα:")); p.add(new JLabel(safe(UserSession.getInstance().getCurrentUser().getUsername())));
+        p.add(new JLabel("Email:")); p.add(new JLabel(safe(UserSession.getInstance().getCurrentUser().getEmail())));
         p.add(new JLabel("Τηλέφωνο:")); p.add(new JLabel("6901234567"));
         p.add(new JLabel("Διεύθυνση:")); p.add(new JLabel("Χανιά, Κρήτη"));
         add(p);

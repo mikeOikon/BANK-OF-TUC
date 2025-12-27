@@ -15,9 +15,10 @@ public class FileBankSystemDAO implements BankSystemDAO {
     @Override
     public BankSystem load() {
         File file = new File(DATA_FILE);
+        FileLogger logger= FileLogger.getInstance();
 
         if (!file.exists()) {
-            //System.out.println("[DAO] No saved data found. Creating new system.");
+            logger.log(types.LogLevel.WARNING, types.LogCategory.SYSTEM, "[DAO] Data file not found. Creating a new empty BankSystem.");
         	BankSystem system= BankSystem.createEmptySystem();
         	system.createDefaultAdminIfMissing();       	
             return system; 
@@ -31,11 +32,11 @@ public class FileBankSystemDAO implements BankSystemDAO {
             }
 
             system.rebuildTransientState(); 
-            //System.out.println("[DAO] Data loaded successfully.");
+            logger.log(types.LogLevel.INFO, types.LogCategory.SYSTEM, "[DAO] Data loaded successfully.");
             return system;
 
         } catch (Exception e) {
-            //System.out.println("[DAO] Failed to load data: " + e.getMessage());
+            logger.log(types.LogLevel.ERROR, types.LogCategory.SYSTEM, "[DAO] Failed to load data: " + e.getMessage());
             return BankSystem.createEmptySystem();
         }
     }

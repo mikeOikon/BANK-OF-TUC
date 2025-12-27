@@ -1,5 +1,6 @@
 package frontend.gui.tabs;
 
+import backend.BankSystem;
 import backend.ChartPanel;
 import backend.accounts.Account;
 import backend.transactions.Transaction;
@@ -111,7 +112,8 @@ public class CustomerOverviewTab extends JPanel {
 
         if (confirm == JOptionPane.YES_OPTION) {
             account.setFrozen(!isCurrentlyFrozen);
-            backend.BankSystem.getInstance().saveAllData();
+            BankSystem bank = BankSystem.getInstance();
+            bank.dao.save(bank);
             refresh();
             JOptionPane.showMessageDialog(this, "Status updated: Account is now " + (account.isFrozen() ? "FROZEN" : "ACTIVE"));
         }
@@ -202,8 +204,8 @@ public class CustomerOverviewTab extends JPanel {
         if (this.account == null) {
             this.account = newAccount;
         }
-        
-        backend.BankSystem.getInstance().saveAllData(); 
+        BankSystem bank =BankSystem.getInstance();      
+        bank.dao.save(bank); 
         JOptionPane.showMessageDialog(this, "Account created!\nIBAN: " + newAccount.getIBAN());
         refreshEntireSystem(); 
     }

@@ -116,7 +116,7 @@ public class AllAccountsTab extends JPanel {
                 }
 
                 if (success) {
-                    bank.saveAllData();
+                	bank.dao.save(bank);
                     JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
                     refreshEntireSystem();
                 } else {

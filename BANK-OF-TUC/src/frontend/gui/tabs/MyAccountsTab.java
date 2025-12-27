@@ -66,7 +66,8 @@ public class MyAccountsTab extends JPanel {
             
             // 1. Ενημέρωση Backend
             customer.setPrimaryAccount(currentSelection);
-            BankSystem.getInstance().saveAllData(); 
+            BankSystem bank= BankSystem.getInstance();
+            bank.dao.save(bank); 
             
             // 2. Αποθήκευση στοιχείων πριν το refresh του μοντέλου
             String iban = currentSelection.getIBAN();

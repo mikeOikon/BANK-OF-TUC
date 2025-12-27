@@ -78,7 +78,7 @@ public class TransferTab extends JPanel {
         Account selectedAcc = (Account) accountSelector.getSelectedItem();
         String type = (String) typeSelector.getSelectedItem();
         String amountStr = amountField.getText().trim();
-
+ 
         if (selectedAcc == null || amountStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
@@ -126,7 +126,7 @@ public class TransferTab extends JPanel {
 
                 if (success) {
                     // 1. Αποθήκευση αλλαγών στο αρχείο
-                    bank.saveAllData();
+                    bank.dao.save(bank);
 
                     // 2. ΑΥΤΟΜΑΤΗ ΑΝΑΝΕΩΣΗ του Overview Tab
                     if (overviewTab != null) {

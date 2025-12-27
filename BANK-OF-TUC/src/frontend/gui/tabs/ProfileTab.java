@@ -111,8 +111,10 @@ public class ProfileTab extends JPanel {
         if (phoneField != null) {
             user.setPhoneNumber(phoneField.getText());
         }
+        
+        BankSystem bank = BankSystem.getInstance();
 
-        BankSystem.getInstance().saveAllData();
+        bank.dao.save(bank);
         
         refresh();
 
