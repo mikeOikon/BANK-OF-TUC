@@ -4,6 +4,7 @@ import backend.BankSystem;
 import backend.users.Customer;
 import backend.users.User;
 import backend.users.BankEmployer; // Βεβαιωθείτε ότι το import υπάρχει
+import backend.users.BusinessCustomer;
 import backend.users.Admin;
 import backend.users.Auditor;
 import frontend.gui.tabs.*;
@@ -49,11 +50,11 @@ public class DashboardFrame extends JFrame {
         tabs.addTab("Profile", new ProfileTab(user));
 
         // 2. CUSTOMER TABS (Με σύνδεση refresh) - Παραμένει ως έχει
-        if (user instanceof Customer customer) {
-            MyTransactionsTab transactionsTab = new MyTransactionsTab(customer);
-            CustomerOverviewTab overviewTab = new CustomerOverviewTab(customer);
-            TransferTab transferTab = new TransferTab(customer, overviewTab);
-            MyAccountsTab accountsTab = new MyAccountsTab(customer, overviewTab);
+        if (user instanceof Customer || user instanceof BusinessCustomer) {
+            MyTransactionsTab transactionsTab = new MyTransactionsTab(user);
+            CustomerOverviewTab overviewTab = new CustomerOverviewTab(user);
+            TransferTab transferTab = new TransferTab(user, overviewTab);
+            MyAccountsTab accountsTab = new MyAccountsTab(user, overviewTab);
 
             overviewTab.setOtherTabs(accountsTab, transactionsTab, transferTab);
 

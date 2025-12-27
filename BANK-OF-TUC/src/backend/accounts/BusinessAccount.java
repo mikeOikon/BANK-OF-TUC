@@ -39,9 +39,9 @@ public class BusinessAccount extends Account {
     @Override
     public String toString() {
         return String.format(
-                "%s | Type: %s | Business: %s | IBAN: %s | Balance: %.2f | Fee: %.2f | Branch: %s",
+                "%s | Type: %s | IBAN: %s | Balance: %.2f | Fee: %.2f | Branch: %s",
                 this.getClass().getSimpleName(),
-                getAccountType(),
+                getAccountType().name(),      // <-- enum σε String
                 this.getIBAN(),
                 this.getBalance(),
                 managementFee,
@@ -56,29 +56,39 @@ public class BusinessAccount extends Account {
         if (balance < total)
             throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
 
-        balance -= total;
+        // Μειώνουμε πρώτα balance για το fee
+        balance -= managementFee;
 
-        transactions.push(new WithdrawTransaction(this, amount));
-        
+        // Κάνουμε withdrawal μόνο το πραγματικό amount
+        super.withdraw(amount);
+
         return true;
     }
+
     
     @Override
     public boolean transferTo(Account target, double amount) {
-    	double total = amount + managementFee;
-    	
-    	if (balance < total)
+        double total = amount + managementFee;
+        
+        if (balance < total)
             throw new IllegalArgumentException("Insufficient funds for transaction + fee.");
-    	
-    	balance -= managementFee;
+        
+        balance -= managementFee;
+        
         super.transferTo(target, amount);
         
         return true;
     }
+
     
     @Override
     public void deposit(double amount) {
 
+        if (amount <= managementFee) {
+            throw new IllegalArgumentException("Deposit must be more than the management fee (" + managementFee + ").");
+        }
         super.deposit(amount);
+        balance -= managementFee;
     }
+
 }

@@ -3,12 +3,14 @@ package frontend.gui.tabs;
 import backend.BankSystem;
 import backend.accounts.Account;
 import backend.users.Customer;
+import backend.users.User;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TransferTab extends JPanel {
 
-    private final Customer customer;
+    private final User customer;
     private final CustomerOverviewTab overviewTab; // Reference για άμεση ανανέωση
     
     private JComboBox<Account> accountSelector;
@@ -18,8 +20,8 @@ public class TransferTab extends JPanel {
     private JLabel targetIbanLabel;
     private JButton executeBtn;
 
-    public TransferTab(Customer customer, CustomerOverviewTab overviewTab) {
-        this.customer = customer;
+    public TransferTab(User user, CustomerOverviewTab overviewTab) {
+        this.customer = user;
         this.overviewTab = overviewTab;
         
         setLayout(new BorderLayout(20, 20));
@@ -34,7 +36,7 @@ public class TransferTab extends JPanel {
         JPanel form = new JPanel(new GridLayout(0, 1, 10, 10));
 
         form.add(new JLabel("Select Your Account:"));
-        accountSelector = new JComboBox<>(customer.getAccounts().toArray(new Account[0]));
+        accountSelector = new JComboBox<>(user.getAccounts().toArray(new Account[0]));
         form.add(accountSelector);
 
         form.add(new JLabel("Transaction Type:"));

@@ -1,12 +1,120 @@
 {
   "businessCustomers": {
     "BUS004": {
-      "accounts": [],
+      "accounts": [
+        {
+          "managementFee": 10.0,
+          "primary": true,
+          "frozen": false,
+          "IBAN": "GR4602100217946098933710985",
+          "userID": "BUS004",
+          "balance": 0.0,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 100.0,
+              "timestampString": "2025-12-27T17:33:25.620946",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 10.0,
+              "timestampString": "2025-12-27T17:33:30.775409200",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 10.0,
+              "timestampString": "2025-12-27T17:45:19.668104400",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 10.0,
+              "timestampString": "2025-12-27T17:45:32.585062300",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 10.0,
+              "timestampString": "2025-12-27T17:46:52.337276800",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 10.0,
+              "timestampString": "2025-12-27T17:47:01.409446500",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 5.0,
+              "timestampString": "2025-12-27T17:47:13.839463300",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 15.0,
+              "timestampString": "2025-12-27T17:50:09.240186400",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "business"
+        },
+        {
+          "managementFee": 10.0,
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR8802100213024949520666655",
+          "userID": "BUS004",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "business"
+        },
+        {
+          "managementFee": 10.0,
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR9402100216574292818838280",
+          "userID": "BUS004",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 2,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "business"
+        }
+      ],
       "username": "tuc",
       "userID": "BUS004",
       "password": "10fe8f704d06cc82a4add5abc8c8ce2747fd042fd1c723b0b13df9df39e912cb",
+      "email": "tuc@tuc.gr",
       "name": "TUC",
       "surname": "Chania",
+      "phoneNumber": "1234567890",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -19,10 +127,8 @@
       "username": "admin",
       "userID": "ADM001",
       "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-      "email": "admin@admin.com",
       "name": "System",
       "surname": "0000000000",
-      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"

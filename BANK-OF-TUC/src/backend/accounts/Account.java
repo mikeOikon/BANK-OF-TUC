@@ -122,7 +122,6 @@ public abstract class Account {
         return remainder;
     }
 
-    @Override
     public String toString() {
         return String.format("%s | IBAN: %s | Balance: %.2f | %s", 
             getClass().getSimpleName(), IBAN, balance, (frozen ? "[FROZEN]" : "ACTIVE"));
