@@ -1,7 +1,10 @@
 package services;
 
 import backend.BankSystem;
+import backend.FileLogger;
 import backend.users.*;
+import types.LogCategory;
+import types.LogLevel;
 import types.UserType;
 
 public class DemoteUserCommand implements Command {
@@ -18,10 +21,12 @@ public class DemoteUserCommand implements Command {
 
     @Override
     public void execute() {
+    	
+   	 FileLogger logger= FileLogger.getInstance();
 
         // 🔐 Permission check via Bridge
         if (!executor.canDemoteUser()) {
-            System.out.println("❌ Permission denied. Only admins can demote users.");
+        	 logger.log(LogLevel.WARNING,LogCategory.USER," UserId:"+executor.getUserID()+" attempted to demote UserId:"+target.getUserID()+" without sufficient permissions.");
             return;
         }
 
@@ -36,7 +41,7 @@ public class DemoteUserCommand implements Command {
                 next = UserType.CUSTOMER;
                 break;
             default:
-                System.out.println("❌ Cannot demote user of type " + current);
+            	logger.log(LogLevel.WARNING,LogCategory.USER," UserId:"+executor.getUserID()+" attempted to demote: "+current);
                 return;
         }
 
@@ -49,16 +54,18 @@ public class DemoteUserCommand implements Command {
                 .withSurname(target.getSurname())
                 .withBranch(target.getBranch())
                 .withAFM(target.getAFM());
-
+        
+        
+        String UserID=bankSystem.generateId(next);
         User demoted = UserFactory.createUser(
                 next,
-                bankSystem.generateId(next),
+                UserID,
                 builder
         );
 
         bankSystem.addUser(demoted);
 
-        System.out.println("✅ User demoted to " + next);
+        logger.log(LogLevel.INFO,LogCategory.USER," UserId:"+executor.getUserID()+" demoted to: "+next+ "with new UserId:"+UserID);
     }
 
 	@Override

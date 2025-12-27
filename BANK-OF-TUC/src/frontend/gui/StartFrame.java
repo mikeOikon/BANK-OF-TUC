@@ -20,7 +20,7 @@ public class StartFrame extends JFrame {
         setResizable(false);
 
         // Load users from JSON
-        BankSystem.getInstance().loadFromFileInternal();
+        BankSystem.dao.load();
 
         JPanel container = new JPanel(new GridLayout(1, 2));
         add(container);

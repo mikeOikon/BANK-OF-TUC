@@ -1,7 +1,10 @@
 package services;
 
 import backend.BankSystem;
+import backend.FileLogger;
 import backend.users.User;
+import types.LogCategory;
+import types.LogLevel;
 import types.UserType;
 
 public class DeleteUserCommand implements Command {
@@ -9,6 +12,7 @@ public class DeleteUserCommand implements Command {
 	 private BankSystem bankSystem;
 	 private String userId;
 	 private User executor;
+
 
 	    public DeleteUserCommand(User executor,String userId) {
 	        this.bankSystem = BankSystem.getInstance();
@@ -18,12 +22,13 @@ public class DeleteUserCommand implements Command {
 
 	@Override
 	public void execute() {
+		 FileLogger logger= FileLogger.getInstance();
 		  if (!executor.canRemoveUsers()) {
 	            throw new SecurityException("Only admins can remove users.");
 	        }
 
 	        bankSystem.removeUser(userId);
-	        System.out.println("User " + userId + " removed by admin " + executor.getUsername());
+	        logger.log(LogLevel.INFO,LogCategory.USER,"User " + userId + " removed by admin " + executor.getUsername());
 	    }
 
 	

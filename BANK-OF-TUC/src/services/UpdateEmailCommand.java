@@ -1,12 +1,16 @@
 package services;
 
+import backend.FileLogger;
 import backend.users.User;
 import backend.users.UserBuilder;
+import types.LogCategory;
+import types.LogLevel;
 
 public class UpdateEmailCommand implements Command {
 
     private final User user;
     private final String newEmail;
+   
 
     public UpdateEmailCommand(User user, String newEmail) {
         this.user = user;
@@ -15,15 +19,15 @@ public class UpdateEmailCommand implements Command {
 
     @Override
     public void execute() {
-
+    	FileLogger logger= FileLogger.getInstance();
         // 1️⃣ Validate using Builder (not mutation yet)
         UserBuilder builder = new UserBuilder()
                 .withEmail(newEmail);
-
-        // 2️⃣ Apply change safely
+        
+        
         user.setEmail(builder.getEmail());
 
-        System.out.println("✅ Email updated successfully.");
+        logger.log(LogLevel.INFO,LogCategory.USER," Email updated successfully for UserId."+user.getUserID());
     }
 
 	@Override

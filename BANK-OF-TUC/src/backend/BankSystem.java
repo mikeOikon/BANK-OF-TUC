@@ -30,6 +30,8 @@ import behaviors.EmployeeBehavior;
 import services.UserManager;
 import services.Command;
 import services.CreateUserCommand;
+import types.LogCategory;
+import types.LogLevel;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 
@@ -52,14 +54,13 @@ public class BankSystem {
 	private  int customerCount = 0;
 	private  int employeeCount = 0;
 	private  int auditorCount = 0;
-	
-	
-    private static final String DATA_FILE = "data/bankSystem.json";
+
+    public static BankSystemDAO dao = new FileBankSystemDAO();
+
     
-    private transient Gson gson;
+
 	private BankSystem() {
 		
-		this.gson = GsonConfig.build();   
 		this.admins=new HashMap<>();
 		this.customers=new HashMap<>();
 		this.bankEmployers=new HashMap<>();
@@ -74,61 +75,14 @@ public class BankSystem {
 		  userMaps.put("AUD", auditors);
 		  userMaps.put("BUS", businessCustomers);
 		this.usersByUsername = new HashMap<>();
-		
-		if (admins.isEmpty()) {
-		    UserBuilder builder = new UserBuilder();
-		    try {
-				builder.withUsername("admin")
-				       .withPassword(PasswordHasher.hash("Admin123"))
-				       .withEmail("admin@bank.com")
-				       .withName("System")
-				       .withSurname("Admin")
-				       .withPhoneNumber("0000000000")
-				       .withBranch(Branch.getDefaultBranch());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		    User admin = UserFactory.createUser(
-		        UserType.ADMIN,
-		        generateId(UserType.ADMIN),
-		        builder
-		    );
-
-		    addUser(admin);
-		}
-		
-		AccountFactory accountFactory = new AccountFactory();
+		//AccountFactory accountFactory = new AccountFactory();
 	}
-
-	public void saveAllData() {
-		if (this.gson == null) {
-			this.gson = GsonConfig.build();
-		}
-		
-        try {
-        
-            File dir = new File("data");
-            if (!dir.exists()) dir.mkdir();
-
-            try (FileWriter writer = new FileWriter(DATA_FILE)) {
-                this.gson.toJson(this, writer); // serialize entire BankSystem
-                writer.flush();
-            }
-            System.out.println("[BankSystem] ✅ Data saved successfully.");
-            System.out.println("[BankSystem] Saving JSON at: " + new File(DATA_FILE).getAbsolutePath());
-
-        } catch (IOException e) {
-            System.err.println("[BankSystem] ❌ Failed to save data: " + e.getMessage());
-        }
-    }
 	
 	public static BankSystem getInstance() {
 	    if (instance == null) {
 	        synchronized (BankSystem.class) {
 	            if (instance == null) {
-	                instance = loadFromFileInternal();
+	                instance = dao.load();
 	            }
 	        }
 	    }
@@ -136,94 +90,69 @@ public class BankSystem {
 	}
 	
 	
-	
-	public static BankSystem loadFromFileInternal() {
+	void createDefaultAdminIfMissing() {
+	    if (!admins.isEmpty()) return;
 
-	    File file = new File(DATA_FILE);
-
-	    if (!file.exists()) {
-	        System.out.println("[BankSystem] No saved data found. Creating new system.");
-	        return new BankSystem();
-	    }
-
-	    try (FileReader reader = new FileReader(file)) {
-
-	    	Gson gson = GsonConfig.build();
-	    	BankSystem system = gson.fromJson(reader, BankSystem.class);
-
-	        if (system == null) {
-	            System.out.println("[BankSystem] Loaded file was empty. Creating new system.");
-	            return new BankSystem();
-	        }
-
-	        // rebuild runtime-only user maps
-	        system.userMaps = new HashMap<>();
-	        system.userMaps.put("ADM", system.admins);
-	        system.userMaps.put("CUS", system.customers);
-	        system.userMaps.put("EMP", system.bankEmployers);
-	        system.userMaps.put("AUD", system.auditors);
-	        system.userMaps.put("BUS", system.businessCustomers);
-
-	        system.usersByUsername = new HashMap<>();
-
-	        for (User user : system.admins.values()) {
-	            system.usersByUsername.put(user.getUsername(), user);
-	        }
-
-	        for (User user : system.customers.values()) {
-	            system.usersByUsername.put(user.getUsername(), user);
-	        }
-
-	        for (User user : system.bankEmployers.values()) {
-	            system.usersByUsername.put(user.getUsername(), user);
-	        }
-
-	        for (User user : system.auditors.values()) {
-	            system.usersByUsername.put(user.getUsername(), user);
-	        }
-
-	        for (User user : system.businessCustomers.values()) {
-	            system.usersByUsername.put(user.getUsername(), user);
-	        }
-	        
-	        
-	        for (Admin admin : system.admins.values()) {
-	            admin.setBehavior(new AdminBehavior());
-	        }
-
-	        for (Customer customer : system.customers.values()) {
-	            customer.setBehavior(new CustomerBehavior());
-	        }
-
-	        for (Auditor auditor : system.auditors.values()) {
-	            auditor.setBehavior(new AuditorBehavior());
-	        }
-
-	        for (BankEmployer emp : system.bankEmployers.values()) {
-	            emp.setBehavior(new EmployeeBehavior());
-	        }
-
-	        for (ΒusinessCustomer bc : system.businessCustomers.values()) {
-	            bc.setBehavior(new BusinessBehavior());
-	        }
-
-	        System.out.println("[BankSystem] Data loaded successfully.");
-	        return system;
-
+	    UserBuilder builder = new UserBuilder();
+	    try {
+	        builder.withUsername("admin")
+	               .withPassword(PasswordHasher.hash("Admin123"))
+	               .withEmail("admin@bank.com")
+	               .withName("System")
+	               .withSurname("Admin")
+	               .withPhoneNumber("0000000000")
+	               .withBranch(Branch.getDefaultBranch());
 	    } catch (Exception e) {
-	        System.out.println("[BankSystem] ⚠️ Failed to load data: " + e.getMessage());
-	        return new BankSystem();
+	        e.printStackTrace();
 	    }
-	    
-	    
-	    
+
+	    User admin = UserFactory.createUser(
+	        UserType.ADMIN,
+	        generateId(UserType.ADMIN),
+	        builder
+	    );
+
+	    addUser(admin);
+	}
+
+
+	
+	void rebuildTransientState() {
+
+	    this.userMaps = new HashMap<>();
+	    userMaps.put("ADM", admins);
+	    userMaps.put("CUS", customers);
+	    userMaps.put("EMP", bankEmployers);
+	    userMaps.put("AUD", auditors);
+	    userMaps.put("BUS", businessCustomers);
+
+	    this.usersByUsername = new HashMap<>();
+
+	    for (User u : admins.values()) usersByUsername.put(u.getUsername(), u);
+	    for (User u : customers.values()) usersByUsername.put(u.getUsername(), u);
+	    for (User u : bankEmployers.values()) usersByUsername.put(u.getUsername(), u);
+	    for (User u : auditors.values()) usersByUsername.put(u.getUsername(), u);
+	    for (User u : businessCustomers.values()) usersByUsername.put(u.getUsername(), u);
+
+	    for (Admin a : admins.values()) a.setBehavior(new AdminBehavior());
+	    for (Customer c : customers.values()) c.setBehavior(new CustomerBehavior());
+	    for (Auditor a : auditors.values()) a.setBehavior(new AuditorBehavior());
+	    for (BankEmployer e : bankEmployers.values()) e.setBehavior(new EmployeeBehavior());
+	    for (ΒusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
+	}
+
+
+	
+	static BankSystem createEmptySystem() {
+	    return new BankSystem();
 	}
 
 
 	//να γινεται save οταν γινεται καποια αλλαγη και οταν κλεινει το προγραμμα
 	 public void shutdown() {
-	    this.saveAllData();
-	    System.out.println("[BankSystem] System shutting down, data persisted.");
+	    dao.save(this);
+	    FileLogger logger= FileLogger.getInstance();
+	    logger.log(LogLevel.INFO,LogCategory.SYSTEM,"System shutting down, data persisted.");
 	 }
 	public Branch getBranch(String branchCode) {
         return branches.get(branchCode);
@@ -257,17 +186,18 @@ public class BankSystem {
 	public void removeUser(String userId) {
 	String prefix = userId.substring(0, 3);
 	Map<String, ? extends User> userMap = userMaps.get(prefix);
+	FileLogger logger= FileLogger.getInstance();
 
 	if (userMap != null) {	
 		User removed= userMap.remove(userId);
 		if (removed != null) {
 			usersByUsername.remove(removed.getUsername());	
-			System.out.println("User " + userId + " removed successfully.");
+			//System.out.println("User " + userId + " removed successfully.");
 		} else {
-			System.out.println("User " + userId + " not found.");
+			logger.log(LogLevel.WARNING,LogCategory.USER,"User " + userId + " not found.");
 		}
 	} else {
-		System.out.println("Invalid user ID prefix: " + prefix);
+		logger.log(LogLevel.ERROR,LogCategory.USER,"Invalid user ID prefix: " + prefix);
 	}
 		}
 	

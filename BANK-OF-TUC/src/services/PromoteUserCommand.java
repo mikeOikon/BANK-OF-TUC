@@ -1,7 +1,10 @@
 package services;
 
 import backend.BankSystem;
+import backend.FileLogger;
 import backend.users.*;
+import types.LogCategory;
+import types.LogLevel;
 import types.UserType;
 
 public class PromoteUserCommand implements Command {
@@ -18,10 +21,10 @@ public class PromoteUserCommand implements Command {
 
     @Override
     public void execute() {
-
-        // 🔐 Permission check via Bridge
+    	
+    	FileLogger logger =FileLogger.getInstance();
         if (!executor.canPromoteUser()) {
-            System.out.println("❌ Permission denied. Only admins can promote users.");
+        	 logger.log(LogLevel.WARNING,LogCategory.USER," UserId:"+executor.getUserID()+" attempted to promote UserId:"+target.getUserID()+" without sufficient permissions.");
             return;
         }
 
@@ -36,7 +39,7 @@ public class PromoteUserCommand implements Command {
                 next = UserType.ADMIN;
                 break;
             default:
-                System.out.println("❌ Cannot promote user of type " + current);
+            	 logger.log(LogLevel.WARNING,LogCategory.USER," UserId:"+executor.getUserID()+" attempted to promote: "+current);
                 return;
         }
 
@@ -49,16 +52,18 @@ public class PromoteUserCommand implements Command {
                 .withSurname(target.getSurname())
                 .withBranch(target.getBranch())
                 .withAFM(target.getAFM());
+        
+        String UserID=bankSystem.generateId(next);
 
         User promoted = UserFactory.createUser(
                 next,
-                bankSystem.generateId(next),
+                UserID,
                 builder
         );
 
         bankSystem.addUser(promoted);
 
-        System.out.println("✅ User promoted to " + next);
+        logger.log(LogLevel.INFO,LogCategory.USER," UserId:"+executor.getUserID()+" promoted to: "+next+ "with new UserId:"+UserID);
     }
 
 	@Override

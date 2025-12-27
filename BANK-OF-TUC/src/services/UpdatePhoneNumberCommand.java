@@ -1,7 +1,10 @@
 package services;
 
+import backend.FileLogger;
 import backend.users.User;
 import backend.users.UserBuilder;
+import types.LogCategory;
+import types.LogLevel;
 
 public class UpdatePhoneNumberCommand implements Command {
 
@@ -15,6 +18,8 @@ public class UpdatePhoneNumberCommand implements Command {
 
 	    @Override
 	    public void execute() {
+	    	
+	    	FileLogger logger= FileLogger.getInstance();
 
 	        // 1️⃣ Validate using Builder (not mutation yet)
 	        UserBuilder builder = new UserBuilder()
@@ -23,7 +28,7 @@ public class UpdatePhoneNumberCommand implements Command {
 	        // 2️⃣ Apply change safely
 	        user.setPhoneNumber(builder.getPhoneNumber());
 
-	        System.out.println("✅ Email updated successfully.");
+	        logger.log(LogLevel.INFO,LogCategory.USER," Phone Number updated successfully for UserId."+user.getUserID());
 	    }
 	@Override
 	public void undo() {
