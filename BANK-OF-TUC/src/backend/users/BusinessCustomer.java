@@ -17,13 +17,13 @@ import behaviors.BusinessBehavior;
 import types.AccountType;
 import types.UserType;
 
-public class ΒusinessCustomer extends User{
+public class BusinessCustomer extends User{
 	
 	private ArrayList<Account> accounts;
 	
-	public ΒusinessCustomer(String userID,String username, String password, Branch branch, String businessName, String representativeName, String AFM) {
+	public BusinessCustomer(String userID,String username, String password, Branch branch, String businessName, String representativeName, String AFM) {
 		super(userID, username, password, businessName, representativeName, branch, AFM);
-		this.accounts = new ArrayList<>();
+		this.accounts = new ArrayList<Account>();
 		this.userBehavior= new BusinessBehavior();
 	}
 	//na doume ti prepei na einai protected 

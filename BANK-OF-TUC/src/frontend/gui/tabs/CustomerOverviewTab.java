@@ -6,7 +6,7 @@ import backend.accounts.Account;
 import backend.transactions.Transaction;
 import backend.users.User;
 import backend.users.Customer;
-import backend.users.ΒusinessCustomer;
+import backend.users.BusinessCustomer;
 
 import javax.swing.*;
 import java.awt.*;

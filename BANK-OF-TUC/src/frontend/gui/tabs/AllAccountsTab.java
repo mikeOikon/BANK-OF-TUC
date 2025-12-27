@@ -6,7 +6,7 @@ import backend.users.Admin;
 import backend.users.Auditor;
 import backend.users.Customer;
 import backend.users.User;
-import backend.users.ΒusinessCustomer;
+import backend.users.BusinessCustomer;
 import backend.users.BankEmployer;
 
 import javax.swing.*;
@@ -143,7 +143,7 @@ public class AllAccountsTab extends JPanel {
         // Χρήση της getAccounts() αν υπάρχει στη βασική κλάση User ή έλεγχος τύπου
         java.util.List<Account> accounts = new java.util.ArrayList<>();
         if (user instanceof Customer c) accounts = c.getAccounts();
-        else if (user instanceof ΒusinessCustomer bc) accounts = bc.getAccounts();
+        else if (user instanceof BusinessCustomer bc) accounts = bc.getAccounts();
 
         for (Account acc : accounts) {
             tableModel.addRow(new Object[]{
