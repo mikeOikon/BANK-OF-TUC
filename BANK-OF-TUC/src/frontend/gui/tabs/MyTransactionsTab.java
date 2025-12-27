@@ -6,6 +6,7 @@ import java.awt.*;
 import backend.accounts.Account;
 import backend.transactions.Transaction;
 import backend.users.Customer;
+import backend.users.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,10 +14,10 @@ import java.util.Comparator;
 
 public class MyTransactionsTab extends JPanel {
 
-    private final Customer customer;
+    private final User customer;
     private final JTextArea historyArea;
 
-    public MyTransactionsTab(Customer customer) {
+    public MyTransactionsTab(User customer) {
         this.customer = customer;
 
         setLayout(new BorderLayout(10, 10));

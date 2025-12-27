@@ -2,22 +2,25 @@ package frontend.gui.tabs;
 
 import backend.BankSystem;
 import backend.accounts.Account;
+import backend.users.BusinessCustomer;
 import backend.users.Customer;
+import backend.users.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class MyAccountsTab extends JPanel {
 
-    private final Customer customer;
+    private final User customer;
     private final JList<Account> accountList;
     private Account selectedAccount; // Αναφορά για χρήση μεταξύ μεθόδων
     private final JButton viewOverviewButton;
     private final JButton setPrimaryButton;
     private final CustomerOverviewTab overviewTab;
 
-    public MyAccountsTab(Customer customer, CustomerOverviewTab overviewTab) {
-        this.customer = customer;
+    public MyAccountsTab(User user, CustomerOverviewTab overviewTab) {
+        this.customer = user;
         this.overviewTab = overviewTab;
 
         setLayout(new BorderLayout(10, 10));
@@ -65,7 +68,15 @@ public class MyAccountsTab extends JPanel {
             }
             
             // 1. Ενημέρωση Backend
-            customer.setPrimaryAccount(currentSelection);
+            if(this.customer instanceof Customer) {
+            	Customer customer = (Customer)this.customer;
+            	customer.setPrimaryAccount(currentSelection);
+            }
+            else {
+            	BusinessCustomer bCustomer = (BusinessCustomer)this.customer;
+            	bCustomer.setPrimaryAccount(currentSelection);
+            }
+            
             BankSystem bank= BankSystem.getInstance();
             bank.dao.save(bank); 
             
