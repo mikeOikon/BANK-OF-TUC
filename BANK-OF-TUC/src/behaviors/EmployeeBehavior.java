@@ -59,7 +59,7 @@ public class EmployeeBehavior implements UserBehavior {
 	@Override
 	public boolean canAssistUsers() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

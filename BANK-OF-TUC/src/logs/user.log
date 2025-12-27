@@ -33,3 +33,9 @@
 [2025-12-27T17:43:59.625788700] [INFO]  Phone Number updated successfully for UserId.BUS004
 [2025-12-27T17:46:46.477565100] [INFO] [LOGIN] User tuc logged in.
 [2025-12-27T17:49:56.999574200] [INFO] [LOGIN] User tuc logged in.
+[2025-12-27T18:09:57.596031900] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T18:10:16.585734300] [INFO]  UserId:ADM001 promoted to: EMPLOYEE with new UserId:EMP003
+[2025-12-27T18:14:28.193982900] [INFO] [LOGIN] User Employee1 logged in.
+[2025-12-27T18:16:34.623543800] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T18:16:41.943834400] [INFO]  UserId:ADM001 promoted to: EMPLOYEE with new UserId:EMP003
+[2025-12-27T18:17:08.029368200] [INFO] [LOGIN] User Employee1 logged in.

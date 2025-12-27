@@ -121,6 +121,8 @@ public class RegisterFrame extends JFrame {
             // Personal fields
             nameField.setVisible(!business);
             surnameField.setVisible(!business);
+            nameLabel.setVisible(!business);
+            surnameLabel.setVisible(!business);
 
             // Business fields
             businessNameLabel.setVisible(business);

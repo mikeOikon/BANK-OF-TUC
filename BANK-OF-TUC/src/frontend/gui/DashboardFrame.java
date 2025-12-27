@@ -68,6 +68,7 @@ public class DashboardFrame extends JFrame {
             if (user.canTransferMoney()) {
                 tabs.addTab("Transfer", transferTab);
             }
+
         }
 
         // 3. ADMIN / AUDITOR / EMPLOYER TABS
@@ -87,5 +88,9 @@ public class DashboardFrame extends JFrame {
         }
 
         tabs.addTab("Settings", new SettingsTab(user));
+        
+        if(user.canAssistUsers()) {
+        	tabs.addTab("Customer Support", new CustomerSupportTab(user));
+        }
     }
 }
