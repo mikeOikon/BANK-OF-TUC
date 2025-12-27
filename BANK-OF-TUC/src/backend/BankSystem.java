@@ -138,7 +138,7 @@ public class BankSystem {
 	    for (Customer c : customers.values()) c.setBehavior(new CustomerBehavior());
 	    for (Auditor a : auditors.values()) a.setBehavior(new AuditorBehavior());
 	    for (BankEmployer e : bankEmployers.values()) e.setBehavior(new EmployeeBehavior());
-	    for (ΒusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
+	    for (BusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
 	}
 
 
@@ -695,6 +695,9 @@ public class BankSystem {
 	    return usersByUsername.get(username);
 	}
 	
+	public void saveAllData() {
+	    dao.save(this);
+	}
 	
 }
 
