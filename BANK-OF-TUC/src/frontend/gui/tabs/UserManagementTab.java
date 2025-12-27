@@ -94,15 +94,76 @@ public class UserManagementTab extends JPanel {
         if (currentUser instanceof Admin admin) {
             int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete user " + userId + "?");
             if (confirm == JOptionPane.YES_OPTION) {
-                // Εδώ καλείς τη μέθοδο διαγραφής από το backend
-                // π.χ. BankSystem.getInstance().removeUser(userId);
+            	BankSystem.getInstance().removeUser(userId);
+                BankSystem.getInstance().saveAllData(); 
                 refreshData();
             }
         }
     }
 
     private void handlePromoteUser() {
-        // Λογική για προαγωγή χρήστη (μπορεί να την κάνει και ο Employer)
-        JOptionPane.showMessageDialog(this, "Promotion logic goes here.");
+        int selectedRow = userTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Παρακαλώ επιλέξτε έναν χρήστη από τον πίνακα.");
+            return;
+        }
+
+        // 1. Λήψη του ID από τον πίνακα
+        int modelRow = userTable.convertRowIndexToModel(selectedRow);
+        String targetUserId = (String) tableModel.getValueAt(modelRow, 0);
+
+        // 2. Έλεγχος αν ο συνδεδεμένος χρήστης είναι Admin
+        if (!(currentUser instanceof Admin admin)) {
+            JOptionPane.showMessageDialog(this, "Μόνο οι Διαχειριστές έχουν πρόσβαση σε αυτή τη λειτουργία.", "Απαγόρευση", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Εύρεση του αντικειμένου User από το BankSystem
+        BankSystem bank = BankSystem.getInstance();
+        User oldUser = bank.getUserById(targetUserId);
+        
+        if (!(oldUser instanceof Customer)) {
+            JOptionPane.showMessageDialog(this,
+                    "Μόνο πελάτες μπορούν να προαχθούν.",
+                    "Μη επιτρεπτή ενέργεια",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+
+        if (oldUser == null) {
+            JOptionPane.showMessageDialog(this, "Ο χρήστης δεν βρέθηκε στο σύστημα.");
+            return;
+        }
+
+        // 4. Επιλογή Νέου Ρόλου (Οι τιμές πρέπει να αντιστοιχούν στο UserType Enum)
+        // Αν το Enum σου έχει τιμές όπως CUSTOMER, BUSINESS_CUSTOMER κλπ.
+        String[] roles = {"BANK_EMPLOYER", "AUDITOR"};
+        String selectedRole = (String) JOptionPane.showInputDialog(this, 
+                "Επιλέξτε νέο ρόλο για τον χρήστη " + oldUser.getFullName() + ":", 
+                "Προαγωγή Χρήστη", 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, roles, roles[0]);
+
+        if (selectedRole == null) return; // Cancel
+
+        // 5. Επιβεβαίωση
+        int confirm = JOptionPane.showConfirmDialog(this, 
+            "Είστε σίγουροι ότι θέλετε να αλλάξετε τον ρόλο του χρήστη σε " + selectedRole + ";\n" +
+            "Προσοχή: Θα δημιουργηθεί νέο ID συστήματος.", 
+            "Επιβεβαίωση Αλλαγής", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Κλήση της μεθόδου promoteUser που έφτιαξες στον Admin
+            boolean success = admin.promoteUser(oldUser, selectedRole);
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Η προαγωγή ολοκληρώθηκε επιτυχώς!");
+                refreshData(); // Ανανέωση του πίνακα
+            } else {
+                JOptionPane.showMessageDialog(this, "Αποτυχία προαγωγής. Ελέγξτε το Log του συστήματος.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
+    
 }

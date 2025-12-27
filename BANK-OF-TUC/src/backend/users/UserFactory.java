@@ -23,7 +23,7 @@ public class UserFactory {
 						 builder.getPhoneNumber(),
 						builder.getBranch(), builder.getAFM());
 			case BUSINESSCUSTOMER:
-				return new ΒusinessCustomer(userID, builder.getUsername(), builder.getPassword(),
+				return new BusinessCustomer(userID, builder.getUsername(), builder.getPassword(),
 						builder.getBranch(),
 						builder.getBuisnessName(),
 						builder.getRepresentativeName(), builder.getAFM());

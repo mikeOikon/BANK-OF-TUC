@@ -17,11 +17,11 @@ import backend.accounts.AccountFactory;
 import backend.users.Admin;
 import backend.users.Auditor;
 import backend.users.BankEmployer;
+import backend.users.BusinessCustomer;
 import backend.users.Customer;
 import backend.users.User;
 import backend.users.UserBuilder;
 import backend.users.UserFactory;
-import backend.users.ΒusinessCustomer;
 import behaviors.AdminBehavior;
 import behaviors.AuditorBehavior;
 import behaviors.BusinessBehavior;
@@ -38,7 +38,7 @@ public class BankSystem {
 	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
 	private static volatile BankSystem instance;
 	private Map<String, Branch> branches;
-	private Map<String,ΒusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
+	private Map<String,BusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
 	private Map<String,Admin> admins; // Map to store admins with userID as key and informations as value
 	private Map<String,Customer> customers; // Map to store customers with userID as key and informations as value
 	private Map<String,BankEmployer> bankEmployers; // Map to bankEmployers users with userID as key and informations as value
@@ -203,7 +203,7 @@ public class BankSystem {
 	            emp.setBehavior(new EmployeeBehavior());
 	        }
 
-	        for (ΒusinessCustomer bc : system.businessCustomers.values()) {
+	        for (BusinessCustomer bc : system.businessCustomers.values()) {
 	            bc.setBehavior(new BusinessBehavior());
 	        }
 
@@ -244,7 +244,7 @@ public class BankSystem {
 				this.auditors.put(user.getUserID(), (Auditor) user);
 				break;
 			case BUSINESSCUSTOMER:
-				this.businessCustomers.put(user.getUserID(), (ΒusinessCustomer) user);
+				this.businessCustomers.put(user.getUserID(), (BusinessCustomer) user);
 				break;
 			default:
 				throw new IllegalArgumentException("Invalid user type: " + user.getUserType());
@@ -284,7 +284,7 @@ public class BankSystem {
 	    return customers;
 	}
 
-	public Map<String, ΒusinessCustomer> getBusinessCustomers() {
+	public Map<String, BusinessCustomer> getBusinessCustomers() {
 	    return businessCustomers;
 	}
 
@@ -763,6 +763,16 @@ public class BankSystem {
 	
 	public User findUserByUsername(String username) {
 	    return usersByUsername.get(username);
+	}
+
+	public User getUserById(String userId) {
+	    if (userId == null || userId.length() < 3) return null;
+
+	    String prefix = userId.substring(0, 3);
+	    Map<String, ? extends User> map = userMaps.get(prefix);
+
+	    if (map == null) return null;
+	    return map.get(userId);
 	}
 	
 	

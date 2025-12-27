@@ -5,7 +5,7 @@ import backend.accounts.Account;
 import backend.transactions.Transaction;
 import backend.users.Customer;
 import backend.users.User;
-import backend.users.ΒusinessCustomer;
+import backend.users.BusinessCustomer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -120,7 +120,7 @@ public class AllTransactionsTab extends JPanel {
                         });
                     }
                 }
-            } else if (user instanceof ΒusinessCustomer bCust) {
+            } else if (user instanceof BusinessCustomer bCust) {
                 for (Account acc : bCust.getAccounts()) {
                     for (Transaction t : acc.getTransactions()) {
                         tableModel.addRow(new Object[]{

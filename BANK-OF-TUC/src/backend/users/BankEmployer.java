@@ -75,8 +75,8 @@ public class BankEmployer extends User {
 	            return true;
 	        }
 	    }
-	    else if(user instanceof ΒusinessCustomer) {
-	    	ΒusinessCustomer bCustomer = (ΒusinessCustomer) user;
+	    else if(user instanceof BusinessCustomer) {
+	    	BusinessCustomer bCustomer = (BusinessCustomer) user;
 	        Account accToClose = bCustomer.findAccountByNumber(IBAN);
 	        if (accToClose != null) {
 	            bCustomer.getAccounts().remove(accToClose);
