@@ -2,6 +2,10 @@ package frontend.gui.tabs;
 
 import backend.BankSystem;
 import backend.users.*;
+import services.DeleteUserCommand;
+import services.PromoteUserCommand;
+import services.UserManager;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -90,17 +94,38 @@ public class UserManagementTab extends JPanel {
         if (row == -1) return;
 
         String userId = (String) tableModel.getValueAt(row, 0);
-        
-        // Μόνο οι Admins μπορούν να διαγράφουν
-        if (currentUser instanceof Admin admin) {
-            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete user " + userId + "?");
-            if (confirm == JOptionPane.YES_OPTION) {
-            	BankSystem.getInstance().removeUser(userId);
-                BankSystem.getInstance().saveAllData(); 
-                refreshData();
-            }
+
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete user " + userId + "?",
+            "Confirm Delete",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        try {
+            // Create the command
+            DeleteUserCommand deleteCommand = new DeleteUserCommand(currentUser, userId);
+
+            // Execute it via UserManager
+            UserManager manager = new UserManager();
+            manager.execute(deleteCommand);
+
+            // Save data and refresh table
+            BankSystem bank = BankSystem.getInstance();
+            bank.dao.save(bank);
+            refreshData();
+
+            JOptionPane.showMessageDialog(this, "User deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SecurityException se) {
+            JOptionPane.showMessageDialog(this, se.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Failed to delete user: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     private void handlePromoteUser() {
         int selectedRow = userTable.getSelectedRow();
@@ -114,7 +139,7 @@ public class UserManagementTab extends JPanel {
         String targetUserId = (String) tableModel.getValueAt(modelRow, 0);
 
         // 2. Έλεγχος αν ο συνδεδεμένος χρήστης είναι Admin
-        if (!(currentUser instanceof Admin admin)) {
+        if (!currentUser.canPromoteUser()) {
             JOptionPane.showMessageDialog(this, "Μόνο οι Διαχειριστές έχουν πρόσβαση σε αυτή τη λειτουργία.", "Απαγόρευση", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -123,48 +148,27 @@ public class UserManagementTab extends JPanel {
         BankSystem bank = BankSystem.getInstance();
         User oldUser = bank.getUserById(targetUserId);
         
-        if (!(oldUser instanceof Customer)) {
-            JOptionPane.showMessageDialog(this,
-                    "Μόνο πελάτες μπορούν να προαχθούν.",
-                    "Μη επιτρεπτή ενέργεια",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+       UserManager userManager = new UserManager();
+       PromoteUserCommand promoteCommand = new PromoteUserCommand(bank,currentUser, oldUser);
 
+       try {
+           int confirm = JOptionPane.showConfirmDialog(this,
+               "Είστε σίγουροι ότι θέλετε να προάγετε τον χρήστη " + oldUser.getFullName() + "?",
+               "Επιβεβαίωση Προαγωγής", JOptionPane.YES_NO_OPTION);
 
-        if (oldUser == null) {
-            JOptionPane.showMessageDialog(this, "Ο χρήστης δεν βρέθηκε στο σύστημα.");
-            return;
-        }
+           if (confirm != JOptionPane.YES_OPTION) return;
 
-        // 4. Επιλογή Νέου Ρόλου (Οι τιμές πρέπει να αντιστοιχούν στο UserType Enum)
-        // Αν το Enum σου έχει τιμές όπως CUSTOMER, BUSINESS_CUSTOMER κλπ.
-        String[] roles = {"BANK_EMPLOYER", "AUDITOR"};
-        String selectedRole = (String) JOptionPane.showInputDialog(this, 
-                "Επιλέξτε νέο ρόλο για τον χρήστη " + oldUser.getFullName() + ":", 
-                "Προαγωγή Χρήστη", 
-                JOptionPane.QUESTION_MESSAGE, 
-                null, roles, roles[0]);
+           // Execute promotion
+           userManager.execute(promoteCommand);
 
-        if (selectedRole == null) return; // Cancel
+           JOptionPane.showMessageDialog(this, "Η προαγωγή ολοκληρώθηκε επιτυχώς!");
+           refreshData();
 
-        // 5. Επιβεβαίωση
-        int confirm = JOptionPane.showConfirmDialog(this, 
-            "Είστε σίγουροι ότι θέλετε να αλλάξετε τον ρόλο του χρήστη σε " + selectedRole + ";\n" +
-            "Προσοχή: Θα δημιουργηθεί νέο ID συστήματος.", 
-            "Επιβεβαίωση Αλλαγής", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            // Κλήση της μεθόδου promoteUser που έφτιαξες στον Admin
-            boolean success = admin.promoteUser(oldUser, selectedRole);
-
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Η προαγωγή ολοκληρώθηκε επιτυχώς!");
-                refreshData(); // Ανανέωση του πίνακα
-            } else {
-                JOptionPane.showMessageDialog(this, "Αποτυχία προαγωγής. Ελέγξτε το Log του συστήματος.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
+       } catch (SecurityException se) {
+           JOptionPane.showMessageDialog(this, se.getMessage(), "Σφάλμα Ασφαλείας", JOptionPane.ERROR_MESSAGE);
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(this, "Αποτυχία προαγωγής: " + e.getMessage(), "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+       }
+   }
     
 }

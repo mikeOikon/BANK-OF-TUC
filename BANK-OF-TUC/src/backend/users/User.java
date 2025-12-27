@@ -3,6 +3,7 @@ package backend.users;
 import java.util.ArrayList;
 
 import backend.Branch;
+import backend.FileLogger;
 import backend.PasswordHasher;
 import backend.accounts.Account;
 import behaviors.UserBehavior;
@@ -173,7 +174,9 @@ public abstract class User {
 
 	public boolean login(String username, String password) {
 		//maybe use a quick pin?
+		FileLogger logger= FileLogger.getInstance();
 		try {
+			
 			return this.username.equals(username) && this.password.equals(PasswordHasher.hash(password));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -23,7 +23,7 @@ public class BusinessCustomer extends User{
 	
 	public BusinessCustomer(String userID,String username, String password, Branch branch, String businessName, String representativeName, String AFM) {
 		super(userID, username, password, businessName, representativeName, branch, AFM);
-		this.accounts = new ArrayList<Account>();
+		this.accounts = new ArrayList<>();
 		this.userBehavior= new BusinessBehavior();
 	}
 	//na doume ti prepei na einai protected 
@@ -31,12 +31,8 @@ public class BusinessCustomer extends User{
 	
 	@Override
 	public ArrayList<Account> getAccounts() {
-		if (this.accounts.isEmpty()) {
-			//System.out.println("No accounts found for customer " + this.userID);
-			return null;
-		} else {
 			return this.accounts;
-		}
+		
 	}
 	
 	@Override

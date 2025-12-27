@@ -20,12 +20,12 @@ public class PromoteUserCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SecurityException {
     	
     	FileLogger logger =FileLogger.getInstance();
         if (!executor.canPromoteUser()) {
         	 logger.log(LogLevel.WARNING,LogCategory.USER," UserId:"+executor.getUserID()+" attempted to promote UserId:"+target.getUserID()+" without sufficient permissions.");
-            return;
+        	 throw new SecurityException("You do not have permission to promote users.");
         }
 
         UserType current = target.getUserType();
@@ -40,7 +40,7 @@ public class PromoteUserCommand implements Command {
                 break;
             default:
             	 logger.log(LogLevel.WARNING,LogCategory.USER," UserId:"+executor.getUserID()+" attempted to promote: "+current);
-                return;
+            	 throw new SecurityException("This user type cannot be promoted.");
         }
 
         bankSystem.removeUser(target.getUserID());

@@ -17,9 +17,9 @@ public class FileLogger implements Logger{
 	    private static String resolveFile(LogCategory category) {
 	    	
 	     switch(category) {
-	     case SYSTEM : return "logs/system.log";
-         case USER : return "logs/user.log";
-         case TRANSACTION : return "logs/transaction.log";
+	     case SYSTEM : return "src/logs/system.log";
+         case USER : return "src/logs/user.log";
+         case TRANSACTION : return "src/logs/transaction.log";
 	     default : return "null";}
 
 	    }

@@ -116,12 +116,12 @@ public class AllAccountsTab extends JPanel {
                 }
 
                 if (success) {
-                    bank.saveAllData();
+                    bank.dao.save(bank); // Αποθήκευση αλλαγών
                     JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
                     refreshEntireSystem();
                 } else {
                     JOptionPane.showMessageDialog(this, "Αδυναμία διαγραφής.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-                }
+                } 
             }
         }
     }

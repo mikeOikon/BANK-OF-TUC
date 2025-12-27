@@ -1,0 +1,9 @@
+[2025-12-27T14:32:59.486148900] [INFO] [LOGIN] User mike21 logged in.
+[2025-12-27T14:48:18.798007300] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T14:56:16.313198800] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T15:00:35.271890700] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T15:11:27.033108600] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T15:11:34.705476600] [INFO] User CUS005 removed by admin admin
+[2025-12-27T15:23:49.668113700] [INFO] [LOGIN] User admin logged in.
+[2025-12-27T15:24:00.104240100] [INFO]  UserId:ADM001 promoted to: EMPLOYEEwith new UserId:EMP001
+[2025-12-27T15:24:08.129023200] [INFO]  UserId:ADM001 promoted to: ADMINwith new UserId:ADM002

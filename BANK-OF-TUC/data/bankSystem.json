@@ -25,136 +25,12 @@
         "bankCode": "021",
         "branchCode": "0021"
       }
-    }
-  },
-  "customers": {
-    "CUS001": {
-      "accounts": [
-        {
-          "primary": true,
-          "frozen": false,
-          "IBAN": "GR2002100210744309206242824",
-          "userID": "CUS001",
-          "balance": 680.0,
-          "transactions": [
-            {
-              "type": "DEPOSIT",
-              "amount": 1000.0,
-              "timestampString": "2025-12-26T16:34:52.031551200",
-              "toAccountIban": "GR2002100210744309206242824",
-              "txType": "deposit"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 100.0,
-              "timestampString": "2025-12-26T16:35:01.313977200",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "txType": "withdraw"
-            },
-            {
-              "type": "TRANSFER",
-              "amount": 20.0,
-              "timestampString": "2025-12-26T16:53:54.291055300",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "toAccountIban": "GR5302100211337711170120247",
-              "txType": "transfer"
-            },
-            {
-              "type": "TRANSFER",
-              "amount": 20.0,
-              "timestampString": "2025-12-26T16:57:20.815202500",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "toAccountIban": "GR5302100211337711170120247",
-              "txType": "transfer"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-26T17:01:55.613175600",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "txType": "withdraw"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-26T17:03:38.618899300",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "txType": "withdraw"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 110.0,
-              "timestampString": "2025-12-26T17:03:47.556308800",
-              "toAccountIban": "GR2002100210744309206242824",
-              "txType": "deposit"
-            }
-          ],
-          "account_id": 1,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "transactional"
-        },
-        {
-          "primary": false,
-          "frozen": false,
-          "IBAN": "GR5302100211337711170120247",
-          "userID": "CUS001",
-          "balance": 20.0,
-          "transactions": [
-            {
-              "type": "TRANSFER",
-              "amount": 20.0,
-              "timestampString": "2025-12-26T16:53:54.291055300",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "toAccountIban": "GR5302100211337711170120247",
-              "txType": "transfer"
-            },
-            {
-              "type": "TRANSFER",
-              "amount": 20.0,
-              "timestampString": "2025-12-26T16:57:20.815202500",
-              "fromAccountIban": "GR2002100210744309206242824",
-              "toAccountIban": "GR5302100211337711170120247",
-              "txType": "transfer"
-            }
-          ],
-          "account_id": 2,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "savings"
-        },
-        {
-          "termMonths": 0,
-          "startDate": "2025-12-26",
-          "maturityDate": "2025-12-26",
-          "primary": false,
-          "frozen": false,
-          "IBAN": "GR5602100214222806133066832",
-          "userID": "CUS001",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 3,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "fixed"
-        }
-      ],
+    },
+    "ADM002": {
       "username": "mike21",
-      "userID": "CUS001",
+      "userID": "ADM002",
       "password": "a043913351e3830bf1b0ecf679e0fa370c35aac7cc719e1036230a7c63b45807",
-      "email": "mike@gmail.com",
       "name": "mike",
-      "surname": "oik",
-      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -162,6 +38,7 @@
       "AFM": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
     }
   },
+  "customers": {},
   "bankEmployers": {},
   "auditors": {
     "AUD001": {
@@ -185,8 +62,8 @@
       "branchCode": "0021"
     }
   },
-  "adminCount": 1,
-  "customerCount": 4,
-  "employeeCount": 0,
+  "adminCount": 2,
+  "customerCount": 5,
+  "employeeCount": 1,
   "auditorCount": 1
 }

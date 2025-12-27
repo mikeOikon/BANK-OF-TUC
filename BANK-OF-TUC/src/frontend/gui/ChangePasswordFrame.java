@@ -60,7 +60,8 @@ public class ChangePasswordFrame extends JFrame {
 
                 // 4. Ενημέρωση και αποθήκευση
                 currentUser.setPassword(PasswordHasher.hash(newPass));
-                BankSystem.getInstance().saveAllData(); // Οριστική αποθήκευση στο JSON
+                BankSystem bank= BankSystem.getInstance();
+                bank.dao.save(bank); // Οριστική αποθήκευση στο JSON
                 
                 JOptionPane.showMessageDialog(this, "Ο κωδικός άλλαξε επιτυχώς!");
                 dispose();

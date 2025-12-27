@@ -1,6 +1,7 @@
 package frontend.gui;
 
 import backend.BankSystem;
+import backend.FileLogger;
 import backend.PasswordHasher;
 import backend.users.User;
 
@@ -97,6 +98,7 @@ public class StartFrame extends JFrame {
     // LOGIN LOGIC
     //---------------------------------------------------------
     private void handleLogin() {
+    	FileLogger logger= FileLogger.getInstance();
         String username = usernameField.getText().trim();
         String rawPassword = new String(passwordField.getPassword());
 
@@ -124,6 +126,7 @@ public class StartFrame extends JFrame {
         }
 
         // Successful login
+        logger.log(types.LogLevel.INFO, types.LogCategory.USER, "[LOGIN] User "+username+" logged in.");
         UserSession.getInstance().setCurrentUser(user);
 
         // Open dashboard depending on role / behavior

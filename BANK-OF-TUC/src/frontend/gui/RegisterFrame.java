@@ -4,6 +4,8 @@ import backend.BankSystem;
 import backend.PasswordHasher;
 import backend.users.User;
 import backend.users.UserBuilder;
+import services.CreateUserCommand;
+import services.UserManager;
 import types.UserType;
 
 import javax.swing.*;
@@ -186,6 +188,7 @@ public class RegisterFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Το όνομα χρήστη υπάρχει ήδη!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
 
             User user = bank.createUser(userType, builder);
             bank.dao.save(bank);

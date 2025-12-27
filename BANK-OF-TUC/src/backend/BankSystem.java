@@ -89,6 +89,15 @@ public class BankSystem {
 	    return instance;
 	}
 	
+	public User getUserById(String userId) {
+	    String prefix = userId.substring(0, 3);
+	    Map<String, ? extends User> userMap = userMaps.get(prefix);
+	    if (userMap != null) {
+	        return userMap.get(userId);
+	    }
+	    return null; // User not found
+	}
+	
 	
 	void createDefaultAdminIfMissing() {
 	    if (!admins.isEmpty()) return;
@@ -138,7 +147,7 @@ public class BankSystem {
 	    for (Customer c : customers.values()) c.setBehavior(new CustomerBehavior());
 	    for (Auditor a : auditors.values()) a.setBehavior(new AuditorBehavior());
 	    for (BankEmployer e : bankEmployers.values()) e.setBehavior(new EmployeeBehavior());
-	    for (ΒusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
+	    for (BusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
 	}
 
 
@@ -181,6 +190,7 @@ public class BankSystem {
 		
 		usersByUsername.put(user.getUsername(), user);
 	}
+	
 	
 	
 	public void removeUser(String userId) {
