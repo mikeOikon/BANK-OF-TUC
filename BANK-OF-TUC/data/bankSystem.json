@@ -36,6 +36,17 @@
         "branchCode": "0021"
       },
       "AFM": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
+    },
+    "ADM003": {
+      "username": "diak21",
+      "userID": "ADM003",
+      "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
+      "name": "angelos",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "1c6ead2be033a9b102dfe99f9acfe0c77f3e66dac946a6de9c71f5fe0cac0d46"
     }
   },
   "customers": {},
@@ -62,8 +73,8 @@
       "branchCode": "0021"
     }
   },
-  "adminCount": 2,
-  "customerCount": 5,
-  "employeeCount": 1,
+  "adminCount": 3,
+  "customerCount": 6,
+  "employeeCount": 2,
   "auditorCount": 1
 }

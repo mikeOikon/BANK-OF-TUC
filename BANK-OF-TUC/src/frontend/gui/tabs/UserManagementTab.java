@@ -5,6 +5,7 @@ import backend.users.*;
 import services.DeleteUserCommand;
 import services.PromoteUserCommand;
 import services.UserManager;
+import types.UserType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -134,41 +135,62 @@ public class UserManagementTab extends JPanel {
             return;
         }
 
-        // 1. Λήψη του ID από τον πίνακα
         int modelRow = userTable.convertRowIndexToModel(selectedRow);
         String targetUserId = (String) tableModel.getValueAt(modelRow, 0);
 
-        // 2. Έλεγχος αν ο συνδεδεμένος χρήστης είναι Admin
         if (!currentUser.canPromoteUser()) {
             JOptionPane.showMessageDialog(this, "Μόνο οι Διαχειριστές έχουν πρόσβαση σε αυτή τη λειτουργία.", "Απαγόρευση", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 3. Εύρεση του αντικειμένου User από το BankSystem
         BankSystem bank = BankSystem.getInstance();
         User oldUser = bank.getUserById(targetUserId);
-        
-       UserManager userManager = new UserManager();
-       PromoteUserCommand promoteCommand = new PromoteUserCommand(bank,currentUser, oldUser);
 
-       try {
-           int confirm = JOptionPane.showConfirmDialog(this,
-               "Είστε σίγουροι ότι θέλετε να προάγετε τον χρήστη " + oldUser.getFullName() + "?",
-               "Επιβεβαίωση Προαγωγής", JOptionPane.YES_NO_OPTION);
+        // Επιλογή τύπου προαγωγής μόνο στο GUI
+        UserType targetType = null;
+        if (oldUser.getUserType() == UserType.CUSTOMER) {
+            String[] options = {"Bank Employee", "Auditor"};
+            int choice = JOptionPane.showOptionDialog(
+                    this,
+                    "Επιλέξτε τον τύπο χρήστη για προαγωγή:",
+                    "Προαγωγή Χρήστη",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
+            if (choice == 0) targetType = UserType.EMPLOYEE;
+            else if (choice == 1) targetType = UserType.AUDITOR;
+            else return; // ακύρωση
+        } else if (oldUser.getUserType() == UserType.EMPLOYEE) {
+            targetType = UserType.ADMIN;
+        } else {
+            JOptionPane.showMessageDialog(this, "Αυτός ο χρήστης δεν μπορεί να προαχθεί.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-           if (confirm != JOptionPane.YES_OPTION) return;
+        PromoteUserCommand promoteCommand = new PromoteUserCommand(bank, currentUser, oldUser, targetType);
+        UserManager userManager = new UserManager();
 
-           // Execute promotion
-           userManager.execute(promoteCommand);
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Είστε σίγουροι ότι θέλετε να προάγετε τον χρήστη " + oldUser.getFullName() + "?",
+                "Επιβεβαίωση Προαγωγής", JOptionPane.YES_NO_OPTION
+        );
 
-           JOptionPane.showMessageDialog(this, "Η προαγωγή ολοκληρώθηκε επιτυχώς!");
-           refreshData();
+        if (confirm != JOptionPane.YES_OPTION) return;
 
-       } catch (SecurityException se) {
-           JOptionPane.showMessageDialog(this, se.getMessage(), "Σφάλμα Ασφαλείας", JOptionPane.ERROR_MESSAGE);
-       } catch (Exception e) {
-           JOptionPane.showMessageDialog(this, "Αποτυχία προαγωγής: " + e.getMessage(), "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-       }
-   }
+        try {
+            userManager.execute(promoteCommand);
+            JOptionPane.showMessageDialog(this, "Η προαγωγή ολοκληρώθηκε επιτυχώς!");
+            refreshData();
+        } catch (SecurityException se) {
+            JOptionPane.showMessageDialog(this, se.getMessage(), "Σφάλμα Ασφαλείας", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Αποτυχία προαγωγής: " + e.getMessage(), "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     
 }
