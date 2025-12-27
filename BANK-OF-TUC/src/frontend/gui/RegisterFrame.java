@@ -73,14 +73,16 @@ public class RegisterFrame extends JFrame {
 
         // Name
         c.gridx = 0; c.gridy++; c.anchor = GridBagConstraints.EAST;
-        form.add(new JLabel("Όνομα:"), c);
+        JLabel nameLabel = new JLabel("Όνομα:");
+        form.add(nameLabel, c);
         c.gridx = 1; c.anchor = GridBagConstraints.WEST;
         JTextField nameField = new JTextField(20);
         form.add(nameField, c);
 
         // Surname
         c.gridx = 0; c.gridy++; c.anchor = GridBagConstraints.EAST;
-        form.add(new JLabel("Επίθετο:"), c);
+        JLabel surnameLabel = new JLabel("Επίθετο:");
+        form.add(surnameLabel, c);
         c.gridx = 1; c.anchor = GridBagConstraints.WEST;
         JTextField surnameField = new JTextField(20);
         form.add(surnameField, c);
@@ -115,12 +117,20 @@ public class RegisterFrame extends JFrame {
 
         userTypeBox.addActionListener(e -> {
             boolean business = userTypeBox.getSelectedIndex() == 1;
+
+            // Personal fields
+            nameField.setVisible(!business);
+            surnameField.setVisible(!business);
+
+            // Business fields
             businessNameLabel.setVisible(business);
             businessNameField.setVisible(business);
             representativeLabel.setVisible(business);
             representativeField.setVisible(business);
+
             pack();
         });
+
 
         root.add(form, BorderLayout.CENTER);
 
