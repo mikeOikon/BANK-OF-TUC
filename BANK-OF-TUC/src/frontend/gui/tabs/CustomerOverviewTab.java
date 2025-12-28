@@ -5,6 +5,8 @@ import backend.ChartPanel;
 import backend.accounts.Account;
 import backend.transactions.Transaction;
 import backend.users.User;
+import services.Command;
+import services.account_services.FreezeAccountCommand;
 import backend.users.Customer;
 import backend.users.BusinessCustomer;
 
@@ -104,20 +106,29 @@ public class CustomerOverviewTab extends JPanel {
 
         boolean isCurrentlyFrozen = account.isFrozen();
         String action = isCurrentlyFrozen ? "UNFREEZE" : "FREEZE";
-        
-        int confirm = JOptionPane.showConfirmDialog(this, 
-            "Are you sure you want to " + action + " this account?\n" +
-            "This will restrict all outgoing transactions.", 
-            "Security Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-        if (confirm == JOptionPane.YES_OPTION) {
-            account.setFrozen(!isCurrentlyFrozen);
-            BankSystem bank = BankSystem.getInstance();
-            bank.dao.save(bank);
-            refresh();
-            JOptionPane.showMessageDialog(this, "Status updated: Account is now " + (account.isFrozen() ? "FROZEN" : "ACTIVE"));
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to " + action + " this account?\n" +
+                "This will restrict all outgoing transactions.",
+                "Security Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        FreezeAccountCommand cmd = new FreezeAccountCommand(account);
+
+        if (isCurrentlyFrozen) {
+            // Αν είναι ήδη frozen, κάνουμε undo για να ξεπαγώσει
+            cmd.undo();
+        } else {
+            // Διαφορετικά, παγώνουμε
+            cmd.execute();
         }
+
+        refresh();
+        JOptionPane.showMessageDialog(this, "Status updated: Account is now " + (account.isFrozen() ? "FROZEN" : "ACTIVE"));
     }
+
+
 
     public void refresh() {
         if (account == null) {
