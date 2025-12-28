@@ -119,18 +119,26 @@ public class TransferTab extends JPanel {
                     message = "Transfer of " + amount + "€ successful!";
                 }
 
-                if (command != null) {
-                    command.execute();
-                    bank.dao.save(bank);
+                try {
+                    if (command != null) {
+                        command.execute();
+                        bank.dao.save(bank);
 
-                    if (overviewTab != null) {
-                        overviewTab.setSelectedAccount(selectedAcc);
+                        if (overviewTab != null) {
+                            overviewTab.setSelectedAccount(selectedAcc);
+                        }
+
+                        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+                        amountField.setText("");
+                        targetIbanField.setText("");
                     }
 
-                    JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
-                    amountField.setText("");
-                    targetIbanField.setText("");
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
+                } catch (IllegalStateException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
                 }
+
 
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);

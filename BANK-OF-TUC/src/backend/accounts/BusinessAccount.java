@@ -55,7 +55,9 @@ public class BusinessAccount extends Account {
 
         if (balance < total)
             throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
-
+        
+        if (isFrozen())
+			throw new IllegalStateException("Account is frozen.");
         // Μειώνουμε πρώτα balance για το fee
         balance -= managementFee;
 
@@ -73,6 +75,9 @@ public class BusinessAccount extends Account {
         if (balance < total)
             throw new IllegalArgumentException("Insufficient funds for transaction + fee.");
         
+        if (target.isFrozen())
+			throw new IllegalStateException("Account is frozen.");
+        
         balance -= managementFee;
         
         super.transferTo(target, amount);
@@ -87,6 +92,10 @@ public class BusinessAccount extends Account {
         if (amount <= managementFee) {
             throw new IllegalArgumentException("Deposit must be more than the management fee (" + managementFee + ").");
         }
+        
+        if (isFrozen())
+			throw new IllegalStateException("Account is frozen.");
+        
         super.deposit(amount);
         balance -= managementFee;
     }
