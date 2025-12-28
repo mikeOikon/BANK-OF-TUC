@@ -158,3 +158,36 @@ See https://github.com/google/gson/blob/main/Troubleshooting.md#reflection-inacc
 [2025-12-28T21:29:54.942376700] [INFO] [DAO] Data saved successfully.
 [2025-12-28T21:30:37.427513800] [INFO] [DAO] Data saved successfully.
 [2025-12-28T21:30:37.428514200] [INFO] System shutting down, data persisted.
+[2025-12-28T22:10:14.087814800] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:11:00.052787300] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:11:00.073763700] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:11:26.220043] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:11:32.768845100] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:11:57.220339300] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:27:43.010082100] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:27:54.946797100] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:28:13.310105100] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:28:16.594199800] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:29:06.494964300] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:29:31.291752300] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:30:14.812394200] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:30:28.587528500] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:30:33.272889700] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:30:33.273897400] [INFO] System shutting down, data persisted.
+[2025-12-28T22:30:41.741440400] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:30:41.741440400] [INFO] System shutting down, data persisted.
+[2025-12-28T22:30:48.701105900] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:30:48.701105900] [INFO] System shutting down, data persisted.
+[2025-12-28T22:37:01.551618400] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T22:37:39.535712500] [ERROR] [DAO] Failed to load data: Abstract classes can't be instantiated! Adjust the R8 configuration or register an InstanceCreator or a TypeAdapter for this type. Class name: backend.users.User
+See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-class
+[2025-12-28T22:37:48.193099200] [ERROR] [DAO] Failed to load data: Abstract classes can't be instantiated! Adjust the R8 configuration or register an InstanceCreator or a TypeAdapter for this type. Class name: backend.users.User
+See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-class
+[2025-12-28T22:38:24.904950200] [ERROR] [DAO] Failed to load data: Abstract classes can't be instantiated! Adjust the R8 configuration or register an InstanceCreator or a TypeAdapter for this type. Class name: backend.users.User
+See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-class
+[2025-12-28T22:39:10.320477] [ERROR] [DAO] Failed to load data: Abstract classes can't be instantiated! Adjust the R8 configuration or register an InstanceCreator or a TypeAdapter for this type. Class name: backend.users.User
+See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-class
+[2025-12-28T22:40:49.111144800] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:41:27.916979800] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:41:30.225379100] [INFO] [DAO] Data saved successfully.
+[2025-12-28T22:41:30.225379100] [INFO] System shutting down, data persisted.

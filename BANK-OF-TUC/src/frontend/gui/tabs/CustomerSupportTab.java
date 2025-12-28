@@ -74,7 +74,7 @@ public class CustomerSupportTab extends JPanel {
         ticketList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 showSelectedTicket();
-            }
+            }    
         });
     }
 
@@ -103,7 +103,7 @@ public class CustomerSupportTab extends JPanel {
 
         if (ticket == null || reply.isEmpty()) return;
 
-        ticket.getMessages().add("EMPLOYEE: " + reply);
+        ticket.addMessageEmployee("EMPLOYEE: " + reply, employee);
         replyField.setText("");
         showSelectedTicket();
     }

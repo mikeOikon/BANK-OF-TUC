@@ -1,179 +1,5 @@
 {
-  "businessCustomers": {
-    "BUS004": {
-      "accounts": [
-        {
-          "managementFee": 10.0,
-          "primary": true,
-          "frozen": false,
-          "IBAN": "GR4602100217946098933710985",
-          "userID": "BUS004",
-          "balance": 820.0,
-          "transactions": [
-            {
-              "type": "DEPOSIT",
-              "amount": 100.0,
-              "timestampString": "2025-12-27T17:33:25.620946",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-27T17:33:30.775409200",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "txType": "withdraw"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-27T17:45:19.668104400",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "txType": "withdraw"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-27T17:45:32.585062300",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "txType": "withdraw"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 10.0,
-              "timestampString": "2025-12-27T17:46:52.337276800",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-27T17:47:01.409446500",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "txType": "withdraw"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 5.0,
-              "timestampString": "2025-12-27T17:47:13.839463300",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 15.0,
-              "timestampString": "2025-12-27T17:50:09.240186400",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 30.0,
-              "timestampString": "2025-12-28T20:38:18.459888200",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 10.0,
-              "timestampString": "2025-12-28T20:38:30.433241900",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "txType": "withdraw"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 50.0,
-              "timestampString": "2025-12-28T20:49:23.764235200",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "DEPOSIT",
-              "amount": 1000.0,
-              "timestampString": "2025-12-28T21:06:53.092580700",
-              "toAccountIban": "GR4602100217946098933710985",
-              "txType": "deposit"
-            },
-            {
-              "type": "WITHDRAW",
-              "amount": 20.0,
-              "timestampString": "2025-12-28T21:07:02.835156500",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "txType": "withdraw"
-            },
-            {
-              "type": "TRANSFER",
-              "amount": 150.0,
-              "timestampString": "2025-12-28T21:15:26.165505700",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "toAccountIban": "GR8802100213024949520666655",
-              "txType": "transfer"
-            }
-          ],
-          "account_id": 1,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "business"
-        },
-        {
-          "managementFee": 10.0,
-          "primary": false,
-          "frozen": true,
-          "IBAN": "GR8802100213024949520666655",
-          "userID": "BUS004",
-          "balance": 150.0,
-          "transactions": [
-            {
-              "type": "TRANSFER",
-              "amount": 150.0,
-              "timestampString": "2025-12-28T21:15:26.165505700",
-              "fromAccountIban": "GR4602100217946098933710985",
-              "toAccountIban": "GR8802100213024949520666655",
-              "txType": "transfer"
-            }
-          ],
-          "account_id": 1,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "business"
-        },
-        {
-          "managementFee": 10.0,
-          "primary": false,
-          "frozen": false,
-          "IBAN": "GR9402100216574292818838280",
-          "userID": "BUS004",
-          "balance": 0.0,
-          "transactions": [],
-          "account_id": 2,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "accountType": "business"
-        }
-      ],
-      "username": "tuc",
-      "userID": "BUS004",
-      "password": "10fe8f704d06cc82a4add5abc8c8ce2747fd042fd1c723b0b13df9df39e912cb",
-      "email": "tuc@tuc.gr",
-      "name": "TUC",
-      "surname": "Chania",
-      "phoneNumber": "1234567890",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "51b5febd38113b73c915ab831b2b8ecf190c33895182276a8317c4764c8044ba"
-    }
-  },
+  "businessCustomers": {},
   "admins": {
     "ADM001": {
       "username": "admin",
@@ -185,52 +11,13 @@
         "bankCode": "021",
         "branchCode": "0021"
       }
-    },
-    "ADM002": {
-      "username": "mike21",
-      "userID": "ADM002",
-      "password": "a043913351e3830bf1b0ecf679e0fa370c35aac7cc719e1036230a7c63b45807",
-      "name": "mike",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
     }
   },
   "customers": {
-    "CUS007": {
+    "CUS001": {
       "accounts": [],
-      "username": "dia21",
-      "userID": "CUS007",
-      "password": "4057d8c859782141bee3cc653208ac0464c92531e03357b78beda7903ac4c6df",
-      "email": "dia@gmail.com",
-      "name": "A",
-      "surname": "D",
-      "phoneNumber": "2121212121",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "097afe17f15825ae1953c5aa4ea00c6db60ea9532405db1cca118054b6c38580"
-    },
-    "CUS008": {
-      "accounts": [],
-      "username": "Employee1",
-      "userID": "CUS008",
-      "password": "9d1c7d34784ab10d3487b14f8be62ad3ce49876234bf47a5f58baf260999784a",
-      "name": "Ipalilos",
-      "surname": "Kalos",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "a18ac4e6fbd3fc024a07a21dafbac37d828ca8a04a0e34f368f1ec54e0d4fffb"
-    },
-    "CUS009": {
-      "accounts": [],
-      "username": "mike_oikon",
-      "userID": "CUS009",
+      "username": "mikeOikon",
+      "userID": "CUS001",
       "password": "9683dec174ac76daa5c900a6a049c9090faeccc89d9b54b95681f3170c11bc33",
       "name": "Mike",
       "surname": "Oikonomou",
@@ -238,24 +25,11 @@
         "bankCode": "021",
         "branchCode": "0021"
       },
-      "AFM": "69333e398f9c8d7134f4aeb1b2be883a4a9c254108da7365049c8016b5c472ac"
+      "AFM": "2fdcc4863844bd5792f9a265b4847abd2667fa7233b0f7c37505a9316623566b"
     }
   },
   "bankEmployers": {},
-  "auditors": {
-    "AUD001": {
-      "username": "auditor",
-      "userID": "AUD001",
-      "password": "023d552dc77da5fca3f63b0be4b3a8984865e2976d2f17b6071e66a575f42e85",
-      "name": "auditor",
-      "surname": "1",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "28e82c75f0fac517b883cec18fe9126f7f33ec67c266df677f60814c245c6ec5"
-    }
-  },
+  "auditors": {},
   "bankAccount": {
     "accountNumber": "BANK001",
     "balance": 1.0E8,
@@ -264,9 +38,21 @@
       "branchCode": "0021"
     }
   },
-  "tickets": {},
-  "adminCount": 3,
-  "customerCount": 9,
-  "employeeCount": 2,
-  "auditorCount": 1
+  "tickets": {
+    "TIC-1766954487911": {
+      "ticketId": "TIC-1766954487911",
+      "customerId": "CUS001",
+      "status": "OPEN",
+      "createdAt": "2025-12-28T22:41:27.914986200",
+      "messages": [
+        " Πελάτης: MONO AEKKKKKKKK"
+      ]
+    }
+  },
+  "adminCount": 1,
+  "customerCount": 1,
+  "employeeCount": 0,
+  "auditorCount": 0,
+  "realBaseIso": "2025-12-28T22:39:10.321540800",
+  "simulatedBaseIso": "2025-12-28T22:39:10.321540800"
 }

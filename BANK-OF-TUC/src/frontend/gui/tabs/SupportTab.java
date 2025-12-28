@@ -71,7 +71,7 @@ public class SupportTab extends JPanel {
 
         for (int i = start; i < msgs.size(); i++) {
             historyArea.append(msgs.get(i) + "\n\n");
-        }
+        }   
     }
 
     private void sendMessage() {

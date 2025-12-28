@@ -66,7 +66,7 @@ public class BankSystem {
 	private String simulatedBaseIso;
 
     public static BankSystemDAO dao = new FileBankSystemDAO();
-
+ 
     
 
 	private BankSystem() {
@@ -372,7 +372,8 @@ public class BankSystem {
 	
 	public SupportTicket getTicketForCustomer(String customerId) {
 	    for (SupportTicket ticket : tickets.values()) {
-	        if (ticket.getCustomerId().equals(customerId) && ticket.getStatus() == TicketStatus.OPEN) {
+	        if (ticket.getCustomerId().equals(customerId) && (ticket.getStatus() == TicketStatus.OPEN || 
+	        		ticket.getStatus() == TicketStatus.IN_PROGRESS)) {
 	            return ticket;
 	        }
 	    }

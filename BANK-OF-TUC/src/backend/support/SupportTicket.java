@@ -3,6 +3,7 @@ package backend.support;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import backend.users.User;
 import types.TicketStatus;
 
 public class SupportTicket {
@@ -11,6 +12,7 @@ public class SupportTicket {
 	private  TicketStatus status;
 	private final LocalDateTime createdAt;
 	private final ArrayList<String> messages;
+	private User assignedEmployee; 
 	
 	
 	public SupportTicket(String ticketId, String customerId,String initialMessage) {
@@ -20,6 +22,7 @@ public class SupportTicket {
 		this.createdAt = LocalDateTime.now();
 		this.messages = new ArrayList<>();
 		this.messages.add(initialMessage);
+		this.assignedEmployee=null;
 	}
 
 
@@ -48,7 +51,8 @@ public class SupportTicket {
 	}
 	
 	public void closeTicket() {
-		this.status=TicketStatus.CLOSED;// Logic to close the ticket
+		this.status=TicketStatus.CLOSED;
+		this.assignedEmployee=null;
 	}
 	
 	
@@ -56,6 +60,13 @@ public class SupportTicket {
 		this.messages.add(message);
 	}
 	
+	public void addMessageEmployee(String message, User employee) {
+		this.messages.add(message);
+		if(this.status==TicketStatus.OPEN) {
+			this.status=TicketStatus.IN_PROGRESS;
+		}
+		this.assignedEmployee=employee;
+	}
 	
 	@Override
 	public String toString() {
