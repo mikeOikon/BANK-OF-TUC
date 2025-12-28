@@ -6,7 +6,7 @@ import backend.users.User;
 import backend.users.UserBuilder;
 import services.UserManager;
 import types.UserType;
-//import user_services.CreateUserCommand;
+import user_services.CreateUserCommand;
 
 import javax.swing.*;
 import java.awt.*;

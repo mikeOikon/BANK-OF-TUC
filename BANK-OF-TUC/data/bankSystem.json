@@ -8,7 +8,7 @@
           "frozen": false,
           "IBAN": "GR4602100217946098933710985",
           "userID": "BUS004",
-          "balance": 1000.0,
+          "balance": 820.0,
           "transactions": [
             {
               "type": "DEPOSIT",
@@ -100,6 +100,14 @@
               "timestampString": "2025-12-28T21:07:02.835156500",
               "fromAccountIban": "GR4602100217946098933710985",
               "txType": "withdraw"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 150.0,
+              "timestampString": "2025-12-28T21:15:26.165505700",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "toAccountIban": "GR8802100213024949520666655",
+              "txType": "transfer"
             }
           ],
           "account_id": 1,
@@ -113,11 +121,20 @@
         {
           "managementFee": 10.0,
           "primary": false,
-          "frozen": false,
+          "frozen": true,
           "IBAN": "GR8802100213024949520666655",
           "userID": "BUS004",
-          "balance": 0.0,
-          "transactions": [],
+          "balance": 150.0,
+          "transactions": [
+            {
+              "type": "TRANSFER",
+              "amount": 150.0,
+              "timestampString": "2025-12-28T21:15:26.165505700",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "toAccountIban": "GR8802100213024949520666655",
+              "txType": "transfer"
+            }
+          ],
           "account_id": 1,
           "interest": 0.0,
           "branch": {
