@@ -33,6 +33,7 @@ import services.UserManager;
 import services.Command;
 import types.LogCategory;
 import types.LogLevel;
+import types.TicketStatus;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
@@ -304,6 +305,15 @@ public class BankSystem {
 		return tickets.values();
 	}
 
+	
+	public SupportTicket getTicketForCustomer(String customerId) {
+	    for (SupportTicket ticket : tickets.values()) {
+	        if (ticket.getCustomerId().equals(customerId) && ticket.getStatus() == TicketStatus.OPEN) {
+	            return ticket;
+	        }
+	    }
+	    return null;
+	}
 
 	
 	public User findUserByUsername(String username) {

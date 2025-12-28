@@ -52,6 +52,16 @@ public class SupportTicket {
 	}
 	
 	
+	public void addMessage(String message) {
+		this.messages.add(message);
+	}
+	
+	
+	@Override
+	public String toString() {
+	    return ticketId + " (" + status + ")";
+	}
+
 	
 
 }
