@@ -1,18 +1,22 @@
 package frontend.gui.tabs;
 
+import javax.swing.*;
 import backend.BankSystem;
 import backend.accounts.Account;
-import backend.users.Customer;
 import backend.users.User;
+import backend.users.Customer;
+import services.Command;
+import services.account_services.DepositCommand;
+import services.account_services.WithdrawCommand;
+import services.account_services.TransferCommand;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class TransferTab extends JPanel {
 
     private final User customer;
-    private final CustomerOverviewTab overviewTab; // Reference για άμεση ανανέωση
-    
+    private final CustomerOverviewTab overviewTab;
+
     private JComboBox<Account> accountSelector;
     private JComboBox<String> typeSelector;
     private JTextField amountField;
@@ -23,16 +27,14 @@ public class TransferTab extends JPanel {
     public TransferTab(User user, CustomerOverviewTab overviewTab) {
         this.customer = user;
         this.overviewTab = overviewTab;
-        
+
         setLayout(new BorderLayout(20, 20));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 
-        // --- ΤΙΤΛΟΣ ---
         JLabel title = new JLabel("Execute Transaction", SwingConstants.CENTER);
         title.setFont(new Font("SansSerif", Font.BOLD, 22));
         add(title, BorderLayout.NORTH);
 
-        // --- ΦΟΡΜΑ ---
         JPanel form = new JPanel(new GridLayout(0, 1, 10, 10));
 
         form.add(new JLabel("Select Your Account:"));
@@ -57,14 +59,12 @@ public class TransferTab extends JPanel {
 
         add(form, BorderLayout.CENTER);
 
-        // --- ΚΟΥΜΠΙ ΕΚΤΕΛΕΣΗΣ ---
         executeBtn = new JButton("Confirm Transaction");
         executeBtn.setFont(new Font("SansSerif", Font.BOLD, 16));
         executeBtn.setBackground(new Color(0, 102, 204));
         executeBtn.setForeground(Color.WHITE);
         add(executeBtn, BorderLayout.SOUTH);
 
-        // --- LOGIC ΓΙΑ ΕΜΦΑΝΙΣΗ IBAN ---
         typeSelector.addActionListener(e -> {
             boolean isTransfer = typeSelector.getSelectedItem().equals("Transfer to IBAN");
             targetIbanLabel.setVisible(isTransfer);
@@ -80,7 +80,7 @@ public class TransferTab extends JPanel {
         Account selectedAcc = (Account) accountSelector.getSelectedItem();
         String type = (String) typeSelector.getSelectedItem();
         String amountStr = amountField.getText().trim();
- 
+
         if (selectedAcc == null || amountStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
@@ -94,21 +94,17 @@ public class TransferTab extends JPanel {
             }
 
             BankSystem bank = BankSystem.getInstance();
-            boolean success = false;
+            Command command = null;
             String message = "";
 
-            // Εσωτερικό try-catch για να πιάσουμε το "Insufficient funds" από το backend
             try {
                 if (type.equals("Withdrawal")) {
-                    success = selectedAcc.withdraw(amount);
+                    command = new WithdrawCommand(selectedAcc, amount);
                     message = "Withdrawal successful!";
-                } 
-                else if (type.equals("Deposit")) {
-                    selectedAcc.deposit(amount);
-                    success = true;
+                } else if (type.equals("Deposit")) {
+                    command = new DepositCommand(selectedAcc, amount);
                     message = "Deposit successful!";
-                } 
-                else if (type.equals("Transfer to IBAN")) {
+                } else if (type.equals("Transfer to IBAN")) {
                     String targetIban = targetIbanField.getText().trim();
                     Account targetAcc = bank.getAccountbyNumber(targetIban);
 
@@ -119,30 +115,24 @@ public class TransferTab extends JPanel {
                         throw new IllegalArgumentException("Cannot transfer to the same account.");
                     }
 
-                    // Εκτέλεση μεταφοράς στο backend
-                    success = selectedAcc.transferTo(targetAcc, amount);
-                    if (success) {
-                        message = "Transfer of " + amount + "€ successful!";
-                    }
+                    command = new TransferCommand(selectedAcc, targetAcc, amount);
+                    message = "Transfer of " + amount + "€ successful!";
                 }
 
-                if (success) {
-                    // 1. Αποθήκευση αλλαγών στο αρχείο
+                if (command != null) {
+                    command.execute();
                     bank.dao.save(bank);
 
-                    // 2. ΑΥΤΟΜΑΤΗ ΑΝΑΝΕΩΣΗ του Overview Tab
                     if (overviewTab != null) {
-                        overviewTab.setSelectedAccount(selectedAcc); 
+                        overviewTab.setSelectedAccount(selectedAcc);
                     }
 
-                    // 3. Ενημέρωση χρήστη και καθαρισμός
                     JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
                     amountField.setText("");
                     targetIbanField.setText("");
                 }
 
             } catch (IllegalArgumentException ex) {
-                // Εδώ πιάνουμε το Exception από το Account.java (π.χ. Insufficient funds)
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -150,14 +140,12 @@ public class TransferTab extends JPanel {
             JOptionPane.showMessageDialog(this, "Please enter a valid numeric amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void refresh() {
-        // Αφαίρεση όλων των παλιών επιλογών
         accountSelector.removeAllItems();
-        
-        // Προσθήκη των νέων επιλογών από τη λίστα του πελάτη
         for (Account acc : customer.getAccounts()) {
             accountSelector.addItem(acc);
         }
     }
 }
+ 

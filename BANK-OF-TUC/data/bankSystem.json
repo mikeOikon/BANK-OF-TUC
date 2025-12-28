@@ -8,7 +8,7 @@
           "frozen": false,
           "IBAN": "GR4602100217946098933710985",
           "userID": "BUS004",
-          "balance": 0.0,
+          "balance": 1000.0,
           "transactions": [
             {
               "type": "DEPOSIT",
@@ -65,6 +65,41 @@
               "timestampString": "2025-12-27T17:50:09.240186400",
               "toAccountIban": "GR4602100217946098933710985",
               "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 30.0,
+              "timestampString": "2025-12-28T20:38:18.459888200",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 10.0,
+              "timestampString": "2025-12-28T20:38:30.433241900",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 50.0,
+              "timestampString": "2025-12-28T20:49:23.764235200",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1000.0,
+              "timestampString": "2025-12-28T21:06:53.092580700",
+              "toAccountIban": "GR4602100217946098933710985",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 20.0,
+              "timestampString": "2025-12-28T21:07:02.835156500",
+              "fromAccountIban": "GR4602100217946098933710985",
+              "txType": "withdraw"
             }
           ],
           "account_id": 1,

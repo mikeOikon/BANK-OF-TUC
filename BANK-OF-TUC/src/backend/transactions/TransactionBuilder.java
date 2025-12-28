@@ -10,6 +10,9 @@ public class TransactionBuilder {
     private Account to;
     private double amount;
 
+    // ------------------------------
+    //        Fluent Setters
+    // ------------------------------
 
     public TransactionBuilder setType(TransactionType type) {
         this.type = type;
@@ -30,6 +33,10 @@ public class TransactionBuilder {
         this.amount = amount;
         return this;
     }
+
+    // ------------------------------
+    //         BUILD METHOD
+    // ------------------------------
 
     public Transaction build() {
 

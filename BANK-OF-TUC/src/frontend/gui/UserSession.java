@@ -35,5 +35,20 @@ public class UserSession {
     public void logout() {
         currentUser = null;
     }
+
+    public String getUsername() {
+        return "";
+    }
+
+    public String getEmail() {
+        return "";
+    }
+
+    public void setUsername(String trim) {
+    }
+
+    public void setEmail(String trim) {
+
+    }
 }
 

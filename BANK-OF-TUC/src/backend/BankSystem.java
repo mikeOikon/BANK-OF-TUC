@@ -278,6 +278,12 @@ public class BankSystem {
 			if(foundAccount != null)
 				return foundAccount;
 		}
+		for(User user : businessCustomers.values()) {
+			BusinessCustomer bCustomer = (BusinessCustomer) user;
+			Account foundAccount = bCustomer.findAccountByNumber(accountNumber);
+			if(foundAccount != null)
+				return foundAccount;
+		}
 		return null; // Account not found
 	}
 	

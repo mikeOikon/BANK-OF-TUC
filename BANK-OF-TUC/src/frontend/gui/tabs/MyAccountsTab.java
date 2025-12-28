@@ -5,6 +5,7 @@ import backend.accounts.Account;
 import backend.users.BusinessCustomer;
 import backend.users.Customer;
 import backend.users.User;
+import services.account_services.SetPrimaryAccountCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,32 +68,21 @@ public class MyAccountsTab extends JPanel {
                 return;
             }
             
-            // 1. Ενημέρωση Backend
-            if(this.customer instanceof Customer) {
-            	Customer customer = (Customer)this.customer;
-            	customer.setPrimaryAccount(currentSelection);
+            SetPrimaryAccountCommand cmd;
+            if (customer instanceof Customer c) {
+                cmd = new SetPrimaryAccountCommand(currentSelection, c);
+            } else {
+                cmd = new SetPrimaryAccountCommand(currentSelection, (BusinessCustomer) customer);
             }
-            else {
-            	BusinessCustomer bCustomer = (BusinessCustomer)this.customer;
-            	bCustomer.setPrimaryAccount(currentSelection);
-            }
-            
-            BankSystem bank= BankSystem.getInstance();
-            bank.dao.save(bank); 
-            
-            // 2. Αποθήκευση στοιχείων πριν το refresh του μοντέλου
-            String iban = currentSelection.getIBAN();
-            
-            // 3. Ανανέωση UI
-            updateListModel(); 
-            
-            // 4. Ενημέρωση του Overview Tab ώστε να δείξει το νέο Status αμέσως
+
+            cmd.execute(); // Εκτέλεση
+            BankSystem bank = BankSystem.getInstance();
+            bank.dao.save(bank); // Αποθήκευση
+
+            updateListModel();
             overviewTab.setSelectedAccount(currentSelection);
-            
-            JOptionPane.showMessageDialog(this, 
-                "Account " + iban + " is now set as primary.", 
-                "Success", 
-                JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "Account " + currentSelection.getIBAN() + " is now set as primary.", "Success", JOptionPane.INFORMATION_MESSAGE);
         });
 
         // Listener για το View Overview

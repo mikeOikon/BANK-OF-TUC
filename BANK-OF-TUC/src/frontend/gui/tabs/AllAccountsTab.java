@@ -6,6 +6,7 @@ import backend.users.Admin;
 import backend.users.Auditor;
 import backend.users.Customer;
 import backend.users.User;
+import services.account_services.CloseAccountCommand;
 import backend.users.BusinessCustomer;
 import backend.users.BankEmployer;
 
@@ -109,11 +110,22 @@ public class AllAccountsTab extends JPanel {
                 boolean success = false;
                
                 // Ασφαλές Casting ανάλογα με τον τύπο του currentUser
-                if (currentUser instanceof Admin admin) {
-                    success = admin.deleteUserAccount(targetUser, iban);
-                } else if (currentUser instanceof BankEmployer employer) {
-                    success = employer.deleteUserAccount(targetUser, iban);
+                try {
+                    CloseAccountCommand cmd =
+                        new CloseAccountCommand(currentUser, targetUser, iban);
+
+                    cmd.execute();
+
+                    JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
+                    refreshEntireSystem();
+
+                } catch (SecurityException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Permission denied", JOptionPane.ERROR_MESSAGE);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Αδυναμία διαγραφής.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
                 }
+
 
                 if (success) {
                     bank.dao.save(bank); // Αποθήκευση αλλαγών

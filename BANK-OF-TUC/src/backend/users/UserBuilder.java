@@ -18,11 +18,11 @@ public class UserBuilder {
    private String representativeName;
    
    
-   public UserBuilder withAFM(String AFM) {
-	   this.AFM = AFM;
-	   return this;
-   }
+
    public UserBuilder withUsername(String username) {
+	  if(username == null || username.length() < 3|| username.length() > 20 || !username.matches("^[a-zA-Z0-9._-]{3,20}$")) {
+		   throw new IllegalArgumentException("Invalid username");
+	   }
 	   this.username = username;
 	   return this;}
    
@@ -44,11 +44,17 @@ public class UserBuilder {
    }
    
    public UserBuilder withName(String name) {
+	  if(name == null || name.length() < 2|| name.length() > 30 || !name.matches("^[a-zA-ZΑ-Ωα-ωΆΈΉΊΌΎΏάέήίόύώ\\s'-]+$")) {
+		   throw new IllegalArgumentException("Invalid name");
+	   }
 	   this.name = name;
 	   return this;}
    
    
    public UserBuilder withSurname(String surname) {
+	  if(surname == null || surname.length() < 2|| surname.length() > 30 || !surname.matches("^[a-zA-ZΑ-Ωα-ωΆΈΉΊΌΎΏάέήίόύώ\\s'-]+$")) {
+		   throw new IllegalArgumentException("Invalid surname");
+	   }
 	   this.surname = surname;
 	   return this;
    }
@@ -60,6 +66,14 @@ public class UserBuilder {
 	    this.phoneNumber = phoneNumber;
 	    return this;
 	}
+	public UserBuilder withAFM(String AFM) {
+	   if(AFM == null || !AFM.matches("^[0-9]{9}$")) {
+		   throw new IllegalArgumentException("Invalid AFM");
+	   }
+	   this.AFM = AFM;
+	   return this;
+   }
+
    
    public UserBuilder withBranch(Branch branch) {
 	   this.branch = branch;
