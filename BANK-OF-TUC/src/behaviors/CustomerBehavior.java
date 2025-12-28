@@ -15,6 +15,10 @@ public class CustomerBehavior implements UserBehavior {
 	}
 
 	@Override
+	public boolean canAdvanceTime() { return false; }
+
+
+	@Override
 	public boolean canViewAccounts() {
 		// TODO Auto-generated method stub
 		return true;

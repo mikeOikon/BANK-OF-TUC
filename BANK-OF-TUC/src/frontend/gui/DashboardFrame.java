@@ -71,7 +71,11 @@ public class DashboardFrame extends JFrame {
             }
             
             if(user.canOpenTicket()) {
-            	tabs.addTab("Support", new SupportTab(user));        }
+            	tabs.addTab("Support", new SupportTab(user));
+            }
+            if (user.canAdvanceTime()) {
+                tabs.addTab("Time Control", new frontend.gui.tabs.TimeControlTab(user));
+            }
 
         }
 

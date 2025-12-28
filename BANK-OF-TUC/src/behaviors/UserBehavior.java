@@ -12,4 +12,6 @@ public interface UserBehavior {
 	 boolean canDemoteUser();
 	 boolean canAssistUsers();
 	 boolean canOpenTicket();
+	 boolean canAdvanceTime();
+
 }

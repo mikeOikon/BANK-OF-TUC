@@ -79,7 +79,7 @@ public class SavingsAccount extends PersonalAccount {
     
     
     private double getTodayTransferTotal() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = backend.BankSystem.getInstance().getSimulatedToday();
         double total = 0;
 
         for (Transaction t : getTransactions()) {
@@ -101,7 +101,7 @@ public class SavingsAccount extends PersonalAccount {
     }
 
     private double getTodayDepositTotal() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = backend.BankSystem.getInstance().getSimulatedToday();
         double total = 0;
 
         for (Transaction t : getTransactions()) {

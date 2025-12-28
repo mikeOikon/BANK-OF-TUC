@@ -38,6 +38,10 @@ import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class BankSystem {
 	
 	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
@@ -58,6 +62,8 @@ public class BankSystem {
 	private  int customerCount = 0;
 	private  int employeeCount = 0;
 	private  int auditorCount = 0;
+	private String realBaseIso;
+	private String simulatedBaseIso;
 
     public static BankSystemDAO dao = new FileBankSystemDAO();
 
@@ -101,8 +107,59 @@ public class BankSystem {
 	    }
 	    return null; // User not found
 	}
-	
-	
+	// ----------------- Simulated Time API -----------------
+
+	public void initTimeIfMissing() {
+		LocalDateTime now = LocalDateTime.now();
+		if (realBaseIso == null || realBaseIso.isBlank()) {
+			realBaseIso = now.toString();
+		}
+		if (simulatedBaseIso == null || simulatedBaseIso.isBlank()) {
+			simulatedBaseIso = now.toString();
+		}
+	}
+
+	/** Το "τώρα" του συστήματος που μπορεί να είναι real ή time-lapse. */
+	public LocalDateTime getSimulatedNow() {
+		initTimeIfMissing();
+
+		LocalDateTime realBase = LocalDateTime.parse(realBaseIso);
+		LocalDateTime simulatedBase = LocalDateTime.parse(simulatedBaseIso);
+
+		Duration delta = Duration.between(realBase, LocalDateTime.now());
+		return simulatedBase.plus(delta);
+	}
+
+	public LocalDate getSimulatedToday() {
+		return getSimulatedNow().toLocalDate();
+	}
+
+	/** Εσωτερικά: κρατάμε τη simulated ώρα εκεί που θέλουμε και ξαναδένουμε με real clock. */
+	private void rebaseTo(LocalDateTime newSimulatedBase) {
+		realBaseIso = LocalDateTime.now().toString();
+		simulatedBaseIso = newSimulatedBase.toString();
+	}
+
+	public void advanceDays(int days) {
+		rebaseTo(getSimulatedNow().plusDays(days));
+	}
+
+	public void advanceMonths(int months) {
+		rebaseTo(getSimulatedNow().plusMonths(months));
+	}
+
+	public void setSimulatedTo(LocalDateTime target) {
+		if (target != null) rebaseTo(target);
+	}
+
+	/** Επιστροφή στην πραγματική ώρα (undo time-lapse). */
+	public void resetToRealTime() {
+		LocalDateTime now = LocalDateTime.now();
+		realBaseIso = now.toString();
+		simulatedBaseIso = now.toString();
+	}
+
+
 	void createDefaultAdminIfMissing() {
 	    if (!admins.isEmpty()) return;
 
@@ -152,6 +209,7 @@ public class BankSystem {
 	    for (Auditor a : auditors.values()) a.setBehavior(new AuditorBehavior());
 	    for (BankEmployer e : bankEmployers.values()) e.setBehavior(new EmployeeBehavior());
 	    for (BusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
+		initTimeIfMissing();
 	}
 
 

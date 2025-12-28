@@ -19,7 +19,7 @@ public abstract class Transaction {
 
         this.type = type;
         this.amount = amount;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = backend.BankSystem.getInstance().getSimulatedNow();
         this.timestampString = this.timestamp.toString(); // ISO string
         this.fromAccountIban = fromAccountIban;
         this.toAccountIban = toAccountIban;

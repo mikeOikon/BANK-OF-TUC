@@ -13,6 +13,9 @@ public class BusinessBehavior implements UserBehavior {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public boolean canAdvanceTime() { return false; }
+
 
 	@Override
 	public boolean canViewAccounts() {

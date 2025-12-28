@@ -57,6 +57,10 @@ public abstract class User {
 		return userBehavior.canViewAccounts();
 	}
 
+	public boolean canAdvanceTime() {
+		return userBehavior.canAdvanceTime();
+	}
+
 	
 	public boolean canTransferMoney() {
 		// TODO Auto-generated method stub

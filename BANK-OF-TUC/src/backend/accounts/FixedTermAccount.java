@@ -25,7 +25,7 @@ public class FixedTermAccount extends PersonalAccount {
     ) {
         super(IBAN, userID, balance, transactions, interest, branch);
         this.termMonths = termMonths;
-        this.startDate = LocalDate.now();
+        this.startDate = backend.BankSystem.getInstance().getSimulatedToday();
         this.maturityDate = startDate.plusMonths(termMonths);
     }
 
@@ -51,7 +51,7 @@ public class FixedTermAccount extends PersonalAccount {
         if (maturityDate == null) {
             return false;
         }
-        return LocalDate.now().isAfter(maturityDate) || LocalDate.now().isEqual(maturityDate);
+        return backend.BankSystem.getInstance().getSimulatedToday().isAfter(maturityDate) || backend.BankSystem.getInstance().getSimulatedToday().isEqual(maturityDate);
     }
 
     @Override

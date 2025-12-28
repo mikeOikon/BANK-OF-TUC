@@ -68,4 +68,8 @@ public class AdminBehavior implements UserBehavior {
 		return false;
 	}
 
+	@Override
+	public boolean canAdvanceTime() { return true; }
+
+
 }
