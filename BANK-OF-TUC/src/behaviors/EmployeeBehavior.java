@@ -62,4 +62,10 @@ public class EmployeeBehavior implements UserBehavior {
 		return true;
 	}
 
+	@Override
+	public boolean canOpenTicket() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

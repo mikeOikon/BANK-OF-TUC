@@ -102,6 +102,10 @@ public abstract class User {
 		// TODO Auto-generated method stub
 		return userBehavior.canAssistUsers();
 	}
+	
+	public boolean canOpenTicket() {
+		return userBehavior.canOpenTicket();
+	}
 
 	
 	public UserType getUserType() {
@@ -207,34 +211,5 @@ public abstract class User {
 		return null;
 	}
 
-	/*protected void login() {
-		//angel 
-		int tries = 0;
-		while(true) {
-			System.out.println("Type username");
-			String username = frontend.Main.scanner.nextLine();		
-			System.out.println("Type Password");
-			String password = frontend.Main.scanner.nextLine();		
-			tries++;
-			if(login(username, password)) {
-				System.out.println("*******Wellcome*******");
-				return;
-			}
-			else {
-				System.out.println("Wrong username or password. Try again!");
-				if(tries % 3 == 0) {
-					int waitMinutes = tries / 3; // Calculate wait time in minutes
-					System.out.print("Try again in ");
-					System.out.print(waitMinutes);
-					System.out.println(" minutes");	//makes trying available after +1 minute every 3 attempts
-					try {
-	                    Thread.sleep(waitMinutes * 60 * 1000); // μετατρέπει λεπτά σε ms and waits for that time
-	                } catch (InterruptedException e) {
-	                    e.printStackTrace();
-	                }
-				}
-			}		
-		}
-	}*/
 	
 }

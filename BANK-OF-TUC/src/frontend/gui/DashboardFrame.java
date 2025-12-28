@@ -56,6 +56,7 @@ public class DashboardFrame extends JFrame {
             TransferTab transferTab = new TransferTab(user, overviewTab);
             MyAccountsTab accountsTab = new MyAccountsTab(user, overviewTab);
 
+
             overviewTab.setOtherTabs(accountsTab, transactionsTab, transferTab);
 
             if (user.canViewAccounts()) {
@@ -68,13 +69,16 @@ public class DashboardFrame extends JFrame {
             if (user.canTransferMoney()) {
                 tabs.addTab("Transfer", transferTab);
             }
+            
+            if(user.canOpenTicket()) {
+            	tabs.addTab("Support", new SupportTab(user));        }
 
         }
 
         // 3. ADMIN / AUDITOR / EMPLOYER TABS
         
         // Προσθήκη ελέγχου για BankEmployer στο All Accounts
-        if (user.canViewAllAccounts() || user instanceof BankEmployer) {
+        if (user.canViewAllAccounts()) {
             tabs.addTab("All Accounts", new AllAccountsTab(user));
         }
 
@@ -92,5 +96,7 @@ public class DashboardFrame extends JFrame {
         if(user.canAssistUsers()) {
         	tabs.addTab("Customer Support", new CustomerSupportTab(user));
         }
+        
+
     }
 }

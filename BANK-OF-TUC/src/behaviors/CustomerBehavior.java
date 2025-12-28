@@ -62,4 +62,10 @@ public class CustomerBehavior implements UserBehavior {
 		return false;
 	}
 
+	@Override
+	public boolean canOpenTicket() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

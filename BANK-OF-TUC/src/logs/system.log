@@ -92,3 +92,18 @@
 [2025-12-27T18:16:25.820825500] [INFO] [DAO] Data loaded successfully.
 [2025-12-27T18:16:34.604344300] [INFO] [DAO] Data loaded successfully.
 [2025-12-27T18:16:48.966498200] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:02:15.696297600] [ERROR] [DAO] Failed to load data: Failed making field 'java.time.LocalDateTime#date' accessible; either increase its visibility or write a custom TypeAdapter for its declaring type.
+See https://github.com/google/gson/blob/main/Troubleshooting.md#reflection-inaccessible
+[2025-12-28T14:03:15.334741400] [ERROR] [DAO] Failed to load data: Failed making field 'java.time.LocalDateTime#date' accessible; either increase its visibility or write a custom TypeAdapter for its declaring type.
+See https://github.com/google/gson/blob/main/Troubleshooting.md#reflection-inaccessible
+[2025-12-28T14:18:27.687908600] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:19:19.165653200] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:21:12.359826] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:21:27.597102100] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:25:52.804161800] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:26:04.231399600] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:26:42.927330600] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:26:57.311202700] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T14:27:09.460248500] [INFO] System shutting down, data persisted.
+[2025-12-28T14:27:51.815758600] [INFO] System shutting down, data persisted.
+[2025-12-28T14:27:52.335952600] [INFO] System shutting down, data persisted.

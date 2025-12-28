@@ -39,3 +39,10 @@
 [2025-12-27T18:16:34.623543800] [INFO] [LOGIN] User admin logged in.
 [2025-12-27T18:16:41.943834400] [INFO]  UserId:ADM001 promoted to: EMPLOYEE with new UserId:EMP003
 [2025-12-27T18:17:08.029368200] [INFO] [LOGIN] User Employee1 logged in.
+[2025-12-28T14:04:46.157790700] [INFO] [LOGIN] User mike logged in.
+[2025-12-28T14:05:02.218630400] [INFO]  Email updated successfully for UserId.CUS001
+[2025-12-28T14:21:27.637741300] [INFO] [LOGIN] User mike_oikon logged in.
+[2025-12-28T14:26:04.269521100] [INFO] [LOGIN] User mike_oikon logged in.
+[2025-12-28T14:26:06.350348800] [INFO] [LOGIN] User mike_oikon logged in.
+[2025-12-28T14:26:21.949457600] [INFO] [LOGIN] User mike_oikon logged in.
+[2025-12-28T14:26:57.350712100] [INFO] [LOGIN] User mike_oikon logged in.

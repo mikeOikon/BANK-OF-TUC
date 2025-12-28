@@ -41,8 +41,6 @@ public class ProfileTab extends JPanel {
         form.add(new JLabel("Name:"));
         form.add(new JLabel(user.getName() + " " + user.getSurname()));
 
-        form.add(new JLabel("AFM:"));
-        form.add(new JLabel(user.getAFM()));
 
         form.add(new JLabel("Email:"));
         emailContainer = new JPanel(new BorderLayout());

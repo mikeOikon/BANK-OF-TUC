@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.google.gson.Gson;
 
 import backend.accounts.Account;
 import backend.accounts.AccountFactory;
+import backend.support.SupportTicket;
 import backend.users.Admin;
 import backend.users.Auditor;
 import backend.users.BankEmployer;
@@ -49,6 +51,7 @@ public class BankSystem {
 	private transient UserManager userManager;
 	private transient Map<String, Map<String, ? extends User>> userMaps;
 	private transient Map<String,User> usersByUsername; // Map to find users by username during login
+	private final Map<String,SupportTicket> tickets=new HashMap<>();
 	
 	private  int adminCount = 0;
 	private  int customerCount = 0;
@@ -241,316 +244,7 @@ public class BankSystem {
 	}
 	
 	
-	/*
-	public User createUserCLI() {
-		System.out.println("Select user type to create: Type 1 for Personal Customer, Type 2 for Business Customer");
-		int choice = frontend.Main.scanner.nextInt();
-		frontend.Main.scanner.nextLine(); // Consume newline
-		switch (choice) {
-			case 1:
-				String username;
-				String password;
-				String name;
-				String surname;
-				String AFM;
-				boolean valid;
-				do {
-					valid = true;
-					System.out.println("Type Username: ");
-					username = frontend.Main.scanner.nextLine();
-					if (username.isEmpty()) {
-						System.out.println("Username cannot be empty.");
-						valid = false;
-						continue;
-					}
-					if (!username.matches("[a-zA-Z0-9_]+")) {
-						System.out.println("Okay, username can contain only characteres allowed (letters, numbers and underscores)."); // I want to rewrite a Username
-						valid = false;
-						continue;
-					}
-					for (User user : customers.values()) {
-						if (user.getUsername().equals(username)) {
-							System.out.println("Username is already taken. Please choose another one.");
-							valid = false;
-							break;
-						}
-					}
-				} while (!valid); //loop until valid username is provided
 
-				System.out.println("Type password: ");//maybe should be hidden and have some rules
-				//I want an if statement to check if password has at least 8 characters, one uppercase letter, one lowercase letter and one number
-				do {
-					valid = true;
-					password = frontend.Main.scanner.nextLine();
-					if (password.isEmpty()) {
-						System.out.println("Password cannot be empty.");
-						valid = false;
-						continue;
-					}
-					if (password.length() < 8) {
-						System.out.println("Password must be at least 8 characters long.");
-						valid = false;
-						continue;
-					}
-					if (!password.matches(".*[A-Z].*")) {
-						System.out.println("Password must contain at least one uppercase letter.");
-						valid = false;
-						continue;
-					}
-					if (!password.matches(".*[a-z].*")) {
-						System.out.println("Password must contain at least one lowercase letter.");
-						valid = false;
-						continue;
-					}
-					if (!password.matches(".*\\d.*")) {
-						System.out.println("Password must contain at least one number.");
-						valid = false;
-						continue;
-					}
-					if (password.contains(" ")) {
-						System.out.println("Password cannot contain spaces.");
-						valid = false;
-					}
-				} while (!valid); //loop until valid password is provided
-				
-				System.out.println("Type business AFM: ");
-				do {
-					valid = true;
-					AFM= frontend.Main.scanner.nextLine();
-					if (AFM.isEmpty()) {
-						System.out.println("AFM cannot be empty.");
-						valid = false;
-						continue;
-					}
-					if(!AFM.matches("^[0-9]{9}$")) {
-						System.out.println("Invalid AFM format. Please try again.");
-						valid = false;
-					}
-					
-				}while(!valid);
-
-
-				System.out.println("Type name: ");
-				do {
-					valid = true;
-					name = frontend.Main.scanner.nextLine();
-					if (name.isEmpty()) {
-						System.out.println("Name cannot be empty.");
-						valid = false;
-						continue;
-					}
-					if (!name.matches("[a-zA-Z]+")) {
-						System.out.println("Name can contain only letters. Please try again.");
-						valid = false;
-					}
-				} while (!valid); //loop until valid name is provided
-
-				System.out.println("Type surname: ");
-				do {
-					valid = true;
-					surname = frontend.Main.scanner.nextLine();
-					if (surname.isEmpty()) {
-						System.out.println("Surname cannot be empty.");
-						valid = false;
-						continue;
-					}
-					if (!surname.matches("[a-zA-Z' -]+")) {
-						System.out.println("Surname can contain only letters the -,' special characters and space. Please try again.");
-						valid = false;
-					}
-				} while (!valid); //loop until valid surname is provided
-
-				//customers are created with the main branch, if we want to create customers with different branches we need to change this
-				String userID = generateId(UserType.CUSTOMER); //2 for customer
-				UserBuilder userBuilder = new UserBuilder();
-			try {
-				userBuilder.withUsername(username)
-						   .withPassword(PasswordHasher.hash(password))
-						   .withName(name)
-						   .withSurname(surname)
-						   .withAFM(AFM)
-						   .withBranch(Branch.getDefaultBranch());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();		
-			}
-				User newCustomer = UserFactory.createUser(UserType.CUSTOMER,userID,userBuilder);//create customer
-				Command create= new CreateUserCommand(newCustomer);				
-				userManager.execute(create);
-				return newCustomer;
-			case 2:
-				String businessUsername;
-				String businessPassword;
-				String businessName;
-				String repname;
-				String businessAFM;
-
-				System.out.println("Type Username: ");
-				boolean businessValid;
-				do {
-					businessValid = true;
-					businessUsername = frontend.Main.scanner.nextLine();
-					if (businessUsername.isEmpty()) {
-						System.out.println("Username cannot be empty.");
-						businessValid = false;
-						continue;
-					}
-					if (!businessUsername.matches("[a-zA-Z0-9_]+")) {
-						System.out.println("Okay, username can contain only characteres allowed (letters, numbers and underscores)."); // I want to rewrite a Username
-						businessValid = false;
-						continue;
-					}
-					for (User user : businessCustomers.values()) {
-						if (user.getUsername().equals(businessUsername)) {
-							System.out.println("Username is already taken. Please choose another one.");
-							businessValid = false;
-							break;
-						}
-					}
-				} while (!businessValid); //loop until valid username is provided
-				System.out.println("Type password: ");    //maybe should be hidden and have some rules
-				do {
-					businessValid = true;
-					businessPassword = frontend.Main.scanner.nextLine();
-					if (businessPassword.isEmpty()) {
-						System.out.println("Password cannot be empty.");
-						businessValid = false;
-						continue;
-					}
-					if (businessPassword.length() < 8) {
-						System.out.println("Password must be at least 8 characters long.");
-						businessValid = false;
-						continue;
-					}
-					if (!businessPassword.matches(".*[A-Z].*")) {
-						System.out.println("Password must contain at least one uppercase letter.");
-						businessValid = false;
-						continue;
-					}
-					if (!businessPassword.matches(".*[a-z].*")) {
-						System.out.println("Password must contain at least one lowercase letter.");
-						businessValid = false;
-						continue;
-					}
-					if (!businessPassword.matches(".*\\d.*")) {
-						System.out.println("Password must contain at least one number.");
-						businessValid = false;
-						continue;
-					}
-					if (businessPassword.contains(" ")) {
-						System.out.println("Password cannot contain spaces.");
-						businessValid = false;
-					}
-				} while (!businessValid); //loop until valid password is provided
-				System.out.println("Type business AFM: ");
-				do {
-					businessValid = true;
-					businessAFM= frontend.Main.scanner.nextLine();
-					if (businessAFM.isEmpty()) {
-						System.out.println("AFM cannot be empty.");
-						businessValid = false;
-						continue;
-					}
-					if(!businessAFM.matches("^[0-9]{9}$")) {
-						System.out.println("Invalid AFM format. Please try again.");
-						businessValid = false;
-					}
-					
-				}while(!businessValid);
-				
-				System.out.println("Type business name: ");
-				do {
-					businessValid = true;
-					businessName = frontend.Main.scanner.nextLine();
-					if (businessName.isEmpty()) {
-						System.out.println("Business name cannot be empty.");
-						businessValid = false;
-						continue;
-					}
-					if (!businessName.matches("[a-zA-Z0-9 '&-]+")) {
-						System.out.println("Business name can contain only letters, numbers and the special characters -,&,' and space. Please try again.");
-						businessValid = false;
-					}
-				} while (!businessValid); //loop until valid business name is provided
-				System.out.println("Type representative name: ");
-				do {
-					businessValid = true;
-					repname = frontend.Main.scanner.nextLine();
-					if (repname.isEmpty()) {
-						System.out.println("Representative name cannot be empty.");
-						businessValid = false;
-						continue;
-					}
-					if (!repname.matches("[a-zA-Z]+")) {
-						System.out.println("Representative name can contain only letters. Please try again.");
-						businessValid = false;
-					}
-				} while (!businessValid); //loop until valid representative name is provided
-				//business customers are created with the main branch, if we want to create business customers with different branches we need to change this
-				String businessUserID = generateId(UserType.BUSINESSCUSTOMER); //businessCustomer for businessCustomer (different from simple customer)
-				UserBuilder businessUserBuilder = new UserBuilder();
-			try {
-				businessUserBuilder.withUsername(businessUsername)
-								   .withPassword(PasswordHasher.hash(businessPassword))
-								   .withAFM(businessAFM)
-								   .withName(businessName)
-								   .withSurname(repname)
-								   .withBranch(Branch.getDefaultBranch());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				User newBusinessCustomer = UserFactory.createUser(UserType.BUSINESSCUSTOMER,businessUserID,businessUserBuilder);//create customer
-				Command businessCreate= new CreateUserCommand(newBusinessCustomer);				
-				userManager.execute(businessCreate);
-				return newBusinessCustomer;
-			default:
-				System.out.println("Invalid choice. Please select 1 or 2.");
-				return null;
-		}
-	}*/
-	
-	/*public User loginCLI() {
-	    Scanner scanner = frontend.Main.scanner;
-	    int attempts = 0;
-
-	    while (true) {
-	        System.out.print("Username: ");
-	        String username = scanner.nextLine();
-
-	        System.out.print("Password: ");
-	        String password = scanner.nextLine();
-
-	        User user = findUserByUsername(username);
-
-	        attempts++;
-	        if (user != null) {
-	            try {
-	                if (PasswordHasher.verify(password, user.getPassword())) {
-	                    System.out.println("******* Welcome " + user.getName() + " *******");
-	                    return user; // successful login
-	                } else {
-	                    System.out.println("Incorrect password.");
-	                }
-	            } catch (Exception e) {
-	                System.err.println("Error verifying password: " + e.getMessage());
-	            }
-	        } else {
-	            System.out.println("Username not found.");
-	        }
-
-	        // Handle failed attempts with incremental wait time
-	        if (attempts % 3 == 0) {
-	            int waitMinutes = attempts / 3;
-	            System.out.println("Too many failed attempts. Wait " + waitMinutes + " minute(s) before retrying.");
-	            try {
-	                Thread.sleep(waitMinutes * 60 * 1000L); // convert minutes to milliseconds
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }
-	}*/
 
 	public String generateId(UserType type) {  //Genrates unique ID for each user ids are in order
 	    String prefix;
@@ -586,76 +280,6 @@ public class BankSystem {
 		return null; // Account not found
 	}
 	
-	/*public void transferMoney(Customer customer) {
-
-	    System.out.println("Type the account number you want to transfer from: ");
-	    String fromAccountNumber = frontend.Main.scanner.nextLine();
-
-	    System.out.println("Type the account number you want to transfer to: ");
-	    String toAccountNumber = frontend.Main.scanner.nextLine();
-
-	    System.out.println("Type the amount you want to transfer: ");
-	    double amount = frontend.Main.scanner.nextDouble();
-	    frontend.Main.scanner.nextLine(); // consume newline
-
-	    Account fromAccount = customer.findAccountByNumber(fromAccountNumber);
-	    Account toAccount = getAccountbyNumber(toAccountNumber);
-
-	    if (amount <= 0) {
-	        System.out.println("Amount must be positive.");
-	        return;
-	    }
-
-	    if (fromAccount == null || toAccount == null) {
-	        System.out.println("One or both of the account numbers are invalid.");
-	        return;
-	    }
-
-	    if (fromAccount.equals(toAccount)) {
-	        System.out.println("You cannot transfer money to the same account.");
-	        return;
-	    }
-
-	    if (!(fromAccount instanceof TransactionalAccount)) {
-	        System.out.println("The source account does not support transactions.");
-	        return;
-	    }
-
-	    if (fromAccount.getBalance() < amount) {
-	        System.out.println("Insufficient funds.");
-	        return;
-	    }
-
-	    if (toAccount instanceof FixedTermAccount) {
-	        System.out.println("The destination account does not support transactions.");
-	        return;
-	    }
-
-	    // 💰 Εφαρμογή χρέωσης σε διαφορετική τράπεζα (προμήθεια 1€)
-	    if (!fromAccount.getBranch().getBankCode().equals(toAccount.getBranch().getBankCode())) {
-
-	        if (fromAccount.getBalance() < amount + 1) {
-	            System.out.println("Insufficient funds to cover transfer fee.");
-	            return;
-	        }
-
-	        fromAccount.setBalance(fromAccount.getBalance() - (amount + 1));
-	        toAccount.setBalance(toAccount.getBalance() + amount);
-	        bankAccount.receivePayment(1.0);
-	    } else {
-	        fromAccount.setBalance(fromAccount.getBalance() - amount);
-	        toAccount.setBalance(toAccount.getBalance() + amount);
-	    }
-
-	    // ✅ Χρησιμοποιούμε πλέον FACTORY
-	    Transaction transferTx = TransactionFactory.createTransaction(fromAccount, toAccount, amount);
-
-	    fromAccount.getTransactions().add(transferTx);
-	    toAccount.getTransactions().add(transferTx);
-
-	    System.out.println("Transfer successful. New balance of source account: " + fromAccount.getBalance());
-	}*/
-
 
 	//mathod to get all accounts in the bank system (used by auditor) 
 	public List<Account> getAllAccounts() {
@@ -666,40 +290,21 @@ public class BankSystem {
 		}
 		return List.copyOf(allAccounts);
 	}  
-
-	//method to get transaction history of Customer(used by auditor)
-	//sosssssssssssssss gia business customer na gyrnaei ta transaction tou business account
-	/*public void viewTransactionsByCustomer(String customerID) {
-		User user = customers.get(customerID); //check if personal customer
-		if (user == null) { 
-			user = businessCustomers.get(customerID);	//check if business customer
-		}
-		if (user == null || !(user instanceof Customer)) { // if not found or not a customer
-			System.out.println("No customer found with ID: " + customerID);
-			return;
-		}
-		if(user instanceof ΒusinessCustomer) {
-			System.out.println("Viewing transactions for Business Customers is not yet implemented.");	//
-			return;
-		}
-		Customer customer = (Customer) user;
-		List<Transaction> allTransactions = new ArrayList<>();
-		for (Account acc : customer.getAccounts()) {
-		    allTransactions.addAll(acc.getTransactions());
-		}
-		if (allTransactions.isEmpty()) {
-	        System.out.println("No transactions found for customer " + customerID);
-	        return;
-	    }
-		
-		System.out.println("Transaction history for customer " + customerID + ":");
-		for (Transaction t : allTransactions) {
-		    System.out.println(t);
-		}
-		
-	}*/
 	
-	//na ftiaxtei methodos gia plhromes klp
+	
+	public String generateTicketID() {
+		return "TIC-"+System.currentTimeMillis();
+	}
+	
+	public void addTicket(SupportTicket ticket) {
+		tickets.put(ticket.getTicketId(),ticket);
+	}
+	
+	public Collection<SupportTicket> getAllTickets(){
+		return tickets.values();
+	}
+
+
 	
 	public User findUserByUsername(String username) {
 	    return usersByUsername.get(username);

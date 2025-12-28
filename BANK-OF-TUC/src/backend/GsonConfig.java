@@ -3,6 +3,7 @@ package backend;
 import com.google.gson.*;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import backend.accounts.*;
@@ -33,6 +34,7 @@ public class GsonConfig {
                 .setPrettyPrinting()
                 // --- Η ΠΡΟΣΘΗΚΗ ΠΟΥ ΛΕΙΠΕΙ ---
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDateTime.class,new LocalDateTimeAdapter())
                 // ----------------------------
                 .registerTypeAdapterFactory(accountAdapter)
                 .registerTypeAdapterFactory(transactionAdapter)
