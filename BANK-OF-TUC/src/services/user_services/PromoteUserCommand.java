@@ -1,8 +1,9 @@
-package services;
+package services.user_services;
 
 import backend.BankSystem;
 import backend.FileLogger;
 import backend.users.*;
+import services.Command;
 import types.LogCategory;
 import types.LogLevel;
 import types.UserType;

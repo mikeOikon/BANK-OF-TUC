@@ -5,7 +5,7 @@ import backend.users.User;
 import frontend.gui.StartFrame;
 import java.awt.*;
 import services.Command;
-import services.ChangePasswordCommand;
+import services.user_services.ChangePasswordCommand;
 import backend.PasswordHasher; // Εισαγωγή του Hasher
 
 public class SettingsTab extends JPanel {

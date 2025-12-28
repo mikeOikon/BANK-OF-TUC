@@ -220,6 +220,16 @@ public class BusinessCustomer extends User{
 		return this.name + " " + this.surname;
 	}
 	
+	@Override
+	public Account getAccountByID(String accountID) {
+		for (Account account : getAccounts()) {
+			if (account.getIBAN().equals(accountID)) {
+				return account;
+			}
+		}
+		return null;
+	}
+	
 	/*protected void accountBalance(Account account) { //ιδιο ακριβως με customer
 		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());
 	}*/

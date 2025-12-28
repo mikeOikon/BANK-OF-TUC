@@ -210,6 +210,10 @@ public abstract class User {
 	public Account getPrimaryAccount() {
 		return null;
 	}
+	
+	public Account getAccountByID(String accountID) {
+		return null;
+	}
 
 	
 }

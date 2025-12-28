@@ -31,11 +31,11 @@ import behaviors.CustomerBehavior;
 import behaviors.EmployeeBehavior;
 import services.UserManager;
 import services.Command;
-import services.CreateUserCommand;
 import types.LogCategory;
 import types.LogLevel;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
+import services.user_services.CreateUserCommand;
 
 public class BankSystem {
 	

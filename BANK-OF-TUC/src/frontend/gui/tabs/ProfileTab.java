@@ -2,8 +2,8 @@ package frontend.gui.tabs;
 
 import backend.BankSystem;
 import backend.users.User;
-import services.UpdateEmailCommand;
-import services.UpdatePhoneNumberCommand;
+import services.user_services.UpdateEmailCommand;
+import services.user_services.UpdatePhoneNumberCommand;
 
 import javax.swing.*;
 import java.awt.*;

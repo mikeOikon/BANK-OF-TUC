@@ -1,7 +1,8 @@
-package services;
+package services.user_services;
 
 import backend.BankSystem;
 import backend.users.User;
+import services.Command;
 
 public class CreateUserCommand implements Command {
 	
