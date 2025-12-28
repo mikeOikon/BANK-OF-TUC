@@ -17,14 +17,14 @@ public class BankSystemCLI {
         this.bankSystem = BankSystem.getInstance();
         this.scanner = new Scanner(System.in);
     }
-    
+
     public static void main(String[] args) {
         BankSystemCLI cli = new BankSystemCLI();
         cli.start();
     }
 
     public void start() {
-    	
+
     	/*System.out.println("                                                           5                                                                  \r\n"
     			+ "                                                         5 47                                                                 \r\n"
     			+ "                                                        15 41                                                                 \r\n"
@@ -160,7 +160,7 @@ public class BankSystemCLI {
                     /*for (Account acc : currentUser.getAccounts()) {
                         System.out.println(acc);
                     }*/
-                    
+
                 } else if (selected == transferOption) {
                     //bankSystem.transferMoney(currentUser);
                 }
@@ -172,17 +172,17 @@ public class BankSystemCLI {
                     System.out.print("Enter user ID to remove: ");
                     String id = scanner.nextLine();
                     bankSystem.removeUser(id);
-                    
-                    
+
+
                 } else if (selected == viewAllAccountsOption) {
                     List<Account> accounts = bankSystem.getAllAccounts();
                     accounts.forEach(System.out::println);
-                    
+
                 } else if (selected == viewAllTransactionsOption) {
                     System.out.print("Enter customer ID: ");
                     String customerId = scanner.nextLine();
                    // bankSystem.viewTransactionsByCustomer(customerId);
-                    
+
                 } else if (selected == createAuditorOption) {
                     System.out.println("Feature not implemented yet.");
                 } else if (selected == promoteUserOption) {
@@ -204,3 +204,4 @@ public class BankSystemCLI {
     }
 
 }
+*
