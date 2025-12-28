@@ -2,9 +2,9 @@ package frontend.gui.tabs;
 
 import backend.BankSystem;
 import backend.users.*;
-import services.DeleteUserCommand;
-import services.PromoteUserCommand;
 import services.UserManager;
+import services.user_services.DeleteUserCommand;
+import services.user_services.PromoteUserCommand;
 import types.UserType;
 
 import javax.swing.*;

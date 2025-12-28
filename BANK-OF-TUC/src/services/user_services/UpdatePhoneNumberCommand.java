@@ -1,8 +1,9 @@
-package services;
+package services.user_services;
 
 import backend.FileLogger;
 import backend.users.User;
 import backend.users.UserBuilder;
+import services.Command;
 import types.LogCategory;
 import types.LogLevel;
 

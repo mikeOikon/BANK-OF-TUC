@@ -247,4 +247,14 @@ public class Customer extends User {
 	public Object getFullName() {
 		return this.name + " " + this.surname;
 	}
+	
+	@Override
+	public Account getAccountByID(String accountID) {
+		for (Account account : getAccounts()) {
+			if (account.getIBAN().equals(accountID)) {
+				return account;
+			}
+		}
+		return null;
+	}
 }

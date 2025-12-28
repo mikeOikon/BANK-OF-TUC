@@ -4,9 +4,9 @@ import backend.BankSystem;
 import backend.PasswordHasher;
 import backend.users.User;
 import backend.users.UserBuilder;
-import services.CreateUserCommand;
 import services.UserManager;
 import types.UserType;
+import user_services.CreateUserCommand;
 
 import javax.swing.*;
 import java.awt.*;

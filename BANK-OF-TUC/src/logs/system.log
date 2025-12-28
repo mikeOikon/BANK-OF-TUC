@@ -92,6 +92,7 @@
 [2025-12-27T18:16:25.820825500] [INFO] [DAO] Data loaded successfully.
 [2025-12-27T18:16:34.604344300] [INFO] [DAO] Data loaded successfully.
 [2025-12-27T18:16:48.966498200] [INFO] [DAO] Data loaded successfully.
+<<<<<<< HEAD
 [2025-12-28T14:02:15.696297600] [ERROR] [DAO] Failed to load data: Failed making field 'java.time.LocalDateTime#date' accessible; either increase its visibility or write a custom TypeAdapter for its declaring type.
 See https://github.com/google/gson/blob/main/Troubleshooting.md#reflection-inaccessible
 [2025-12-28T14:03:15.334741400] [ERROR] [DAO] Failed to load data: Failed making field 'java.time.LocalDateTime#date' accessible; either increase its visibility or write a custom TypeAdapter for its declaring type.
@@ -107,3 +108,8 @@ See https://github.com/google/gson/blob/main/Troubleshooting.md#reflection-inacc
 [2025-12-28T14:27:09.460248500] [INFO] System shutting down, data persisted.
 [2025-12-28T14:27:51.815758600] [INFO] System shutting down, data persisted.
 [2025-12-28T14:27:52.335952600] [INFO] System shutting down, data persisted.
+=======
+[2025-12-28T20:17:15.909020500] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T20:17:31.938055] [INFO] [DAO] Data loaded successfully.
+[2025-12-28T20:17:48.987402100] [INFO] System shutting down, data persisted.
+>>>>>>> stash
