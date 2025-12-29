@@ -1,5 +1,19 @@
 {
-  "businessCustomers": {},
+  "businessCustomers": {
+    "BUS002": {
+      "accounts": [],
+      "username": "Aek",
+      "userID": "BUS002",
+      "password": "8bd50c95f4827c3ae0739b3a010397e28affbe3f2b987ec8f1cd5fd3f890e616",
+      "name": "AEK FC",
+      "surname": "Marko Nikolic",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "2fdcc4863844bd5792f9a265b4847abd2667fa7233b0f7c37505a9316623566b"
+    }
+  },
   "admins": {
     "ADM001": {
       "username": "admin",
@@ -51,7 +65,7 @@
     }
   },
   "adminCount": 1,
-  "customerCount": 1,
+  "customerCount": 2,
   "employeeCount": 0,
   "auditorCount": 0,
   "realBaseIso": "2025-12-28T22:39:10.321540800",

@@ -154,7 +154,7 @@ public class RegisterFrame extends JFrame {
 
             // 1. Validation
             if (username.isEmpty() || rawPassword.isEmpty() || rawConfirm.isEmpty()
-                    || name.isEmpty() || surname.isEmpty() || rawAfm.isEmpty()) {
+                    ||  rawAfm.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Συμπληρώστε όλα τα πεδία", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -184,11 +184,16 @@ public class RegisterFrame extends JFrame {
             UserBuilder builder = new UserBuilder()
                     .withUsername(username)
                     .withPassword(hashedPassword)
-                    .withName(name)
-                    .withSurname(surname)
                     .withAFM(hashedAfm);
-
-            if (userType == UserType.BUSINESSCUSTOMER) {
+            
+            if (userType == UserType.CUSTOMER) {
+                if (name.isEmpty() || surname.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Συμπληρώστε όνομα και επίθετο", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                builder.withName(name).withSurname(surname);
+                }
+                else {
                 String bName = businessNameField.getText().trim();
                 String rName = representativeField.getText().trim();
                 if (bName.isEmpty() || rName.isEmpty()) {

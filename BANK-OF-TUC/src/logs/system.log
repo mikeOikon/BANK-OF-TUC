@@ -216,3 +216,15 @@ See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-clas
 [2025-12-29T13:05:07.921934] [INFO] [DAO] Data saved successfully.
 [2025-12-29T13:05:44.195455300] [INFO] [DAO] Data saved successfully.
 [2025-12-29T13:05:44.196457100] [INFO] System shutting down, data persisted.
+[2025-12-29T13:24:46.708509200] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:30:44.242844800] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:31:11.972337900] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:33:37.686665300] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:34:12.579294900] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:34:12.662756100] [INFO] [DAO] Data saved successfully.
+[2025-12-29T13:34:56.637683600] [INFO] [DAO] Data saved successfully.
+[2025-12-29T13:34:56.638686100] [INFO] System shutting down, data persisted.
+[2025-12-29T13:36:04.371641700] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:36:12.480622900] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:44:54.747932400] [INFO] [DAO] Data saved successfully.
+[2025-12-29T13:44:54.748934100] [INFO] System shutting down, data persisted.
