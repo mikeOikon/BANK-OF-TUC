@@ -1,12 +1,13 @@
 package frontend.gui;
 
 import backend.BankSystem;
+
 import backend.PasswordHasher;
 import backend.users.User;
 import backend.users.UserBuilder;
 import services.UserManager;
 import types.UserType;
-import user_services.CreateUserCommand;
+import services.user_services.CreateUserCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -157,7 +158,7 @@ public class RegisterFrame extends JFrame {
                     ||  rawAfm.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Συμπληρώστε όλα τα πεδία", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
                 return;
-            }
+            }//aek
             
             if(rawAfm == null || !rawAfm.matches("^[0-9]{9}$")) {
             	JOptionPane.showMessageDialog(this, "Το Α.Φ.Μ. πρέπει να είναι 9 νούμερα.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
