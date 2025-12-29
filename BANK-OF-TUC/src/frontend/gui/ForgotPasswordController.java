@@ -8,6 +8,8 @@ import backend.support.EmailVerificationStrategy;
 import backend.support.SmsVerificationStrategy;
 import backend.support.VerificationContext;
 import backend.users.User;
+import services.UserManager;
+import services.user_services.ChangePasswordCommand;
 
 public class ForgotPasswordController {
 
@@ -68,7 +70,12 @@ public class ForgotPasswordController {
                 return;
             }
 
-            user.setPassword(String.valueOf(p1.getPassword()));
+            ChangePasswordCommand changePasswordCommand =
+				new ChangePasswordCommand(user, String.valueOf(p1.getPassword()));
+            
+            UserManager manager = new UserManager();
+            manager.execute(changePasswordCommand);
+            
             JOptionPane.showMessageDialog(null, "Password successfully changed");
         }
     }

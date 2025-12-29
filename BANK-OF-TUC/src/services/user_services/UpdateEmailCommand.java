@@ -1,5 +1,6 @@
 package services.user_services;
 
+import backend.BankSystem;
 import backend.FileLogger;
 import backend.users.User;
 import backend.users.UserBuilder;
@@ -27,7 +28,7 @@ public class UpdateEmailCommand implements Command {
         
         
         user.setEmail(builder.getEmail());
-
+        BankSystem.getInstance().saveAllData();
         logger.log(LogLevel.INFO,LogCategory.USER," Email updated successfully for UserId."+user.getUserID());
     }
 

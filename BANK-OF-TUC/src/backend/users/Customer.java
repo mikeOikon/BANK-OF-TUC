@@ -63,12 +63,7 @@ public class Customer extends User {
 	}
 
 	
-	/*public void createAccountMenu() {
-		System.out.println("What type of account do you want to create? Type 1 for Transactional, Type 2 for Savings, Type 3 for Fixed-Term");
-		int choice = frontend.Main.scanner.nextInt();
-		frontend.Main.scanner.nextLine(); // Consume newline
-		createAccount(choice);
-	}*/
+
 	@Override
 	public Account createAccount(int choice) {
 	    AccountType type;
@@ -114,17 +109,6 @@ public class Customer extends User {
 		System.out.println("The balance for account " + account.getIBAN() + " is: " + account.getBalance());
 	}
 
-	/*protected void viewAccountBalance() {
-		System.out.println("Type the acount iBAN you want to check the balance");
-		String accountNumber = frontend.Main.scanner.nextLine();	
-		Account account = findAccountByNumber(accountNumber);
-		if (account != null) {
-		    accountBalance(account);
-		} else {
-		    System.out.println("Account with iBAN " + accountNumber + " not found.");
-		}	
-	}*/
-	
 	protected void viewAccountDetails(Account acc) {
 		if (acc != null) {
 			System.out.println(acc.toString());
@@ -177,64 +161,7 @@ public class Customer extends User {
 		}
 		
 	}
-	
-	/*protected void updatePersonalInformation() {
-		//if password is correct then let user update email, name, surname, phone number, and maybe password
-		System.out.println("To update your personal information, please enter your current password:");
-		String currentPassword = frontend.Main.scanner.nextLine();
-		if (currentPassword.equals(this.password)) {
-			viewPersonalInformation(); // Display current information
-			System.out.println("Enter new username (or press Enter to keep current):");
-			String newUsername = frontend.Main.scanner.nextLine();
-		    if (!newUsername.isEmpty()) {
-		        this.username = newUsername;
-		    }
-		    System.out.println("Enter new email (or press Enter to keep current):");
-		    String newEmail = frontend.Main.scanner.nextLine();
-		    if (!newEmail.isEmpty()) {
-		        this.email = newEmail;
-		    }
 
-		    System.out.println("Enter new name (or press Enter to keep current):");
-		    String newName = frontend.Main.scanner.nextLine();
-		    if (!newName.isEmpty()) {
-		        this.name = newName;
-		    }
-
-		    System.out.println("Enter new surname (or press Enter to keep current):");
-		    String newSurname = frontend.Main.scanner.nextLine();
-		    if (!newSurname.isEmpty()) {
-		        this.surname = newSurname;
-		    }
-
-		    System.out.println("Enter new phone number (or press Enter to keep current):");
-		    String newPhoneNumber = frontend.Main.scanner.nextLine();
-		    if (!newPhoneNumber.isEmpty()) {
-		        this.phoneNumber = newPhoneNumber;
-		    }
-
-		    System.out.println("Do you want to change your password? (yes/no)");
-		    String changePassword = frontend.Main.scanner.nextLine();
-		    if (changePassword.equalsIgnoreCase("yes")) {
-		        System.out.println("Enter new password:");
-		        String newPassword = frontend.Main.scanner.nextLine();
-		        this.password = newPassword;
-		    }
-
-		    System.out.println("Personal information updated successfully.");
-		    viewPersonalInformation(); // Display updated information
-		} else {
-		    System.out.println("Incorrect password. Personal information not updated.");
-		}
-	}*/
-	
-	private void viewPersonalInformation() {
-		System.out.println("Username: " + this.username);
-		System.out.println("Name: " + this.name + " " + this.surname);
-		System.out.println("Email: " + this.email);
-		System.out.println("Phone Number: " + this.phoneNumber);
-	}
-	
 	public Account findAccountByNumber(String accountNumber) {	//find account by iBAN
 	    for (Account acc : accounts) {
 	        if (acc.getIBAN().equals(accountNumber)) {

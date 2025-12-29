@@ -65,7 +65,7 @@ public class SettingsTab extends JPanel {
         });
 
         JButton notifyBtn = new JButton("Προτιμήσεις Ειδοποιήσεων");
-        JButton logoutBtn = new JButton("logout");
+        JButton logoutBtn = new JButton("LOGOUT");
         logoutBtn.setForeground(new Color(180, 50, 50));
         logoutBtn.addActionListener(e -> handleLogout());
 

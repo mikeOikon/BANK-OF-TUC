@@ -1,8 +1,12 @@
 package services.user_services;
 
 import backend.BankSystem;
+import backend.FileLogger;
+import backend.PasswordHasher;
 import backend.users.User;
 import services.Command;
+import types.LogCategory;
+import types.LogLevel;
 
 public class ChangePasswordCommand implements Command {
     
@@ -22,17 +26,25 @@ public class ChangePasswordCommand implements Command {
     @Override
     public void execute() {
         // Ενημέρωση του password στο αντικείμενο του χρήστη
-        user.setPassword(newPassword);
+    	FileLogger logger = FileLogger.getInstance();
+    	String hashedPassword="";
+    	try {
+    		hashedPassword=PasswordHasher.hash(this.newPassword);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        user.setPassword(hashedPassword);
         // Αποθήκευση των αλλαγών στο αρχείο/βάση
         bankSystem.saveAllData();
-        System.out.println("Password changed successfully for user: " + user.getUserID());
+        logger.log(LogLevel.INFO,LogCategory.USER,"Password changed successfully for user: " + user.getUserID());
     }
 
     @Override
     public void undo() {
-        // Επαναφορά του παλιού password
+       /* // Επαναφορά του παλιού password
         user.setPassword(oldPassword);
         bankSystem.saveAllData();
-        System.out.println("Password change undone for user: " + user.getUserID());
+        System.out.println("Password change undone for user: " + user.getUserID());*/
     }
 }
