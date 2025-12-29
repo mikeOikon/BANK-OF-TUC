@@ -52,6 +52,7 @@ public class StartFrame extends JFrame {
         //---------------------------------------------------------
         JPanel rightPanel = new JPanel(null);
         rightPanel.setBackground(Color.WHITE);
+        //rightPanel.setLayout(new GridBagLayout());
         container.add(rightPanel);
 
         JLabel loginTitle = new JLabel("ΣΥΝΔΕΣΗ ΧΡΗΣΤΗ");
@@ -66,16 +67,39 @@ public class StartFrame extends JFrame {
 
         usernameField = new JTextField();
         usernameField.setBounds(290, 160, 200, 30);
+        usernameField.setBorder(
+        	    BorderFactory.createCompoundBorder(
+        	        BorderFactory.createLineBorder(Color.GRAY),
+        	        BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        	    )
+        	);
+
         rightPanel.add(usernameField);
 
-        JLabel passLabel = new JLabel("Κωδικός:");
+        JLabel passLabel = new JLabel("Κωδικός:"); 
         passLabel.setBounds(80, 230, 200, 30);
         passLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
         rightPanel.add(passLabel);
 
         passwordField = new JPasswordField();
         passwordField.setBounds(290, 230, 200, 30);
+    	passwordField.setBorder(
+        	    BorderFactory.createCompoundBorder(
+        	        BorderFactory.createLineBorder(Color.GRAY),
+        	        BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        	    )
+        	);
         rightPanel.add(passwordField);
+        
+        JButton forgotPasswordButton = new JButton("Ξέχασα τον κωδικό");
+        forgotPasswordButton.setBounds(290, 270, 200, 25);
+        forgotPasswordButton.setBorderPainted(false);
+        forgotPasswordButton.setContentAreaFilled(false);
+        forgotPasswordButton.setForeground(new Color(0, 102, 204));
+        forgotPasswordButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        rightPanel.add(forgotPasswordButton);
+
 
         JButton loginButton = new JButton("ΣΥΝΔΕΣΗ");
         loginButton.setBounds(80, 330, 180, 45);
@@ -92,6 +116,15 @@ public class StartFrame extends JFrame {
         //---------------------------------------------------------
         loginButton.addActionListener(e -> handleLogin());
         registerButton.addActionListener(e -> new RegisterFrame(this).setVisible(true));
+        forgotPasswordButton.addActionListener(e -> {
+            String username = JOptionPane.showInputDialog(this,"Εισάγετε το όνομα χρήστη:","Ανάκτηση Κωδικού",
+                JOptionPane.PLAIN_MESSAGE );
+
+            if (username != null && !username.trim().isEmpty()) {
+                new ForgotPasswordController().startRecovery(username.trim());
+            }
+        });
+
     }
 
     //---------------------------------------------------------
