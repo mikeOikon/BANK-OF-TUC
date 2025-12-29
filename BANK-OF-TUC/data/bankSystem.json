@@ -12,6 +12,36 @@
         "branchCode": "0021"
       },
       "AFM": "2fdcc4863844bd5792f9a265b4847abd2667fa7233b0f7c37505a9316623566b"
+    },
+    "BUS003": {
+      "accounts": [
+        {
+          "managementFee": 10.0,
+          "primary": true,
+          "frozen": false,
+          "IBAN": "GR7902100217208805792758003",
+          "userID": "BUS003",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "business"
+        }
+      ],
+      "username": "tuc",
+      "userID": "BUS003",
+      "password": "10fe8f704d06cc82a4add5abc8c8ce2747fd042fd1c723b0b13df9df39e912cb",
+      "name": "TUC",
+      "surname": "Crete",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "c62f84df37fed2c16b8b8edcd35721be3fdce286cf52347e293b371b39df4661"
     }
   },
   "admins": {
@@ -41,6 +71,19 @@
         "branchCode": "0021"
       },
       "AFM": "2fdcc4863844bd5792f9a265b4847abd2667fa7233b0f7c37505a9316623566b"
+    },
+    "CUS004": {
+      "accounts": [],
+      "username": "diak",
+      "userID": "CUS004",
+      "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
+      "name": "Angelo",
+      "surname": "Diak",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "599aa720ead37fdda96c5a06d982182cfd378265120447e76e17f680d6de9e16"
     }
   },
   "bankEmployers": {},
@@ -64,8 +107,19 @@
       ]
     }
   },
+  "allBills": {
+    "RF39939514": {
+      "paymentCode": "RF39939514",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 20.0,
+      "description": "Payment for internet",
+      "issueDate": "2025/12/29 14:37:08",
+      "paid": false
+    }
+  },
   "adminCount": 1,
-  "customerCount": 2,
+  "customerCount": 4,
   "employeeCount": 0,
   "auditorCount": 0,
   "realBaseIso": "2025-12-28T22:39:10.321540800",

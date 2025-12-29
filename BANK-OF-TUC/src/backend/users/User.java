@@ -111,6 +111,13 @@ public abstract class User {
 		return userBehavior.canOpenTicket();
 	}
 
+	public boolean canPayBills() {
+		return userBehavior.canPayBills();
+	}
+	
+	public boolean canIssueBills() {
+		return userBehavior.canIssueBills();
+	}
 	
 	public UserType getUserType() {
 		return null; //to be overridden
@@ -218,6 +225,5 @@ public abstract class User {
 	public Account getAccountByID(String accountID) {
 		return null;
 	}
-
 	
 }

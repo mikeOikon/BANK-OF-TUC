@@ -13,5 +13,7 @@ public interface UserBehavior {
 	 boolean canAssistUsers();
 	 boolean canOpenTicket();
 	 boolean canAdvanceTime();
+	boolean canPayBills();
+	boolean canIssueBills();
 
 }

@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import backend.accounts.Account;
 import backend.accounts.AccountFactory;
+import backend.support.Bill;
 import backend.support.SupportTicket;
 import backend.users.Admin;
 import backend.users.Auditor;
@@ -57,6 +58,7 @@ public class BankSystem {
 	private transient Map<String, Map<String, ? extends User>> userMaps;
 	private transient Map<String,User> usersByUsername; // Map to find users by username during login
 	private final Map<String,SupportTicket> tickets=new HashMap<>();
+	private final Map<String,Bill> allBills=new HashMap<>();
 	
 	private  int adminCount = 0;
 	private  int customerCount = 0;
@@ -384,6 +386,24 @@ public class BankSystem {
 	public User findUserByUsername(String username) {
 	    return usersByUsername.get(username);
 	}
+	
+	public void addBill(Bill bill) {
+        if (bill == null || bill.getPaymentCode() == null) {
+            return;
+        }
+        allBills.put(bill.getPaymentCode(), bill);
+        
+        // Προαιρετικά: αποθήκευση αμέσως μετά την προσθήκη
+        // saveAllData(); 
+    }
+	
+	public Bill findBillByCode(String code) {
+        return allBills.get(code);
+    }
+	
+	public void removeBill(String code) {
+        allBills.remove(code);
+    }
 	
 	public void saveAllData() {
 	    dao.save(this);

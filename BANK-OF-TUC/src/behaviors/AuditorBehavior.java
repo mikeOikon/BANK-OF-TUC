@@ -65,6 +65,16 @@ public class AuditorBehavior implements UserBehavior {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override 
+	public boolean canPayBills() {
+		return false;
+	}
+	@Override
+	public boolean canIssueBills() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public boolean canOpenTicket() {

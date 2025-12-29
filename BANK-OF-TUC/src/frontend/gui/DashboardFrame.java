@@ -69,6 +69,12 @@ public class DashboardFrame extends JFrame {
             if (user.canTransferMoney()) {
                 tabs.addTab("Transfer", transferTab);
             }
+            if (user.canPayBills()) {
+                tabs.addTab("Pay Bills", new BillPaymentTab(user));
+            }
+            if (user.canIssueBills()) {
+				tabs.addTab("Issue Bills", new IssueBillTab(user));
+			}
             
             if(user.canOpenTicket()) {
             	tabs.addTab("Support", new SupportTab(user));

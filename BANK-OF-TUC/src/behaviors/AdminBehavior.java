@@ -69,6 +69,17 @@ public class AdminBehavior implements UserBehavior {
 	}
 
 	@Override
+	public boolean canPayBills() {
+		return false;
+	}
+	
+	@Override
+	public boolean canIssueBills() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public boolean canAdvanceTime() { return true; }
 
 

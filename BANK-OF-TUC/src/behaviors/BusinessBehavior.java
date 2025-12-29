@@ -64,6 +64,18 @@ public class BusinessBehavior implements UserBehavior {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean canPayBills() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
+	public boolean canIssueBills() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 	@Override
 	public boolean canOpenTicket() {
