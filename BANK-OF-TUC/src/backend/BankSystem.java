@@ -444,5 +444,23 @@ public class BankSystem {
 	        "New Monthly Subscription added: " + sub.getSubscriptionId());
 	}
 	
+	public void disableMonthlyAutoPay(String subscriptionId) {
+	    for (MonthlySubscription sub : subscriptions) {
+	        if (sub.getSubscriptionId().equals(subscriptionId)) {
+	            sub.disableAutoPay();
+	            break;
+	        }
+	    }
+	}
+
+	public boolean isSubscriptionAutoPayEnabled(String subscriptionId) {
+	    for (MonthlySubscription sub : subscriptions) {
+	        if (sub.getSubscriptionId().equals(subscriptionId)) {
+	            return sub.isAutoPayEnabled();
+	        }
+	    }
+	    return false;
+	}
+	
 }
 

@@ -29,7 +29,7 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         // --- Header ---
-        JLabel title = new JLabel("Ηλεκτρονική Πληρωμή Λογαριασμού (RF)");
+        JLabel title = new JLabel("Ηλεκτρονική Πληρωμή & Διαχείριση Συνδρομών");
         title.setFont(new Font("SansSerif", Font.BOLD, 22));
         add(title, BorderLayout.NORTH);
 
@@ -43,14 +43,11 @@ public class BillPaymentTab extends JPanel implements Refreshable {
 
         JButton checkBtn = new JButton("Αναζήτηση Λογαριασμού");
 
-        detailsLabel = new JLabel(
-                "<html><i>Εισάγετε τον κωδικό πληρωμής για να δείτε τις λεπτομέρειες.</i></html>"
-        );
+        detailsLabel = new JLabel("<html><i>Εισάγετε κωδικό RF.</i></html>");
         detailsLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         detailsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // ✅ Checkbox για μηνιαία πληρωμή
-        monthlyAutoPayCheck = new JCheckBox("Ενεργοποίηση πάγιας εντολής (αυτόματη πληρωμή κάθε μήνα)");
+        monthlyAutoPayCheck = new JCheckBox("Ενεργοποίηση πάγιας εντολής");
         monthlyAutoPayCheck.setVisible(false);
         monthlyAutoPayCheck.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -59,7 +56,7 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         payBtn.setBackground(new Color(46, 139, 87));
         payBtn.setForeground(Color.WHITE);
         payBtn.setFont(new Font("SansSerif", Font.BOLD, 14));
-        payBtn.setPreferredSize(new Dimension(220, 40));
+        payBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         centralPanel.add(new JLabel("Κωδικός Πληρωμής (RF):"));
         centralPanel.add(codeField);
@@ -74,63 +71,54 @@ public class BillPaymentTab extends JPanel implements Refreshable {
 
         // --- Logic ---
         checkBtn.addActionListener(e -> searchForBill());
-
         payBtn.addActionListener(e -> handlePayment());
+
+        // ✅ Νέα Λογική: Αν αλλάξει το checkbox σε ήδη πληρωμένο λογαριασμό, ενημέρωσε τη συνδρομή
+        monthlyAutoPayCheck.addActionListener(e -> {
+            if (foundBill != null && foundBill.isPaid() && foundBill.isMonthly()) {
+                handleToggleAutoPayOnly();
+            }
+        });
+    }
+
+    private void handleToggleAutoPayOnly() {
+        Account acc = currentUser.getPrimaryAccount();
+        if (acc == null) {
+            JOptionPane.showMessageDialog(this, "Δεν βρέθηκε λογαριασμός χρέωσης.");
+            return;
+        }
+
+        if (monthlyAutoPayCheck.isSelected()) {
+            BankSystem.getInstance().enableMonthlyAutoPay(foundBill.getSubscriptionId(), acc.getIBAN());
+            JOptionPane.showMessageDialog(this, "Η πάγια εντολή ενεργοποιήθηκε επιτυχώς!");
+        } else {
+            BankSystem.getInstance().disableMonthlyAutoPay(foundBill.getSubscriptionId());
+            JOptionPane.showMessageDialog(this, "Η πάγια εντολή απενεργοποιήθηκε.");
+        }
+        refreshData();
     }
 
     private void handlePayment() {
         if (foundBill == null) return;
-
         Account acc = currentUser.getPrimaryAccount();
+        
         if (acc == null || acc.isFrozen()) {
-            JOptionPane.showMessageDialog(this,
-                    "Δεν υπάρχει διαθέσιμος ενεργός λογαριασμός.",
-                    "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Σφάλμα λογαριασμού.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        if (acc.getBalance() < foundBill.getAmount()) {
-            JOptionPane.showMessageDialog(this,
-                    "Ανεπαρκές υπόλοιπο.",
-                    "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        int confirm = JOptionPane.showConfirmDialog(
-                this,
-                String.format("Επιβεβαιώνετε την πληρωμή %.2f€;", foundBill.getAmount()),
-                "Επιβεβαίωση",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        if (confirm != JOptionPane.YES_OPTION) return;
 
         try {
-            // Πληρωμή τρέχοντος bill
             new PayBillCommand(acc, foundBill).execute();
 
-            // ✅ Αν είναι μηνιαίο και τσεκαρισμένο → πάγια εντολή
             if (foundBill.isMonthly() && monthlyAutoPayCheck.isSelected()) {
-                BankSystem.getInstance()
-                        .enableMonthlyAutoPay(foundBill.getSubscriptionId(), acc.getIBAN());
+                BankSystem.getInstance().enableMonthlyAutoPay(foundBill.getSubscriptionId(), acc.getIBAN());
             }
 
-            JOptionPane.showMessageDialog(this,
-                    "Η πληρωμή ολοκληρώθηκε επιτυχώς!",
-                    "Επιτυχία",
-                    JOptionPane.INFORMATION_MESSAGE);
-
+            JOptionPane.showMessageDialog(this, "Η πληρωμή ολοκληρώθηκε!");
             refreshData();
-
-            if (dashboard != null) {
-                dashboard.refreshAllTabs();
-            }
-
+            if (dashboard != null) dashboard.refreshAllTabs();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Σφάλμα: " + ex.getMessage(),
-                    "Σφάλμα",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Σφάλμα: " + ex.getMessage());
         }
     }
 
@@ -147,50 +135,37 @@ public class BillPaymentTab extends JPanel implements Refreshable {
             return;
         }
 
-        if (foundBill.isPaid()) {
-            detailsLabel.setText("<html><b style='color:red;'>Ο λογαριασμός έχει ήδη πληρωθεί.</b></html>");
-            payBtn.setEnabled(false);
-            monthlyAutoPayCheck.setVisible(false);
-            return;
-        }
-
-        detailsLabel.setText(String.format(
-                "<html><div style='background:white; padding:15px; border:1px solid #2e8b57;'>"
-                        + "<b>Επιχείρηση:</b> %s<br>"
-                        + "<b>Ποσό:</b> %.2f€<br>"
-                        + "<b>Περιγραφή:</b> %s"
-                        + "</div></html>",
-                foundBill.getBusinessName(),
-                foundBill.getAmount(),
-                foundBill.getDescription()
-        ));
-
-        payBtn.setEnabled(true);
-
-        // ✅ Εμφάνιση επιλογής μόνο για μηνιαία
+        boolean isAutoPayOn = false;
         if (foundBill.isMonthly()) {
-            monthlyAutoPayCheck.setVisible(true);
-            monthlyAutoPayCheck.setSelected(foundBill.isAutoPayEnabled());
+            isAutoPayOn = BankSystem.getInstance().isSubscriptionAutoPayEnabled(foundBill.getSubscriptionId());
+        }
+
+        if (foundBill.isPaid()) {
+            detailsLabel.setText("<html><b style='color:green;'>Πληρωμένος Λογαριασμός.</b><br>Μπορείτε να αλλάξετε την κατάσταση της συνδρομής:</html>");
+            payBtn.setEnabled(false);
+            if (foundBill.isMonthly()) {
+                monthlyAutoPayCheck.setVisible(true);
+                monthlyAutoPayCheck.setSelected(isAutoPayOn);
+                monthlyAutoPayCheck.setText("Ενεργή πάγια εντολή για μελλοντικούς μήνες");
+            }
         } else {
-            monthlyAutoPayCheck.setVisible(false);
+            detailsLabel.setText(String.format("<html><b>Επιχείρηση:</b> %s<br><b>Ποσό:</b> %.2f€</html>", 
+                    foundBill.getBusinessName(), foundBill.getAmount()));
+            payBtn.setEnabled(true);
+            if (foundBill.isMonthly()) {
+                monthlyAutoPayCheck.setVisible(true);
+                monthlyAutoPayCheck.setSelected(isAutoPayOn);
+                monthlyAutoPayCheck.setText("Ενεργοποίηση πάγιας εντολής (αυτόματη πληρωμή)");
+            } else {
+                monthlyAutoPayCheck.setVisible(false);
+            }
         }
     }
 
-    @Override
-    public void refresh() {
-        refreshData();
-    }
+    @Override public void refresh() { refreshData(); }
 
     private void refreshData() {
-        if (!codeField.getText().trim().isEmpty()) {
-            searchForBill();
-        } else {
-            detailsLabel.setText("<html><i>Εισάγετε κωδικό RF.</i></html>");
-            payBtn.setEnabled(false);
-            monthlyAutoPayCheck.setVisible(false);
-        }
-
-        revalidate();
-        repaint();
+        if (!codeField.getText().trim().isEmpty()) searchForBill();
+        revalidate(); repaint();
     }
 }
