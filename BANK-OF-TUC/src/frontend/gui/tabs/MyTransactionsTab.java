@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 
-public class MyTransactionsTab extends JPanel {
+public class MyTransactionsTab extends JPanel implements Refreshable{
 
     private final User customer;
     private final JTextArea historyArea;
@@ -53,7 +53,7 @@ public class MyTransactionsTab extends JPanel {
      * Μαζεύει όλες τις συναλλαγές από όλους τους λογαριασμούς,
      * τις ταξινομεί κατά ημερομηνία και τις εμφανίζει.
      */
-    
+    @Override
     public void refresh() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-15s | %-12s | %-10s | %s\n", "Date", "Amount", "Type", "Account IBAN"));

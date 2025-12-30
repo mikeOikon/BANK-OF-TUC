@@ -1,22 +1,21 @@
 package frontend.gui;
 
 import backend.BankSystem;
-import backend.users.Customer;
-import backend.users.User;
-import backend.users.BankEmployer; // Βεβαιωθείτε ότι το import υπάρχει
-import backend.users.BusinessCustomer;
-import backend.users.Admin;
-import backend.users.Auditor;
+import backend.users.*;
 import frontend.gui.tabs.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFrame extends JFrame {
 
     private final User user;
-    private final JTabbedPane tabs;
+    private final JTabbedPane tabbedPane;
+    private final List<Refreshable> refreshableTabs = new ArrayList<>();
 
     public DashboardFrame() {
         user = UserSession.getInstance().getCurrentUser();
@@ -29,6 +28,7 @@ public class DashboardFrame extends JFrame {
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setLayout(new BorderLayout());
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -38,75 +38,111 @@ public class DashboardFrame extends JFrame {
             }
         });
 
-        tabs = new JTabbedPane(JTabbedPane.TOP);
-        add(tabs);
+        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        add(tabbedPane, BorderLayout.CENTER);
 
         buildTabs();
         setVisible(true);
     }
 
+    /**
+     * Δημιουργία tabs & σύνδεση refresh
+     */
     private void buildTabs() {
-        // 1. PROFILE (Πάντα πρώτο)
-        tabs.addTab("Profile", new ProfileTab(user));
 
-        // 2. CUSTOMER TABS (Με σύνδεση refresh) - Παραμένει ως έχει
+        // --- PROFILE (πάντα πρώτο) ---
+        tabbedPane.addTab("Profile", new ProfileTab(user));
+
+        // --- CUSTOMER / BUSINESS CUSTOMER ---
         if (user instanceof Customer || user instanceof BusinessCustomer) {
-            MyTransactionsTab transactionsTab = new MyTransactionsTab(user);
-            CustomerOverviewTab overviewTab = new CustomerOverviewTab(user);
-            TransferTab transferTab = new TransferTab(user, overviewTab);
-            MyAccountsTab accountsTab = new MyAccountsTab(user, overviewTab);
 
+            CustomerOverviewTab overviewTab = new CustomerOverviewTab(user);
+            MyAccountsTab accountsTab = new MyAccountsTab(user, overviewTab);
+            MyTransactionsTab transactionsTab = new MyTransactionsTab(user);
+            TransferTab transferTab = new TransferTab(user, overviewTab);
+            BillPaymentTab billPaymentTab = new BillPaymentTab(user);
 
             overviewTab.setOtherTabs(accountsTab, transactionsTab, transferTab);
 
             if (user.canViewAccounts()) {
-                tabs.addTab("Overview", overviewTab);
-                tabs.addTab("My Accounts", accountsTab);
-            }
-            if (user.canViewTransactionsHistory()) {
-                tabs.addTab("My Transactions", transactionsTab);
-            }
-            if (user.canTransferMoney()) {
-                tabs.addTab("Transfer", transferTab);
-            }
-            if (user.canPayBills()) {
-                tabs.addTab("Pay Bills", new BillPaymentTab(user));
-            }
-            if (user.canIssueBills()) {
-				tabs.addTab("Issue Bills", new IssueBillTab(user));
-			}
-            
-            if(user.canOpenTicket()) {
-            	tabs.addTab("Support", new SupportTab(user));
-            }
-            if (user.canAdvanceTime()) {
-                tabs.addTab("Time Control", new frontend.gui.tabs.TimeControlTab(user));
+                tabbedPane.addTab("Overview", overviewTab);
+                tabbedPane.addTab("My Accounts", accountsTab);
+                refreshableTabs.add(overviewTab);
+                refreshableTabs.add(accountsTab);
             }
 
+            if (user.canViewTransactionsHistory()) {
+                tabbedPane.addTab("My Transactions", transactionsTab);
+                refreshableTabs.add(transactionsTab);
+            }
+
+            if (user.canTransferMoney()) {
+                tabbedPane.addTab("Transfer", transferTab);
+                refreshableTabs.add(transferTab);
+            }
+
+            if (user.canPayBills()) {
+                tabbedPane.addTab("Pay Bills", billPaymentTab);
+                refreshableTabs.add(billPaymentTab);
+            }
+
+            if (user.canIssueBills()) {
+                IssueBillTab issueBillTab = new IssueBillTab(user);
+                tabbedPane.addTab("Issue Bills", issueBillTab);
+                refreshableTabs.add(issueBillTab);
+            }
+
+            if (user.canOpenTicket()) {
+                SupportTab supportTab = new SupportTab(user);
+                tabbedPane.addTab("Support", supportTab);
+            }
+
+            if (user.canAdvanceTime()) {
+                TimeControlTab timeTab = new TimeControlTab(user);
+                tabbedPane.addTab("Time Control", timeTab);
+                refreshableTabs.add(timeTab);
+            }
         }
 
-        // 3. ADMIN / AUDITOR / EMPLOYER TABS
-        
-        // Προσθήκη ελέγχου για BankEmployer στο All Accounts
+        // --- ADMIN / AUDITOR / EMPLOYER ---
+
         if (user.canViewAllAccounts()) {
-            tabs.addTab("All Accounts", new AllAccountsTab(user));
+            AllAccountsTab allAccountsTab = new AllAccountsTab(user);
+            tabbedPane.addTab("All Accounts", allAccountsTab);
+            refreshableTabs.add(allAccountsTab);
         }
 
         if (user.canViewAllTransactionsHistory()) {
-            tabs.addTab("All Transactions", new AllTransactionsTab());
+            AllTransactionsTab allTransactionsTab = new AllTransactionsTab();
+            tabbedPane.addTab("All Transactions", allTransactionsTab);
+            refreshableTabs.add(allTransactionsTab);
         }
 
-        // Προσθήκη ελέγχου για BankEmployer στο User Management
-        if (user.canPromoteUser() || user.canDemoteUser() || user.canRemoveUsers() || user instanceof BankEmployer) {
-            tabs.addTab("User Management", new UserManagementTab(user));
+        if (user.canPromoteUser() || user.canDemoteUser()
+                || user.canRemoveUsers() || user instanceof BankEmployer) {
+
+            UserManagementTab userManagementTab = new UserManagementTab(user);
+            tabbedPane.addTab("User Management", userManagementTab);
+            refreshableTabs.add(userManagementTab);
         }
 
-        tabs.addTab("Settings", new SettingsTab(user));
-        
-        if(user.canAssistUsers()) {
-        	tabs.addTab("Customer Support", new CustomerSupportTab(user));
-        }
-        
+        SettingsTab settingsTab = new SettingsTab(user);
+        tabbedPane.addTab("Settings", settingsTab);
+        refreshableTabs.add(settingsTab);
 
+        if (user.canAssistUsers()) {
+            CustomerSupportTab customerSupportTab = new CustomerSupportTab(user);
+            tabbedPane.addTab("Customer Support", customerSupportTab);
+            refreshableTabs.add(customerSupportTab);
+        }
+    }
+
+    /**
+     * GLOBAL refresh όλων των tabs
+     */
+    public void refreshAllTabs() {
+        for (Refreshable tab : refreshableTabs) {
+            tab.refresh();
+        }
     }
 }

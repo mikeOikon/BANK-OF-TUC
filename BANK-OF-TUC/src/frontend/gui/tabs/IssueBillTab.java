@@ -7,7 +7,8 @@ import backend.users.User;
 import backend.support.Bill;
 import services.account_services.CreateBillCommand;
 
-public class IssueBillTab extends JPanel {
+public class IssueBillTab extends JPanel implements Refreshable {
+
     private JTextField amountField;
     private JTextField descriptionField;
     private User businessUser;
@@ -16,7 +17,7 @@ public class IssueBillTab extends JPanel {
         this.businessUser = user;
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -56,34 +57,42 @@ public class IssueBillTab extends JPanel {
         try {
             double amount = Double.parseDouble(amountField.getText());
             String desc = descriptionField.getText().trim();
-            
+
             if (amount <= 0 || desc.isEmpty()) {
                 throw new Exception("Invalid input data.");
             }
 
-            // 1. Παραγωγή τυχαίου κωδικού RF (π.χ. RF + 8 ψηφία)
             String paymentCode = "RF" + (10000000 + new Random().nextInt(90000000));
-
-            // 2. Λήψη του IBAN της επιχείρησης (από τον primary λογαριασμό της)
             String businessIBAN = businessUser.getPrimaryAccount().getIBAN();
-            
             String businessName = (String) businessUser.getFullName();
 
-            // 3. Δημιουργία και Εκτέλεση του Command
             Bill newBill = new Bill(paymentCode, businessIBAN, businessName, amount, desc);
             new CreateBillCommand(newBill).execute();
 
-            // 4. Ενημέρωση Χρήστη
-            String message = String.format("Bill Issued Successfully!\nPayment Code: %s\nAmount: %.2f€", 
-                                            paymentCode, amount);
+            String message = String.format(
+                    "Bill Issued Successfully!\nPayment Code: %s\nAmount: %.2f€",
+                    paymentCode, amount
+            );
             JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
-            
-            // Καθαρισμός πεδίων
+
             amountField.setText("");
             descriptionField.setText("");
+
+            refresh(); // 👈 απαραίτητο για sync με dashboard
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * ΥΠΟΧΡΕΩΤΙΚΟ για Refreshable
+     */
+    @Override
+    public void refresh() {
+        amountField.setText("");
+        descriptionField.setText("");
+        revalidate();
+        repaint();
     }
 }

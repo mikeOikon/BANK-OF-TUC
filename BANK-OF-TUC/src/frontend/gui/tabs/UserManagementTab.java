@@ -12,16 +12,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Map;
 
-public class UserManagementTab extends JPanel {
+public class UserManagementTab extends JPanel implements Refreshable {
 
-    private final User currentUser; // Αλλαγή σε User για να δέχεται Admin & BankEmployer
+    private final User currentUser;
     private JTable userTable;
     private DefaultTableModel tableModel;
     private JButton deleteBtn;
     private JButton promoteBtn;
 
     public UserManagementTab(User user) {
-        // Αποφεύγουμε το ClassCastException αποθηκεύοντας ως User
         this.currentUser = user;
 
         setLayout(new BorderLayout(10, 10));
@@ -31,25 +30,27 @@ public class UserManagementTab extends JPanel {
         String[] columns = {"User ID", "Username", "Full Name", "Role"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
-            public boolean isCellEditable(int row, int column) { return false; }
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
         };
+
         userTable = new JTable(tableModel);
         add(new JScrollPane(userTable), BorderLayout.CENTER);
 
         // --- PANEL ΚΟΥΜΠΙΩΝ ---
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        
+
         promoteBtn = new JButton("Promote User");
-        
+
         deleteBtn = new JButton("Delete User");
         deleteBtn.setBackground(new Color(180, 50, 50));
         deleteBtn.setForeground(Color.WHITE);
 
-        // --- ΕΛΕΓΧΟΣ ΔΙΚΑΙΩΜΑΤΩΝ ---
-        // Αν ο χρήστης είναι απλός υπάλληλος, κρύβουμε το κουμπί διαγραφής
+        // --- ΔΙΚΑΙΩΜΑΤΑ ---
         if (currentUser instanceof BankEmployer && !(currentUser instanceof Admin)) {
             deleteBtn.setVisible(false);
-            promoteBtn.setVisible(false); 
+            promoteBtn.setVisible(false);
         }
 
         buttonPanel.add(promoteBtn);
@@ -67,7 +68,6 @@ public class UserManagementTab extends JPanel {
         tableModel.setRowCount(0);
         BankSystem bank = BankSystem.getInstance();
 
-        // Προσθήκη όλων των χρηστών στον πίνακα (εκτός του εαυτού μας)
         addUserToTable(bank.getCustomers());
         addUserToTable(bank.getBusinessCustomers());
         addUserToTable(bank.getBankEmployers());
@@ -77,15 +77,15 @@ public class UserManagementTab extends JPanel {
 
     private void addUserToTable(Map<String, ? extends User> users) {
         if (users == null) return;
+
         for (User u : users.values()) {
-            // Κρύβουμε τον συνδεδεμένο λογαριασμό από τη λίστα για ασφάλεια
             if (u.getUserID().equals(currentUser.getUserID())) continue;
 
             tableModel.addRow(new Object[]{
-                u.getUserID(),
-                u.getUsername(),
-                u.getFullName(),
-                u.getClass().getSimpleName() 
+                    u.getUserID(),
+                    u.getUsername(),
+                    u.getFullName(),
+                    u.getClass().getSimpleName()
             });
         }
     }
@@ -97,25 +97,22 @@ public class UserManagementTab extends JPanel {
         String userId = (String) tableModel.getValueAt(row, 0);
 
         int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete user " + userId + "?",
-            "Confirm Delete",
-            JOptionPane.YES_NO_OPTION
+                this,
+                "Are you sure you want to delete user " + userId + "?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION
         );
 
         if (confirm != JOptionPane.YES_OPTION) return;
 
         try {
-            // Create the command
             DeleteUserCommand deleteCommand = new DeleteUserCommand(currentUser, userId);
-
-            // Execute it via UserManager
             UserManager manager = new UserManager();
             manager.execute(deleteCommand);
 
-            // Save data and refresh table
             BankSystem bank = BankSystem.getInstance();
             bank.dao.save(bank);
+
             refreshData();
 
             JOptionPane.showMessageDialog(this, "User deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -126,7 +123,6 @@ public class UserManagementTab extends JPanel {
             JOptionPane.showMessageDialog(this, "Failed to delete user: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
     private void handlePromoteUser() {
         int selectedRow = userTable.getSelectedRow();
@@ -139,15 +135,20 @@ public class UserManagementTab extends JPanel {
         String targetUserId = (String) tableModel.getValueAt(modelRow, 0);
 
         if (!currentUser.canPromoteUser()) {
-            JOptionPane.showMessageDialog(this, "Μόνο οι Διαχειριστές έχουν πρόσβαση σε αυτή τη λειτουργία.", "Απαγόρευση", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Μόνο οι Διαχειριστές έχουν πρόσβαση σε αυτή τη λειτουργία.",
+                    "Απαγόρευση",
+                    JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
 
         BankSystem bank = BankSystem.getInstance();
         User oldUser = bank.getUserById(targetUserId);
 
-        // Επιλογή τύπου προαγωγής μόνο στο GUI
         UserType targetType = null;
+
         if (oldUser.getUserType() == UserType.CUSTOMER) {
             String[] options = {"Bank Employee", "Auditor"};
             int choice = JOptionPane.showOptionDialog(
@@ -160,9 +161,11 @@ public class UserManagementTab extends JPanel {
                     options,
                     options[0]
             );
+
             if (choice == 0) targetType = UserType.EMPLOYEE;
             else if (choice == 1) targetType = UserType.AUDITOR;
-            else return; // ακύρωση
+            else return;
+
         } else if (oldUser.getUserType() == UserType.EMPLOYEE) {
             targetType = UserType.ADMIN;
         } else {
@@ -176,7 +179,8 @@ public class UserManagementTab extends JPanel {
         int confirm = JOptionPane.showConfirmDialog(
                 this,
                 "Είστε σίγουροι ότι θέλετε να προάγετε τον χρήστη " + oldUser.getFullName() + "?",
-                "Επιβεβαίωση Προαγωγής", JOptionPane.YES_NO_OPTION
+                "Επιβεβαίωση Προαγωγής",
+                JOptionPane.YES_NO_OPTION
         );
 
         if (confirm != JOptionPane.YES_OPTION) return;
@@ -192,5 +196,13 @@ public class UserManagementTab extends JPanel {
         }
     }
 
-    
+    /**
+     * Υποχρεωτικό από το Refreshable
+     */
+    @Override
+    public void refresh() {
+        refreshData();
+        revalidate();
+        repaint();
+    }
 }

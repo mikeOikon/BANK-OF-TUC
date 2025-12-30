@@ -8,7 +8,7 @@ import services.user_services.UpdatePhoneNumberCommand;
 import javax.swing.*;
 import java.awt.*;
 
-public class ProfileTab extends JPanel {
+public class ProfileTab extends JPanel implements Refreshable{
 	
 	private JPanel emailContainer;
 	private JTextField emailField;
@@ -61,8 +61,8 @@ public class ProfileTab extends JPanel {
         
         refresh();
     }
-    
-    private void refresh() {
+    @Override
+    public void refresh() {
 
         // -------- EMAIL --------
         emailContainer.removeAll();

@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class AllTransactionsTab extends JPanel {
+public class AllTransactionsTab extends JPanel implements Refreshable{
 
     private JTable transactionsTable;
     private DefaultTableModel tableModel;
@@ -199,4 +199,13 @@ public class AllTransactionsTab extends JPanel {
         endDateField.setText("");
         sorter.setRowFilter(null);
     }
+    
+    @Override
+    public void refresh() {
+        refreshData();
+        applyFilters();
+        revalidate();
+        repaint();
+    }
+
 }
