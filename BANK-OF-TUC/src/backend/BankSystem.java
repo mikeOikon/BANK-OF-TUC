@@ -38,6 +38,7 @@ import types.TicketStatus;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
+import backend.support.MonthlySubscription;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -59,6 +60,7 @@ public class BankSystem {
 	private transient Map<String,User> usersByUsername; // Map to find users by username during login
 	private final Map<String,SupportTicket> tickets=new HashMap<>();
 	private final Map<String,Bill> allBills=new HashMap<>();
+	private List<MonthlySubscription> subscriptions;
 	
 	private  int adminCount = 0;
 	private  int customerCount = 0;
@@ -81,6 +83,7 @@ public class BankSystem {
 		this.bankAccount = new BankAccount("BANK001", Branch.getDefaultBranch()); //default bank account(TUC)
 		this.userManager=new UserManager();
 		this.userMaps = new HashMap<>();
+		this.subscriptions = new ArrayList<>();
 		  userMaps.put("ADM", admins);
 		  userMaps.put("CUS", customers);
 		  userMaps.put("EMP", bankEmployers);
@@ -407,6 +410,38 @@ public class BankSystem {
 	
 	public void saveAllData() {
 	    dao.save(this);
+	}
+
+	public List<Bill> getAllBills() {
+	    return new ArrayList<>(allBills.values());
+	}
+	
+	public void enableMonthlyAutoPay(String subscriptionId, String accountIBAN) {
+        if (subscriptionId == null || accountIBAN == null) return;
+
+        for (MonthlySubscription sub : subscriptions) {
+            if (sub.getSubscriptionId().equals(subscriptionId)) {
+                sub.enableAutoPay(accountIBAN);
+                System.out.printf("BankSystem: AutoPay ενεργοποιήθηκε για subscription %s στον λογαριασμό %s%n",
+                        subscriptionId, accountIBAN);
+                break;
+            }
+        }
+    }
+	
+	public void addSubscription(MonthlySubscription sub) {
+	    if (sub == null) return;
+	    
+	    // Αρχικοποίηση αν για κάποιο λόγο είναι null (ασφάλεια)
+	    if (this.subscriptions == null) {
+	        this.subscriptions = new ArrayList<>();
+	    }
+	    
+	    this.subscriptions.add(sub);
+	    
+	    // Προαιρετικά: Log την ενέργεια
+	    FileLogger.getInstance().log(LogLevel.INFO, LogCategory.SYSTEM, 
+	        "New Monthly Subscription added: " + sub.getSubscriptionId());
 	}
 	
 }

@@ -60,7 +60,7 @@ public class DashboardFrame extends JFrame {
             MyAccountsTab accountsTab = new MyAccountsTab(user, overviewTab);
             MyTransactionsTab transactionsTab = new MyTransactionsTab(user);
             TransferTab transferTab = new TransferTab(user, overviewTab);
-            BillPaymentTab billPaymentTab = new BillPaymentTab(user);
+            BillPaymentTab billPaymentTab = new BillPaymentTab(user, this);
 
             overviewTab.setOtherTabs(accountsTab, transactionsTab, transferTab);
 
