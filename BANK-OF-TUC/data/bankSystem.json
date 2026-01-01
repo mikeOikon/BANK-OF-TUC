@@ -21,7 +21,7 @@
           "frozen": false,
           "IBAN": "GR7902100217208805792758003",
           "userID": "BUS003",
-          "balance": 61.0,
+          "balance": 127.0,
           "transactions": [
             {
               "type": "TRANSFER",
@@ -54,6 +54,30 @@
               "fromAccountIban": "GR9102100216936808720520544",
               "toAccountIban": "GR7902100217208805792758003",
               "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 30.0,
+              "timestampString": "2025-12-31T13:57:32.065577300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 25.0,
+              "timestampString": "2026-01-01T12:41:17.596575900",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 11.0,
+              "timestampString": "2026-01-01T12:55:41.453370100",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
             }
           ],
           "account_id": 1,
@@ -75,6 +99,37 @@
         "branchCode": "0021"
       },
       "AFM": "c62f84df37fed2c16b8b8edcd35721be3fdce286cf52347e293b371b39df4661"
+    },
+    "BUS006": {
+      "accounts": [
+        {
+          "managementFee": 10.0,
+          "primary": true,
+          "frozen": false,
+          "IBAN": "GR9302100211794758077963509",
+          "userID": "BUS006",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "business"
+        }
+      ],
+      "username": "ote",
+      "userID": "BUS006",
+      "password": "ca226a7f65ce149d5fbdeb0cd942604605ca94dcc6a9947c8b1733212b8c5c77",
+      "email": "ote@ote.gr",
+      "name": "ote",
+      "surname": "greece",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "3bcd6d73f6620c1395d3e107cb6131b8010cd71c804e41a064ed5be79e19680c"
     }
   },
   "admins": {
@@ -123,7 +178,7 @@
           "frozen": false,
           "IBAN": "GR9102100216936808720520544",
           "userID": "CUS004",
-          "balance": 39.0,
+          "balance": 73.0,
           "transactions": [
             {
               "type": "DEPOSIT",
@@ -163,6 +218,51 @@
               "fromAccountIban": "GR9102100216936808720520544",
               "toAccountIban": "GR7902100217208805792758003",
               "txType": "transfer"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 100.0,
+              "timestampString": "2025-12-31T13:56:45.364325500",
+              "toAccountIban": "GR9102100216936808720520544",
+              "txType": "deposit"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 30.0,
+              "timestampString": "2025-12-31T13:57:32.065577300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 10.0,
+              "timestampString": "2026-01-01T12:39:46.750481500",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 10.0,
+              "timestampString": "2026-01-01T12:39:54.140914500",
+              "toAccountIban": "GR9102100216936808720520544",
+              "txType": "deposit"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 25.0,
+              "timestampString": "2026-01-01T12:41:17.596575900",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 11.0,
+              "timestampString": "2026-01-01T12:55:41.453370100",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
             }
           ],
           "account_id": 1,
@@ -172,13 +272,63 @@
             "branchCode": "0021"
           },
           "accountType": "transactional"
+        },
+        {
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR0402100213653882024388838",
+          "userID": "CUS004",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "savings"
+        },
+        {
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR2302100219499299777479904",
+          "userID": "CUS004",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "savings"
+        },
+        {
+          "termMonths": 0,
+          "startDate": "2026-01-01",
+          "maturityDate": "2026-01-01",
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR1002100216230829520095224",
+          "userID": "CUS004",
+          "balance": 0.0,
+          "transactions": [],
+          "account_id": 2,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "accountType": "fixed"
         }
       ],
       "username": "diak",
       "userID": "CUS004",
       "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
+      "email": "diak@gmail.com",
       "name": "Angelo",
       "surname": "Diak",
+      "phoneNumber": "2121212121",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -258,6 +408,17 @@
       "paid": true,
       "autoPay": false,
       "subscriptionId": "ed55f4d8-6397-4667-aa87-23070468580d"
+    },
+    "RFEAD8C84AF187": {
+      "paymentCode": "RFEAD8C84AF187",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 11.0,
+      "description": "testing (01/2026)",
+      "issueDate": "2026/01/01 12:54:54",
+      "paid": true,
+      "autoPay": false,
+      "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f"
     }
   },
   "subscriptions": [
@@ -269,10 +430,19 @@
       "description": "monthly subscription testing",
       "autoPayAccountIBAN": "GR9102100216936808720520544",
       "lastIssuedMonth": "2025-12-01"
+    },
+    {
+      "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "monthlyAmount": 11.0,
+      "description": "testing",
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "lastIssuedMonth": "2026-01-01"
     }
   ],
   "adminCount": 2,
-  "customerCount": 5,
+  "customerCount": 6,
   "employeeCount": 1,
   "auditorCount": 0,
   "realBaseIso": "2025-12-28T22:39:10.321540800",
