@@ -21,7 +21,7 @@
           "frozen": false,
           "IBAN": "GR7902100217208805792758003",
           "userID": "BUS003",
-          "balance": 127.0,
+          "balance": 130.5,
           "transactions": [
             {
               "type": "TRANSFER",
@@ -75,6 +75,22 @@
               "type": "TRANSFER",
               "amount": 11.0,
               "timestampString": "2026-01-01T12:55:41.453370100",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 3.0,
+              "timestampString": "2026-02-01T17:12:33.520326300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 0.5,
+              "timestampString": "2026-02-01T17:24:04.938182200",
               "fromAccountIban": "GR9102100216936808720520544",
               "toAccountIban": "GR7902100217208805792758003",
               "txType": "transfer"
@@ -178,7 +194,7 @@
           "frozen": false,
           "IBAN": "GR9102100216936808720520544",
           "userID": "CUS004",
-          "balance": 73.0,
+          "balance": 69.5,
           "transactions": [
             {
               "type": "DEPOSIT",
@@ -260,6 +276,22 @@
               "type": "TRANSFER",
               "amount": 11.0,
               "timestampString": "2026-01-01T12:55:41.453370100",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 3.0,
+              "timestampString": "2026-02-01T17:12:33.520326300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 0.5,
+              "timestampString": "2026-02-01T17:24:04.938182200",
               "fromAccountIban": "GR9102100216936808720520544",
               "toAccountIban": "GR7902100217208805792758003",
               "txType": "transfer"
@@ -419,6 +451,28 @@
       "paid": true,
       "autoPay": false,
       "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f"
+    },
+    "RFD678F1844E03": {
+      "paymentCode": "RFD678F1844E03",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 3.0,
+      "description": "testing (02/2026)",
+      "issueDate": "2026/01/01 17:12:04",
+      "paid": true,
+      "autoPay": false,
+      "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746"
+    },
+    "RFD61B96C1F4EA": {
+      "paymentCode": "RFD61B96C1F4EA",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.5,
+      "description": "testing (02/2026)",
+      "issueDate": "2026/01/01 17:23:35",
+      "paid": true,
+      "autoPay": false,
+      "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb"
     }
   },
   "subscriptions": [
@@ -439,12 +493,28 @@
       "description": "testing",
       "autoPayAccountIBAN": "GR9102100216936808720520544",
       "lastIssuedMonth": "2026-01-01"
+    },
+    {
+      "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "monthlyAmount": 3.0,
+      "description": "testing",
+      "lastIssuedMonth": "2026-02-01"
+    },
+    {
+      "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "monthlyAmount": 0.5,
+      "description": "testing",
+      "lastIssuedMonth": "2026-02-01"
     }
   ],
   "adminCount": 2,
   "customerCount": 6,
   "employeeCount": 1,
   "auditorCount": 0,
-  "realBaseIso": "2025-12-28T22:39:10.321540800",
-  "simulatedBaseIso": "2025-12-28T22:39:10.321540800"
+  "realBaseIso": "2026-01-01T17:25:48.985982100",
+  "simulatedBaseIso": "2026-04-01T17:25:48.985982100"
 }

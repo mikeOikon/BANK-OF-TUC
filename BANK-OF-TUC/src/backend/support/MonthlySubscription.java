@@ -16,6 +16,7 @@ public class MonthlySubscription {
     private final String businessName;
     private final double monthlyAmount;
     private final String description;
+    private String accountIBAN;
 
     // Στοιχεία Αυτόματης Πληρωμής (Auto-Pay)
     // Αρχικά είναι null μέχρι ο πελάτης να ενεργοποιήσει την πάγια εντολή
@@ -36,6 +37,7 @@ public class MonthlySubscription {
         
         this.autoPayAccountIBAN = null; // Default: Χειροκίνητη πληρωμή
         this.lastIssuedMonth = null;
+        this.accountIBAN = null;
     }
 
     /**

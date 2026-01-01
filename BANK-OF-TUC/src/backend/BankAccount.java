@@ -24,6 +24,10 @@ public class BankAccount {
 		return branch;
 	}
 	
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
 	public long payClient(long amount) { //επιστροφή ποσού που πληρώθηκε
 		if (amount > 0 && amount <= balance) {
 			balance -= amount;

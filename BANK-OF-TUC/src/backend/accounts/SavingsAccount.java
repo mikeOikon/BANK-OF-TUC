@@ -120,6 +120,16 @@ public class SavingsAccount extends PersonalAccount {
         }
         return total;
     }
+    
+    @Override
+    public boolean supportsInterest() {
+		return true;
+	}
+    
+    @Override
+    public double getInterestRate() {
+        return interest;
+    }
 
 
 }

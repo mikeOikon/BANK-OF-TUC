@@ -97,11 +97,6 @@ public class DashboardFrame extends JFrame {
                 tabbedPane.addTab("Support", supportTab);
             }
 
-            if (user.canAdvanceTime()) {
-                TimeControlTab timeTab = new TimeControlTab(user);
-                tabbedPane.addTab("Time Control", timeTab);
-                refreshableTabs.add(timeTab);
-            }
         }
 
         // --- ADMIN / AUDITOR / EMPLOYER ---
@@ -124,6 +119,12 @@ public class DashboardFrame extends JFrame {
             UserManagementTab userManagementTab = new UserManagementTab(user);
             tabbedPane.addTab("User Management", userManagementTab);
             refreshableTabs.add(userManagementTab);
+        }
+        
+        if (user.canAdvanceTime()) {
+            TimeControlTab timeTab = new TimeControlTab(user);
+            tabbedPane.addTab("Time Control", timeTab);
+            refreshableTabs.add(timeTab);
         }
 
         SettingsTab settingsTab = new SettingsTab(user);

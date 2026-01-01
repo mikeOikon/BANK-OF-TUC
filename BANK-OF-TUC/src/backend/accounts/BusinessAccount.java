@@ -2,6 +2,7 @@ package backend.accounts;
 
 import java.util.Stack;
 
+import backend.BankSystem;
 import backend.Branch;
 import backend.transactions.Transaction;
 import backend.transactions.WithdrawTransaction;
@@ -63,6 +64,9 @@ public class BusinessAccount extends Account {
 
         // Κάνουμε withdrawal μόνο το πραγματικό amount
         super.withdraw(amount);
+        
+        double curBalance = BankSystem.getInstance().getBankAccount().getBalance();
+        BankSystem.getInstance().getBankAccount().setBalance(curBalance + managementFee); //τα τέλη πηγαίνουν στην τράπεζα
 
         return true;
     }
@@ -82,6 +86,9 @@ public class BusinessAccount extends Account {
         
         super.transferTo(target, amount);
         
+        double curBalance = BankSystem.getInstance().getBankAccount().getBalance();
+        BankSystem.getInstance().getBankAccount().setBalance(curBalance + managementFee); //τα τέλη πηγαίνουν στην τράπεζα
+        
         return true;
     }
 
@@ -98,6 +105,9 @@ public class BusinessAccount extends Account {
         
         super.deposit(amount);
         balance -= managementFee;
+        double curBalance = BankSystem.getInstance().getBankAccount().getBalance();
+        BankSystem.getInstance().getBankAccount().setBalance(curBalance + managementFee); //τα τέλη πηγαίνουν στην τράπεζα
     }
+    
 
 }

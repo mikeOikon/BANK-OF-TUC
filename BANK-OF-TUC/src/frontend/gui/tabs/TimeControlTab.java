@@ -25,16 +25,16 @@ public class TimeControlTab extends JPanel implements Refreshable {
         JButton plus1Day = new JButton("+1 day");
         JButton plus7Days = new JButton("+7 days");
         JButton plus1Month = new JButton("+1 month");
-        JButton plus3Months = new JButton("+3 months");
-        JButton setExact = new JButton("Set exact datetime...");
+        //JButton plus3Months = new JButton("+3 months");
+        //JButton setExact = new JButton("Set exact datetime...");
         JButton reset = new JButton("Reset to real time");
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttons.add(plus1Day);
         buttons.add(plus7Days);
         buttons.add(plus1Month);
-        buttons.add(plus3Months);
-        buttons.add(setExact);
+        //buttons.add(plus3Months);
+        //buttons.add(setExact);
         buttons.add(reset);
 
         add(top, BorderLayout.NORTH);
@@ -67,7 +67,7 @@ public class TimeControlTab extends JPanel implements Refreshable {
             system.saveAllData();
             refreshLabel.run();
         });
-
+        /*
         plus3Months.addActionListener(e -> {
             system.advanceMonths(3);
             system.saveAllData();
@@ -79,7 +79,7 @@ public class TimeControlTab extends JPanel implements Refreshable {
                     this,
                     "Enter datetime ISO (e.g. 2026-01-28T10:30:00)",
                     system.getSimulatedNow().toString()
-            );
+            ); 
             if (s == null) return;
             try {
                 LocalDateTime target = LocalDateTime.parse(s.trim());
@@ -97,7 +97,7 @@ public class TimeControlTab extends JPanel implements Refreshable {
                 );
             }
         });
-
+*/
         reset.addActionListener(e -> {
             system.resetToRealTime();
             system.saveAllData();

@@ -68,9 +68,7 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         center.add(Box.createRigidArea(new Dimension(0, 15)));
         center.add(new JLabel("Λογαριασμός Χρέωσης:"));
 
-        accountCombo = new JComboBox<>(
-                currentUser.getAccounts().toArray(new Account[0])
-        );
+        accountCombo = new JComboBox<>(currentUser.getAccounts().toArray(new Account[0]));
         accountCombo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
         accountCombo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
             JLabel l = new JLabel(value.getIBAN() + " | Υπόλοιπο: " + value.getBalance() + "€");
@@ -104,20 +102,15 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         searchBtn.addActionListener(e -> searchForBill());
         payBtn.addActionListener(e -> handlePayment());
 
-        // ❗ Αν αλλάξει account → απενεργοποίηση subscription
-        accountCombo.addActionListener(e -> {
-            if (monthlyAutoPayCheck.isVisible()) {
-                monthlyAutoPayCheck.setSelected(false);
-            }
-        });
+        // Αν αλλάξει account → επανέλεγξε αν μπορεί να ενεργοποιήσει subscription
+        accountCombo.addActionListener(e -> updateSubscriptionCheckbox());
+        monthlyAutoPayCheck.addActionListener(e -> toggleSubscription());
     }
 
-    // ---------- PAYMENT ----------
     private void handlePayment() {
         if (foundBill == null) return;
 
         Account acc = (Account) accountCombo.getSelectedItem();
-
         if (acc == null || acc.isFrozen()) {
             JOptionPane.showMessageDialog(this, "Μη έγκυρος λογαριασμός.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
@@ -130,20 +123,10 @@ public class BillPaymentTab extends JPanel implements Refreshable {
 
         try {
             new PayBillCommand(acc, foundBill).execute();
-
-            if (foundBill.isMonthly() && monthlyAutoPayCheck.isSelected()) {
-                BankSystem.getInstance().enableMonthlyAutoPay(
-                        foundBill.getSubscriptionId(),
-                        acc.getIBAN()
-                );
-            }
-
+            updateSubscriptionCheckbox();
             JOptionPane.showMessageDialog(this, "Η πληρωμή ολοκληρώθηκε!");
             refresh();
-
-            if (dashboard != null) {
-                dashboard.refreshAllTabs();
-            }
+            if (dashboard != null) dashboard.refreshAllTabs();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
@@ -152,7 +135,6 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         }
     }
 
-    // ---------- SEARCH ----------
     private void searchForBill() {
         String code = codeField.getText().trim();
         if (code.isEmpty()) return;
@@ -180,20 +162,51 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         ));
 
         payBtn.setEnabled(true);
+        updateSubscriptionCheckbox();
+    }
 
-        if (foundBill.isMonthly()) {
-            monthlyAutoPayCheck.setVisible(true);
-            monthlyAutoPayCheck.setSelected(false);
-        } else {
+    // Ελέγχει αν μπορεί να ενεργοποιηθεί/απενεργοποιηθεί η πάγια εντολή
+    private void updateSubscriptionCheckbox() {
+        if (foundBill == null || !foundBill.isMonthly()) {
             monthlyAutoPayCheck.setVisible(false);
+            return;
+        }
+
+        monthlyAutoPayCheck.setVisible(true);
+        Account selected = (Account) accountCombo.getSelectedItem();
+        String activeIBAN = BankSystem.getInstance().getActiveAutoPayIBAN(foundBill.getSubscriptionId());
+
+        if (activeIBAN == null) {
+            // Δεν υπάρχει ενεργή πάγια → μπορεί να ενεργοποιήσει
+            monthlyAutoPayCheck.setEnabled(true);
+            monthlyAutoPayCheck.setSelected(false);
+        } else if (activeIBAN.equals(selected.getIBAN())) {
+            // Αυτή η πάγια ανήκει στον επιλεγμένο λογαριασμό → μπορεί να απενεργοποιήσει
+            monthlyAutoPayCheck.setEnabled(true);
+            monthlyAutoPayCheck.setSelected(true);
+        } else {
+            // Η πάγια ανήκει σε άλλο λογαριασμό → δεν μπορεί να αλλάξει
+            monthlyAutoPayCheck.setEnabled(false);
+            monthlyAutoPayCheck.setSelected(true);
         }
     }
 
-    // ---------- REFRESH ----------
+    // Ενεργοποιεί ή απενεργοποιεί πάγια
+    private void toggleSubscription() {
+        if (foundBill == null || !foundBill.isMonthly()) return;
+        Account selected = (Account) accountCombo.getSelectedItem();
+        if (!monthlyAutoPayCheck.isEnabled()) return; // δεν επιτρέπεται
+
+        if (monthlyAutoPayCheck.isSelected()) {
+            BankSystem.getInstance().enableMonthlyAutoPay(foundBill.getSubscriptionId(), selected.getIBAN());
+        } else {
+            BankSystem.getInstance().disableMonthlyAutoPay(foundBill.getSubscriptionId());
+        }
+    }
+
     @Override
     public void refresh() {
-        if (!currentUser.getAccounts().isEmpty()
-                && !codeField.getText().trim().isEmpty()) {
+        if (!currentUser.getAccounts().isEmpty() && !codeField.getText().trim().isEmpty()) {
             searchForBill();
         }
         revalidate();

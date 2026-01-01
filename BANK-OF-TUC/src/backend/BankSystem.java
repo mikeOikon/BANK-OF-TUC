@@ -15,7 +15,9 @@ import com.google.gson.Gson;
 
 import backend.accounts.Account;
 import backend.accounts.AccountFactory;
+import backend.support.AutoPayManager;
 import backend.support.Bill;
+import backend.support.InterestManager;
 import backend.support.SupportTicket;
 import backend.users.Admin;
 import backend.users.Auditor;
@@ -39,6 +41,7 @@ import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
 import backend.support.MonthlySubscription;
+import backend.support.MonthlyTaskScheduler;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -46,7 +49,6 @@ import java.time.LocalDateTime;
 
 public class BankSystem {
 	
-	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
 	private static volatile BankSystem instance;
 	private Map<String, Branch> branches;
 	private Map<String,BusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
@@ -104,6 +106,10 @@ public class BankSystem {
 	    return instance;
 	}
 	
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
+	
 	public User getUserById(String userId) {
 	    String prefix = userId.substring(0, 3);
 	    Map<String, ? extends User> userMap = userMaps.get(prefix);
@@ -151,6 +157,17 @@ public class BankSystem {
 
 	public void advanceMonths(int months) {
 		rebaseTo(getSimulatedNow().plusMonths(months));
+		
+		 MonthlyTaskScheduler scheduler = new MonthlyTaskScheduler();
+
+		  // Προσθέτουμε όλα τα tasks
+		  scheduler.addTask(() -> new AutoPayManager(this).processAutoPayments());
+		  scheduler.addTask(() -> new InterestManager(this).applyMonthlyInterest());
+
+		  // Εκτέλεση όλων των tasks
+		  scheduler.executeTasks();
+
+		  dao.save(this);
 	}
 
 	public void setSimulatedTo(LocalDateTime target) {
@@ -453,14 +470,15 @@ public class BankSystem {
 	    }
 	}
 
-	public boolean isSubscriptionAutoPayEnabled(String subscriptionId) {
+	public String getActiveAutoPayIBAN(String subscriptionId) {
 	    for (MonthlySubscription sub : subscriptions) {
 	        if (sub.getSubscriptionId().equals(subscriptionId)) {
-	            return sub.isAutoPayEnabled();
+	            return sub.getAutoPayAccountIBAN(); // null αν δεν υπάρχει ενεργή πάγια
 	        }
 	    }
-	    return false;
+	    return null;
 	}
+
 	
 }
 

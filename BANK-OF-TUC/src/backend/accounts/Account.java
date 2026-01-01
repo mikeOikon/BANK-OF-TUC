@@ -121,6 +121,14 @@ public abstract class Account {
         }
         return remainder;
     }
+    
+    public boolean supportsInterest() {
+		return false;
+	}
+    
+    public double getInterestRate() {
+        return interest;
+    }
 
     public String toString() {
         return String.format("%s | IBAN: %s | Balance: %.2f | %s", 
