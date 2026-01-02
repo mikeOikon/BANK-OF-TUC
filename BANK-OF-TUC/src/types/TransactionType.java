@@ -4,5 +4,9 @@ package types;
 public enum TransactionType {
     DEPOSIT,
     WITHDRAW,
-    TRANSFER
+    TRANSFER,
+    BILL_PAYMENT,
+    AUTO_BILL_PAYMENT,
+    INTEREST,
+    FEE
 }

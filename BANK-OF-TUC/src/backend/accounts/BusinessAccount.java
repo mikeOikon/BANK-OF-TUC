@@ -96,17 +96,11 @@ public class BusinessAccount extends Account {
     @Override
     public void deposit(double amount) {
 
-        if (amount <= managementFee) {
-            throw new IllegalArgumentException("Deposit must be more than the management fee (" + managementFee + ").");
-        }
         
         if (isFrozen())
 			throw new IllegalStateException("Account is frozen.");
         
         super.deposit(amount);
-        balance -= managementFee;
-        double curBalance = BankSystem.getInstance().getBankAccount().getBalance();
-        BankSystem.getInstance().getBankAccount().setBalance(curBalance + managementFee); //τα τέλη πηγαίνουν στην τράπεζα
     }
     
 

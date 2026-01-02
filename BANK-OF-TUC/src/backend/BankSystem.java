@@ -18,6 +18,7 @@ import backend.accounts.AccountFactory;
 import backend.support.AutoPayManager;
 import backend.support.Bill;
 import backend.support.InterestManager;
+import backend.support.MonthlySubscription;
 import backend.support.SupportTicket;
 import backend.users.Admin;
 import backend.users.Auditor;
@@ -40,7 +41,6 @@ import types.TicketStatus;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
-import backend.support.MonthlySubscription;
 import backend.support.MonthlyTaskScheduler;
 
 import java.time.Duration;
@@ -156,19 +156,28 @@ public class BankSystem {
 	}
 
 	public void advanceMonths(int months) {
-		rebaseTo(getSimulatedNow().plusMonths(months));
-		
-		 MonthlyTaskScheduler scheduler = new MonthlyTaskScheduler();
 
-		  // Προσθέτουμε όλα τα tasks
-		  scheduler.addTask(() -> new AutoPayManager(this).processAutoPayments());
-		  scheduler.addTask(() -> new InterestManager(this).applyMonthlyInterest());
+	    for (int i = 0; i < months; i++) {
 
-		  // Εκτέλεση όλων των tasks
-		  scheduler.executeTasks();
+	        rebaseTo(
+	            getSimulatedNow()
+	                .plusMonths(1)
+	                .withDayOfMonth(1)
+	        );
 
-		  dao.save(this);
+	        for (MonthlySubscription sub : subscriptions) {
+	            sub.generateMonthlyBill(this);
+	        }
+
+	        MonthlyTaskScheduler scheduler = new MonthlyTaskScheduler();
+	        scheduler.addTask(() -> new AutoPayManager(this).processAutoPayments());
+	        scheduler.addTask(() -> new InterestManager(this).applyMonthlyInterest());
+	        scheduler.executeTasks();
+	    }
+
+	    dao.save(this);
 	}
+
 
 	public void setSimulatedTo(LocalDateTime target) {
 		if (target != null) rebaseTo(target);

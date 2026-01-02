@@ -32,12 +32,12 @@ public class AutoPayManager {
                 continue;
             }
 
-            if (bill.getCustomerIBAN() == null) {
+            if (bill.getAutoPayAccountIBAN() == null) {
                 continue;
             }
 
             Account sourceAccount =
-                    bankSystem.getAccountbyNumber(bill.getCustomerIBAN());
+                    bankSystem.getAccountbyNumber(bill.getAutoPayAccountIBAN());
 
             if (sourceAccount == null) {
                 continue;

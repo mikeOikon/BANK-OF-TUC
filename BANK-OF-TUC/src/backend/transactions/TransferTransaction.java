@@ -10,7 +10,8 @@ public class TransferTransaction extends Transaction {
                 TransactionType.TRANSFER,
                 amount,
                 from.getIBAN(),
-                to.getIBAN()
+                to.getIBAN(),
+                "Transfer from " + from.getIBAN() + " to " + to.getIBAN()
         );
         execute(from, to, amount);
     }

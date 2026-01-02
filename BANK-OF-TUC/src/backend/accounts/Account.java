@@ -62,7 +62,7 @@ public abstract class Account {
         if (amount <= 0) throw new IllegalArgumentException("Amount must be positive.");
 
         // Η DepositTransaction θα αυξήσει το balance
-        Transaction tx = new DepositTransaction(this, amount);
+        Transaction tx = new DepositTransaction(amount, this);
         transactions.push(tx);
     }
 

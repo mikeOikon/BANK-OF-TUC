@@ -21,7 +21,7 @@
           "frozen": false,
           "IBAN": "GR7902100217208805792758003",
           "userID": "BUS003",
-          "balance": 130.5,
+          "balance": 171.84999999999997,
           "transactions": [
             {
               "type": "TRANSFER",
@@ -94,6 +94,121 @@
               "fromAccountIban": "GR9102100216936808720520544",
               "toAccountIban": "GR7902100217208805792758003",
               "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 1.2,
+              "timestampString": "2026-05-02T10:21:58.806517700",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 0.25,
+              "timestampString": "2026-07-01T10:38:58.767382400",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 0.75,
+              "timestampString": "2026-08-01T10:42:30.582388200",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 21.0,
+              "timestampString": "2026-09-01T10:45:12.809453700",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 11.0,
+              "timestampString": "2026-09-01T10:45:12.810448100",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 21.0,
+              "timestampString": "2026-10-01T10:48:41.619969200",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.5,
+              "timestampString": "2026-11-01T10:49:11.785443600",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1.2,
+              "timestampString": "2026-11-01T10:49:11.786446800",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.25,
+              "timestampString": "2026-11-01T10:49:11.786446800",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.75,
+              "timestampString": "2026-11-01T10:49:11.787442400",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.5,
+              "timestampString": "2026-11-01T10:49:11.788444800",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1.2,
+              "timestampString": "2026-11-01T10:49:11.788444800",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.25,
+              "timestampString": "2026-11-01T10:49:11.788444800",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.75,
+              "timestampString": "2026-11-01T10:49:11.789444300",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.5,
+              "timestampString": "2026-11-01T10:49:11.789444300",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 0.25,
+              "timestampString": "2026-11-01T10:49:11.790446500",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "deposit"
             }
           ],
           "account_id": 1,
@@ -194,7 +309,7 @@
           "frozen": false,
           "IBAN": "GR9102100216936808720520544",
           "userID": "CUS004",
-          "balance": 69.5,
+          "balance": 1000.05,
           "transactions": [
             {
               "type": "DEPOSIT",
@@ -295,6 +410,213 @@
               "fromAccountIban": "GR9102100216936808720520544",
               "toAccountIban": "GR7902100217208805792758003",
               "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 1.2,
+              "timestampString": "2026-05-02T10:21:58.806517700",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 0.25,
+              "timestampString": "2026-07-01T10:38:58.767382400",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "TRANSFER",
+              "amount": 0.75,
+              "timestampString": "2026-08-01T10:42:30.582388200",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "toAccountIban": "GR7902100217208805792758003",
+              "txType": "transfer"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 21.0,
+              "timestampString": "2026-09-01T10:45:12.809453700",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 11.0,
+              "timestampString": "2026-09-01T10:45:12.810448100",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.5,
+              "timestampString": "2026-09-01T10:45:12.811449300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.2,
+              "timestampString": "2026-09-01T10:45:12.812449300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.25,
+              "timestampString": "2026-09-01T10:45:12.813449900",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.75,
+              "timestampString": "2026-09-01T10:45:12.813449900",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.5,
+              "timestampString": "2026-10-01T10:48:41.615948500",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.2,
+              "timestampString": "2026-10-01T10:48:41.617947200",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.25,
+              "timestampString": "2026-10-01T10:48:41.618947600",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.75,
+              "timestampString": "2026-10-01T10:48:41.618947600",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 21.0,
+              "timestampString": "2026-10-01T10:48:41.619969200",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.5,
+              "timestampString": "2026-10-01T10:48:41.620944700",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.2,
+              "timestampString": "2026-10-01T10:48:41.620944700",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.25,
+              "timestampString": "2026-10-01T10:48:41.621946400",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.75,
+              "timestampString": "2026-10-01T10:48:41.621946400",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.5,
+              "timestampString": "2026-11-01T10:49:11.784442200",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.2,
+              "timestampString": "2026-11-01T10:49:11.786446800",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.25,
+              "timestampString": "2026-11-01T10:49:11.786446800",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.75,
+              "timestampString": "2026-11-01T10:49:11.787442400",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.5,
+              "timestampString": "2026-11-01T10:49:11.787442400",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 1.2,
+              "timestampString": "2026-11-01T10:49:11.788444800",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.25,
+              "timestampString": "2026-11-01T10:49:11.788444800",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.75,
+              "timestampString": "2026-11-01T10:49:11.789444300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.5,
+              "timestampString": "2026-11-01T10:49:11.789444300",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 0.25,
+              "timestampString": "2026-11-01T10:49:11.790446500",
+              "fromAccountIban": "GR9102100216936808720520544",
+              "txType": "withdraw"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 1000.0,
+              "timestampString": "2026-12-01T11:20:54.903046900",
+              "toAccountIban": "GR9102100216936808720520544",
+              "description": "Deposit",
+              "txType": "deposit"
             }
           ],
           "account_id": 1,
@@ -372,7 +694,7 @@
   "auditors": {},
   "bankAccount": {
     "accountNumber": "BANK001",
-    "balance": 1.0E8,
+    "balance": 1.0000002E8,
     "branch": {
       "bankCode": "021",
       "branchCode": "0021"
@@ -473,6 +795,371 @@
       "paid": true,
       "autoPay": false,
       "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb"
+    },
+    "RFA8B564B7A8C8": {
+      "paymentCode": "RFA8B564B7A8C8",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 1.2,
+      "description": "testing (05/2026)",
+      "issueDate": "2026/01/02 10:21:30",
+      "paid": true,
+      "autoPay": false,
+      "subscriptionId": "5b7d9248-6351-4019-89a4-ea5f74f3d5f8"
+    },
+    "RF3DF2B5C16E5F": {
+      "paymentCode": "RF3DF2B5C16E5F",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.25,
+      "description": "testing (07/2026)",
+      "issueDate": "2026/01/02 10:38:26",
+      "paid": true,
+      "autoPay": false,
+      "subscriptionId": "7251790d-d487-4df9-8040-db9f09d19db4"
+    },
+    "RF971F0C708FF0": {
+      "paymentCode": "RF971F0C708FF0",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.75,
+      "description": "testing (08/2026)",
+      "issueDate": "2026/01/02 10:42:03",
+      "paid": true,
+      "autoPay": false,
+      "subscriptionId": "ce6ad122-d6ec-4c70-9abe-1f8f602af2ab"
+    },
+    "RF801C1783CDB9": {
+      "paymentCode": "RF801C1783CDB9",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 21.0,
+      "description": "monthly subscription testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ed55f4d8-6397-4667-aa87-23070468580d"
+    },
+    "RF3162ABC9A091": {
+      "paymentCode": "RF3162ABC9A091",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 11.0,
+      "description": "testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f"
+    },
+    "RF8C40D27AE3C5": {
+      "paymentCode": "RF8C40D27AE3C5",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 3.0,
+      "description": "testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": false,
+      "autoPay": false,
+      "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746"
+    },
+    "RFF2409C3F820E": {
+      "paymentCode": "RFF2409C3F820E",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.5,
+      "description": "testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb"
+    },
+    "RFE90B317D885B": {
+      "paymentCode": "RFE90B317D885B",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 1.2,
+      "description": "testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "5b7d9248-6351-4019-89a4-ea5f74f3d5f8"
+    },
+    "RF902C72639EF0": {
+      "paymentCode": "RF902C72639EF0",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.25,
+      "description": "testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "7251790d-d487-4df9-8040-db9f09d19db4"
+    },
+    "RF8B2E467DA7B2": {
+      "paymentCode": "RF8B2E467DA7B2",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.75,
+      "description": "testing (09/2026)",
+      "issueDate": "2026/01/02 10:45:12",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ce6ad122-d6ec-4c70-9abe-1f8f602af2ab"
+    },
+    "RF13CC94BA9127": {
+      "paymentCode": "RF13CC94BA9127",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 21.0,
+      "description": "monthly subscription testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ed55f4d8-6397-4667-aa87-23070468580d"
+    },
+    "RFE8CDDE4B6A9E": {
+      "paymentCode": "RFE8CDDE4B6A9E",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 11.0,
+      "description": "testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f"
+    },
+    "RFB58910B67DA6": {
+      "paymentCode": "RFB58910B67DA6",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 3.0,
+      "description": "testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": false,
+      "autoPay": false,
+      "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746"
+    },
+    "RF525200AFCC90": {
+      "paymentCode": "RF525200AFCC90",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.5,
+      "description": "testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb"
+    },
+    "RF78AE04491773": {
+      "paymentCode": "RF78AE04491773",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 1.2,
+      "description": "testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "5b7d9248-6351-4019-89a4-ea5f74f3d5f8"
+    },
+    "RFDA5075A5CF5C": {
+      "paymentCode": "RFDA5075A5CF5C",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.25,
+      "description": "testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "7251790d-d487-4df9-8040-db9f09d19db4"
+    },
+    "RF865CDAAA3DAA": {
+      "paymentCode": "RF865CDAAA3DAA",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.75,
+      "description": "testing (10/2026)",
+      "issueDate": "2026/01/02 10:48:41",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ce6ad122-d6ec-4c70-9abe-1f8f602af2ab"
+    },
+    "RFACC5CD334BA1": {
+      "paymentCode": "RFACC5CD334BA1",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 21.0,
+      "description": "monthly subscription testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ed55f4d8-6397-4667-aa87-23070468580d"
+    },
+    "RF9E8FE6CE6FE4": {
+      "paymentCode": "RF9E8FE6CE6FE4",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 11.0,
+      "description": "testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f"
+    },
+    "RF8C13F53B9193": {
+      "paymentCode": "RF8C13F53B9193",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 3.0,
+      "description": "testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": false,
+      "autoPay": false,
+      "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746"
+    },
+    "RFDE7BE65DA208": {
+      "paymentCode": "RFDE7BE65DA208",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.5,
+      "description": "testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb"
+    },
+    "RF0F3C64B31258": {
+      "paymentCode": "RF0F3C64B31258",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 1.2,
+      "description": "testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "5b7d9248-6351-4019-89a4-ea5f74f3d5f8"
+    },
+    "RF0A2F13FFB335": {
+      "paymentCode": "RF0A2F13FFB335",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.25,
+      "description": "testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": true,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "7251790d-d487-4df9-8040-db9f09d19db4"
+    },
+    "RF3A9B5013F5AB": {
+      "paymentCode": "RF3A9B5013F5AB",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.75,
+      "description": "testing (11/2026)",
+      "issueDate": "2026/01/02 10:49:11",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ce6ad122-d6ec-4c70-9abe-1f8f602af2ab"
+    },
+    "RF91EF1E39328F": {
+      "paymentCode": "RF91EF1E39328F",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 21.0,
+      "description": "monthly subscription testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ed55f4d8-6397-4667-aa87-23070468580d"
+    },
+    "RF6289A95B506F": {
+      "paymentCode": "RF6289A95B506F",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 11.0,
+      "description": "testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f"
+    },
+    "RF4FAAC04BFBEE": {
+      "paymentCode": "RF4FAAC04BFBEE",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 3.0,
+      "description": "testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": false,
+      "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746"
+    },
+    "RF4CC8AADC226F": {
+      "paymentCode": "RF4CC8AADC226F",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.5,
+      "description": "testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb"
+    },
+    "RF067E5EC293AD": {
+      "paymentCode": "RF067E5EC293AD",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 1.2,
+      "description": "testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "5b7d9248-6351-4019-89a4-ea5f74f3d5f8"
+    },
+    "RF98D7C1353A86": {
+      "paymentCode": "RF98D7C1353A86",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.25,
+      "description": "testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "7251790d-d487-4df9-8040-db9f09d19db4"
+    },
+    "RF726F9EC99D18": {
+      "paymentCode": "RF726F9EC99D18",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "amount": 0.75,
+      "description": "testing (12/2026)",
+      "issueDate": "2026/01/02 11:20:12",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "subscriptionId": "ce6ad122-d6ec-4c70-9abe-1f8f602af2ab"
     }
   },
   "subscriptions": [
@@ -483,7 +1170,7 @@
       "monthlyAmount": 21.0,
       "description": "monthly subscription testing",
       "autoPayAccountIBAN": "GR9102100216936808720520544",
-      "lastIssuedMonth": "2025-12-01"
+      "lastIssuedMonth": "2026-12-01"
     },
     {
       "subscriptionId": "a4f31ebb-215e-47e5-ae58-d796b66e504f",
@@ -492,7 +1179,7 @@
       "monthlyAmount": 11.0,
       "description": "testing",
       "autoPayAccountIBAN": "GR9102100216936808720520544",
-      "lastIssuedMonth": "2026-01-01"
+      "lastIssuedMonth": "2026-12-01"
     },
     {
       "subscriptionId": "add9570a-3e3d-4432-93d3-5c36de3de746",
@@ -500,7 +1187,7 @@
       "businessName": "TUC Crete",
       "monthlyAmount": 3.0,
       "description": "testing",
-      "lastIssuedMonth": "2026-02-01"
+      "lastIssuedMonth": "2026-12-01"
     },
     {
       "subscriptionId": "0ffd703c-9d79-4e9f-a34c-8342012280cb",
@@ -508,13 +1195,41 @@
       "businessName": "TUC Crete",
       "monthlyAmount": 0.5,
       "description": "testing",
-      "lastIssuedMonth": "2026-02-01"
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "lastIssuedMonth": "2026-12-01"
+    },
+    {
+      "subscriptionId": "5b7d9248-6351-4019-89a4-ea5f74f3d5f8",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "monthlyAmount": 1.2,
+      "description": "testing",
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "lastIssuedMonth": "2026-12-01"
+    },
+    {
+      "subscriptionId": "7251790d-d487-4df9-8040-db9f09d19db4",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "monthlyAmount": 0.25,
+      "description": "testing",
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "lastIssuedMonth": "2026-12-01"
+    },
+    {
+      "subscriptionId": "ce6ad122-d6ec-4c70-9abe-1f8f602af2ab",
+      "businessIBAN": "GR7902100217208805792758003",
+      "businessName": "TUC Crete",
+      "monthlyAmount": 0.75,
+      "description": "testing",
+      "autoPayAccountIBAN": "GR9102100216936808720520544",
+      "lastIssuedMonth": "2026-12-01"
     }
   ],
   "adminCount": 2,
   "customerCount": 6,
   "employeeCount": 1,
   "auditorCount": 0,
-  "realBaseIso": "2026-01-01T17:25:48.985982100",
-  "simulatedBaseIso": "2026-04-01T17:25:48.985982100"
+  "realBaseIso": "2026-01-02T11:20:12.652751800",
+  "simulatedBaseIso": "2026-12-01T11:20:12.650752400"
 }

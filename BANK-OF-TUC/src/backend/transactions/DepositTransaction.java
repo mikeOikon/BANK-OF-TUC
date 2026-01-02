@@ -5,17 +5,18 @@ import types.TransactionType;
 
 public class DepositTransaction extends Transaction {
 
-    public DepositTransaction(Account targetAccount, double amount) {
+    public DepositTransaction(double amount, Account targetAccount) {
         super(
                 TransactionType.DEPOSIT,
                 amount,
-                null,                         // deposit has no "from"
-                targetAccount.getIBAN()
+                null,                           // fromAccountIban = null για deposit
+                targetAccount.getIBAN(),        // toAccountIban
+                "Deposit"                       // description
         );
         execute(targetAccount, amount);
     }
-    
+
     private void execute(Account targetAccount, double amount) {
-    	targetAccount.setBalance(targetAccount.getBalance() + amount);
+        targetAccount.setBalance(targetAccount.getBalance() + amount);
     }
 }

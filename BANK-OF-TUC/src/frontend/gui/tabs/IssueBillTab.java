@@ -7,7 +7,7 @@ import java.util.Random;
 import backend.users.BusinessCustomer;
 import backend.users.User;
 import backend.support.Bill;
-import backend.support.MonthlySubscription; 
+import backend.support.MonthlySubscription;
 import backend.BankSystem; 
 import services.account_services.CreateBillCommand;
 
