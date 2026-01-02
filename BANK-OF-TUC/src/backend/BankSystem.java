@@ -60,10 +60,15 @@ public class BankSystem {
 	private transient UserManager userManager;
 	private transient Map<String, Map<String, ? extends User>> userMaps;
 	private transient Map<String,User> usersByUsername; // Map to find users by username during login
+	private transient Map<String, Integer> loginAttempts;
+	private transient Map<String, Long> loginLockedUntil;
+	private static final int MAX_LOGIN_ATTEMPTS = 3;
+	private static final long LOGIN_LOCK_MS = 60_000L; // 1 minute
 	private final Map<String,SupportTicket> tickets=new HashMap<>();
 	private final Map<String,Bill> allBills=new HashMap<>();
 	private List<MonthlySubscription> subscriptions;
-	
+
+
 	private  int adminCount = 0;
 	private  int customerCount = 0;
 	private  int employeeCount = 0;
@@ -241,6 +246,9 @@ public class BankSystem {
 	    for (BankEmployer e : bankEmployers.values()) e.setBehavior(new EmployeeBehavior());
 	    for (BusinessCustomer b : businessCustomers.values()) b.setBehavior(new BusinessBehavior());
 		initTimeIfMissing();
+		// init login lock maps
+		this.loginAttempts = new HashMap<>();
+		this.loginLockedUntil = new HashMap<>();
 	}
 
 
@@ -358,8 +366,64 @@ public class BankSystem {
 	    }
 
 	   
-	}	
-	
+	}
+	public boolean isUserLocked(String username) {
+		if (loginLockedUntil == null) loginLockedUntil = new HashMap<>();
+		Long until = loginLockedUntil.get(username);
+		return until != null && System.currentTimeMillis() < until;
+	}
+
+	public long remainingLockSeconds(String username) {
+		if (loginLockedUntil == null) loginLockedUntil = new HashMap<>();
+		Long until = loginLockedUntil.get(username);
+		if (until == null) return 0;
+		long diff = until - System.currentTimeMillis();
+		return diff > 0 ? (diff + 999) / 1000 : 0;
+	}
+
+	/**
+	 * @return User αν πετύχει το login, αλλιώς null.
+	 * Με 3 λάθος passwords κάνει lock για 60".
+	 */
+	public User loginUser(String username, String password) {
+		if (username == null) return null;
+
+		username = username.trim();
+
+		if (loginAttempts == null) loginAttempts = new HashMap<>();
+		if (loginLockedUntil == null) loginLockedUntil = new HashMap<>();
+
+		// locked?
+		if (isUserLocked(username)) {
+			return null;
+		}
+
+		User user = findUserByUsername(username);
+		if (user == null) {
+			// Προαιρετικά: ΜΗΝ μετράς attempts για άγνωστο username
+			return null;
+		}
+
+		// verify credentials (με PasswordHasher.verify μέσα στο User.login)
+		if (user.login(username, password)) {
+			loginAttempts.remove(username);
+			loginLockedUntil.remove(username);
+			return user;
+		}
+
+		// failed attempt
+		int attempts = loginAttempts.getOrDefault(username, 0) + 1;
+		loginAttempts.put(username, attempts);
+
+		if (attempts >= MAX_LOGIN_ATTEMPTS) {
+			loginLockedUntil.put(username, System.currentTimeMillis() + LOGIN_LOCK_MS);
+			loginAttempts.put(username, 0); // reset counter after lock
+		}
+
+		return null;
+	}
+
+
 	public Account getAccountbyNumber(String accountNumber) {	//method to find account by account number (used in transfer money)
 		for(User user : customers.values()) {
 			Customer customer = (Customer) user;
