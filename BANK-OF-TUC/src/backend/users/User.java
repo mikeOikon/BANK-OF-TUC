@@ -188,8 +188,6 @@ public abstract class User {
 	}
 
 	public boolean login(String username, String password) {
-		//maybe use a quick pin?
-		FileLogger logger= FileLogger.getInstance();
 		try {
 			
 			return this.username.equals(username) && this.password.equals(PasswordHasher.hash(password));

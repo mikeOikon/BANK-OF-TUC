@@ -164,3 +164,28 @@
 [2026-01-02T10:51:34.827188300] [INFO] [LOGIN] User tuc logged in.
 [2026-01-02T11:20:10.358653900] [INFO] [LOGIN] User admin logged in.
 [2026-01-02T11:20:34.123878600] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T11:38:45.447378600] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:38:58.766281300] [INFO]  Email updated successfully for UserId.ADM001
+[2026-01-02T11:39:33.679160] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:39:48.449046600] [INFO]  Phone Number updated successfully for UserId.ADM001
+[2026-01-02T11:42:39.312294300] [INFO] User BUS006 removed by admin admin
+[2026-01-02T11:43:49.082416200] [INFO] Password changed successfully for user: ADM001
+[2026-01-02T11:45:56.266096300] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T11:48:38.460484] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T11:49:48.968165700] [INFO] Password changed successfully for user: ADM001
+[2026-01-02T11:49:51.079208600] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:52:09.700827200] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:52:17.901678500] [INFO]  UserId:ADM001 promoted to: AUDITOR with new UserId:AUD001
+[2026-01-02T11:52:45.977539300] [INFO] [LOGIN] User auditor logged in.
+[2026-01-02T11:52:57.249971100] [INFO]  Email updated successfully for UserId.AUD001
+[2026-01-02T11:56:08.102794100] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:56:22.163084700] [INFO]  UserId:ADM001 promoted to: EMPLOYEE with new UserId:EMP002
+[2026-01-02T11:56:40.330171] [INFO] [LOGIN] User employer logged in.
+[2026-01-02T11:57:46.350691900] [INFO] [LOGIN] User employer logged in.
+[2026-01-02T12:00:37.419851800] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:01:18.046097700] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:06:43.943714700] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:08:09.168079400] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:09:08.784949900] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:09:41.293078100] [INFO] [LOGIN] User aek logged in.
+[2026-01-02T12:10:32.313971700] [INFO] Password changed successfully for user: CUS003

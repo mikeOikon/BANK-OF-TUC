@@ -127,15 +127,17 @@ public class DashboardFrame extends JFrame {
             refreshableTabs.add(timeTab);
         }
 
-        SettingsTab settingsTab = new SettingsTab(user);
-        tabbedPane.addTab("Settings", settingsTab);
-        refreshableTabs.add(settingsTab);
-
         if (user.canAssistUsers()) {
             CustomerSupportTab customerSupportTab = new CustomerSupportTab(user);
             tabbedPane.addTab("Customer Support", customerSupportTab);
             refreshableTabs.add(customerSupportTab);
         }
+        
+        SettingsTab settingsTab = new SettingsTab(user);
+        tabbedPane.addTab("Settings", settingsTab);
+        refreshableTabs.add(settingsTab);
+
+        
     }
 
     /**

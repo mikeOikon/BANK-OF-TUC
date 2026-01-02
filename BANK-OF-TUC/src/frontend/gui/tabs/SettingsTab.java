@@ -75,8 +75,7 @@ public class SettingsTab extends JPanel implements Refreshable {
                         }
 
                         try {
-                            String hashedNewPassword = PasswordHasher.hash(newPassPlain);
-                            Command changePass = new ChangePasswordCommand(currentUser, hashedNewPassword);
+                            Command changePass = new ChangePasswordCommand(currentUser, newPassPlain);
                             changePass.execute();
 
                             JOptionPane.showMessageDialog(this, "Password changed successfully!");
