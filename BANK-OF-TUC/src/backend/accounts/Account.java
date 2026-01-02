@@ -64,6 +64,7 @@ public abstract class Account {
         // Η DepositTransaction θα αυξήσει το balance
         Transaction tx = new DepositTransaction(amount, this);
         transactions.push(tx);
+        backend.transactions.TransactionService.getInstance().record(tx);
     }
 
     public boolean withdraw(double amount) {
@@ -74,6 +75,7 @@ public abstract class Account {
         // Η WithdrawTransaction θα μειώσει το balance
         Transaction tx = new WithdrawTransaction(this, amount);
         transactions.push(tx);
+        backend.transactions.TransactionService.getInstance().record(tx);
         return true;
     }
 
@@ -87,6 +89,7 @@ public abstract class Account {
         Transaction tx = new TransferTransaction(this, target, amount);
         this.transactions.push(tx);
         target.getTransactions().push(tx);
+        backend.transactions.TransactionService.getInstance().record(tx);
         return true;
     }
 

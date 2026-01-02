@@ -9,6 +9,8 @@ import backend.transactions.validation.IbanValidationStrategy;
 import backend.transactions.validation.TransactionValidationStrategy;
 import services.Command;
 import types.TransactionType;
+import backend.transactions.FileTransactionDAO;
+
 
 /**
  * TransactionService
@@ -208,6 +210,16 @@ public class TransactionService implements TransactionAPI {
         public void undo() {
 
         }
+    }
+    public synchronized void record(Transaction tx) {
+        if (tx == null) return;
+
+        // Safety fallback: αν για κάποιο λόγο δεν έχει γίνει injection από FileBankSystemDAO
+        if (transactionDAO == null) {
+            transactionDAO = new FileTransactionDAO();
+        }
+
+        transactionDAO.save(tx);
     }
 
 }
