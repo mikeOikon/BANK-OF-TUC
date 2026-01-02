@@ -7,7 +7,7 @@ import backend.users.User;
 import javax.swing.*;
 import java.awt.*;
 
-public class CustomerSupportTab extends JPanel {
+public class CustomerSupportTab extends JPanel implements Refreshable {
 
     private final User employee;
 
@@ -37,12 +37,10 @@ public class CustomerSupportTab extends JPanel {
     }
 
     private JSplitPane createMainPanel() {
-        // Ticket list
         ticketList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane ticketScroll = new JScrollPane(ticketList);
         ticketScroll.setPreferredSize(new Dimension(250, 0));
 
-        // Messages area
         messagesArea.setEditable(false);
         messagesArea.setLineWrap(true);
         messagesArea.setWrapStyleWord(true);
@@ -74,7 +72,7 @@ public class CustomerSupportTab extends JPanel {
         ticketList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 showSelectedTicket();
-            }    
+            }
         });
     }
 
@@ -106,5 +104,16 @@ public class CustomerSupportTab extends JPanel {
         ticket.addMessageEmployee("EMPLOYEE: " + reply, employee);
         replyField.setText("");
         showSelectedTicket();
+    }
+
+    /**
+     * ΥΠΟΧΡΕΩΤΙΚΟ για Refreshable
+     */
+    @Override
+    public void refresh() {
+        loadTickets();
+        showSelectedTicket();
+        revalidate();
+        repaint();
     }
 }

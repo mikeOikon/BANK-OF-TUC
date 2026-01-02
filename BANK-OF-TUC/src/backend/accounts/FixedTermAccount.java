@@ -100,4 +100,14 @@ public class FixedTermAccount extends PersonalAccount {
         }
         return super.transferTo(target, amount);
     }
+    
+    @Override
+    public boolean supportsInterest() {
+		return true;
+	}
+    
+    @Override
+    public double getInterestRate() {
+        return interest;
+    }
 }

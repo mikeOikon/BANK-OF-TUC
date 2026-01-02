@@ -18,7 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Map;
 
-public class AllAccountsTab extends JPanel {
+public class AllAccountsTab extends JPanel implements Refreshable {
 
     private JTable accountsTable;
     private DefaultTableModel tableModel;
@@ -137,7 +137,7 @@ public class AllAccountsTab extends JPanel {
             }
         }
     }
-
+    @Override
     public void refresh() {
         tableModel.setRowCount(0);
         BankSystem bank = BankSystem.getInstance();

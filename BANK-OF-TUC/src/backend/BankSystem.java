@@ -15,6 +15,10 @@ import com.google.gson.Gson;
 
 import backend.accounts.Account;
 import backend.accounts.AccountFactory;
+import backend.support.AutoPayManager;
+import backend.support.Bill;
+import backend.support.InterestManager;
+import backend.support.MonthlySubscription;
 import backend.support.SupportTicket;
 import backend.users.Admin;
 import backend.users.Auditor;
@@ -37,6 +41,7 @@ import types.TicketStatus;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
+import backend.support.MonthlyTaskScheduler;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -44,7 +49,6 @@ import java.time.LocalDateTime;
 
 public class BankSystem {
 	
-	//ArrayList<Account> accounts;    //να δουμε αν χρειαζεται ( η τράπεζα να ξερει για τους λογαριασμούς ή οι χρήστες);
 	private static volatile BankSystem instance;
 	private Map<String, Branch> branches;
 	private Map<String,BusinessCustomer> businessCustomers; // Map to store accounts with IBAN as key and account informations as value
@@ -57,6 +61,8 @@ public class BankSystem {
 	private transient Map<String, Map<String, ? extends User>> userMaps;
 	private transient Map<String,User> usersByUsername; // Map to find users by username during login
 	private final Map<String,SupportTicket> tickets=new HashMap<>();
+	private final Map<String,Bill> allBills=new HashMap<>();
+	private List<MonthlySubscription> subscriptions;
 	
 	private  int adminCount = 0;
 	private  int customerCount = 0;
@@ -79,6 +85,7 @@ public class BankSystem {
 		this.bankAccount = new BankAccount("BANK001", Branch.getDefaultBranch()); //default bank account(TUC)
 		this.userManager=new UserManager();
 		this.userMaps = new HashMap<>();
+		this.subscriptions = new ArrayList<>();
 		  userMaps.put("ADM", admins);
 		  userMaps.put("CUS", customers);
 		  userMaps.put("EMP", bankEmployers);
@@ -97,6 +104,10 @@ public class BankSystem {
 	        }
 	    }
 	    return instance;
+	}
+	
+	public BankAccount getBankAccount() {
+		return bankAccount;
 	}
 	
 	public User getUserById(String userId) {
@@ -145,8 +156,28 @@ public class BankSystem {
 	}
 
 	public void advanceMonths(int months) {
-		rebaseTo(getSimulatedNow().plusMonths(months));
+
+	    for (int i = 0; i < months; i++) {
+
+	        rebaseTo(
+	            getSimulatedNow()
+	                .plusMonths(1)
+	                .withDayOfMonth(1)
+	        );
+
+	        for (MonthlySubscription sub : subscriptions) {
+	            sub.generateMonthlyBill(this);
+	        }
+
+	        MonthlyTaskScheduler scheduler = new MonthlyTaskScheduler();
+	        scheduler.addTask(() -> new AutoPayManager(this).processAutoPayments());
+	        scheduler.addTask(() -> new InterestManager(this).applyMonthlyInterest());
+	        scheduler.executeTasks();
+	    }
+
+	    dao.save(this);
 	}
+
 
 	public void setSimulatedTo(LocalDateTime target) {
 		if (target != null) rebaseTo(target);
@@ -385,9 +416,78 @@ public class BankSystem {
 	    return usersByUsername.get(username);
 	}
 	
+	public void addBill(Bill bill) {
+        if (bill == null || bill.getPaymentCode() == null) {
+            return;
+        }
+        allBills.put(bill.getPaymentCode(), bill);
+        
+        // Προαιρετικά: αποθήκευση αμέσως μετά την προσθήκη
+        // saveAllData(); 
+    }
+	
+	public Bill findBillByCode(String code) {
+        return allBills.get(code);
+    }
+	
+	public void removeBill(String code) {
+        allBills.remove(code);
+    }
+	
 	public void saveAllData() {
 	    dao.save(this);
 	}
+
+	public List<Bill> getAllBills() {
+	    return new ArrayList<>(allBills.values());
+	}
+	
+	public void enableMonthlyAutoPay(String subscriptionId, String accountIBAN) {
+        if (subscriptionId == null || accountIBAN == null) return;
+
+        for (MonthlySubscription sub : subscriptions) {
+            if (sub.getSubscriptionId().equals(subscriptionId)) {
+                sub.enableAutoPay(accountIBAN);
+                System.out.printf("BankSystem: AutoPay ενεργοποιήθηκε για subscription %s στον λογαριασμό %s%n",
+                        subscriptionId, accountIBAN);
+                break;
+            }
+        }
+    }
+	
+	public void addSubscription(MonthlySubscription sub) {
+	    if (sub == null) return;
+	    
+	    // Αρχικοποίηση αν για κάποιο λόγο είναι null (ασφάλεια)
+	    if (this.subscriptions == null) {
+	        this.subscriptions = new ArrayList<>();
+	    }
+	    
+	    this.subscriptions.add(sub);
+	    
+	    // Προαιρετικά: Log την ενέργεια
+	    FileLogger.getInstance().log(LogLevel.INFO, LogCategory.SYSTEM, 
+	        "New Monthly Subscription added: " + sub.getSubscriptionId());
+	}
+	
+	public void disableMonthlyAutoPay(String subscriptionId) {
+	    for (MonthlySubscription sub : subscriptions) {
+	        if (sub.getSubscriptionId().equals(subscriptionId)) {
+	            sub.disableAutoPay();
+	            break;
+	        }
+	    }
+	}
+
+	public String getActiveAutoPayIBAN(String subscriptionId) {
+	    for (MonthlySubscription sub : subscriptions) {
+	        if (sub.getSubscriptionId().equals(subscriptionId)) {
+	            return sub.getAutoPayAccountIBAN(); // null αν δεν υπάρχει ενεργή πάγια
+	        }
+	    }
+	    return null;
+	}
+
 	
 }
 

@@ -12,7 +12,7 @@ import services.account_services.TransferCommand;
 
 import java.awt.*;
 
-public class TransferTab extends JPanel {
+public class TransferTab extends JPanel implements Refreshable{
 
     private final User customer;
     private final CustomerOverviewTab overviewTab;

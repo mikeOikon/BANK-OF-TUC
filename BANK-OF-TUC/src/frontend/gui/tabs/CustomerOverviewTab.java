@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Comparator;
 
-public class CustomerOverviewTab extends JPanel {
+public class CustomerOverviewTab extends JPanel implements Refreshable {
 
     private final JLabel balanceLabel;
     private final JLabel typeLabel;
@@ -129,7 +129,7 @@ public class CustomerOverviewTab extends JPanel {
     }
 
 
-
+	@Override
     public void refresh() {
         if (account == null) {
             typeLabel.setText("No account selected.");

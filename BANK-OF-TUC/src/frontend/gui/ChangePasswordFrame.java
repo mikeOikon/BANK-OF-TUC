@@ -51,7 +51,20 @@ public class ChangePasswordFrame extends JFrame {
                     JOptionPane.showMessageDialog(this, "Ο παλιός κωδικός είναι λανθασμένος!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-
+                //Code smell: double hashing of passwords should be avoided in real applications.
+                if (oldPass.equals(newPass)) {
+                    JOptionPane.showMessageDialog(this, "Ο νέος κωδικός δεν μπορεί να είναι ίδιος με τον παλιό.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                // Απλοί έλεγχοι για νέο κωδικό (μήκος, χαρακτήρες κλπ) μπορούν να προστεθούν εδώ
+                if (newPass.length() < 6) {
+                    JOptionPane.showMessageDialog(this, "Ο νέος κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                if (!newPass.matches(".*[A-Z].*") || !newPass.matches(".*[a-z].*") || !newPass.matches(".*\\d.*")) {
+                    JOptionPane.showMessageDialog(this, "Ο νέος κωδικός πρέπει να περιέχει τουλάχιστον ένα κεφαλαίο γράμμα, ένα πεζό γράμμα και έναν αριθμό.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 // 3. Έλεγχος αν οι νέοι κωδικοί ταιριάζουν
                 if (!newPass.equals(confirmPass)) {
                     JOptionPane.showMessageDialog(this, "Οι νέοι κωδικοί δεν ταιριάζουν.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);

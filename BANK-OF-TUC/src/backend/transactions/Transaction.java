@@ -2,28 +2,40 @@ package backend.transactions;
 
 import java.time.LocalDateTime;
 
+import backend.BankSystem;
 import types.TransactionType;
 
 public abstract class Transaction {
 
-    protected TransactionType type;
-    protected double amount;
+    protected final TransactionType type;
+    protected final double amount;
 
     protected transient LocalDateTime timestamp; // δεν αποθηκεύεται στο JSON
-    protected String timestampString; // αυτό αποθηκεύεται
-    protected String fromAccountIban;
-    protected String toAccountIban;
+    protected String timestampString;             // αποθηκεύεται στο JSON
 
-    public Transaction(TransactionType type, double amount,
-                       String fromAccountIban, String toAccountIban) {
+    protected final String fromAccountIban;
+    protected final String toAccountIban;
 
+    protected String description; // 👈 ΝΕΟ (πολύ σημαντικό)
+
+    protected Transaction(
+            TransactionType type,
+            double amount,
+            String fromAccountIban,
+            String toAccountIban,
+            String description
+    ) {
         this.type = type;
         this.amount = amount;
-        this.timestamp = backend.BankSystem.getInstance().getSimulatedNow();
-        this.timestampString = this.timestamp.toString(); // ISO string
         this.fromAccountIban = fromAccountIban;
         this.toAccountIban = toAccountIban;
+        this.description = description;
+
+        this.timestamp = BankSystem.getInstance().getSimulatedNow();
+        this.timestampString = this.timestamp.toString();
     }
+
+    // ---------------- GETTERS ----------------
 
     public TransactionType getType() {
         return type;
@@ -41,33 +53,56 @@ public abstract class Transaction {
     }
 
     public String getFromAccountIban() {
-        return this.fromAccountIban;
+        return fromAccountIban;
     }
 
     public String getToAccountIban() {
-        return this.toAccountIban;
+        return toAccountIban;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    // ---------------- DISPLAY ----------------
 
     @Override
     public String toString() {
-    	if (type == TransactionType.TRANSFER) {
-    		return "[" + getTimestamp() + "] "
-                + type + " "
-                + amount +
-                " from " + this.fromAccountIban +
-                " to " + this.toAccountIban;
-    	}
-    	else if(type == TransactionType.DEPOSIT) {
-			return "[" + getTimestamp() + "] "
-	                + type + " "
-	                + amount +
-	                " to " + this.toAccountIban;
-    	}
-    	else
-    		return "[" + getTimestamp() + "] "
-				+ type + " "
-				+ amount +
-				" from " + this.fromAccountIban;
+        return "[" + getTimestamp() + "] "
+                + formatByType();
     }
 
+    protected String formatByType() {
+        return switch (type) {
+
+            case TRANSFER ->
+                    "TRANSFER " + amount +
+                    " from " + fromAccountIban +
+                    " to " + toAccountIban;
+
+            case DEPOSIT ->
+                    "DEPOSIT " + amount +
+                    " to " + toAccountIban;
+
+            case WITHDRAW ->
+                    "WITHDRAW " + amount +
+                    " from " + fromAccountIban;
+
+            case BILL_PAYMENT ->
+                    "BILL PAYMENT " + amount +
+                    " to " + toAccountIban;
+
+            case AUTO_BILL_PAYMENT ->
+                    "AUTO BILL PAYMENT " + amount +
+                    " to " + toAccountIban;
+
+            case INTEREST ->
+                    "INTEREST " + amount +
+                    " to " + toAccountIban;
+
+            case FEE ->
+                    "FEE " + amount +
+                    " from " + fromAccountIban;
+        };
+    }
 }

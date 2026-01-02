@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MyAccountsTab extends JPanel {
+public class MyAccountsTab extends JPanel implements Refreshable{
 
     private final User customer;
     private final JList<Account> accountList;
@@ -102,7 +102,7 @@ public class MyAccountsTab extends JPanel {
             }
         });
     }
-
+	@Override
     public void refresh() {
         updateListModel();
     }

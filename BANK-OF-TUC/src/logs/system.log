@@ -228,3 +228,482 @@ See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-clas
 [2025-12-29T13:36:12.480622900] [INFO] [DAO] Data loaded successfully.
 [2025-12-29T13:44:54.747932400] [INFO] [DAO] Data saved successfully.
 [2025-12-29T13:44:54.748934100] [INFO] System shutting down, data persisted.
+[2025-12-29T13:58:45.357077600] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:59:06.936702300] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T13:59:06.952703900] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:00:26.233826200] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:24:27.908126100] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:24:35.600013900] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:35:53.058866400] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:35:53.060863100] [INFO] System shutting down, data persisted.
+[2025-12-29T14:36:12.820529200] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:36:20.759083500] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:37:08.583731200] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:37:39.446645] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:37:39.447643700] [INFO] System shutting down, data persisted.
+[2025-12-29T14:37:46.441425100] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:38:11.095798200] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:38:11.115984500] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:38:58.475743] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:38:58.476744700] [INFO] System shutting down, data persisted.
+[2025-12-29T14:44:30.279753400] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:44:41.494568400] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:45:07.310761500] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:45:50.967429200] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:45:50.968399500] [INFO] System shutting down, data persisted.
+[2025-12-29T14:50:08.217393500] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:50:23.303968600] [INFO] [DAO] Data loaded successfully.
+[2025-12-29T14:50:49.934582300] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:51:09.953540200] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:51:09.960341200] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:51:20.485392200] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:51:37.649495300] [INFO] [DAO] Data saved successfully.
+[2025-12-29T14:51:37.649495300] [INFO] System shutting down, data persisted.
+[2025-12-30T11:33:46.655702100] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:33:57.465571200] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:35:44.597102700] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:35:56.123612800] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:36:48.624920400] [INFO] [DAO] Data saved successfully.
+[2025-12-30T11:37:11.049270600] [INFO] [DAO] Data saved successfully.
+[2025-12-30T11:37:11.050413] [INFO] System shutting down, data persisted.
+[2025-12-30T11:37:16.183469] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:37:43.275634100] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:37:43.342910900] [INFO] [DAO] Data saved successfully.
+[2025-12-30T11:38:41.089034100] [INFO] [DAO] Data saved successfully.
+[2025-12-30T11:38:41.090037900] [INFO] System shutting down, data persisted.
+[2025-12-30T11:40:01.110621400] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:40:08.979371] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T11:41:15.621558900] [INFO] [DAO] Data saved successfully.
+[2025-12-30T11:41:15.622540400] [INFO] System shutting down, data persisted.
+[2025-12-30T14:43:46.847895100] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T14:43:55.199968300] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T14:44:15.322104800] [INFO] [DAO] Data saved successfully.
+[2025-12-30T14:44:21.120770500] [INFO] [DAO] Data saved successfully.
+[2025-12-30T14:44:21.121772800] [INFO] System shutting down, data persisted.
+[2025-12-30T14:44:26.472995200] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T14:44:34.460032] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T14:45:13.729688600] [INFO] [DAO] Data saved successfully.
+[2025-12-30T14:45:24.810872300] [INFO] [DAO] Data saved successfully.
+[2025-12-30T14:45:24.810872300] [INFO] System shutting down, data persisted.
+[2025-12-30T14:48:04.535058700] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T15:07:07.024487400] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T15:07:16.843001600] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T15:07:28.672488700] [INFO] [DAO] Data saved successfully.
+[2025-12-30T15:07:31.501981500] [INFO] [DAO] Data saved successfully.
+[2025-12-30T15:07:31.501981500] [INFO] System shutting down, data persisted.
+[2025-12-30T15:07:36.826820400] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T15:07:44.079552100] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T20:19:34.452613600] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T20:19:43.755811300] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T20:21:22.518514100] [INFO] [DAO] Data saved successfully.
+[2025-12-30T20:21:22.519525500] [INFO] System shutting down, data persisted.
+[2025-12-30T20:21:39.675665900] [INFO] [DAO] Data saved successfully.
+[2025-12-30T20:21:39.675665900] [INFO] System shutting down, data persisted.
+[2025-12-30T20:21:45.878638300] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T20:22:14.963470900] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T20:23:30.311570900] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T20:26:33.343146700] [INFO] [DAO] Data saved successfully.
+[2025-12-30T20:26:33.344142300] [INFO] System shutting down, data persisted.
+[2025-12-30T21:12:06.346845200] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:20:32.824086600] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:20:42.021819600] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:25:34.922543] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:25:34.923548] [INFO] System shutting down, data persisted.
+[2025-12-30T21:29:01.083775600] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:29:06.439262100] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:29:35.320745700] [INFO] New Monthly Subscription added: ed55f4d8-6397-4667-aa87-23070468580d
+[2025-12-30T21:29:55.686672] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:29:55.687672500] [INFO] System shutting down, data persisted.
+[2025-12-30T21:29:59.823701600] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:30:06.039308700] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:31:38.055494900] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:31:48.236385700] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:31:48.237389500] [INFO] System shutting down, data persisted.
+[2025-12-30T21:32:00.961462400] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:32:06.074497800] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:32:26.801313] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:32:26.801313] [INFO] System shutting down, data persisted.
+[2025-12-30T21:36:00.440251800] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:36:10.484448400] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:36:59.305918200] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:36:59.305918200] [INFO] System shutting down, data persisted.
+[2025-12-30T21:38:54.355459] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:39:03.184077800] [INFO] [DAO] Data loaded successfully.
+[2025-12-30T21:39:36.954610300] [INFO] [DAO] Data saved successfully.
+[2025-12-30T21:39:36.955597900] [INFO] System shutting down, data persisted.
+[2025-12-31T13:55:21.538965400] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T13:55:36.669806300] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T13:55:54.111732800] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:56:23.198804700] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:56:31.397666600] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:56:34.935207400] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:56:45.371329] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:56:45.376577300] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:57:32.071860] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:57:32.078711100] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:58:24.251911300] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:58:28.925593] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:58:28.925593] [INFO] System shutting down, data persisted.
+[2025-12-31T13:58:36.152187100] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T13:58:42.937117300] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T13:59:41.124448900] [INFO] [DAO] Data saved successfully.
+[2025-12-31T13:59:41.125527500] [INFO] System shutting down, data persisted.
+[2025-12-31T13:59:45.694870100] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T13:59:53.898422500] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T14:00:48.146608200] [INFO] [DAO] Data saved successfully.
+[2025-12-31T14:00:48.147730800] [INFO] System shutting down, data persisted.
+[2025-12-31T14:00:53.459247900] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T14:01:01.586734200] [INFO] [DAO] Data loaded successfully.
+[2025-12-31T14:01:24.007416800] [INFO] [DAO] Data saved successfully.
+[2025-12-31T14:01:24.008644] [INFO] System shutting down, data persisted.
+[2026-01-01T12:37:17.822733500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:37:28.660409200] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:38:05.176296100] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:38:13.551658] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:38:13.551658] [INFO] System shutting down, data persisted.
+[2026-01-01T12:38:18.219212300] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:38:29.913926100] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:38:43.517589400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:18.661673400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:30.042459] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:32.914316400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:46.756480800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:46.762481100] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:54.145858600] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:39:54.151861400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:41:17.603531800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:41:17.609169400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:41:54.479397600] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:42:13.134821] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:42:13.135037300] [INFO] System shutting down, data persisted.
+[2026-01-01T12:47:14.573853400] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:47:23.132792200] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:48:01.097050] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:48:29.062888] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:48:29.063815700] [INFO] System shutting down, data persisted.
+[2026-01-01T12:48:34.641888500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:48:41.556960600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:48:57.559538500] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:48:57.560100] [INFO] System shutting down, data persisted.
+[2026-01-01T12:52:36.512143800] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:52:45.213184900] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:54:17.472128400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:54:17.472894500] [INFO] System shutting down, data persisted.
+[2026-01-01T12:54:23.869866400] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:54:32.898448500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:54:54.263195100] [INFO] New Monthly Subscription added: a4f31ebb-215e-47e5-ae58-d796b66e504f
+[2026-01-01T12:55:01.218875] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:55:01.219699600] [INFO] System shutting down, data persisted.
+[2026-01-01T12:55:05.173026800] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:55:13.239963500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T12:55:41.492606300] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:55:54.190291100] [INFO] [DAO] Data saved successfully.
+[2026-01-01T12:55:54.190291100] [INFO] System shutting down, data persisted.
+[2026-01-01T13:00:59.952803100] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T13:01:08.719410400] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T13:02:16.483585300] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T13:02:19.569728200] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:02:19.570560100] [INFO] System shutting down, data persisted.
+[2026-01-01T13:02:56.989260600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T13:02:57.072744800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:03:06.170391800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:03:10.317695300] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:03:14.191175600] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:03:27.508363500] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:03:40.627684800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:08:33.366555900] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:08:33.367553500] [INFO] System shutting down, data persisted.
+[2026-01-01T13:13:46.230609600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T13:14:30.976667300] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T13:15:03.681788300] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:15:17.882535800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T13:15:17.883743300] [INFO] System shutting down, data persisted.
+[2026-01-01T16:54:18.892766500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T16:54:28.624322] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T16:54:41.312126100] [INFO] [DAO] Data saved successfully.
+[2026-01-01T16:54:41.313515400] [INFO] System shutting down, data persisted.
+[2026-01-01T16:59:02.737084600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T16:59:09.794181300] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T16:59:26.056131500] [INFO] [DAO] Data saved successfully.
+[2026-01-01T16:59:26.056131500] [INFO] System shutting down, data persisted.
+[2026-01-01T17:05:38.180779800] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:05:46.974292500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:05:58.805551300] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:05:58.806556600] [INFO] System shutting down, data persisted.
+[2026-01-01T17:09:50.501257] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:09:59.143088500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:10:03.479552800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:10:03.517283200] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:10:03.527950700] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:10:03.539494200] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:10:17.439982400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:10:17.440727500] [INFO] System shutting down, data persisted.
+[2026-01-01T17:10:22.814523400] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:10:34.950328100] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:11:36.359387600] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:11:36.361457800] [INFO] System shutting down, data persisted.
+[2026-01-01T17:11:41.474730] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:11:50.933094300] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:12:04.135679500] [INFO] New Monthly Subscription added: add9570a-3e3d-4432-93d3-5c36de3de746
+[2026-01-01T17:12:09.996435900] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:12:09.997440800] [INFO] System shutting down, data persisted.
+[2026-01-01T17:12:16.281085600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:12:25.594374200] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:12:33.564016800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:15:18.805594800] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:15:18.806598600] [INFO] System shutting down, data persisted.
+[2026-01-01T17:15:21.720032400] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:19:42.610914400] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:19:48.928019100] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:23:13.221759700] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:23:13.223094500] [INFO] System shutting down, data persisted.
+[2026-01-01T17:23:17.815954600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:23:25.820104500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:23:35.379170300] [INFO] New Monthly Subscription added: 0ffd703c-9d79-4e9f-a34c-8342012280cb
+[2026-01-01T17:23:37.461392900] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:23:37.461392900] [INFO] System shutting down, data persisted.
+[2026-01-01T17:23:42.043887600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:23:51.471277500] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:24:04.986075900] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:24:21.785803] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:24:21.786794400] [INFO] System shutting down, data persisted.
+[2026-01-01T17:24:28.633833200] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:24:36.377199900] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:24:39.395998200] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:24:39.409160500] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:24:39.421030900] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:24:39.430944200] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:25:05.735980300] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:25:05.737021] [INFO] System shutting down, data persisted.
+[2026-01-01T17:25:10.498002600] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:25:20.488133300] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:25:31.589477] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:25:31.590169900] [INFO] System shutting down, data persisted.
+[2026-01-01T17:25:36.168570700] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:25:45.866171] [INFO] [DAO] Data loaded successfully.
+[2026-01-01T17:25:49.024297100] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:25:49.040873600] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:25:49.053048300] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:25:49.065046700] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:26:07.712613400] [INFO] [DAO] Data saved successfully.
+[2026-01-01T17:26:07.713126400] [INFO] System shutting down, data persisted.
+[2026-01-02T10:11:21.990312300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:11:33.768587600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:12:07.186547300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:12:07.189545900] [INFO] System shutting down, data persisted.
+[2026-01-02T10:18:04.598415900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:18:13.254831200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:19:34.660705400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:19:34.661704400] [INFO] System shutting down, data persisted.
+[2026-01-02T10:19:38.974794700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:19:45.571473300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:19:52.407055200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:19:52.432050700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:19:52.440053100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:19:52.448054400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:19:59.833644100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:19:59.834635700] [INFO] System shutting down, data persisted.
+[2026-01-02T10:20:03.739713400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:20:16.432160800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:20:52.349169200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:20:52.350171700] [INFO] System shutting down, data persisted.
+[2026-01-02T10:21:04.480262500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:21:11.922317200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:21:30.519889300] [INFO] New Monthly Subscription added: 5b7d9248-6351-4019-89a4-ea5f74f3d5f8
+[2026-01-02T10:21:34.465255400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:21:34.466252700] [INFO] System shutting down, data persisted.
+[2026-01-02T10:21:38.065801800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:21:43.574356100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:21:58.836515100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:04.238231600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:04.239231300] [INFO] System shutting down, data persisted.
+[2026-01-02T10:22:09.005629400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:22:16.054033500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:22:23.072690600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:23.085689] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:23.093692100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:23.101690100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:33.051192500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:33.052193500] [INFO] System shutting down, data persisted.
+[2026-01-02T10:22:36.779896600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:22:43.846624900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:22:51.528607700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:22:51.528607700] [INFO] System shutting down, data persisted.
+[2026-01-02T10:30:26.173515] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:30:42.234928800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:30:45.191625900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:30:45.203626] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:30:45.213627900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:30:45.221625500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:30:54.285756100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:30:54.286743300] [INFO] System shutting down, data persisted.
+[2026-01-02T10:30:58.331799100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:31:05.327531500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:31:14.994395400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:31:14.995392600] [INFO] System shutting down, data persisted.
+[2026-01-02T10:38:00.555846700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:38:13.380353500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:38:26.541216800] [INFO] New Monthly Subscription added: 7251790d-d487-4df9-8040-db9f09d19db4
+[2026-01-02T10:38:28.561177900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:38:28.562180] [INFO] System shutting down, data persisted.
+[2026-01-02T10:38:33.016528900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:38:41.003244900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:38:58.803381200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:03.228508300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:03.229508800] [INFO] System shutting down, data persisted.
+[2026-01-02T10:39:06.997477800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:39:15.662232100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:39:19.181205900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:19.194204200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:19.204204100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:19.211202600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:43.424023400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:39:43.424023400] [INFO] System shutting down, data persisted.
+[2026-01-02T10:39:47.959129300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:40:04.655957900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:41:30.157107700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:41:30.158108200] [INFO] System shutting down, data persisted.
+[2026-01-02T10:41:35.941532500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:41:48.586865300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:42:03.054506600] [INFO] New Monthly Subscription added: ce6ad122-d6ec-4c70-9abe-1f8f602af2ab
+[2026-01-02T10:42:05.229088600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:42:05.229088600] [INFO] System shutting down, data persisted.
+[2026-01-02T10:42:09.771334200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:42:15.891340800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:42:30.615389200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:44:57.273747800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:44:57.274790300] [INFO] System shutting down, data persisted.
+[2026-01-02T10:45:01.496058700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:45:08.476562100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:45:12.855445800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:45:12.868446100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:45:12.879445700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:45:12.887450100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:45:19.120672800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:45:19.121673700] [INFO] System shutting down, data persisted.
+[2026-01-02T10:48:25.369996800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:48:33.756461500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:48:41.656944400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:48:41.671945700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:48:41.682944700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:48:41.690948500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:48:58.591980500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:48:59.380718300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:48:59.381718100] [INFO] System shutting down, data persisted.
+[2026-01-02T10:49:08.554589900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:49:11.833440500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:49:11.853445600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:49:11.864444100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:49:11.891445500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:49:40.120272900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:49:40.120272900] [INFO] System shutting down, data persisted.
+[2026-01-02T10:50:58.635857400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:51:06.573697700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:51:20.036448800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T10:51:20.037442300] [INFO] System shutting down, data persisted.
+[2026-01-02T10:51:25.675445800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T10:51:34.792805300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:12:20.354031900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:12:20.356017900] [INFO] System shutting down, data persisted.
+[2026-01-02T11:20:03.474491400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:20:10.326250500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:20:12.773754] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:20:12.804761900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:20:12.816755] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:20:12.827760800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:20:19.866828100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:20:19.867830900] [INFO] System shutting down, data persisted.
+[2026-01-02T11:20:23.689103100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:20:34.091879100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:20:54.944202500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:20:54.962198300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:38:07.694941200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:38:07.696945400] [INFO] System shutting down, data persisted.
+[2026-01-02T11:38:36.731290200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:38:45.397287100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:38:58.764318] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:39:19.726374400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:39:19.726981400] [INFO] System shutting down, data persisted.
+[2026-01-02T11:39:26.640005200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:39:33.630052600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:39:48.554330400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:42:39.371946100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:43:49.078086900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:44:46.638257200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:44:46.656084500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:44:46.672634500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:44:46.696175] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:45:42.496424400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:45:42.497043200] [INFO] System shutting down, data persisted.
+[2026-01-02T11:45:47.851881700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:45:56.211118] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:46:56.127615200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:47:03.862778800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:10.583850900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:14.224217700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:14.245851300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:19.381851500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:24.039924200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:24.044391400] [INFO] System shutting down, data persisted.
+[2026-01-02T11:48:30.155847400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:48:38.356431600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:48:45.298575100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:48:45.304570600] [INFO] System shutting down, data persisted.
+[2026-01-02T11:48:52.453091100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:48:59.820216900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:49:48.964628800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:50:11.555528600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:50:11.590058300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:50:11.616972] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:50:11.656030100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:50:42.156083500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:50:42.157089100] [INFO] System shutting down, data persisted.
+[2026-01-02T11:50:47.848148700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:51:18.044641600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:51:18.222828900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:51:49.378744200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:52:03.097144800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:52:25.552018700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:52:25.552960600] [INFO] System shutting down, data persisted.
+[2026-01-02T11:52:30.623715200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:52:39.079503] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:52:57.248101600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:53:21.284706900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:54:21.581095200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:54:48.249063] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:56:32.483128900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:57:32.553730400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:57:32.555757900] [INFO] System shutting down, data persisted.
+[2026-01-02T11:57:37.933406300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:57:46.277254] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T11:59:18.061056500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T11:59:18.062245800] [INFO] System shutting down, data persisted.
+[2026-01-02T11:59:24.782769] [ERROR] [DAO] Failed to load data: Abstract classes can't be instantiated! Adjust the R8 configuration or register an InstanceCreator or a TypeAdapter for this type. Class name: backend.users.User
+See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-class
+[2026-01-02T11:59:55.751728300] [ERROR] [DAO] Failed to load data: Abstract classes can't be instantiated! Adjust the R8 configuration or register an InstanceCreator or a TypeAdapter for this type. Class name: backend.users.User
+See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-class
+[2026-01-02T12:00:03.975823700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:00:29.645441600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:01:04.964043900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:01:04.965173400] [INFO] System shutting down, data persisted.
+[2026-01-02T12:01:11.112650400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:01:17.978448400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:05:26.154627200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:05:53.977118500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:05:54.055017700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:06:37.958778400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:07:54.311087300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:07:54.311724] [INFO] System shutting down, data persisted.
+[2026-01-02T12:07:55.326856600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:07:55.329840900] [INFO] System shutting down, data persisted.
+[2026-01-02T12:08:02.219538500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:08:09.097803400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:08:20.433287200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:08:45.036889500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:08:57.493125200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:09:13.188196900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:09:13.188657900] [INFO] System shutting down, data persisted.
+[2026-01-02T12:09:18.762590400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:09:41.227252200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T12:10:32.308697800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T12:10:35.135994100] [INFO] [DAO] Data loaded successfully.

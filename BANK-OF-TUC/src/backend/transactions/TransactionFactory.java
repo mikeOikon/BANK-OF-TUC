@@ -1,32 +1,39 @@
 package backend.transactions;
 
 import backend.accounts.Account;
+import backend.support.Bill;
 import types.TransactionType;
 
-// Factory class for creating different types of transactions
 public class TransactionFactory {
 
-    // Deposit & Withdraw
-    public static Transaction createTransaction(
-            TransactionType type,
-            Account account,
-            double amount
-    ) {
+    public static Transaction createTransaction(TransactionType type, Account account, double amount) {
         return switch (type) {
-            case DEPOSIT -> new DepositTransaction(account, amount);
+            case DEPOSIT -> new DepositTransaction(amount, account);
             case WITHDRAW -> new WithdrawTransaction(account, amount);
             default -> throw new IllegalArgumentException(
-                    "Use the second createTransaction() method for TRANSFER"
+                    "Use other factory methods for TRANSFER or special transactions"
             );
         };
     }
 
-    // Transfer
-    public static Transaction createTransaction(
-            Account from,
-            Account to,
-            double amount
-    ) {
+    public static Transaction createTransaction(Account from, Account to, double amount) {
         return new TransferTransaction(from, to, amount);
+    }
+
+    // --- Νέες συναλλαγές ---
+    public static Transaction createBillPaymentTransaction(Account from, Bill bill) {
+        return new BillPaymentTransaction(from, bill);
+    }
+
+    public static Transaction createAutoBillPaymentTransaction(Account from, Bill bill) {
+        return new AutoBillPaymentTransaction(from, bill);
+    }
+
+    public static Transaction createInterestTransaction(Account target, double amount) {
+        return new InterestTransaction(target, amount);
+    }
+
+    public static Transaction createFeeTransaction(Account target, double amount, String description) {
+        return new FeeTransaction(target, amount, description);
     }
 }

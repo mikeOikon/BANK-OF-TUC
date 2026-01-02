@@ -1,19 +1,5 @@
 {
-  "businessCustomers": {
-    "BUS002": {
-      "accounts": [],
-      "username": "Aek",
-      "userID": "BUS002",
-      "password": "8bd50c95f4827c3ae0739b3a010397e28affbe3f2b987ec8f1cd5fd3f890e616",
-      "name": "AEK FC",
-      "surname": "Marko Nikolic",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "2fdcc4863844bd5792f9a265b4847abd2667fa7233b0f7c37505a9316623566b"
-    }
-  },
+  "businessCustomers": {},
   "admins": {
     "ADM001": {
       "username": "admin",
@@ -30,17 +16,42 @@
   "customers": {
     "CUS001": {
       "accounts": [],
-      "username": "mikeOikon",
+      "username": "newAdmin",
       "userID": "CUS001",
-      "password": "9683dec174ac76daa5c900a6a049c9090faeccc89d9b54b95681f3170c11bc33",
-      "email": "mikeoikonomou21@gmail.com",
-      "name": "Mike",
-      "surname": "Oikonomou",
+      "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
+      "name": "NewAdmin",
+      "surname": "AEK",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
       },
-      "AFM": "2fdcc4863844bd5792f9a265b4847abd2667fa7233b0f7c37505a9316623566b"
+      "AFM": "5240564f207b039ead21e7e541c02d383301aeda72a79bd12c492fdf5d96663e"
+    },
+    "CUS002": {
+      "accounts": [],
+      "username": "test",
+      "userID": "CUS002",
+      "password": "d9b5f58f0b38198293971865a14074f59eba3e82595becbe86ae51f1d9f1f65e",
+      "name": "test",
+      "surname": "AEKARA",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "da5d517c7495579d3aafc4f996220f3bdb33dd99b596f561a71286a91b2c2cd4"
+    },
+    "CUS003": {
+      "accounts": [],
+      "username": "aek",
+      "userID": "CUS003",
+      "password": "1f85caa01286f7399b14e56fdca5f0b6c144bc7ff3c3ab07d1c091a24c8d28a2",
+      "name": "AEK",
+      "surname": "Original",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "613317d4400891c7bfd8dccda01b593033eaa30b50e78138e6b0b26b6518d4e8"
     }
   },
   "bankEmployers": {},
@@ -53,21 +64,13 @@
       "branchCode": "0021"
     }
   },
-  "tickets": {
-    "TIC-1766954487911": {
-      "ticketId": "TIC-1766954487911",
-      "customerId": "CUS001",
-      "status": "OPEN",
-      "createdAt": "2025-12-28T22:41:27.914986200",
-      "messages": [
-        " Πελάτης: MONO AEKKKKKKKK"
-      ]
-    }
-  },
+  "tickets": {},
+  "allBills": {},
+  "subscriptions": [],
   "adminCount": 1,
-  "customerCount": 2,
+  "customerCount": 3,
   "employeeCount": 0,
   "auditorCount": 0,
-  "realBaseIso": "2025-12-28T22:39:10.321540800",
-  "simulatedBaseIso": "2025-12-28T22:39:10.321540800"
+  "realBaseIso": "2026-01-02T11:59:55.755844700",
+  "simulatedBaseIso": "2026-01-02T11:59:55.755844700"
 }

@@ -83,3 +83,109 @@
 [2025-12-29T13:05:07.923934700] [INFO] Password changed successfully for user: CUS001
 [2025-12-29T13:05:18.665135200] [INFO] [LOGIN] User mikeOikon logged in.
 [2025-12-29T13:36:12.517632200] [INFO] [LOGIN] User Aek logged in.
+[2025-12-29T14:24:35.655992200] [INFO] [LOGIN] User tuc logged in.
+[2025-12-29T14:24:37.483658700] [INFO] [LOGIN] User tuc logged in.
+[2025-12-29T14:36:20.824944100] [INFO] [LOGIN] User tuc logged in.
+[2025-12-29T14:44:41.534087500] [INFO] [LOGIN] User tuc logged in.
+[2025-12-29T14:50:23.350531500] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T11:33:57.534829900] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T11:34:00.317938700] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T11:35:56.170995200] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T11:40:09.033748] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T14:43:59.989816800] [INFO] [LOGIN] User tuc logged in.
+[2025-12-30T14:44:34.520017500] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T15:07:16.887595600] [INFO] [LOGIN] User tuc logged in.
+[2025-12-30T15:07:44.122763400] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T20:19:43.815508100] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T20:22:15.001429] [INFO] [LOGIN] User admin logged in.
+[2025-12-30T20:23:18.251763500] [INFO]  UserId:ADM001 promoted to: EMPLOYEE with new UserId:EMP001
+[2025-12-30T20:23:24.533744400] [INFO]  UserId:ADM001 promoted to: ADMIN with new UserId:ADM002
+[2025-12-30T20:23:35.895106300] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T21:20:42.066725300] [INFO] [LOGIN] User tuc logged in.
+[2025-12-30T21:29:06.478262800] [INFO] [LOGIN] User tuc logged in.
+[2025-12-30T21:30:06.073274300] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T21:32:06.114479500] [INFO] [LOGIN] User tuc logged in.
+[2025-12-30T21:36:10.521573700] [INFO] [LOGIN] User diak logged in.
+[2025-12-30T21:39:03.215085200] [INFO] [LOGIN] User diak logged in.
+[2025-12-31T13:55:36.729899500] [INFO] [LOGIN] User diak logged in.
+[2025-12-31T13:55:54.112735200] [INFO]  Email updated successfully for UserId.CUS004
+[2025-12-31T13:58:24.254377700] [INFO] Password changed successfully for user: CUS004
+[2025-12-31T13:59:23.471635100] [INFO] [LOGIN] User tuc logged in.
+[2025-12-31T13:59:53.953170700] [INFO] [LOGIN] User admin logged in.
+[2025-12-31T14:01:01.621474200] [INFO] [LOGIN] User admin logged in.
+[2026-01-01T12:38:05.178293600] [INFO] Password changed successfully for user: CUS004
+[2026-01-01T12:38:10.680654800] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T12:38:43.520581500] [INFO] Password changed successfully for user: CUS004
+[2026-01-01T12:38:50.164435700] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T12:39:18.651748600] [INFO]  Phone Number updated successfully for UserId.CUS004
+[2026-01-01T12:47:23.201187100] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T12:48:41.596891400] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T12:52:45.277238700] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T12:54:32.944949600] [INFO] [LOGIN] User tuc logged in.
+[2026-01-01T12:55:13.291691700] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T13:01:08.761353800] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T13:03:27.509365900] [INFO] Password changed successfully for user: BUS006
+[2026-01-01T13:03:40.628527500] [INFO]  Email updated successfully for UserId.BUS006
+[2026-01-01T13:15:03.683786600] [INFO] Password changed successfully for user: BUS006
+[2026-01-01T13:15:06.121830600] [INFO] [LOGIN] User ote logged in.
+[2026-01-01T16:54:28.679914600] [INFO] [LOGIN] User admin logged in.
+[2026-01-01T16:59:09.853171] [INFO] [LOGIN] User admin logged in.
+[2026-01-01T17:05:53.361907300] [INFO] [LOGIN] User admin logged in.
+[2026-01-01T17:09:59.188524] [INFO] [LOGIN] User admin logged in.
+[2026-01-01T17:10:34.998720400] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T17:11:50.967046900] [INFO] [LOGIN] User tuc logged in.
+[2026-01-01T17:12:25.642397100] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T17:19:48.976749500] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T17:23:25.864290900] [INFO] [LOGIN] User tuc logged in.
+[2026-01-01T17:23:51.513112600] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T17:24:36.434155600] [INFO] [LOGIN] User admin logged in.
+[2026-01-01T17:25:20.527793800] [INFO] [LOGIN] User diak logged in.
+[2026-01-01T17:25:45.907099600] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:11:33.822587200] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:18:13.319934200] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:19:45.602992700] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:20:16.465938700] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:21:11.954300600] [INFO] [LOGIN] User tuc logged in.
+[2026-01-02T10:21:43.605918300] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:22:16.091593] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:22:43.878630] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:30:42.265930500] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:31:05.361531500] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:38:13.424379400] [INFO] [LOGIN] User tuc logged in.
+[2026-01-02T10:38:41.035054800] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:39:15.703185500] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:40:04.691330500] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:41:48.620216100] [INFO] [LOGIN] User tuc logged in.
+[2026-01-02T10:42:15.926027900] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:45:08.510558400] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:48:33.794922700] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:49:08.596583400] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T10:51:06.612697900] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T10:51:34.827188300] [INFO] [LOGIN] User tuc logged in.
+[2026-01-02T11:20:10.358653900] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:20:34.123878600] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T11:38:45.447378600] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:38:58.766281300] [INFO]  Email updated successfully for UserId.ADM001
+[2026-01-02T11:39:33.679160] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:39:48.449046600] [INFO]  Phone Number updated successfully for UserId.ADM001
+[2026-01-02T11:42:39.312294300] [INFO] User BUS006 removed by admin admin
+[2026-01-02T11:43:49.082416200] [INFO] Password changed successfully for user: ADM001
+[2026-01-02T11:45:56.266096300] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T11:48:38.460484] [INFO] [LOGIN] User diak logged in.
+[2026-01-02T11:49:48.968165700] [INFO] Password changed successfully for user: ADM001
+[2026-01-02T11:49:51.079208600] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:52:09.700827200] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:52:17.901678500] [INFO]  UserId:ADM001 promoted to: AUDITOR with new UserId:AUD001
+[2026-01-02T11:52:45.977539300] [INFO] [LOGIN] User auditor logged in.
+[2026-01-02T11:52:57.249971100] [INFO]  Email updated successfully for UserId.AUD001
+[2026-01-02T11:56:08.102794100] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T11:56:22.163084700] [INFO]  UserId:ADM001 promoted to: EMPLOYEE with new UserId:EMP002
+[2026-01-02T11:56:40.330171] [INFO] [LOGIN] User employer logged in.
+[2026-01-02T11:57:46.350691900] [INFO] [LOGIN] User employer logged in.
+[2026-01-02T12:00:37.419851800] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:01:18.046097700] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:06:43.943714700] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:08:09.168079400] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:09:08.784949900] [INFO] [LOGIN] User admin logged in.
+[2026-01-02T12:09:41.293078100] [INFO] [LOGIN] User aek logged in.
+[2026-01-02T12:10:32.313971700] [INFO] Password changed successfully for user: CUS003

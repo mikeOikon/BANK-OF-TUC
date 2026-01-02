@@ -10,7 +10,8 @@ public class WithdrawTransaction extends Transaction {
                 TransactionType.WITHDRAW,
                 amount,
                 sourceAccount.getIBAN(),      // withdraw has "from"
-                null                          // no "to"
+                null,                          // no "to"
+                "Withdraw from " + sourceAccount.getIBAN()
         );
         execute(sourceAccount, amount);
     }
