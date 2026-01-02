@@ -67,7 +67,9 @@ public class UserBuilder {
 	    return this;
 	}
 	public UserBuilder withAFM(String AFM) {
-
+		if(AFM == null || !AFM.matches("^[0-9]{9}$")) {
+		   throw new IllegalArgumentException("Invalid AFM");
+	   }
 	   this.AFM = AFM;
 	   return this;
    }
