@@ -97,54 +97,50 @@ public class AllAccountsTab extends JPanel implements Refreshable {
         String userID = (String) tableModel.getValueAt(modelRow, 0);
         String iban = (String) tableModel.getValueAt(modelRow, 2);
 
-        int confirm = JOptionPane.showConfirmDialog(this,
-            "Οριστική διαγραφή του λογαριασμού: " + iban + ";",
-            "Επιβεβαίωση", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Οριστική διαγραφή του λογαριασμού: " + iban + ";",
+                "Επιβεβαίωση",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
 
-        if (confirm == JOptionPane.YES_OPTION) {
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        closeBtn.setEnabled(false); // αποφυγή διπλού click
+        try {
             BankSystem bank = BankSystem.getInstance();
+
             User targetUser = bank.getCustomers().get(userID);
             if (targetUser == null) targetUser = bank.getBusinessCustomers().get(userID);
 
-            if (targetUser != null) {
-
-                try {
-                    CloseAccountCommand cmd = new CloseAccountCommand(currentUser, targetUser, iban);
-                    cmd.execute();
-
-                    // Persist
-                    bank.saveAllData(); // ή bank.dao.save(bank) αν επιμένεις, αλλά έχεις ήδη saveAllData()
-
-                    JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
-                    refreshEntireSystem();
-
-                } catch (SecurityException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Permission denied", JOptionPane.ERROR_MESSAGE);
-
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this,
-                            "Αδυναμία διαγραφής: " + ex.getMessage(),
-                            "Σφάλμα",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-
-            } else {
+            if (targetUser == null) {
                 JOptionPane.showMessageDialog(this, "Δεν βρέθηκε ο χρήστης.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
+            CloseAccountCommand cmd = new CloseAccountCommand(currentUser, targetUser, iban);
+            cmd.execute(); // αν αποτύχει → exception
 
+            bank.saveAllData(); // persist μόνο αν πέτυχε
 
-            if (success) {
-                    bank.dao.save(bank); // Αποθήκευση αλλαγών
-                    JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
-                    refreshEntireSystem();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Αδυναμία διαγραφής.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-                } 
-            }
+            JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
+            refreshEntireSystem();
+
+        } catch (SecurityException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Permission denied", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Αδυναμία διαγραφής: " + ex.getMessage(),
+                    "Σφάλμα",
+                    JOptionPane.ERROR_MESSAGE);
+
+        } finally {
+            closeBtn.setEnabled(true);
         }
     }
-    @Override
+
     public void refresh() {
         tableModel.setRowCount(0);
         BankSystem bank = BankSystem.getInstance();
