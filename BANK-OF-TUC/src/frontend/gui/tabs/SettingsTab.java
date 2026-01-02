@@ -42,22 +42,49 @@ public class SettingsTab extends JPanel implements Refreshable {
                     if (resultNew == JOptionPane.OK_OPTION) {
                         String newPassPlain = new String(newPf.getPassword());
 
-                        if (!newPassPlain.trim().isEmpty()) {
-                            try {
-                                String hashedNewPassword = PasswordHasher.hash(newPassPlain);
-                                Command changePass = new ChangePasswordCommand(currentUser, hashedNewPassword);
-                                changePass.execute();
+                        // Empty check
+                        if (newPassPlain == null || newPassPlain.trim().isEmpty()) {
+                            JOptionPane.showMessageDialog(this, "Password cannot be empty.", "Error", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
 
-                                JOptionPane.showMessageDialog(this, "Password changed successfully!");
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(
-                                        this, "Error while hashing.", "Error", JOptionPane.ERROR_MESSAGE
-                                );
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Password cannot be empty.");
+                        // Code smell: double hashing of passwords should be avoided in real applications.
+                        if (oldPassPlain.equals(newPassPlain)) {
+                            JOptionPane.showMessageDialog(this,
+                                    "Ο νέος κωδικός δεν μπορεί να είναι ίδιος με τον παλιό.",
+                                    "Σφάλμα",
+                                    JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        // Απλοί έλεγχοι για νέο κωδικό (μήκος, χαρακτήρες κλπ) μπορούν να προστεθούν εδώ
+                        if (newPassPlain.length() < 6) {
+                            JOptionPane.showMessageDialog(this,
+                                    "Ο νέος κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες.",
+                                    "Σφάλμα",
+                                    JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        if (!newPassPlain.matches(".*[A-Z].*") || !newPassPlain.matches(".*[a-z].*") || !newPassPlain.matches(".*\\d.*")) {
+                            JOptionPane.showMessageDialog(this,
+                                    "Ο νέος κωδικός πρέπει να περιέχει τουλάχιστον ένα κεφαλαίο γράμμα, ένα πεζό γράμμα και έναν αριθμό.",
+                                    "Σφάλμα",
+                                    JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        try {
+                            String hashedNewPassword = PasswordHasher.hash(newPassPlain);
+                            Command changePass = new ChangePasswordCommand(currentUser, hashedNewPassword);
+                            changePass.execute();
+
+                            JOptionPane.showMessageDialog(this, "Password changed successfully!");
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(this, "Error while hashing.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
+
                 } else {
                     JOptionPane.showMessageDialog(
                             this, "Wrong Password!", "Error", JOptionPane.ERROR_MESSAGE
