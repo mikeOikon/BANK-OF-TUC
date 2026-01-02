@@ -107,14 +107,13 @@ public class AllAccountsTab extends JPanel implements Refreshable {
             if (targetUser == null) targetUser = bank.getBusinessCustomers().get(userID);
 
             if (targetUser != null) {
-                boolean success = false;
-               
-                // Ασφαλές Casting ανάλογα με τον τύπο του currentUser
-                try {
-                    CloseAccountCommand cmd =
-                        new CloseAccountCommand(currentUser, targetUser, iban);
 
+                try {
+                    CloseAccountCommand cmd = new CloseAccountCommand(currentUser, targetUser, iban);
                     cmd.execute();
+
+                    // Persist
+                    bank.saveAllData(); // ή bank.dao.save(bank) αν επιμένεις, αλλά έχεις ήδη saveAllData()
 
                     JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
                     refreshEntireSystem();
@@ -123,11 +122,19 @@ public class AllAccountsTab extends JPanel implements Refreshable {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Permission denied", JOptionPane.ERROR_MESSAGE);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Αδυναμία διαγραφής.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,
+                            "Αδυναμία διαγραφής: " + ex.getMessage(),
+                            "Σφάλμα",
+                            JOptionPane.ERROR_MESSAGE);
                 }
 
+            } else {
+                JOptionPane.showMessageDialog(this, "Δεν βρέθηκε ο χρήστης.", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            }
 
-                if (success) {
+
+
+            if (success) {
                     bank.dao.save(bank); // Αποθήκευση αλλαγών
                     JOptionPane.showMessageDialog(this, "Ο λογαριασμός έκλεισε.");
                     refreshEntireSystem();
