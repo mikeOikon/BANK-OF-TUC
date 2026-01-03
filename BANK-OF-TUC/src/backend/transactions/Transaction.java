@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import backend.BankSystem;
 import types.TransactionType;
 
-public abstract class Transaction {
+public class Transaction {
 
     protected final TransactionType type;
     protected final double amount;
@@ -16,7 +16,7 @@ public abstract class Transaction {
     protected final String fromAccountIban;
     protected final String toAccountIban;
 
-    protected String description; // 👈 ΝΕΟ (πολύ σημαντικό)
+    protected String description; 
 
     protected Transaction(
             TransactionType type,
@@ -89,11 +89,12 @@ public abstract class Transaction {
                     " from " + fromAccountIban;
 
             case BILL_PAYMENT ->
-                    "BILL PAYMENT " + amount +
+                    "BILL_PAYMENT " + amount +
+                    " from " + fromAccountIban +
                     " to " + toAccountIban;
 
             case AUTO_BILL_PAYMENT ->
-                    "AUTO BILL PAYMENT " + amount +
+                    "AUTO_BILL_PAYMENT " + amount +
                     " to " + toAccountIban;
 
             case INTEREST ->

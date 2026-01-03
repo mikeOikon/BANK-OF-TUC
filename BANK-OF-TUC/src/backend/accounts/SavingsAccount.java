@@ -33,50 +33,6 @@ public class SavingsAccount extends PersonalAccount {
         );
     }
     
-    @Override
-    public boolean withdraw(double amount) {
-        double total = amount + managementFee;
-
-        if (balance < total)
-            throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
-
-        super.withdraw(amount);
-        
-        return true;
-    }
-    
-    @Override
-    public boolean transferTo(Account target, double amount) {
-    	
-    	if (balance < amount)
-            throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
-
-        double dailyTotal = getTodayTransferTotal();
-
-        if (dailyTotal + amount > 500)
-            throw new IllegalArgumentException(
-                    "Daily transfer limit exceeded. Remaining limit today: " + (1000 - dailyTotal)
-            );
-
-        super.transferTo(target, amount);
-        
-        return true;
-    }
-    
-    @Override
-    public void deposit(double amount) {
-
-        double dailyTotal = getTodayDepositTotal();
-
-        if (dailyTotal + amount > 1000)
-            throw new IllegalArgumentException(
-                    "Daily deposit limit exceeded. Remaining deposit limit today: " + (2000 - dailyTotal)
-            );
-
-        super.deposit(amount);
-    }
-
-    
     
     private double getTodayTransferTotal() {
         LocalDate today = backend.BankSystem.getInstance().getSimulatedToday();

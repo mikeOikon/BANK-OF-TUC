@@ -84,4 +84,10 @@ public class CustomerBehavior implements UserBehavior {
 		return true;
 	}
 
+	@Override
+	public boolean canOpenBusinessAccount() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

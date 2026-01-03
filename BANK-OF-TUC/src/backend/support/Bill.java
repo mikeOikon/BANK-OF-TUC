@@ -33,7 +33,7 @@ public class Bill {
         this.businessIBAN = businessIBAN;
         this.businessName = businessName;
         this.amount = amount;
-        this.description = description;
+        this.description = "bill payment";
 
         this.paid = false;
         this.autoPay = false;

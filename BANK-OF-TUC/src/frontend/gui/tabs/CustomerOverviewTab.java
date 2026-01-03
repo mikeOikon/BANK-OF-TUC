@@ -10,6 +10,7 @@ import services.account_services.FreezeAccountCommand;
 import backend.users.Customer;
 import backend.users.BusinessCustomer;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Comparator;
@@ -203,23 +204,74 @@ public class CustomerOverviewTab extends JPanel implements Refreshable {
     }
 
     private void showCreateAccountDialog() {
-        String[] options = {"Transactional Account", "Savings Account", "Fixed-Term Account"};
-        int choice = JOptionPane.showOptionDialog(this, "Select account type to open:", "New Account",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+        // ✅ ΑΝ ΜΠΟΡΕΙ ΝΑ ΑΝΟΙΞΕΙ BUSINESS ACCOUNT
+        if (customer instanceof BusinessCustomer) {
+
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "You are eligible to open a Business Account.\nDo you want to proceed?",
+                    "Business Account",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirm != JOptionPane.YES_OPTION) return;
+
+            Account newAccount = customer.createAccount(1);
+
+            if (this.account == null) {
+                this.account = newAccount;
+            }
+
+            BankSystem bank = BankSystem.getInstance();
+            bank.dao.save(bank);
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Business Account created!\nIBAN: " + newAccount.getIBAN()
+            );
+
+            refreshEntireSystem();
+            return;
+        }
+
+        // ❌ ΑΛΛΙΩΣ → ΚΛΑΣΙΚΕΣ ΕΠΙΛΟΓΕΣ
+        String[] options = {
+                "Transactional Account",
+                "Savings Account",
+                "Fixed-Term Account"
+        };
+
+        int choice = JOptionPane.showOptionDialog(
+                this,
+                "Select account type to open:",
+                "New Account",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
 
         if (choice == -1) return;
 
-        // Κλήση της μεθόδου δημιουργίας (υποθέτοντας ότι η κλάση User έχει αυτή τη μέθοδο)
         Account newAccount = customer.createAccount(choice + 1);
-        
+
         if (this.account == null) {
             this.account = newAccount;
         }
-        BankSystem bank =BankSystem.getInstance();      
-        bank.dao.save(bank); 
-        JOptionPane.showMessageDialog(this, "Account created!\nIBAN: " + newAccount.getIBAN());
-        refreshEntireSystem(); 
+
+        BankSystem bank = BankSystem.getInstance();
+        bank.dao.save(bank);
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Account created!\nIBAN: " + newAccount.getIBAN()
+        );
+
+        refreshEntireSystem();
     }
+
     
     private void refreshEntireSystem() {
         refresh();

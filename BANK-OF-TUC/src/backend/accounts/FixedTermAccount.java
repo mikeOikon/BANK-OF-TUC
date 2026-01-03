@@ -68,40 +68,6 @@ public class FixedTermAccount extends PersonalAccount {
     }
     
     @Override
-    public boolean withdraw(double amount) {
-        // Έλεγχος αν ο λογαριασμός είναι παγωμένος (από την κλάση Account)
-        if (isFrozen()) {
-            throw new IllegalStateException("Account is frozen.");
-        }
-        
-        if (!isMatured()) {
-            throw new IllegalStateException("Cannot withdraw from Fixed Term Account before maturity date: " + maturityDate);
-        }
-        
-        if (balance < amount)
-            throw new IllegalArgumentException("Insufficient funds.");
-
-        super.withdraw(amount);
-        transactions.push(new WithdrawTransaction(this, amount));
-        
-        return true;
-    }
-    
-    @Override
-    public void deposit(double amount) {
-        throw new IllegalStateException("Cannot deposit on a fixed-term account.");
-    }
-    
-    @Override
-    public boolean transferTo(Account target, double amount) {
-        // Συνήθως οι προθεσμιακοί επιτρέπουν μεταφορά μόνο αν έχουν λήξει
-        if (!isMatured()) {
-            throw new IllegalStateException("You cannot transfer from a Fixed Term Account before maturity.");
-        }
-        return super.transferTo(target, amount);
-    }
-    
-    @Override
     public boolean supportsInterest() {
 		return true;
 	}

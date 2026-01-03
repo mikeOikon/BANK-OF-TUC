@@ -6,9 +6,8 @@ import backend.accounts.Account;
 import backend.users.User;
 import backend.users.Customer;
 import services.Command;
-import services.account_services.DepositCommand;
-import services.account_services.WithdrawCommand;
-import services.account_services.TransferCommand;
+import services.account_services.TransactionCommand;
+import types.TransactionType;
 
 import java.awt.*;
 
@@ -99,10 +98,10 @@ public class TransferTab extends JPanel implements Refreshable{
 
             try {
                 if (type.equals("Withdrawal")) {
-                    command = new WithdrawCommand(selectedAcc, amount);
+                	command = new TransactionCommand(TransactionType.WITHDRAW, selectedAcc, null, amount);
                     message = "Withdrawal successful!";
                 } else if (type.equals("Deposit")) {
-                    command = new DepositCommand(selectedAcc, amount);
+                	command = new TransactionCommand(TransactionType.DEPOSIT, null, selectedAcc, amount);
                     message = "Deposit successful!";
                 } else if (type.equals("Transfer to IBAN")) {
                     String targetIban = targetIbanField.getText().trim();
@@ -115,7 +114,7 @@ public class TransferTab extends JPanel implements Refreshable{
                         throw new IllegalArgumentException("Cannot transfer to the same account.");
                     }
 
-                    command = new TransferCommand(selectedAcc, targetAcc, amount);
+                    command = new TransactionCommand(TransactionType.TRANSFER,selectedAcc, targetAcc, amount);
                     message = "Transfer of " + amount + "€ successful!";
                 }
 

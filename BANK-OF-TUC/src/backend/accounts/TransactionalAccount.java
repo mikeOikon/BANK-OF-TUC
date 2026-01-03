@@ -30,36 +30,6 @@ public class TransactionalAccount extends PersonalAccount {
         );
     }
     
-    @Override
-    public boolean withdraw(double amount) {
-
-        if (balance < amount)
-            throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
-
-
-        super.withdraw(amount);
-        
-        return true;
-    }
-    
-    @Override
-    public boolean transferTo(Account target, double amount) {
-
-    	if (balance < amount)
-            throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
-
-        super.transferTo(target, amount);
-        
-        return true;
-    }
-    
-    
-    @Override
-    public void deposit(double amount) {
-
-        super.deposit(amount);
-    }
-
 }
 
 	

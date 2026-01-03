@@ -15,5 +15,6 @@ public interface UserBehavior {
 	 boolean canAdvanceTime();
 	boolean canPayBills();
 	boolean canIssueBills();
+	boolean canOpenBusinessAccount();
 
 }

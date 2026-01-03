@@ -707,3 +707,529 @@ See https://github.com/google/gson/blob/main/Troubleshooting.md#r8-abstract-clas
 [2026-01-02T12:09:41.227252200] [INFO] [DAO] Data loaded successfully.
 [2026-01-02T12:10:32.308697800] [INFO] [DAO] Data saved successfully.
 [2026-01-02T12:10:35.135994100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T15:58:51.874272800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T15:59:00.181847800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:00:26.676327900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:00:36.900548500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:06:15.453549300] [WARNING] [DAO] Data file was empty/unreadable. Creating a new empty BankSystem.
+[2026-01-02T16:08:28.649030700] [WARNING] [DAO] Data file was empty/unreadable. Creating a new empty BankSystem.
+[2026-01-02T16:09:00.571462500] [WARNING] [DAO] Data file was empty/unreadable. Creating a new empty BankSystem.
+[2026-01-02T16:09:06.522210200] [WARNING] [DAO] Data file was empty/unreadable. Creating a new empty BankSystem.
+[2026-01-02T16:09:28.049216200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:09:34.305181500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:12:34.281011400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:12:34.281011400] [INFO] System shutting down, data persisted.
+[2026-01-02T16:12:40.496592200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:12:46.985039500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:16:24.929431700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:16:26.520652900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:16:26.521648800] [INFO] System shutting down, data persisted.
+[2026-01-02T16:16:31.489941300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:23:39.826211700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:23:39.827215500] [INFO] System shutting down, data persisted.
+[2026-01-02T16:23:45.575429400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:23:51.373399200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:27:46.544099800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:27:46.545081300] [INFO] System shutting down, data persisted.
+[2026-01-02T16:27:52.777675600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:27:59.617397] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:29:06.427302300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:29:06.428293300] [INFO] System shutting down, data persisted.
+[2026-01-02T16:29:07.987242200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:29:12.098469700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:29:16.280410700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:29:39.603181700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:29:39.604042500] [INFO] System shutting down, data persisted.
+[2026-01-02T16:30:28.960900900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:30:35.908014700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:30:43.020266800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:30:43.028112500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:31:02.347820200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:31:02.354326100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:33:56.284155300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:33:56.287200100] [INFO] System shutting down, data persisted.
+[2026-01-02T16:34:00.048834400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:34:07.838475100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:34:16.282148300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:34:16.288130] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:34:28.655277100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:34:28.666265400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:35:59.727157500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:35:59.732476200] [INFO] System shutting down, data persisted.
+[2026-01-02T16:36:03.508612100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:36:10.856180100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:36:58.502023100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T16:36:58.504323] [INFO] System shutting down, data persisted.
+[2026-01-02T16:37:01.041057600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T16:37:10.016049900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:06:09.288099100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:06:11.146613500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:06:11.147613900] [INFO] System shutting down, data persisted.
+[2026-01-02T17:06:19.384544500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:06:31.849460] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:06:31.868012800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:06:42.080160500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:06:42.089003300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:06:54.708006100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:07:34.369608200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:07:34.372831] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:07:54.034978400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:07:54.039974800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:08:06.752417500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:08:06.753070300] [INFO] System shutting down, data persisted.
+[2026-01-02T17:08:10.573930300] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:08:24.235027200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:08:57.600201200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:08:57.601008900] [INFO] System shutting down, data persisted.
+[2026-01-02T17:09:01.552830900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:09:35.981139800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:09:36.389995300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:09:59.962846700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:09:59.963447900] [INFO] System shutting down, data persisted.
+[2026-01-02T17:16:03.739537900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:16:31.803113400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:22:54.210013] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:22:56.353467900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:22:56.354467700] [INFO] System shutting down, data persisted.
+[2026-01-02T17:23:03.498939500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:23:15.851781400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:23:28.501319100] [INFO] New Monthly Subscription added: 3c1a1f1e-4b4a-4377-8426-08fab1598503
+[2026-01-02T17:23:33.054481400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:23:33.054567800] [INFO] System shutting down, data persisted.
+[2026-01-02T17:23:37.265734800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:23:47.133044700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:48:46.922846100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:48:47.925294500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:48:47.925294500] [INFO] System shutting down, data persisted.
+[2026-01-02T17:48:53.932965200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:51:12.236821400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:51:12.237823900] [INFO] System shutting down, data persisted.
+[2026-01-02T17:51:16.411516700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:51:23.932828100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:51:29.071899200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:54:03.544057700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:54:11.621113900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:54:23.615631600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:54:23.616628900] [INFO] System shutting down, data persisted.
+[2026-01-02T17:54:44.614053500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:54:44.615053800] [INFO] System shutting down, data persisted.
+[2026-01-02T17:54:47.329837200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:54:57.860506700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:55:00.290901700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:55:00.314900300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:55:00.321903100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:55:00.327899100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:55:21.639842200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:55:21.640834100] [INFO] System shutting down, data persisted.
+[2026-01-02T17:58:39.158211200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:58:46.361688100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:59:05.335798500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:59:05.336799] [INFO] System shutting down, data persisted.
+[2026-01-02T17:59:09.554352] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:59:19.786021600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:59:32.798103600] [INFO] New Monthly Subscription added: 52000c00-6557-4ccc-9771-01fd78778601
+[2026-01-02T17:59:34.698622800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T17:59:34.699585700] [INFO] System shutting down, data persisted.
+[2026-01-02T17:59:37.657664] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T17:59:56.194481200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:00:05.675520800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:00:05.695523900] [ERROR] [DAO] Failed to write transactions: Cannot invoke "com.google.gson.TypeAdapter.toJsonTree(Object)" because "delegate" is null
+[2026-01-02T18:02:12.833944300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:02:20.189618300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:02:27.421044300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:02:30.839062700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:02:30.840063100] [INFO] System shutting down, data persisted.
+[2026-01-02T18:02:33.978263600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:02:58.140476900] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:02:58.152483400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:03:03.746362500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:03:16.698887500] [INFO] New Monthly Subscription added: 1494f1ee-eab6-4534-90fd-203dbb725573
+[2026-01-02T18:03:19.489172700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:03:19.489172700] [INFO] System shutting down, data persisted.
+[2026-01-02T18:03:22.577996200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:03:44.828075700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:03:44.841076400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:03:54.460528200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:03:58.022985700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:04:01.035447300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:04:28.593289] [ERROR] [DAO] Failed to read transactions: java.io.EOFException: End of input at line 83 column 4 path $[10]
+[2026-01-02T18:04:28.613292800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:04:28.627294200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:04:57.699900100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:04:57.700884600] [INFO] System shutting down, data persisted.
+[2026-01-02T18:05:07.608404] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:05:14.070767800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:05:20.040399500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:05:20.056403400] [ERROR] [DAO] Failed to write transactions: Cannot invoke "com.google.gson.TypeAdapter.toJsonTree(Object)" because "delegate" is null
+[2026-01-02T18:11:02.046035200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:11:17.899056900] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:11:24.101235400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:11:54.147130600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-02T18:11:54.166133300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:12:00.825593300] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:12:12.381638200] [INFO] New Monthly Subscription added: 663d993d-89a6-4ce4-9c4d-eedbc668eb2e
+[2026-01-02T18:12:19.917178200] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:12:19.917178200] [INFO] System shutting down, data persisted.
+[2026-01-02T18:12:25.418210200] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:12:47.141093600] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:12:47.159174900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:12:59.222283600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:13:04.691883500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:13:25.038524400] [ERROR] [DAO] Failed to read transactions: java.io.EOFException: End of input at line 9 column 4 path $[1]
+[2026-01-02T18:13:25.044520] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:13:25.051521900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:13:29.444888500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:13:29.464464500] [ERROR] [DAO] Failed to write transactions: Cannot invoke "com.google.gson.TypeAdapter.toJsonTree(Object)" because "delegate" is null
+[2026-01-02T18:15:23.533452600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:15:27.982548600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:15:33.043673600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:15:41.472404] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:16:04.400035500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:16:04.411034] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:16:10.313419100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:16:20.896950100] [INFO] New Monthly Subscription added: 2c5195a7-7de6-4d40-aa90-a9e2f73fbdd1
+[2026-01-02T18:16:25.775601400] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:16:49.054683] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:16:55.167440400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:17:06.377772500] [ERROR] [DAO] Failed to read transactions: java.io.EOFException: End of input at line 9 column 4 path $[1]
+[2026-01-02T18:17:06.382761100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:17:06.386768] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:17:12.994850700] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:17:34.989476] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:17:35.007480100] [ERROR] [DAO] Failed to write transactions: Cannot invoke "com.google.gson.TypeAdapter.toJsonTree(Object)" because "delegate" is null
+[2026-01-02T18:18:26.143514500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:18:30.092804] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:19:19.137800100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:19:19.146805] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:19:25.495181900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:19:40.205184400] [INFO] New Monthly Subscription added: 37067d22-6649-4931-8ba3-a73cf7d16870
+[2026-01-02T18:19:44.277260800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:20:02.091700800] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:20:07.871136600] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:20:15.843240500] [ERROR] [DAO] Failed to read transactions: java.io.EOFException: End of input at line 9 column 4 path $[1]
+[2026-01-02T18:20:15.850239400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:20:15.853237900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:20:20.397700800] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:20:34.808648700] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:20:34.827652200] [ERROR] [DAO] Failed to write transactions: Cannot invoke "com.google.gson.TypeAdapter.toJsonTree(Object)" because "delegate" is null
+[2026-01-02T18:25:03.764536] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:25:07.588678200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:25:28.363857] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-02T18:25:28.378857100] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:25:33.336867500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:25:42.687460600] [INFO] New Monthly Subscription added: 4d7c7883-cbfb-4baa-9fd0-178ee29dd8e1
+[2026-01-02T18:25:47.216822500] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:26:13.881353] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:26:20.850496400] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:26:28.716589300] [ERROR] [DAO] Failed to read transactions: java.io.EOFException: End of input at line 9 column 4 path $[1]
+[2026-01-02T18:26:28.722592900] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:26:28.726590500] [INFO] [DAO] Data saved successfully.
+[2026-01-02T18:26:34.596408100] [INFO] [DAO] Data loaded successfully.
+[2026-01-02T18:27:10.812785200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:46:11.131377600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:46:35.275833100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:46:35.314331400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:46:41.068676600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:46:48.150013400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:46:48.152015300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:46:52.537521] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:46:52.539524400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:07.288647200] [INFO] New Monthly Subscription added: b93aadd5-5561-4843-b230-bf17f18a6e9d
+[2026-01-03T10:47:09.422291500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:09.423269900] [INFO] System shutting down, data persisted.
+[2026-01-03T10:47:11.805554200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T10:47:18.235197] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T10:47:36.947735500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:41.997171300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:51.469526200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:51.472481500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:59.338549] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:47:59.342551300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:48:12.312187] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T10:53:30.536253] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:53:36.366450100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:53:41.804418800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:54:04.948308] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T10:54:04.961358100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:54:12.968972100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:54:29.405035300] [INFO] New Monthly Subscription added: 1ac39d57-dd3b-4079-9b21-8e9128df7405
+[2026-01-03T10:54:33.270938800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T10:54:58.389887300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:55:04.706885200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:55:14.905015300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:55:14.909018] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:55:23.304728] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:55:23.308730200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T10:55:33.585849500] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:00:43.987833] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:00:49.566297400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:01:12.841392300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:01:12.855409500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:01:20.622715900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:01:29.178707600] [INFO] New Monthly Subscription added: 708d3a5f-0026-40ef-8ade-8822e6b8b94a
+[2026-01-03T11:01:32.963711200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:01:55.355789500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:02:00.935726300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:02:16.316324300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:02:16.319318700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:02:22.364259900] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:05:25.567796700] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:05:28.346804300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:05:32.794017] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:05:53.091294] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:05:53.105296900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:06:08.536014500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:06:22.193959400] [INFO] New Monthly Subscription added: b18b2829-bec8-415a-85b3-9f92ac917518
+[2026-01-03T11:06:26.038183100] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:06:45.411003] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:06:51.202497800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:07:02.201396300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:07:02.204402200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:07:05.208358200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:08:51.403427200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:09:16.239959] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:12:11.621391600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:12:32.020553200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:12:32.043551100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:12:38.344443800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:12:45.807610400] [INFO] New Monthly Subscription added: 11450092-6cb6-4064-a39b-52ae7a5ad1cd
+[2026-01-03T11:12:50.095809300] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:13:08.019763500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:13:13.758729100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:13:22.220436500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:13:22.223434300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:13:28.493473] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:19:44.106837500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:23:23.130035600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:51:16.954663800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:51:26.453781500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T11:54:01.464963400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:54:09.549657100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:54:17.028249500] [INFO] New Monthly Subscription added: c2f21730-da36-4068-acd4-c98744329252
+[2026-01-03T11:54:23.683027700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T11:54:40.683489800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:54:46.772976900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:57:35.880509200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:57:35.884512] [INFO] [DAO] Data saved successfully.
+[2026-01-03T11:57:41.676289700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T12:02:47.890981400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T12:02:51.439355300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T12:02:55.889456200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T12:03:18.750503200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T12:03:18.766501100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:04:30.900960900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:04:34.587396400] [INFO] New Monthly Subscription added: 0e809ab2-3ae1-40cb-b13c-77b0ee52ba42
+[2026-01-03T12:04:40.099396100] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T12:05:05.579591] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:05:18.912318] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:05:26.491428300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:05:26.494426700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:05:36.965967400] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T12:31:10.556135200] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T12:31:13.580383800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T12:31:17.856561900] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T12:34:58.682317700] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T12:34:58.696319200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:35:04.333929600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:35:12.522082800] [INFO] New Monthly Subscription added: 627a2150-e6e9-4ee4-b53f-9cb5e7cc40ac
+[2026-01-03T12:35:15.766359400] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T12:35:37.012902300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:35:42.061592600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:35:52.416349100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:35:52.421348500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T12:35:58.054871600] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:09:01.937754100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T13:11:55.969272800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T13:12:16.002214100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 49 column 20 path $.customers..accounts[0]
+[2026-01-03T13:12:16.013189900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:12:20.583434] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:12:28.997395500] [INFO] New Monthly Subscription added: 427176df-b1f2-4809-bdad-a03ce74c838f
+[2026-01-03T13:12:33.150495800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:12:49.080073800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:12:53.516292300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:13:00.666774800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:13:00.669774600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:13:33.305364300] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:30:02.870606400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:34:24.155709500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:34:45.784848100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:34:45.798020600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:34:52.781593600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:35:01.825169100] [INFO] New Monthly Subscription added: 8d55c60f-d5c3-4ee0-b503-f8ff9c9df6df
+[2026-01-03T13:35:05.779810700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:35:52.420549200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:35:57.819395400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:36:09.519933400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:36:16.612207600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:36:16.615205700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:36:20.603623] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:36:20.604627500] [INFO] System shutting down, data persisted.
+[2026-01-03T13:36:23.570755900] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:36:41.953231200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:36:52.655693100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:39:19.184791] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:39:20.084788800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:39:20.085797700] [INFO] System shutting down, data persisted.
+[2026-01-03T13:39:32.278364100] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:39:35.657973900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:39:35.683968900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:39:35.689970700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:39:35.698970300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:40:02.525193200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:40:25.047801800] [INFO] New Monthly Subscription added: 114351d3-6986-4053-aaa7-735195ead4e9
+[2026-01-03T13:40:29.770797700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:41:19.730765200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:41:19.730765200] [INFO] System shutting down, data persisted.
+[2026-01-03T13:41:44.228088800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:41:52.051493] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:54:21.820873600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:54:27.817596700] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:54:32.531660100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:54:53.594029] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T13:54:53.610031600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:55:06.967332600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:55:09.844646100] [INFO] New Monthly Subscription added: 7e8e900e-3458-49e4-8b18-9910797904f5
+[2026-01-03T13:55:13.023837200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:55:57.039691600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:56:03.676333200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:56:12.756810] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:56:12.761806] [INFO] [DAO] Data saved successfully.
+[2026-01-03T13:56:16.184062200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T13:56:35.055204900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:00:33.820983900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:00:39.984817900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:00:39.985821800] [INFO] System shutting down, data persisted.
+[2026-01-03T14:02:51.792487300] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:03:13.932763200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:03:37.167457800] [INFO] New Monthly Subscription added: 9a5ff884-27d8-4586-a25d-98169948ca1c
+[2026-01-03T14:03:40.237382500] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:04:08.603464300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:04:08.604462200] [INFO] System shutting down, data persisted.
+[2026-01-03T14:04:15.781460500] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:04:25.640006300] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:12:06.996036600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:12:11.937977500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:12:32.801685100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:12:32.817681200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:14:20.834326800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:14:35.560378] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:14:35.563373800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:14:44.146392800] [INFO] New Monthly Subscription added: 2d882689-7c60-4593-9134-75846cf5c8af
+[2026-01-03T14:14:47.114883] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:15:06.164212400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:15:12.470922700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:15:19.855301200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:15:19.858302100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:15:25.538297700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:25:53.826633500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:25:53.830635100] [INFO] System shutting down, data persisted.
+[2026-01-03T14:25:57.341707100] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:26:04.061695] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:26:20.853053] [INFO] New Monthly Subscription added: 0f755dce-4c35-4b19-85de-a80fdae1bd04
+[2026-01-03T14:26:25.398392300] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:26:41.071565900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:26:41.071565900] [INFO] System shutting down, data persisted.
+[2026-01-03T14:26:43.637536600] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:26:49.564406900] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:32:58.154715600] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:33:04.969310500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:33:26.306834100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:33:26.328833500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:33:31.735102100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:33:41.122168700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:33:51.642553500] [INFO] New Monthly Subscription added: 0b28488b-3656-46ec-b973-4d0b5e4fe2fd
+[2026-01-03T14:33:55.581312400] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:34:34.001595900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:34:34.001595900] [INFO] System shutting down, data persisted.
+[2026-01-03T14:34:36.783122700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:34:56.036515800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:34:56.054510600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:35:02.157710900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:35:10.861162900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:35:10.866161500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:35:20.575629200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:35:53.283221500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:35:53.284222800] [INFO] System shutting down, data persisted.
+[2026-01-03T14:37:20.916916800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:37:29.924980800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:40:48.732366700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:40:48.737366400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:43:03.648280200] [INFO] New Monthly Subscription added: 71099b04-2855-4c0c-a270-b0ce86382c61
+[2026-01-03T14:43:07.499977600] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:43:23.899959600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:43:23.899959600] [INFO] System shutting down, data persisted.
+[2026-01-03T14:43:27.106800900] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:43:39.880218800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:45:06.830069400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:45:12.041802100] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:45:37.630352500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:45:37.648350800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:45:44.237562500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:45:52.091386700] [INFO] New Monthly Subscription added: fb5c95a4-3ca6-451e-a438-0a1c565b40d5
+[2026-01-03T14:45:55.646530900] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:46:20.845494700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:46:25.579436300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:46:33.675406600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:46:33.679406800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:46:39.103468400] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:48:20.395433800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:48:28.181276900] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:48:52.083780700] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T14:48:52.103779700] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:48:57.927351400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:49:05.767799800] [INFO] New Monthly Subscription added: bd37dbe4-2675-4f21-913e-1120876a1e52
+[2026-01-03T14:49:09.481373600] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:49:30.962234100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:49:35.097319300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:49:42.698932900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:49:42.703941] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:49:46.798081100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T14:49:46.799061600] [INFO] System shutting down, data persisted.
+[2026-01-03T14:49:49.073154700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T14:49:55.020663200] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:03:03.718786400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:04:59.189273500] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:05:29.949207300] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:05:29.963747] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:05:38.124045] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:05:48.320290300] [INFO] New Monthly Subscription added: 1d473498-8461-4336-a3a6-371f94192e8f
+[2026-01-03T15:05:51.713370700] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:06:14.058803900] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:06:19.371134100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:07:00.485509200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:07:00.488506200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:07:03.115812300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:07:03.116807800] [INFO] System shutting down, data persisted.
+[2026-01-03T15:07:05.565202600] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:07:15.398088500] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:07:28.646830500] [ERROR] [DAO] Failed to write transactions: Cannot invoke "com.google.gson.TypeAdapter.toJsonTree(Object)" because "delegate" is null
+[2026-01-03T15:11:39.164843800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:11:42.686785400] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:11:59.407010800] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:12:25.592205] [ERROR] [DAO] Failed to load data: java.io.EOFException: End of input at line 4 column 20 path $.businessCustomers..accounts[0]
+[2026-01-03T15:12:25.613206500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:12:38.819651] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:12:44.846392700] [INFO] New Monthly Subscription added: c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975
+[2026-01-03T15:12:48.232009300] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:13:07.575654200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:13:14.368853100] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:13:25.840898700] [ERROR] [DAO] Failed to read transactions: java.io.EOFException: End of input at line 186 column 4 path $[23]
+[2026-01-03T15:13:25.848897300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:13:25.853899500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:13:34.226865800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:13:34.226865800] [INFO] System shutting down, data persisted.
+[2026-01-03T15:13:36.807511800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:14:21.725192800] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:14:31.775839300] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:14:42.579710800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:14:42.580712400] [INFO] System shutting down, data persisted.
+[2026-01-03T15:14:45.672071] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:14:53.473257900] [INFO] [DAO] Data loaded successfully.
+[2026-01-03T15:14:56.527575400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:14:56.532577500] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:14:56.537580600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:14:56.541578200] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:15:32.007331400] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:15:32.013332800] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:15:32.025333600] [INFO] [DAO] Data saved successfully.
+[2026-01-03T15:15:32.032346800] [INFO] [DAO] Data saved successfully.

@@ -1,0 +1,19 @@
+[
+  {
+    "type": "DEPOSIT",
+    "amount": 10000.0,
+    "timestampString": "2026-01-03T15:13:25.810989",
+    "toAccountIban": "GR5402100212409731326051261",
+    "description": "Deposit",
+    "txType": "deposit"
+  },
+  {
+    "type": "BILL_PAYMENT",
+    "amount": 21.0,
+    "timestampString": "2026-01-03T15:14:31.724839900",
+    "fromAccountIban": "GR5402100212409731326051261",
+    "toAccountIban": "GR6802100216754971931699530",
+    "description": "Bill Payment: RF8B8DF6A27BB2",
+    "txType": "bill_payment"
+  }
+]

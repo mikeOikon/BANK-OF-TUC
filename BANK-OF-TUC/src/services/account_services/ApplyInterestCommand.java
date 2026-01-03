@@ -3,6 +3,7 @@ package services.account_services;
 import backend.BankSystem;
 import backend.accounts.Account;
 import services.Command;
+import types.TransactionType;
 
 public class ApplyInterestCommand implements Command {
 
@@ -19,7 +20,7 @@ public class ApplyInterestCommand implements Command {
     @Override
     public void execute() {
         double interest = account.getBalance() * account.getInterest();
-        account.deposit(interest);
+        bankSystem.transaction(TransactionType.DEPOSIT, account, null, interest);
         bankSystem.saveAllData();
     }
 

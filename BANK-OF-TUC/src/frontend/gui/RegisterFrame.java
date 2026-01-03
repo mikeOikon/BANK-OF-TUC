@@ -162,7 +162,8 @@ public class RegisterFrame extends JFrame {
             
             if(rawAfm == null || !rawAfm.matches("^[0-9]{9}$")) {
             	JOptionPane.showMessageDialog(this, "Το Α.Φ.Μ. πρέπει να είναι 9 νούμερα.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
-     	   }
+            	return;
+            }
             
             if (!rawPassword.equals(rawConfirm)) {
                 JOptionPane.showMessageDialog(this, "Οι κωδικοί δεν ταιριάζουν", "Σφάλμα", JOptionPane.WARNING_MESSAGE);

@@ -59,23 +59,6 @@ public class TransactionService implements TransactionAPI {
     //        PUBLIC API (GUI / CLI)
     // ======================================
 
-    public Transaction deposit(Account target, double amount) {
-        DepositCommand cmd = new DepositCommand(target, amount);
-        cmd.execute();
-        return cmd.getTransaction();
-    }
-
-    public Transaction withdraw(Account source, double amount) {
-        WithdrawCommand cmd = new WithdrawCommand(source, amount);
-        cmd.execute();
-        return cmd.getTransaction();
-    }
-    public Transaction transfer(Account from, Account to, double amount) {
-        TransferCommand cmd = new TransferCommand(from, to, amount);
-        cmd.execute();
-        return cmd.getTransaction();
-    }
-
     // ======================================
     //           BASE COMMAND CLASS
     // ======================================
@@ -109,108 +92,6 @@ public class TransactionService implements TransactionAPI {
     }
 
 
-    // ======================================
-    //             COMMANDS
-    // ======================================
-    private class DepositCommand extends BaseTransactionCommand {
-
-        private final Account target;
-
-        public DepositCommand(Account target, double amount) {
-            super(amount);
-            this.target = target;
-        }
-
-        @Override
-        public void execute() {
-            // Strategy validation
-            applyValidation(TransactionType.DEPOSIT, null, target, amount);
-
-            // Execute deposit
-            target.setBalance(target.getBalance() + amount);
-
-            // Create transaction through factory
-            transaction = TransactionFactory.createTransaction(
-                    TransactionType.DEPOSIT,
-                    target,
-                    amount
-            );
-
-            // Push transaction to account history
-            target.getTransactions().push(transaction);
-
-            // Save using DAO
-            persist(transaction);
-        }
-
-        @Override
-        public void undo() {
-
-        }
-    }
-
-    private class WithdrawCommand extends BaseTransactionCommand {
-
-        private final Account source;
-
-        public WithdrawCommand(Account source, double amount) {
-            super(amount);
-            this.source = source;
-        }
-
-        @Override
-        public void execute() {
-            applyValidation(TransactionType.WITHDRAW, source, null, amount);
-
-            source.setBalance(source.getBalance() - amount);
-
-            transaction = TransactionFactory.createTransaction(
-                    TransactionType.WITHDRAW,
-                    source,
-                    amount
-            );
-
-            source.getTransactions().push(transaction);
-            persist(transaction);
-        }
-
-        @Override
-        public void undo() {
-
-        }
-    }
-
-    private class TransferCommand extends BaseTransactionCommand {
-
-        private final Account from;
-        private final Account to;
-
-        public TransferCommand(Account from, Account to, double amount) {
-            super(amount);
-            this.from = from;
-            this.to = to;
-        }
-
-        @Override
-        public void execute() {
-            applyValidation(TransactionType.TRANSFER, from, to, amount);
-
-            from.setBalance(from.getBalance() - amount);
-            to.setBalance(to.getBalance() + amount);
-
-            transaction = TransactionFactory.createTransaction(from, to, amount);
-
-            from.getTransactions().push(transaction);
-            to.getTransactions().push(transaction);
-
-            persist(transaction);
-        }
-
-        @Override
-        public void undo() {
-
-        }
-    }
     public synchronized void record(Transaction tx) {
         if (tx == null) return;
 
@@ -221,5 +102,23 @@ public class TransactionService implements TransactionAPI {
 
         transactionDAO.save(tx);
     }
+
+	@Override
+	public Transaction deposit(Account target, double amount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Transaction withdraw(Account source, double amount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Transaction transfer(Account from, Account to, double amount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

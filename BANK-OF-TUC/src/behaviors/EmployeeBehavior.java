@@ -84,4 +84,10 @@ public class EmployeeBehavior implements UserBehavior {
 		return false;
 	}
 
+	@Override
+	public boolean canOpenBusinessAccount() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

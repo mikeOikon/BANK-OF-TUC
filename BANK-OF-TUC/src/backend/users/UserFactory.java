@@ -20,7 +20,7 @@ public class UserFactory {
 			case ADMIN:
 				return new Admin(userID, builder.getUsername(), 
 						builder.getPassword(), builder.getName(),
-						 builder.getPhoneNumber(),
+						builder.getSurname(),
 						builder.getBranch(), builder.getAFM());
 			case BUSINESSCUSTOMER:
 				return new BusinessCustomer(userID, builder.getUsername(), builder.getPassword(),

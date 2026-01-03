@@ -9,6 +9,8 @@ import backend.accounts.Account;
 import backend.support.Bill;
 import backend.BankSystem;
 import services.account_services.PayBillCommand;
+import services.account_services.TransactionCommand;
+import types.TransactionType;
 
 public class BillPaymentTab extends JPanel implements Refreshable {
 
@@ -26,6 +28,8 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         this.currentUser = user;
         this.dashboard = dashboard;
 
+        BankSystem bank = BankSystem.getInstance();
+        
         // ❗ Αν δεν έχει κανέναν λογαριασμό
         if (user.getAccounts().isEmpty()) {
             setLayout(new BorderLayout());
@@ -122,7 +126,20 @@ public class BillPaymentTab extends JPanel implements Refreshable {
         }
 
         try {
-            new PayBillCommand(acc, foundBill).execute();
+        	 Account businessAccount =
+                     BankSystem.getInstance().getAccountbyNumber(foundBill.getBusinessIBAN());
+
+             if (businessAccount == null) {
+                 throw new IllegalStateException("Ο λογαριασμός επιχείρησης δεν βρέθηκε.");
+             }
+
+             // ✅ ΣΩΣΤΟ COMMAND
+             PayBillCommand cmd = new PayBillCommand(
+                     acc,
+                     foundBill
+             );
+
+            cmd.execute();
             updateSubscriptionCheckbox();
             JOptionPane.showMessageDialog(this, "Η πληρωμή ολοκληρώθηκε!");
             refresh();

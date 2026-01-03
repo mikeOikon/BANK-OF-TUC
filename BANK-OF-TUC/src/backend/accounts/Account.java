@@ -2,8 +2,10 @@ package backend.accounts;
 
 import java.util.*;
 import backend.Branch;
+import backend.support.Bill;
 import backend.transactions.*;
 import types.AccountType;
+import types.TransactionType;
 
 public abstract class Account {
     private boolean primary;
@@ -11,12 +13,13 @@ public abstract class Account {
     protected String IBAN;    
     protected String userID;
     protected double balance;
-    protected Stack<Transaction> transactions; 
+    public Stack<Transaction> transactions; 
     private static long nextAccountId = 1;
     private long account_id;
     private static Set<String> usedAccounts = new HashSet<>(); 
     protected double interest; 
     private Branch branch;    
+    private List<String> issuedBills = new ArrayList<>();
     
     public Account(String IBAN, String userID, double balance, Stack<Transaction> transactions, double interest, Branch branch) {
         this.IBAN = (IBAN != null && !IBAN.isEmpty()) ? IBAN : generateIBAN(branch); 
@@ -56,7 +59,7 @@ public abstract class Account {
 	}
 
     // --- Core Logic Methods ---
-
+/*
     public void deposit(double amount) {
         if (frozen) throw new IllegalStateException("Account is frozen.");
         if (amount <= 0) throw new IllegalArgumentException("Amount must be positive.");
@@ -78,20 +81,8 @@ public abstract class Account {
         backend.transactions.TransactionService.getInstance().record(tx);
         return true;
     }
-
-    public boolean transferTo(Account target, double amount) {
-        if (frozen) throw new IllegalStateException("Source account is frozen.");
-        if (target == null) throw new IllegalArgumentException("Target account cannot be null.");
-        if (target.isFrozen()) throw new IllegalStateException("Target account is frozen.");
-        if (this.balance < amount) throw new IllegalArgumentException("Insufficient funds.");
-
-        // Η TransferTransaction θα αλλάξει και τα δύο balances
-        Transaction tx = new TransferTransaction(this, target, amount);
-        this.transactions.push(tx);
-        target.getTransactions().push(tx);
-        backend.transactions.TransactionService.getInstance().record(tx);
-        return true;
-    }
+*/
+    
 
     // --- IBAN Generation (Helper Methods) ---
     private static String lettersToDigits(String input) {
@@ -136,5 +127,15 @@ public abstract class Account {
     public String toString() {
         return String.format("%s | IBAN: %s | Balance: %.2f | %s", 
             getClass().getSimpleName(), IBAN, balance, (frozen ? "[FROZEN]" : "ACTIVE"));
+    }
+    
+    public void markBillAsIssued(Bill bill) {
+        if (!issuedBills.contains(bill.getPaymentCode())) {
+            issuedBills.add(bill.getPaymentCode());
+        }
+    }
+    
+    public boolean isBillIssued(Bill bill) {
+        return issuedBills.contains(bill.getPaymentCode());
     }
 }

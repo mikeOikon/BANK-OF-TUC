@@ -5,8 +5,11 @@ import java.util.Stack;
 import backend.BankSystem;
 import backend.Branch;
 import backend.transactions.Transaction;
+import backend.transactions.TransactionBuilder;
+import backend.transactions.TransactionFactory;
 import backend.transactions.WithdrawTransaction;
 import types.AccountType;
+import types.TransactionType;
 
 public class BusinessAccount extends Account {
 
@@ -49,59 +52,5 @@ public class BusinessAccount extends Account {
                 (getBranch() != null ? getBranch().getBranchCode() : "N/A")
         );
     }
-    
-    @Override
-    public boolean withdraw(double amount) {
-        double total = amount + managementFee;
-
-        if (balance < total)
-            throw new IllegalArgumentException("Insufficient funds for withdrawal + fee.");
-        
-        if (isFrozen())
-			throw new IllegalStateException("Account is frozen.");
-        // Μειώνουμε πρώτα balance για το fee
-        balance -= managementFee;
-
-        // Κάνουμε withdrawal μόνο το πραγματικό amount
-        super.withdraw(amount);
-        
-        double curBalance = BankSystem.getInstance().getBankAccount().getBalance();
-        BankSystem.getInstance().getBankAccount().setBalance(curBalance + managementFee); //τα τέλη πηγαίνουν στην τράπεζα
-
-        return true;
-    }
-
-    
-    @Override
-    public boolean transferTo(Account target, double amount) {
-        double total = amount + managementFee;
-        
-        if (balance < total)
-            throw new IllegalArgumentException("Insufficient funds for transaction + fee.");
-        
-        if (target.isFrozen())
-			throw new IllegalStateException("Account is frozen.");
-        
-        balance -= managementFee;
-        
-        super.transferTo(target, amount);
-        
-        double curBalance = BankSystem.getInstance().getBankAccount().getBalance();
-        BankSystem.getInstance().getBankAccount().setBalance(curBalance + managementFee); //τα τέλη πηγαίνουν στην τράπεζα
-        
-        return true;
-    }
-
-    
-    @Override
-    public void deposit(double amount) {
-
-        
-        if (isFrozen())
-			throw new IllegalStateException("Account is frozen.");
-        
-        super.deposit(amount);
-    }
-    
 
 }

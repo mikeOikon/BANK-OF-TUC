@@ -2,6 +2,7 @@ package backend.support;
 
 import backend.BankSystem;
 import backend.accounts.Account;
+import types.TransactionType;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class AutoPayManager {
      * Εκτελεί όλες τις αυτόματες πληρωμές που είναι ενεργοποιημένες
      * (π.χ. μηνιαίοι λογαριασμοί)
      */
+    
     public void processAutoPayments() {
         List<Bill> bills = bankSystem.getAllBills();
 
@@ -52,18 +54,13 @@ public class AutoPayManager {
                 System.out.println("AutoPay insufficient funds: " + bill.getPaymentCode());
                 continue;
             }
+            
+            Account busAccount = bankSystem.getAccountbyNumber(bill.getBusinessIBAN());
 
             try {
                 // Χρέωση πελάτη
-                sourceAccount.withdraw(bill.getAmount());
+            	bankSystem.transaction(TransactionType.AUTO_BILL_PAYMENT, sourceAccount, busAccount, bill.getAmount());
 
-                // Πίστωση επιχείρησης
-                Account businessAcc =
-                        bankSystem.getAccountbyNumber(bill.getBusinessIBAN());
-
-                if (businessAcc != null) {
-                    businessAcc.deposit(bill.getAmount());
-                }
 
                 bill.setPaid(true);
 

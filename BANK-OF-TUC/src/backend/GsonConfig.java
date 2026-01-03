@@ -22,27 +22,33 @@ public class GsonConfig {
                         .registerSubtype(FixedTermAccount.class, "fixed")
                         .registerSubtype(BusinessAccount.class, "business");
 
-        // Transaction polymorphism
+        // Transaction polymorphism - ΕΝΗΜΕΡΩΜΕΝΟ
         RuntimeTypeAdapterFactory<Transaction> transactionAdapter =
                 RuntimeTypeAdapterFactory
                         .of(Transaction.class, "txType")
                         .registerSubtype(DepositTransaction.class, "deposit")
                         .registerSubtype(WithdrawTransaction.class, "withdraw")
-                        .registerSubtype(TransferTransaction.class, "transfer");
+                        .registerSubtype(TransferTransaction.class, "transfer")
+                        // ΠΡΟΣΘΗΚΕΣ ΓΙΑ ΤΗΝ ΕΠΙΛΥΣΗ ΤΟΥ ERROR:
+                        .registerSubtype(BillPaymentTransaction.class, "bill_payment")
+                        .registerSubtype(AutoBillPaymentTransaction.class, "auto_bill_payment")
+                        // Προληπτικές προσθήκες για τα υπόλοιπα types:
+                        .registerSubtype(InterestTransaction.class, "interest")
+                        .registerSubtype(FeeTransaction.class, "fee");
 
         return new GsonBuilder()
                 .setPrettyPrinting()
-                // --- Η ΠΡΟΣΘΗΚΗ ΠΟΥ ΛΕΙΠΕΙ ---
+                // Καταγραφή των Adapters για ημερομηνίες
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                .registerTypeAdapter(LocalDateTime.class,new LocalDateTimeAdapter())
-                // ----------------------------
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                // Καταγραφή των Factory Adapters για τον πολυμορφισμό
                 .registerTypeAdapterFactory(accountAdapter)
                 .registerTypeAdapterFactory(transactionAdapter)
                 .create();
     }
 
     /**
-     * Εσωτερική βοηθητική κλάση για τη διαχείριση του LocalDate
+     * Adapter για LocalDate
      */
     private static class LocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
         private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
@@ -55,6 +61,23 @@ public class GsonConfig {
         @Override
         public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             return LocalDate.parse(json.getAsString(), formatter);
+        }
+    }
+
+    /**
+     * Adapter για LocalDateTime (Χρειάζεται επίσης για το timestamp των Transactions)
+     */
+    private static class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        @Override
+        public JsonElement serialize(LocalDateTime dateTime, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(dateTime.format(formatter));
+        }
+
+        @Override
+        public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            return LocalDateTime.parse(json.getAsString(), formatter);
         }
     }
 }

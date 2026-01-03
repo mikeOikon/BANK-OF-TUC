@@ -7,6 +7,9 @@ import types.TransactionType;
 
 public class AutoBillPaymentTransaction extends Transaction {
 
+    private transient Account fromAccount;
+    private transient Bill bill;
+
     public AutoBillPaymentTransaction(Account fromAccount, Bill bill) {
         super(
                 TransactionType.AUTO_BILL_PAYMENT,
@@ -15,25 +18,39 @@ public class AutoBillPaymentTransaction extends Transaction {
                 bill.getBusinessIBAN(),
                 "Auto Bill Payment: " + bill.getPaymentCode()
         );
-        execute(fromAccount, bill);
+        this.fromAccount = fromAccount;
+        this.bill = bill;
+        execute();
     }
 
-    private void execute(Account from, Bill bill) {
+    private void execute() {
         BankSystem bankSystem = BankSystem.getInstance();
 
-        if (from.getBalance() < bill.getAmount()) {
+        if (fromAccount.isFrozen()) {
+            throw new IllegalStateException("Account is frozen");
+        }
+
+        if (fromAccount.getBalance() < bill.getAmount()) {
             throw new IllegalStateException("Insufficient funds for auto bill payment");
         }
 
-        from.setBalance(from.getBalance() - bill.getAmount());
+        // Χρέωση πελάτη
+        fromAccount.setBalance(fromAccount.getBalance() - bill.getAmount());
 
+        // Πίστωση επιχείρησης
         Account businessAcc = bankSystem.getAccountbyNumber(bill.getBusinessIBAN());
         if (businessAcc != null) {
             businessAcc.setBalance(businessAcc.getBalance() + bill.getAmount());
+            businessAcc.getTransactions().push(this);
         }
 
+        // Καταγραφή συναλλαγής στον πελάτη
+        fromAccount.getTransactions().push(this);
+
+        // Σήμανση bill
         bill.setPaid(true);
 
+        // Αποθήκευση
         bankSystem.dao.save(bankSystem);
     }
 }

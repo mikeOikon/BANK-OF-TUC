@@ -2,6 +2,7 @@ package backend.support;
 
 import backend.BankSystem;
 import backend.accounts.Account;
+import types.TransactionType;
 
 /**
  * Manager που υπολογίζει και πιστώνει τον τόκο στους λογαριασμούς που τον υποστηρίζουν.
@@ -30,9 +31,11 @@ public class InterestManager {
             double interest = acc.getBalance() * monthlyRate;
 
             if (interest <= 0) continue;
+            
+            
 
             // Πίστωση στον λογαριασμό
-            acc.deposit(interest);
+            bankSystem.transaction(TransactionType.INTEREST, acc, null, interest);
 
             System.out.printf(
                     "[InterestManager] %s: +%.2f€ τόκος (rate=%.2f%%)%n",

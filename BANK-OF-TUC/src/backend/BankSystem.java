@@ -15,11 +15,16 @@ import com.google.gson.Gson;
 
 import backend.accounts.Account;
 import backend.accounts.AccountFactory;
+import backend.accounts.BusinessAccount;
 import backend.support.AutoPayManager;
 import backend.support.Bill;
 import backend.support.InterestManager;
 import backend.support.MonthlySubscription;
 import backend.support.SupportTicket;
+import backend.transactions.Transaction;
+import backend.transactions.TransactionBuilder;
+import backend.transactions.TransactionFactory;
+import backend.transactions.TransactionService;
 import backend.users.Admin;
 import backend.users.Auditor;
 import backend.users.BankEmployer;
@@ -38,6 +43,7 @@ import services.Command;
 import types.LogCategory;
 import types.LogLevel;
 import types.TicketStatus;
+import types.TransactionType;
 import types.UserType;
 //import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
 import services.user_services.CreateUserCommand;
@@ -550,6 +556,54 @@ public class BankSystem {
 	        }
 	    }
 	    return null;
+	}
+	
+	public boolean transaction(TransactionType type, Account from, Account target, double amount) {
+        //if (from.isFrozen()) throw new IllegalStateException("Source account is frozen.");
+        //if (target == null) throw new IllegalArgumentException("Target account cannot be null.");
+        //if (target.isFrozen()) throw new IllegalStateException("Target account is frozen.");
+        //if (from.balance < amount) throw new IllegalArgumentException("Insufficient funds.");
+
+        Transaction tx = TransactionFactory.createTransaction(
+                type,
+                new TransactionBuilder()
+                		.withType(type)
+                        .withFrom(from)
+                        .withTo(target)
+                        .withAmount(amount)
+                        .withDescription("Fee charged")
+        );
+        
+        //from.transactions.push(tx);
+        //	target.getTransactions().push(tx);
+        TransactionService.getInstance().record(tx);
+        return true;
+    }
+	
+	public boolean billTransaction(TransactionType type, Account from, Bill bill) {
+		//if (from.isFrozen()) throw new IllegalStateException("Source account is frozen.");
+		//if (bill == null) throw new IllegalArgumentException("Bill cannot be null.");
+		//if (from.balance < bill.getAmount()) throw new IllegalArgumentException("Insufficient funds.");
+		
+		Account acc = getAccountbyNumber(bill.getBusinessIBAN());
+		System.out.println("Paying bill to account: " + acc.getIBAN());
+		
+		Transaction tx = TransactionFactory.createTransaction(
+				type,
+				new TransactionBuilder()
+						.withType(type)
+						.withFrom(from)
+						.withTo(acc)
+						.withBill(bill)
+						.withAmount(bill.getAmount())
+						.withDescription("Bill Payment: " + bill.getPaymentCode())
+		);
+		System.out.println(tx);
+		
+		//from.transactions.push(tx);
+		//acc.getTransactions().push(tx);
+		TransactionService.getInstance().record(tx);
+		return true;
 	}
 
 	

@@ -1,12 +1,54 @@
 {
-  "businessCustomers": {},
+  "businessCustomers": {
+    "BUS001": {
+      "accounts": [
+        {
+          "managementFee": 10.0,
+          "primary": true,
+          "frozen": false,
+          "IBAN": "GR6802100216754971931699530",
+          "userID": "BUS001",
+          "balance": 0.0,
+          "transactions": [
+            {
+              "type": "BILL_PAYMENT",
+              "amount": 21.0,
+              "timestampString": "2026-01-03T15:14:31.724839900",
+              "fromAccountIban": "GR5402100212409731326051261",
+              "toAccountIban": "GR6802100216754971931699530",
+              "description": "Bill Payment: RF8B8DF6A27BB2",
+              "txType": "bill_payment"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "issuedBills": [],
+          "accountType": "business"
+        }
+      ],
+      "username": "tuc",
+      "userID": "BUS001",
+      "password": "10fe8f704d06cc82a4add5abc8c8ce2747fd042fd1c723b0b13df9df39e912cb",
+      "name": "tuc",
+      "surname": "greece",
+      "branch": {
+        "bankCode": "021",
+        "branchCode": "0021"
+      },
+      "AFM": "81f9e453ba21fd6a2d5db95dc924fef985fa383f43f44f2c252ca74819d8d669"
+    }
+  },
   "admins": {
     "ADM001": {
       "username": "admin",
       "userID": "ADM001",
       "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
       "name": "System",
-      "surname": "0000000000",
+      "surname": "Admin",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
@@ -14,44 +56,53 @@
     }
   },
   "customers": {
-    "CUS001": {
-      "accounts": [],
-      "username": "newAdmin",
-      "userID": "CUS001",
-      "password": "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-      "name": "NewAdmin",
-      "surname": "AEK",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "5240564f207b039ead21e7e541c02d383301aeda72a79bd12c492fdf5d96663e"
-    },
     "CUS002": {
-      "accounts": [],
-      "username": "test",
+      "accounts": [
+        {
+          "primary": true,
+          "frozen": false,
+          "IBAN": "GR5402100212409731326051261",
+          "userID": "CUS002",
+          "balance": 10000.0,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 10000.0,
+              "timestampString": "2026-01-03T15:13:25.810989",
+              "toAccountIban": "GR5402100212409731326051261",
+              "description": "Deposit",
+              "txType": "deposit"
+            },
+            {
+              "type": "BILL_PAYMENT",
+              "amount": 21.0,
+              "timestampString": "2026-01-03T15:14:31.724839900",
+              "fromAccountIban": "GR5402100212409731326051261",
+              "toAccountIban": "GR6802100216754971931699530",
+              "description": "Bill Payment: RF8B8DF6A27BB2",
+              "txType": "bill_payment"
+            }
+          ],
+          "account_id": 2,
+          "interest": 0.0,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "issuedBills": [],
+          "accountType": "transactional"
+        }
+      ],
+      "username": "diak",
       "userID": "CUS002",
-      "password": "d9b5f58f0b38198293971865a14074f59eba3e82595becbe86ae51f1d9f1f65e",
-      "name": "test",
-      "surname": "AEKARA",
+      "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
+      "name": "ang",
+      "surname": "diak",
       "branch": {
         "bankCode": "021",
         "branchCode": "0021"
       },
-      "AFM": "da5d517c7495579d3aafc4f996220f3bdb33dd99b596f561a71286a91b2c2cd4"
-    },
-    "CUS003": {
-      "accounts": [],
-      "username": "aek",
-      "userID": "CUS003",
-      "password": "1f85caa01286f7399b14e56fdca5f0b6c144bc7ff3c3ab07d1c091a24c8d28a2",
-      "name": "AEK",
-      "surname": "Original",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "613317d4400891c7bfd8dccda01b593033eaa30b50e78138e6b0b26b6518d4e8"
+      "AFM": "f352039e4ea33364e6e69d150024ca3af023793e9f4b7f109c20e8195bef3417"
     }
   },
   "bankEmployers": {},
@@ -65,12 +116,58 @@
     }
   },
   "tickets": {},
-  "allBills": {},
-  "subscriptions": [],
+  "allBills": {
+    "RF8B8DF6A27BB2": {
+      "paymentCode": "RF8B8DF6A27BB2",
+      "businessIBAN": "GR6802100216754971931699530",
+      "businessName": "tuc greece",
+      "amount": 21.0,
+      "description": "bill payment",
+      "issueDate": "2026/01/03 15:12:44",
+      "paid": false,
+      "autoPay": false,
+      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975"
+    },
+    "RFB537C07BAF30": {
+      "paymentCode": "RFB537C07BAF30",
+      "businessIBAN": "GR6802100216754971931699530",
+      "businessName": "tuc greece",
+      "amount": 21.0,
+      "description": "bill payment",
+      "issueDate": "2026/01/03 15:14:56",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR5402100212409731326051261",
+      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975"
+    },
+    "RF13EDB9BFF4A2": {
+      "paymentCode": "RF13EDB9BFF4A2",
+      "businessIBAN": "GR6802100216754971931699530",
+      "businessName": "tuc greece",
+      "amount": 21.0,
+      "description": "bill payment",
+      "issueDate": "2026/01/03 15:15:32",
+      "paid": false,
+      "autoPay": true,
+      "autoPayAccountIBAN": "GR5402100212409731326051261",
+      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975"
+    }
+  },
+  "subscriptions": [
+    {
+      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975",
+      "businessIBAN": "GR6802100216754971931699530",
+      "businessName": "tuc greece",
+      "monthlyAmount": 21.0,
+      "description": "test",
+      "autoPayAccountIBAN": "GR5402100212409731326051261",
+      "lastIssuedMonth": "2026-03-01"
+    }
+  ],
   "adminCount": 1,
-  "customerCount": 3,
+  "customerCount": 2,
   "employeeCount": 0,
   "auditorCount": 0,
-  "realBaseIso": "2026-01-02T11:59:55.755844700",
-  "simulatedBaseIso": "2026-01-02T11:59:55.755844700"
+  "realBaseIso": "2026-01-03T15:15:32.000330500",
+  "simulatedBaseIso": "2026-03-01T15:15:32.000330500"
 }

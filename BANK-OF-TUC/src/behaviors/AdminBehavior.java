@@ -82,5 +82,11 @@ public class AdminBehavior implements UserBehavior {
 	@Override
 	public boolean canAdvanceTime() { return true; }
 
+	@Override
+	public boolean canOpenBusinessAccount() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

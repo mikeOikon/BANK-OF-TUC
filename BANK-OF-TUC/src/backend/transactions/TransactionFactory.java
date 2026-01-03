@@ -4,36 +4,74 @@ import backend.accounts.Account;
 import backend.support.Bill;
 import types.TransactionType;
 
+
 public class TransactionFactory {
 
-    public static Transaction createTransaction(TransactionType type, Account account, double amount) {
-        return switch (type) {
-            case DEPOSIT -> new DepositTransaction(amount, account);
-            case WITHDRAW -> new WithdrawTransaction(account, amount);
-            default -> throw new IllegalArgumentException(
-                    "Use other factory methods for TRANSFER or special transactions"
-            );
-        };
-    }
+    public static Transaction createTransaction(TransactionType type, TransactionBuilder builder) {
+        if (type == null)
+            throw new IllegalArgumentException("Transaction type must be specified.");
 
-    public static Transaction createTransaction(Account from, Account to, double amount) {
-        return new TransferTransaction(from, to, amount);
-    }
+        Transaction tx;
 
-    // --- Νέες συναλλαγές ---
-    public static Transaction createBillPaymentTransaction(Account from, Bill bill) {
-        return new BillPaymentTransaction(from, bill);
-    }
+        switch (type) {
 
-    public static Transaction createAutoBillPaymentTransaction(Account from, Bill bill) {
-        return new AutoBillPaymentTransaction(from, bill);
-    }
+            case DEPOSIT:
+                if (builder.getTo() == null)
+                    throw new IllegalArgumentException("Deposit needs a target account.");
+                tx = new DepositTransaction(builder.getAmount(), builder.getTo());
+                builder.getTo().getTransactions().push(tx);
+                return tx;
 
-    public static Transaction createInterestTransaction(Account target, double amount) {
-        return new InterestTransaction(target, amount);
-    }
+            case WITHDRAW:
+                if (builder.getFrom() == null)
+                    throw new IllegalArgumentException("Withdraw needs a source account.");
+                tx = new WithdrawTransaction(builder.getFrom(), builder.getAmount());
+                builder.getFrom().getTransactions().push(tx);
+                return tx;
 
-    public static Transaction createFeeTransaction(Account target, double amount, String description) {
-        return new FeeTransaction(target, amount, description);
+            case TRANSFER:
+                if (builder.getFrom() == null || builder.getTo() == null)
+                    throw new IllegalArgumentException("Transfer needs both source and target accounts.");
+                tx = new TransferTransaction(builder.getFrom(), builder.getTo(), builder.getAmount());
+                builder.getFrom().getTransactions().push(tx);
+                builder.getTo().getTransactions().push(tx);
+                System.out.println(tx);
+                return tx;
+
+            case BILL_PAYMENT:
+                if (builder.getFrom() == null || builder.getBill() == null)
+                    throw new IllegalArgumentException("Bill payment needs a source account and a bill.");
+                tx = new BillPaymentTransaction(builder.getFrom(), builder.getTo(), builder.getAmount(), builder.getBill());
+                System.out.println("Creating BillPaymentTransaction from " + builder.getFrom().getIBAN() + " for bill " + builder.getBill().getPaymentCode());
+                System.out.println(tx);
+                builder.getFrom().getTransactions().push(tx);
+                builder.getTo().getTransactions().push(tx);
+                System.out.println("BillPaymentTransaction created and added to transactions.");
+                return tx;
+
+            case AUTO_BILL_PAYMENT:
+                if (builder.getFrom() == null || builder.getBill() == null)
+                    throw new IllegalArgumentException("Auto bill payment needs a source account and a bill.");
+                tx = new AutoBillPaymentTransaction(builder.getFrom(), builder.getBill());
+                builder.getFrom().getTransactions().push(tx);
+                return tx;
+
+            case INTEREST:
+                if (builder.getTo() == null)
+                    throw new IllegalArgumentException("Interest transaction needs a target account.");
+                tx = new InterestTransaction(builder.getTo(), builder.getAmount());
+                builder.getTo().getTransactions().push(tx);
+                return tx;
+
+            case FEE:
+                if (builder.getTo() == null)
+                    throw new IllegalArgumentException("Fee transaction needs a target account.");
+                tx = new FeeTransaction(builder.getTo(), builder.getAmount(), builder.getDescription());
+                builder.getTo().getTransactions().push(tx);
+                return tx;
+
+            default:
+                throw new IllegalArgumentException("Unsupported transaction type: " + type);
+        }
     }
 }
