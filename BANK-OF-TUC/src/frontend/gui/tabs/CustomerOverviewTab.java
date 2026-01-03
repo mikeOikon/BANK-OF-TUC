@@ -7,6 +7,8 @@ import backend.transactions.Transaction;
 import backend.users.User;
 import services.Command;
 import services.account_services.FreezeAccountCommand;
+import services.account_services.TransactionCommand;
+import types.TransactionType;
 import backend.users.Customer;
 import backend.users.BusinessCustomer;
 
@@ -204,10 +206,8 @@ public class CustomerOverviewTab extends JPanel implements Refreshable {
     }
 
     private void showCreateAccountDialog() {
-
         // ✅ ΑΝ ΜΠΟΡΕΙ ΝΑ ΑΝΟΙΞΕΙ BUSINESS ACCOUNT
         if (customer instanceof BusinessCustomer) {
-
             int confirm = JOptionPane.showConfirmDialog(
                     this,
                     "You are eligible to open a Business Account.\nDo you want to proceed?",
@@ -218,29 +218,18 @@ public class CustomerOverviewTab extends JPanel implements Refreshable {
             if (confirm != JOptionPane.YES_OPTION) return;
 
             Account newAccount = customer.createAccount(1);
-
-            if (this.account == null) {
-                this.account = newAccount;
-            }
+            if (this.account == null) this.account = newAccount;
 
             BankSystem bank = BankSystem.getInstance();
             bank.dao.save(bank);
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Business Account created!\nIBAN: " + newAccount.getIBAN()
-            );
-
+            JOptionPane.showMessageDialog(this, "Business Account created!\nIBAN: " + newAccount.getIBAN());
             refreshEntireSystem();
             return;
         }
 
         // ❌ ΑΛΛΙΩΣ → ΚΛΑΣΙΚΕΣ ΕΠΙΛΟΓΕΣ
-        String[] options = {
-                "Transactional Account",
-                "Savings Account",
-                "Fixed-Term Account"
-        };
+        String[] options = {"Transactional Account", "Savings Account", "Fixed-Term Account"};
 
         int choice = JOptionPane.showOptionDialog(
                 this,
@@ -255,23 +244,64 @@ public class CustomerOverviewTab extends JPanel implements Refreshable {
 
         if (choice == -1) return;
 
+        // 1. Δημιουργία του αντικειμένου του λογαριασμού
         Account newAccount = customer.createAccount(choice + 1);
+        BankSystem bank = BankSystem.getInstance();
+        String successMsg = "Account created successfully!\nIBAN: " + newAccount.getIBAN();
 
+        // 2. Ειδικός χειρισμός για Fixed-Term (Choice 2)
+        if (choice == 2 && newAccount instanceof backend.accounts.FixedTermAccount fixedAcc) {
+            String input = JOptionPane.showInputDialog(
+                    this,
+                    "Fixed-Term Accounts require an initial deposit to activate.\n" +
+                    "Please enter the amount you wish to transfer from your primary account:",
+                    "Initial Deposit",
+                    JOptionPane.QUESTION_MESSAGE
+            );
+
+            try {
+                if (input == null || input.isEmpty()) {
+                    throw new Exception("Deposit cancelled. Account will not be activated.");
+                }
+                
+                double amount = Double.parseDouble(input);
+                if (amount <= 0) throw new Exception("Amount must be positive.");
+
+                Account primary = customer.getPrimaryAccount();
+                if (primary == null || primary.getBalance() < amount) {
+                    throw new Exception("Insufficient funds in your primary account.");
+                }
+
+                // --- ΕΚΤΕΛΕΣΗ ΣΥΝΑΛΛΑΓΩΝ (Όπως στο TransferTab) ---
+                // α) Ανάληψη από τον κύριο λογαριασμό
+                Command withdrawCmd = new TransactionCommand(types.TransactionType.WITHDRAW, primary, null, amount);
+                withdrawCmd.execute();
+                
+                // β) Κατάθεση στον προθεσμιακό (αυτό ενεργοποιεί το maturity στο backend)
+                Command depositCmd = new TransactionCommand(types.TransactionType.DEPOSIT, null, fixedAcc, amount);
+                depositCmd.execute();
+
+                // Ενημέρωση του μηνύματος με την ημερομηνία λήξης
+                successMsg += "\nInitial Deposit: " + amount + " €" +
+                             "\nMaturity Date: " + fixedAcc.getMaturityDate();
+
+            } catch (Exception ex) {
+                // Rollback: Αφαίρεση του ανενεργού λογαριασμού από τον πελάτη
+                customer.getAccounts().remove(newAccount); 
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Activation Failed", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+        }
+        
+        // 3. Τελική αποθήκευση και ενημέρωση
         if (this.account == null) {
             this.account = newAccount;
         }
 
-        BankSystem bank = BankSystem.getInstance();
         bank.dao.save(bank);
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Account created!\nIBAN: " + newAccount.getIBAN()
-        );
-
+        JOptionPane.showMessageDialog(this, successMsg, "Success", JOptionPane.INFORMATION_MESSAGE);
         refreshEntireSystem();
     }
-
     
     private void refreshEntireSystem() {
         refresh();

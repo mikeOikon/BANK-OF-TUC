@@ -29,13 +29,13 @@ public class InterestManager {
             // Μηνιαίος τόκος
             double monthlyRate = acc.getInterestRate() / 12.0;
             double interest = acc.getBalance() * monthlyRate;
+            interest = ((long)(interest * 100)) / 100.0;
 
             if (interest <= 0) continue;
             
             
-
             // Πίστωση στον λογαριασμό
-            bankSystem.transaction(TransactionType.INTEREST, acc, null, interest);
+            bankSystem.transaction(TransactionType.INTEREST, null, acc, interest);
 
             System.out.printf(
                     "[InterestManager] %s: +%.2f€ τόκος (rate=%.2f%%)%n",

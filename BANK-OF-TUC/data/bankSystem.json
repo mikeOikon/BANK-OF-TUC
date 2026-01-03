@@ -1,47 +1,5 @@
 {
-  "businessCustomers": {
-    "BUS001": {
-      "accounts": [
-        {
-          "managementFee": 10.0,
-          "primary": true,
-          "frozen": false,
-          "IBAN": "GR6802100216754971931699530",
-          "userID": "BUS001",
-          "balance": 0.0,
-          "transactions": [
-            {
-              "type": "BILL_PAYMENT",
-              "amount": 21.0,
-              "timestampString": "2026-01-03T15:14:31.724839900",
-              "fromAccountIban": "GR5402100212409731326051261",
-              "toAccountIban": "GR6802100216754971931699530",
-              "description": "Bill Payment: RF8B8DF6A27BB2",
-              "txType": "bill_payment"
-            }
-          ],
-          "account_id": 1,
-          "interest": 0.0,
-          "branch": {
-            "bankCode": "021",
-            "branchCode": "0021"
-          },
-          "issuedBills": [],
-          "accountType": "business"
-        }
-      ],
-      "username": "tuc",
-      "userID": "BUS001",
-      "password": "10fe8f704d06cc82a4add5abc8c8ce2747fd042fd1c723b0b13df9df39e912cb",
-      "name": "tuc",
-      "surname": "greece",
-      "branch": {
-        "bankCode": "021",
-        "branchCode": "0021"
-      },
-      "AFM": "81f9e453ba21fd6a2d5db95dc924fef985fa383f43f44f2c252ca74819d8d669"
-    }
-  },
+  "businessCustomers": {},
   "admins": {
     "ADM001": {
       "username": "admin",
@@ -56,45 +14,331 @@
     }
   },
   "customers": {
-    "CUS002": {
+    "CUS001": {
       "accounts": [
         {
+          "termMonths": 0,
+          "startDate": "2026-01-03",
+          "maturityDate": "2026-01-03",
           "primary": true,
           "frozen": false,
-          "IBAN": "GR5402100212409731326051261",
-          "userID": "CUS002",
-          "balance": 10000.0,
+          "IBAN": "GR5302100214802388968939122",
+          "userID": "CUS001",
+          "balance": 10264.175000000001,
           "transactions": [
             {
               "type": "DEPOSIT",
               "amount": 10000.0,
-              "timestampString": "2026-01-03T15:13:25.810989",
-              "toAccountIban": "GR5402100212409731326051261",
+              "timestampString": "2026-02-01T16:46:50.169481700",
+              "toAccountIban": "GR5302100214802388968939122",
               "description": "Deposit",
               "txType": "deposit"
             },
             {
-              "type": "BILL_PAYMENT",
-              "amount": 21.0,
-              "timestampString": "2026-01-03T15:14:31.724839900",
-              "fromAccountIban": "GR5402100212409731326051261",
-              "toAccountIban": "GR6802100216754971931699530",
-              "description": "Bill Payment: RF8B8DF6A27BB2",
-              "txType": "bill_payment"
+              "type": "WITHDRAW",
+              "amount": 100.0,
+              "timestampString": "2026-03-01T17:08:12.411637700",
+              "fromAccountIban": "GR5302100214802388968939122",
+              "description": "Withdraw from GR5302100214802388968939122",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 150.0,
+              "timestampString": "2026-06-01T17:14:04.786284700",
+              "fromAccountIban": "GR5302100214802388968939122",
+              "description": "Withdraw from GR5302100214802388968939122",
+              "txType": "withdraw"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 300.0,
+              "timestampString": "2026-06-01T17:17:21.774481700",
+              "fromAccountIban": "GR5302100214802388968939122",
+              "description": "Withdraw from GR5302100214802388968939122",
+              "txType": "withdraw"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 157.5,
+              "timestampString": "2026-11-01T17:20:56.391715100",
+              "toAccountIban": "GR5302100214802388968939122",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 160.125,
+              "timestampString": "2026-12-01T17:21:05.607593600",
+              "toAccountIban": "GR5302100214802388968939122",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 162.79,
+              "timestampString": "2027-01-01T17:25:33.833397700",
+              "toAccountIban": "GR5302100214802388968939122",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 165.5,
+              "timestampString": "2027-02-01T17:25:34.745874200",
+              "toAccountIban": "GR5302100214802388968939122",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 168.26,
+              "timestampString": "2027-03-01T17:25:35.406033800",
+              "toAccountIban": "GR5302100214802388968939122",
+              "description": "Interest Credit",
+              "txType": "interest"
             }
           ],
-          "account_id": 2,
-          "interest": 0.0,
+          "account_id": 1,
+          "interest": 0.2,
           "branch": {
             "bankCode": "021",
             "branchCode": "0021"
           },
           "issuedBills": [],
-          "accountType": "transactional"
+          "accountType": "fixed"
+        },
+        {
+          "termMonths": 0,
+          "startDate": "2026-03-01",
+          "maturityDate": "2026-03-01",
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR4702100217739606854220984",
+          "userID": "CUS001",
+          "balance": 325.8333333333333,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 100.0,
+              "timestampString": "2026-03-01T17:08:12.467345700",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Deposit",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 200.0,
+              "timestampString": "2026-03-01T17:08:54.979961",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Deposit",
+              "txType": "deposit"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.0,
+              "timestampString": "2026-11-01T17:20:56.437102800",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.083333333333333,
+              "timestampString": "2026-12-01T17:21:05.634592600",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.16,
+              "timestampString": "2027-01-01T17:25:33.887893",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.25,
+              "timestampString": "2027-02-01T17:25:34.771891700",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.34,
+              "timestampString": "2027-03-01T17:25:35.446246300",
+              "toAccountIban": "GR4702100217739606854220984",
+              "description": "Interest Credit",
+              "txType": "interest"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.2,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "issuedBills": [],
+          "accountType": "fixed"
+        },
+        {
+          "termMonths": 0,
+          "startDate": "2026-06-01",
+          "maturityDate": "2026-06-01",
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR3602100213686341861382407",
+          "userID": "CUS001",
+          "balance": 54.300555555555555,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 150.0,
+              "timestampString": "2026-06-01T17:14:04.846500600",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Deposit",
+              "txType": "deposit"
+            },
+            {
+              "type": "DEPOSIT",
+              "amount": 100.0,
+              "timestampString": "2026-06-01T17:14:25.203065600",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Deposit",
+              "txType": "deposit"
+            },
+            {
+              "type": "WITHDRAW",
+              "amount": 200.0,
+              "timestampString": "2026-06-01T17:14:34.075078700",
+              "fromAccountIban": "GR3602100213686341861382407",
+              "description": "Withdraw from GR3602100213686341861382407",
+              "txType": "withdraw"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 0.8333333333333334,
+              "timestampString": "2026-11-01T17:20:56.501876100",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 0.8472222222222222,
+              "timestampString": "2026-12-01T17:21:05.666913200",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 0.86,
+              "timestampString": "2027-01-01T17:25:33.938747900",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 0.87,
+              "timestampString": "2027-02-01T17:25:34.810876400",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 0.89,
+              "timestampString": "2027-03-01T17:25:35.488013",
+              "toAccountIban": "GR3602100213686341861382407",
+              "description": "Interest Credit",
+              "txType": "interest"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.2,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "issuedBills": [],
+          "accountType": "fixed"
+        },
+        {
+          "termMonths": 12,
+          "startDate": "2026-06-01",
+          "maturityDate": "2026-06-01",
+          "primary": false,
+          "frozen": false,
+          "IBAN": "GR5102100216535550197884016",
+          "userID": "CUS001",
+          "balance": 325.8333333333333,
+          "transactions": [
+            {
+              "type": "DEPOSIT",
+              "amount": 300.0,
+              "timestampString": "2026-06-01T17:17:21.846721500",
+              "toAccountIban": "GR5102100216535550197884016",
+              "description": "Deposit",
+              "txType": "deposit"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.0,
+              "timestampString": "2026-11-01T17:20:56.548489800",
+              "toAccountIban": "GR5102100216535550197884016",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.083333333333333,
+              "timestampString": "2026-12-01T17:21:05.710855600",
+              "toAccountIban": "GR5102100216535550197884016",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.16,
+              "timestampString": "2027-01-01T17:25:33.980688400",
+              "toAccountIban": "GR5102100216535550197884016",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.25,
+              "timestampString": "2027-02-01T17:25:34.851401300",
+              "toAccountIban": "GR5102100216535550197884016",
+              "description": "Interest Credit",
+              "txType": "interest"
+            },
+            {
+              "type": "INTEREST",
+              "amount": 5.34,
+              "timestampString": "2027-03-01T17:25:35.532253100",
+              "toAccountIban": "GR5102100216535550197884016",
+              "description": "Interest Credit",
+              "txType": "interest"
+            }
+          ],
+          "account_id": 1,
+          "interest": 0.2,
+          "branch": {
+            "bankCode": "021",
+            "branchCode": "0021"
+          },
+          "issuedBills": [],
+          "accountType": "fixed"
         }
       ],
       "username": "diak",
-      "userID": "CUS002",
+      "userID": "CUS001",
       "password": "a29793a39d816397ec013b8593b40a30c10edd5541dfba015c0aecd66c1ee0e5",
       "name": "ang",
       "surname": "diak",
@@ -102,7 +346,7 @@
         "bankCode": "021",
         "branchCode": "0021"
       },
-      "AFM": "f352039e4ea33364e6e69d150024ca3af023793e9f4b7f109c20e8195bef3417"
+      "AFM": "50a243584065427bafe854d55d2dc0a2e9d37448f080949afd1f7b8854ba0f9b"
     }
   },
   "bankEmployers": {},
@@ -116,58 +360,12 @@
     }
   },
   "tickets": {},
-  "allBills": {
-    "RF8B8DF6A27BB2": {
-      "paymentCode": "RF8B8DF6A27BB2",
-      "businessIBAN": "GR6802100216754971931699530",
-      "businessName": "tuc greece",
-      "amount": 21.0,
-      "description": "bill payment",
-      "issueDate": "2026/01/03 15:12:44",
-      "paid": false,
-      "autoPay": false,
-      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975"
-    },
-    "RFB537C07BAF30": {
-      "paymentCode": "RFB537C07BAF30",
-      "businessIBAN": "GR6802100216754971931699530",
-      "businessName": "tuc greece",
-      "amount": 21.0,
-      "description": "bill payment",
-      "issueDate": "2026/01/03 15:14:56",
-      "paid": false,
-      "autoPay": true,
-      "autoPayAccountIBAN": "GR5402100212409731326051261",
-      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975"
-    },
-    "RF13EDB9BFF4A2": {
-      "paymentCode": "RF13EDB9BFF4A2",
-      "businessIBAN": "GR6802100216754971931699530",
-      "businessName": "tuc greece",
-      "amount": 21.0,
-      "description": "bill payment",
-      "issueDate": "2026/01/03 15:15:32",
-      "paid": false,
-      "autoPay": true,
-      "autoPayAccountIBAN": "GR5402100212409731326051261",
-      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975"
-    }
-  },
-  "subscriptions": [
-    {
-      "subscriptionId": "c5bbc3d5-e954-48a3-ac8b-2acf4c9b6975",
-      "businessIBAN": "GR6802100216754971931699530",
-      "businessName": "tuc greece",
-      "monthlyAmount": 21.0,
-      "description": "test",
-      "autoPayAccountIBAN": "GR5402100212409731326051261",
-      "lastIssuedMonth": "2026-03-01"
-    }
-  ],
+  "allBills": {},
+  "subscriptions": [],
   "adminCount": 1,
-  "customerCount": 2,
+  "customerCount": 1,
   "employeeCount": 0,
   "auditorCount": 0,
-  "realBaseIso": "2026-01-03T15:15:32.000330500",
-  "simulatedBaseIso": "2026-03-01T15:15:32.000330500"
+  "realBaseIso": "2026-01-03T17:25:35.402808",
+  "simulatedBaseIso": "2027-03-01T17:25:35.401808700"
 }

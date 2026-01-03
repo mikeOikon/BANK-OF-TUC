@@ -24,9 +24,10 @@ public class FixedTermAccount extends PersonalAccount {
             int termMonths
     ) {
         super(IBAN, userID, balance, transactions, interest, branch);
-        this.termMonths = termMonths;
+        this.termMonths = 12;
         this.startDate = backend.BankSystem.getInstance().getSimulatedToday();
         this.maturityDate = startDate.plusMonths(termMonths);
+        this.interest = 0.2;
     }
 
     @Override

@@ -80,6 +80,7 @@ public class TransferTab extends JPanel implements Refreshable{
         String type = (String) typeSelector.getSelectedItem();
         String amountStr = amountField.getText().trim();
 
+        // 1. Βασικοί έλεγχοι εισαγωγής δεδομένων
         if (selectedAcc == null || amountStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
@@ -92,59 +93,74 @@ public class TransferTab extends JPanel implements Refreshable{
                 return;
             }
 
+            // 2. Έλεγχος Maturity για Fixed-Term Accounts
+            // Ο έλεγχος γίνεται μόνο για συναλλαγές που αφαιρούν χρήματα (Withdrawal, Transfer)
+            if (type.equals("Withdrawal") || type.equals("Transfer to IBAN")) {
+                if (selectedAcc instanceof backend.accounts.FixedTermAccount fixedAcc) {
+                    if (!fixedAcc.isMatured()) {
+                        JOptionPane.showMessageDialog(this, 
+                            "Transaction Denied: This Fixed-Term Account has not matured yet.\n" +
+                            "Maturity Date: " + fixedAcc.getMaturityDate(), 
+                            "Account Locked", 
+                            JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+            }
+
             BankSystem bank = BankSystem.getInstance();
             Command command = null;
             String message = "";
 
-            try {
-                if (type.equals("Withdrawal")) {
-                	command = new TransactionCommand(TransactionType.WITHDRAW, selectedAcc, null, amount);
-                    message = "Withdrawal successful!";
-                } else if (type.equals("Deposit")) {
-                	command = new TransactionCommand(TransactionType.DEPOSIT, null, selectedAcc, amount);
-                    message = "Deposit successful!";
-                } else if (type.equals("Transfer to IBAN")) {
-                    String targetIban = targetIbanField.getText().trim();
-                    Account targetAcc = bank.getAccountbyNumber(targetIban);
+            if (type.equals("Withdrawal")) {
+                command = new TransactionCommand(TransactionType.WITHDRAW, selectedAcc, null, amount);
+                message = "Withdrawal successful!";
+            } else if (type.equals("Deposit")) {
+                command = new TransactionCommand(TransactionType.DEPOSIT, null, selectedAcc, amount);
+                message = "Deposit successful!";
+            } else if (type.equals("Transfer to IBAN")) {
+                String targetIban = targetIbanField.getText().trim();
+                Account targetAcc = bank.getAccountbyNumber(targetIban);
 
-                    if (targetAcc == null) {
-                        throw new IllegalArgumentException("Target IBAN not found in the system.");
-                    }
-                    if (targetAcc.getIBAN().equals(selectedAcc.getIBAN())) {
-                        throw new IllegalArgumentException("Cannot transfer to the same account.");
-                    }
-
-                    command = new TransactionCommand(TransactionType.TRANSFER,selectedAcc, targetAcc, amount);
-                    message = "Transfer of " + amount + "€ successful!";
+                if (targetAcc == null) {
+                    throw new IllegalArgumentException("Target IBAN not found in the system.");
+                }
+                if (targetAcc.getIBAN().equals(selectedAcc.getIBAN())) {
+                    throw new IllegalArgumentException("Cannot transfer to the same account.");
                 }
 
+                command = new TransactionCommand(TransactionType.TRANSFER, selectedAcc, targetAcc, amount);
+                message = "Transfer of " + amount + "€ successful!";
+            }
+
+            // 4. Εκτέλεση της συναλλαγής και ενημέρωση συστήματος
+            if (command != null) {
                 try {
-                    if (command != null) {
-                        command.execute();
-                        bank.dao.save(bank);
+                    command.execute();
+                    bank.dao.save(bank); // Μόνιμη αποθήκευση αλλαγών
 
-                        if (overviewTab != null) {
-                            overviewTab.setSelectedAccount(selectedAcc);
-                        }
-
-                        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
-                        amountField.setText("");
-                        targetIbanField.setText("");
+                    // Ενημέρωση του Overview Tab αν υπάρχει
+                    if (overviewTab != null) {
+                        overviewTab.setSelectedAccount(selectedAcc);
                     }
 
-                } catch (IllegalArgumentException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
-                } catch (IllegalStateException ex) {
+                    JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    // Καθαρισμός πεδίων
+                    amountField.setText("");
+                    targetIbanField.setText("");
+                    
+                } catch (IllegalArgumentException | IllegalStateException ex) {
+                    // Σφάλματα που αφορούν το balance ή το freeze status
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
                 }
-
-
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Please enter a valid numeric amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            // Σφάλματα όπως το "Target IBAN not found"
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Transaction Failed", JOptionPane.ERROR_MESSAGE);
         }
     }
 
